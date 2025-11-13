@@ -38,3 +38,10 @@ next-env.d.ts
 
 # Assistant IA config
 .CLAUDE.md
+
+# IDE
+.idea/
+.claude/
+
+# Documentation locale
+.doc/
