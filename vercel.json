@@ -3,6 +3,5 @@
   "buildCommand": "pnpm turbo run build --filter=web",
   "devCommand": "pnpm turbo run dev --filter=web",
   "installCommand": "pnpm install",
-  "framework": "nextjs",
-  "outputDirectory": "apps/web/.next"
+  "framework": "nextjs"
 }
