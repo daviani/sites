@@ -15,6 +15,7 @@ export function middleware(req: NextRequest) {
 
   // Mapping des sous-domaines vers les routes
   const subdomainRoutes: Record<string, string> = {
+    'portfolio': '/portfolio',
     'blog': '/blog',
     'contact': '/contact',
     'rdv': '/rdv',
