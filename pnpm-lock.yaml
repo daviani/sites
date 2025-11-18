@@ -42,6 +42,9 @@ importers:
         specifier: ^18
         version: 18.3.1(react@18.3.1)
     devDependencies:
+      '@daviani/config':
+        specifier: workspace:*
+        version: link:../../packages/config
       '@testing-library/jest-dom':
         specifier: ^6.9.1
         version: 6.9.1
@@ -84,6 +87,12 @@ importers:
       typescript:
         specifier: ^5
         version: 5.9.3
+
+  packages/config:
+    devDependencies:
+      jest:
+        specifier: ^30.0.0
+        version: 30.2.0(@types/node@20.19.25)
 
 packages:
 

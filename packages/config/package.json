@@ -1,0 +1,16 @@
+{
+  "name": "@daviani/config",
+  "version": "0.1.0",
+  "private": true,
+  "exports": {
+    "./typescript/*": "./typescript/*"
+  },
+  "files": ["typescript", "eslint"],
+  "scripts": {
+    "test": "jest",
+    "clean": "rm -rf .turbo node_modules"
+  },
+  "devDependencies": {
+    "jest": "^30.0.0"
+  }
+}
