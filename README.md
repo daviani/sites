@@ -1,16 +1,17 @@
 # daviani.dev
 
-> Portfolio multi-tenant avec Next.js 14, Turborepo et architecture sécurisée
+> Portfolio multi-tenant avec Next.js 16, Turborepo et architecture sécurisée
 
-[![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![Turborepo](https://img.shields.io/badge/Turborepo-2.1-EF4444?logo=turborepo)](https://turbo.build/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 
 ---
 
 ## 🎯 Vue d'ensemble
 
-Portfolio professionnel démontrant une expertise Full-Stack et DevOps. Architecture monorepo multi-tenant avec Next.js 14, sécurité renforcée et performance optimale.
+Portfolio professionnel démontrant une expertise Full-Stack et DevOps. Architecture monorepo multi-tenant avec Next.js 16, sécurité renforcée et performance optimale.
 
 ### Domaines
 
@@ -28,9 +29,9 @@ Portfolio professionnel démontrant une expertise Full-Stack et DevOps. Architec
 ## 🏗️ Stack
 
 **Frontend**
-- Next.js 14 (App Router, React 18)
-- TypeScript 5.3 (strict)
-- Tailwind CSS 3.4
+- Next.js 16 (App Router, React 19)
+- TypeScript 5 (strict)
+- Tailwind CSS 4
 
 **Backend & Infra**
 - Vercel (Edge + Serverless)
