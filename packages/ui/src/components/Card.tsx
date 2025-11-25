@@ -16,9 +16,9 @@ export function Card({
   const baseStyles = 'rounded-xl transition-all';
 
   const variants = {
-    default: 'bg-white dark:bg-nord1 shadow-md hover:shadow-lg',
-    elevated: 'bg-white dark:bg-nord1 shadow-lg hover:shadow-2xl',
-    outlined: 'bg-white dark:bg-nord1 border-2 border-nord4 dark:border-nord3 hover:border-nord10'
+    default: 'bg-white dark:bg-nord-1 shadow-md hover:shadow-lg',
+    elevated: 'bg-white dark:bg-nord-1 shadow-lg hover:shadow-2xl',
+    outlined: 'bg-white dark:bg-nord-1 border-2 border-nord-4 dark:border-nord-3 hover:border-nord-10 dark:hover:border-nord-8'
   };
 
   const paddings = {

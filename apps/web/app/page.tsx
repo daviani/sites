@@ -41,12 +41,12 @@ const navigationItems = [
 
 export default function RootPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-nord6 via-nord5 to-nord4 dark:from-nord0 dark:via-nord1 dark:to-nord2">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-nord-6 via-nord-5 to-nord-4 dark:from-nord-0 dark:via-nord-1 dark:to-nord-2">
       <div className="max-w-3xl mx-auto px-6 py-12 text-center">
-        <h1 className="text-6xl font-bold mb-6 text-nord0 dark:text-nord6">
+        <h1 className="text-6xl font-bold mb-6 text-nord-0 dark:text-nord-6">
           Daviani Fillatre
         </h1>
-        <p className="text-2xl text-nord2 dark:text-nord4 mb-12">
+        <p className="text-2xl text-nord-2 dark:text-nord-4 mb-12">
           Développeur Full-Stack & DevOps
         </p>
 

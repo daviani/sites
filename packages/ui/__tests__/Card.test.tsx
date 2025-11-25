@@ -32,7 +32,7 @@ describe('Card Component', () => {
       const { container } = render(<Card variant="outlined">Outlined</Card>);
       const card = container.firstChild as HTMLElement;
       expect(card.className).toContain('border-2');
-      expect(card.className).toContain('border-nord4');
+      expect(card.className).toContain('border-nord-4');
     });
   });
 
