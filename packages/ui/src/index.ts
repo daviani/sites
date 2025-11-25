@@ -9,4 +9,12 @@ export type { HeaderProps } from './components/Header';
 
 export { DarkModeToggle } from './components/DarkModeToggle';
 
+export { LanguageSwitcher } from './components/LanguageSwitcher';
+
 export { useTheme } from './hooks/use-theme';
+
+export { useLanguage, LanguageProvider } from './hooks/use-language';
+export type { Language } from './hooks/use-language';
+
+export { useTranslation } from './hooks/use-translation';
+export type { TranslationKey } from './hooks/use-translation';

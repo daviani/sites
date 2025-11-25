@@ -1,53 +1,65 @@
-import { NavigationCard } from '@/components/NavigationCard';
+'use client';
 
-const navigationItems = [
+import { NavigationCard } from '@/components/NavigationCard';
+import { useTranslation, TranslationKey } from '@daviani/ui';
+
+interface NavItem {
+  href: string;
+  icon: string;
+  titleKey: TranslationKey;
+  descriptionKey: TranslationKey;
+}
+
+const navigationItems: NavItem[] = [
   {
     href: 'https://portfolio.daviani.dev',
     icon: '💼',
-    title: 'Portfolio',
-    description: 'Projets & compétences'
+    titleKey: 'nav.portfolio.title',
+    descriptionKey: 'nav.portfolio.description'
   },
   {
     href: 'https://blog.daviani.dev',
     icon: '📝',
-    title: 'Blog',
-    description: 'Articles techniques'
+    titleKey: 'nav.blog.title',
+    descriptionKey: 'nav.blog.description'
   },
   {
     href: 'https://cv.daviani.dev',
     icon: '📄',
-    title: 'CV',
-    description: 'Curriculum vitae'
+    titleKey: 'nav.cv.title',
+    descriptionKey: 'nav.cv.description'
   },
   {
     href: 'https://contact.daviani.dev',
     icon: '✉️',
-    title: 'Contact',
-    description: 'Prenons contact'
+    titleKey: 'nav.contact.title',
+    descriptionKey: 'nav.contact.description'
   },
   {
     href: 'https://rdv.daviani.dev',
     icon: '📅',
-    title: 'Rendez-vous',
-    description: 'Planifier'
+    titleKey: 'nav.rdv.title',
+    descriptionKey: 'nav.rdv.description'
   },
   {
     href: 'https://legal.daviani.dev',
     icon: '⚖️',
-    title: 'Légal',
-    description: 'Mentions légales'
+    titleKey: 'nav.legal.title',
+    descriptionKey: 'nav.legal.description'
   }
 ];
 
 export default function RootPage() {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-nord-6 via-nord-5 to-nord-4 dark:from-nord-0 dark:via-nord-1 dark:to-nord-2">
       <div className="max-w-3xl mx-auto px-6 py-12 text-center">
         <h1 className="text-6xl font-bold mb-6 text-nord-0 dark:text-nord-6">
-          Daviani Fillatre
+          {t('home.title')}
         </h1>
         <p className="text-2xl text-nord-2 dark:text-nord-4 mb-12">
-          Développeur Full-Stack & DevOps
+          {t('home.subtitle')}
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
@@ -56,8 +68,8 @@ export default function RootPage() {
               key={item.href}
               href={item.href}
               icon={item.icon}
-              title={item.title}
-              description={item.description}
+              title={t(item.titleKey)}
+              description={t(item.descriptionKey)}
             />
           ))}
         </div>

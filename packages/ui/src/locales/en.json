@@ -1,0 +1,81 @@
+{
+  "common": {
+    "languageSelection": "Language selection",
+    "french": "French",
+    "english": "English"
+  },
+  "darkMode": {
+    "switchToDark": "Switch to dark mode",
+    "switchToLight": "Switch to light mode"
+  },
+  "home": {
+    "title": "Daviani Fillatre",
+    "subtitle": "Full-Stack & DevOps Developer"
+  },
+  "nav": {
+    "portfolio": {
+      "title": "Portfolio",
+      "description": "Projects & skills"
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Technical articles"
+    },
+    "cv": {
+      "title": "Resume",
+      "description": "Curriculum vitae"
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Get in touch"
+    },
+    "rdv": {
+      "title": "Appointment",
+      "description": "Schedule"
+    },
+    "legal": {
+      "title": "Legal",
+      "description": "Legal notice"
+    }
+  },
+  "pages": {
+    "portfolio": {
+      "title": "Portfolio",
+      "subtitle": "Cloud architecture, automation and modern web development",
+      "skills": "Skills",
+      "projects": "Projects",
+      "skillsList": {
+        "frontend": "Next.js, React, TypeScript",
+        "backend": "Node.js, Python",
+        "cloud": "AWS, Vercel, Cloudflare",
+        "devops": "Docker, CI/CD, Turborepo"
+      },
+      "projectsList": {
+        "platform": "Multi-tenant portfolio platform",
+        "iac": "Infrastructure as Code",
+        "distributed": "Distributed systems",
+        "automation": "DevOps automation"
+      }
+    },
+    "blog": {
+      "title": "Blog",
+      "subtitle": "Technical articles and experience sharing"
+    },
+    "cv": {
+      "title": "Curriculum Vitae",
+      "subtitle": "Background and skills"
+    },
+    "contact": {
+      "title": "Contact",
+      "subtitle": "Get in touch"
+    },
+    "rdv": {
+      "title": "Book an appointment",
+      "subtitle": "Schedule a meeting"
+    },
+    "legal": {
+      "title": "Legal notice",
+      "subtitle": "Legal information"
+    }
+  }
+}
