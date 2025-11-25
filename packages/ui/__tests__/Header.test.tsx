@@ -10,6 +10,34 @@ jest.mock('../src/hooks/use-theme', () => ({
   }),
 }));
 
+// Mock useLanguage hook used by LanguageSwitcher
+jest.mock('../src/hooks/use-language', () => ({
+  useLanguage: () => ({
+    language: 'fr',
+    setLanguage: jest.fn(),
+    toggleLanguage: jest.fn(),
+    mounted: true,
+  }),
+}));
+
+// Mock useTranslation hook
+jest.mock('../src/hooks/use-translation', () => ({
+  useTranslation: () => ({
+    t: (key: string) => {
+      const translations: Record<string, string> = {
+        'darkMode.switchToDark': 'Switch to dark mode',
+        'darkMode.switchToLight': 'Switch to light mode',
+        'common.languageSelection': 'Language selection',
+        'common.french': 'Français',
+        'common.english': 'Anglais',
+      };
+      return translations[key] || key;
+    },
+    language: 'fr',
+    mounted: true,
+  }),
+}));
+
 describe('Header Component', () => {
   describe('Rendering', () => {
     it('renders with default logo text', () => {

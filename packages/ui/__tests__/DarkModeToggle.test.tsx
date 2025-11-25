@@ -14,6 +14,21 @@ jest.mock('../src/hooks/use-theme', () => ({
   }),
 }));
 
+// Mock useTranslation hook
+jest.mock('../src/hooks/use-translation', () => ({
+  useTranslation: () => ({
+    t: (key: string) => {
+      const translations: Record<string, string> = {
+        'darkMode.switchToDark': 'Switch to dark mode',
+        'darkMode.switchToLight': 'Switch to light mode',
+      };
+      return translations[key] || key;
+    },
+    language: 'en',
+    mounted: true,
+  }),
+}));
+
 describe('DarkModeToggle Component', () => {
   beforeEach(() => {
     mockTheme = 'light';
@@ -50,7 +65,7 @@ describe('DarkModeToggle Component', () => {
       render(<DarkModeToggle />);
       const button = screen.getByRole('button');
       expect(button).toBeDisabled();
-      expect(button).toHaveAttribute('aria-label', 'Toggle theme');
+      expect(button).toHaveAttribute('aria-label', 'Switch to dark mode');
     });
 
     it('renders enabled button when mounted', () => {

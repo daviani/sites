@@ -1,0 +1,81 @@
+{
+  "common": {
+    "languageSelection": "Sélection de la langue",
+    "french": "Français",
+    "english": "Anglais"
+  },
+  "darkMode": {
+    "switchToDark": "Passer en mode sombre",
+    "switchToLight": "Passer en mode clair"
+  },
+  "home": {
+    "title": "Daviani Fillatre",
+    "subtitle": "Développeur Full-Stack & DevOps"
+  },
+  "nav": {
+    "portfolio": {
+      "title": "Portfolio",
+      "description": "Projets & compétences"
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Articles techniques"
+    },
+    "cv": {
+      "title": "CV",
+      "description": "Curriculum vitae"
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Prenons contact"
+    },
+    "rdv": {
+      "title": "Rendez-vous",
+      "description": "Planifier"
+    },
+    "legal": {
+      "title": "Légal",
+      "description": "Mentions légales"
+    }
+  },
+  "pages": {
+    "portfolio": {
+      "title": "Portfolio",
+      "subtitle": "Architecture cloud, automatisation et développement web moderne",
+      "skills": "Compétences",
+      "projects": "Projets",
+      "skillsList": {
+        "frontend": "Next.js, React, TypeScript",
+        "backend": "Node.js, Python",
+        "cloud": "AWS, Vercel, Cloudflare",
+        "devops": "Docker, CI/CD, Turborepo"
+      },
+      "projectsList": {
+        "platform": "Plateforme portfolio multi-tenant",
+        "iac": "Infrastructure as Code",
+        "distributed": "Systèmes distribués",
+        "automation": "Automatisation DevOps"
+      }
+    },
+    "blog": {
+      "title": "Blog",
+      "subtitle": "Articles techniques et retours d'expérience"
+    },
+    "cv": {
+      "title": "Curriculum Vitae",
+      "subtitle": "Parcours et compétences"
+    },
+    "contact": {
+      "title": "Contact",
+      "subtitle": "Prenons contact"
+    },
+    "rdv": {
+      "title": "Prendre rendez-vous",
+      "subtitle": "Planifiez une rencontre"
+    },
+    "legal": {
+      "title": "Mentions légales",
+      "subtitle": "Informations légales"
+    }
+  }
+}

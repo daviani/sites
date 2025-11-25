@@ -1,18 +1,17 @@
 'use client';
 
 import { useTheme } from '../hooks/use-theme';
-
-
+import { useTranslation } from '../hooks/use-translation';
 
 export function DarkModeToggle() {
   const { theme, toggleTheme, mounted } = useTheme();
+  const { t } = useTranslation();
 
-  // Éviter les problèmes d'hydratation
   if (!mounted) {
     return (
       <button
         className="p-2 rounded-lg text-nord-3 dark:text-nord-4"
-        aria-label="Toggle theme"
+        aria-label={t('darkMode.switchToDark')}
         disabled
       >
         <span className="w-5 h-5 block" />
@@ -24,7 +23,7 @@ export function DarkModeToggle() {
     <button
       onClick={toggleTheme}
       className="p-2 rounded-lg hover:bg-nord-5 dark:hover:bg-nord-2 transition-colors text-nord-10 dark:text-nord-8"
-      aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+      aria-label={theme === 'light' ? t('darkMode.switchToDark') : t('darkMode.switchToLight')}
     >
       {theme === 'light' ? (
         // Moon icon for dark mode

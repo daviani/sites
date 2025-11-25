@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Header } from "@daviani/ui";
+import { Providers } from "@/components/Providers";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -31,8 +32,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
-        {children}
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
         <Analytics />
         <SpeedInsights />
       </body>

@@ -2,6 +2,7 @@
 
 import { ReactNode } from 'react';
 import { DarkModeToggle } from './DarkModeToggle';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 export interface HeaderProps {
   children?: ReactNode;
@@ -25,9 +26,10 @@ export function Header({ children, logo, className = '' }: HeaderProps) {
             )}
           </div>
 
-          {/* Actions (DarkModeToggle, Navigation, etc.) */}
+          {/* Actions (LanguageSwitcher, DarkModeToggle, Navigation, etc.) */}
           <div className="flex items-center gap-4">
             {children}
+            <LanguageSwitcher />
             <DarkModeToggle />
           </div>
         </div>
