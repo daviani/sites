@@ -21,7 +21,7 @@ export function Header({ children, logo, className = '' }: HeaderProps) {
           {/* Logo / Branding */}
           <div className="flex-shrink-0">
             {logo || (
-              <a href="/" className="flex items-center gap-3">
+              <a href="/" className="flex items-center gap-3 cursor-pointer">
                 <OwlLogo size={48} />
                 <span className="text-xl font-mono font-bold">
                   <span className="text-nord-3 dark:text-nord-4">&lt;</span>
