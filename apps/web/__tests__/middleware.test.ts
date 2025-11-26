@@ -1,8 +1,6 @@
 import { NextRequest } from 'next/server';
 
-// Import will fail until we implement the middleware
-// This is the RED phase of TDD
-import { getSubdomain, getRewritePath } from '@/lib/domains/config';
+import { getSubdomain, getRewritePath, getSubdomainUrl, getBaseUrl } from '@/lib/domains/config';
 
 describe('Subdomain Routing', () => {
   describe('getSubdomain', () => {
@@ -74,6 +72,45 @@ describe('Subdomain Routing', () => {
 
     it('returns null for unknown subdomain', () => {
       expect(getRewritePath('unknown')).toBeNull();
+    });
+  });
+
+  describe('getBaseUrl', () => {
+    it('returns full URL with protocol and domain', () => {
+      expect(getBaseUrl()).toMatch(/^https?:\/\/.*$/);
+    });
+  });
+
+  describe('getSubdomainUrl', () => {
+    it('returns URL for blog subdomain', () => {
+      const url = getSubdomainUrl('blog');
+      expect(url).toContain('blog');
+      expect(url).toMatch(/^https?:\/\//);
+    });
+
+    it('returns URL for portfolio subdomain', () => {
+      const url = getSubdomainUrl('portfolio');
+      expect(url).toContain('portfolio');
+    });
+
+    it('returns URL for cv subdomain', () => {
+      const url = getSubdomainUrl('cv');
+      expect(url).toContain('cv');
+    });
+
+    it('returns URL for contact subdomain', () => {
+      const url = getSubdomainUrl('contact');
+      expect(url).toContain('contact');
+    });
+
+    it('returns URL for rdv subdomain', () => {
+      const url = getSubdomainUrl('rdv');
+      expect(url).toContain('rdv');
+    });
+
+    it('returns URL for legal subdomain', () => {
+      const url = getSubdomainUrl('legal');
+      expect(url).toContain('legal');
     });
   });
 });

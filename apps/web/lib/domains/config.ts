@@ -13,9 +13,29 @@ export const VALID_SUBDOMAINS = [
 export type ValidSubdomain = (typeof VALID_SUBDOMAINS)[number];
 
 /**
+ * Environment-based configuration
+ */
+const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'daviani.dev';
+const PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL || 'https';
+
+/**
  * Main domain configuration
  */
-export const MAIN_DOMAIN = 'daviani.dev';
+export const MAIN_DOMAIN = DOMAIN;
+
+/**
+ * Returns the base URL (protocol + domain)
+ */
+export function getBaseUrl(): string {
+  return `${PROTOCOL}://${DOMAIN}`;
+}
+
+/**
+ * Returns the full URL for a subdomain
+ */
+export function getSubdomainUrl(subdomain: ValidSubdomain): string {
+  return `${PROTOCOL}://${subdomain}.${DOMAIN}`;
+}
 
 /**
  * Extracts subdomain from hostname
