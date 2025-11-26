@@ -9,7 +9,7 @@ interface NavigationCardProps {
 
 export function NavigationCard({ href, icon, title, description }: NavigationCardProps) {
   return (
-    <a href={href} className="block group">
+    <a href={href} className="block group cursor-pointer">
       <Card variant="elevated" className="hover:scale-105">
         <div className="text-4xl mb-2">{icon}</div>
         <h3 className="text-lg font-bold text-nord-10 dark:text-nord-8 group-hover:text-nord-9">

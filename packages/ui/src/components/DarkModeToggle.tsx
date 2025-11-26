@@ -22,7 +22,7 @@ export function DarkModeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-lg hover:bg-nord-5 dark:hover:bg-nord-2 transition-colors text-nord-10 dark:text-nord-8"
+      className="p-2 rounded-lg hover:bg-nord-5 dark:hover:bg-nord-2 transition-colors text-nord-10 dark:text-nord-8 cursor-pointer"
       aria-label={theme === 'light' ? t('darkMode.switchToDark') : t('darkMode.switchToLight')}
     >
       {theme === 'light' ? (

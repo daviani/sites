@@ -29,7 +29,7 @@ export function LanguageSwitcher() {
 
   const buttonClass = (lang: Language) => {
     const isActive = language === lang;
-    return `px-2 py-1 rounded text-sm font-medium transition-colors ${
+    return `px-2 py-1 rounded text-sm font-medium transition-colors cursor-pointer ${
       isActive
         ? 'bg-nord-10 text-nord-6'
         : 'text-nord-3 dark:text-nord-4 hover:bg-nord-5 dark:hover:bg-nord-2'
