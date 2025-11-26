@@ -9,9 +9,10 @@ export interface HeaderProps {
   children?: ReactNode;
   logo?: ReactNode;
   className?: string;
+  homeUrl?: string;
 }
 
-export function Header({ children, logo, className = '' }: HeaderProps) {
+export function Header({ children, logo, className = '', homeUrl = '/' }: HeaderProps) {
   return (
     <header
       className={`w-full border-b border-nord-4 dark:border-nord-3 bg-nord-6 dark:bg-nord-0 transition-colors ${className}`}
@@ -21,7 +22,7 @@ export function Header({ children, logo, className = '' }: HeaderProps) {
           {/* Logo / Branding */}
           <div className="flex-shrink-0">
             {logo || (
-              <a href="/" className="flex items-center gap-3 cursor-pointer">
+              <a href={homeUrl} className="flex items-center gap-3 cursor-pointer">
                 <OwlLogo size={48} />
                 <span className="text-xl font-mono font-bold">
                   <span className="text-nord-3 dark:text-nord-4">&lt;</span>

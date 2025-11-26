@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslation } from '@daviani/ui';
+import { getSubdomainUrl } from '@/lib/domains/config';
 
 export default function PortfolioPage() {
   const { t } = useTranslation();
@@ -45,20 +46,20 @@ export default function PortfolioPage() {
         <div className="mt-12 text-center">
           <div className="flex gap-4 justify-center">
             <a
-              href="https://blog.daviani.dev"
-              className="px-6 py-3 bg-nord10 text-white rounded-lg hover:bg-nord9 transition-colors"
+              href={getSubdomainUrl('blog')}
+              className="px-6 py-3 bg-nord10 text-white rounded-lg hover:bg-nord9 transition-colors cursor-pointer"
             >
               {t('nav.blog.title')}
             </a>
             <a
-              href="https://contact.daviani.dev"
-              className="px-6 py-3 bg-nord8 text-white rounded-lg hover:bg-nord7 transition-colors"
+              href={getSubdomainUrl('contact')}
+              className="px-6 py-3 bg-nord8 text-white rounded-lg hover:bg-nord7 transition-colors cursor-pointer"
             >
               {t('nav.contact.title')}
             </a>
             <a
-              href="https://cv.daviani.dev"
-              className="px-6 py-3 border-2 border-nord10 text-nord10 dark:text-nord8 rounded-lg hover:bg-nord10 hover:text-white transition-colors"
+              href={getSubdomainUrl('cv')}
+              className="px-6 py-3 border-2 border-nord10 text-nord10 dark:text-nord8 rounded-lg hover:bg-nord10 hover:text-white transition-colors cursor-pointer"
             >
               {t('nav.cv.title')}
             </a>

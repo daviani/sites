@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Header } from "@daviani/ui";
 import { Providers } from "@/components/Providers";
+import { getBaseUrl } from "@/lib/domains/config";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -33,7 +34,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
-          <Header />
+          <Header homeUrl={getBaseUrl()} />
           {children}
         </Providers>
         <Analytics />

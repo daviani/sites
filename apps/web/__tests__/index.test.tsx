@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import RootPage from '@/app/page'
+import { getSubdomainUrl } from '@/lib/domains/config'
 
 describe('Homepage', () => {
   it('renders the main heading', () => {
@@ -25,6 +26,6 @@ describe('Homepage', () => {
   it('has correct links for navigation cards', () => {
     render(<RootPage />)
     const portfolioLink = screen.getByRole('link', { name: /Portfolio/i })
-    expect(portfolioLink).toHaveAttribute('href', 'https://portfolio.daviani.dev')
+    expect(portfolioLink).toHaveAttribute('href', getSubdomainUrl('portfolio'))
   })
 })

@@ -2,9 +2,10 @@
 
 import { NavigationCard } from '@/components/NavigationCard';
 import { useTranslation, TranslationKey } from '@daviani/ui';
+import { getSubdomainUrl, ValidSubdomain } from '@/lib/domains/config';
 
 interface NavItem {
-  href: string;
+  subdomain: ValidSubdomain;
   icon: string;
   titleKey: TranslationKey;
   descriptionKey: TranslationKey;
@@ -12,37 +13,37 @@ interface NavItem {
 
 const navigationItems: NavItem[] = [
   {
-    href: 'https://portfolio.daviani.dev',
+    subdomain: 'portfolio',
     icon: '💼',
     titleKey: 'nav.portfolio.title',
     descriptionKey: 'nav.portfolio.description'
   },
   {
-    href: 'https://blog.daviani.dev',
+    subdomain: 'blog',
     icon: '📝',
     titleKey: 'nav.blog.title',
     descriptionKey: 'nav.blog.description'
   },
   {
-    href: 'https://cv.daviani.dev',
+    subdomain: 'cv',
     icon: '📄',
     titleKey: 'nav.cv.title',
     descriptionKey: 'nav.cv.description'
   },
   {
-    href: 'https://contact.daviani.dev',
+    subdomain: 'contact',
     icon: '✉️',
     titleKey: 'nav.contact.title',
     descriptionKey: 'nav.contact.description'
   },
   {
-    href: 'https://rdv.daviani.dev',
+    subdomain: 'rdv',
     icon: '📅',
     titleKey: 'nav.rdv.title',
     descriptionKey: 'nav.rdv.description'
   },
   {
-    href: 'https://legal.daviani.dev',
+    subdomain: 'legal',
     icon: '⚖️',
     titleKey: 'nav.legal.title',
     descriptionKey: 'nav.legal.description'
@@ -65,8 +66,8 @@ export default function RootPage() {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
           {navigationItems.map((item) => (
             <NavigationCard
-              key={item.href}
-              href={item.href}
+              key={item.subdomain}
+              href={getSubdomainUrl(item.subdomain)}
               icon={item.icon}
               title={t(item.titleKey)}
               description={t(item.descriptionKey)}
