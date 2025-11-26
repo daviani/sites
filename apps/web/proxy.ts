@@ -1,46 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getSubdomain, getRewritePath } from '@/lib/domains/config';
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/((?!_next/static|_next/image|favicon.ico|icon.png|api).*)',
   ],
 };
 
-export function proxy(req: NextRequest) {
-  const url = req.nextUrl;
-  const hostname = req.headers.get('host') || '';
+export function proxy(request: NextRequest) {
+  const hostname = request.headers.get('host') || '';
+  const subdomain = getSubdomain(hostname);
 
-  // Extraire le sous-domaine
-  const subdomain = hostname.split('.')[0];
-
-  // Mapping des sous-domaines vers les routes
-  const subdomainRoutes: Record<string, string> = {
-    'portfolio': '/portfolio',
-    'blog': '/blog',
-    'contact': '/contact',
-    'rdv': '/rdv',
-    'cv': '/cv',
-    'legal': '/legal',
-  };
-
-  // Pour localhost, on peut tester avec des query params
-  // Ex: localhost:3000?subdomain=blog
-  if (hostname.includes('localhost')) {
-    const testSubdomain = url.searchParams.get('subdomain');
-    if (testSubdomain && subdomainRoutes[testSubdomain]) {
-      url.pathname = `${subdomainRoutes[testSubdomain]}${url.pathname === '/' ? '' : url.pathname}`;
-      return NextResponse.rewrite(url);
-    }
-    // Par défaut sur localhost → page principale
+  // No subdomain, continue normally
+  if (!subdomain) {
     return NextResponse.next();
   }
 
-  // En production, router selon le sous-domaine
-  if (subdomainRoutes[subdomain]) {
-    url.pathname = `${subdomainRoutes[subdomain]}${url.pathname === '/' ? '' : url.pathname}`;
-    return NextResponse.rewrite(url);
+  const rewritePath = getRewritePath(subdomain);
+
+  // Unknown subdomain, continue normally
+  if (!rewritePath) {
+    return NextResponse.next();
   }
 
-  // Domaine principal (daviani.dev) → page principale
-  return NextResponse.next();
+  // Rewrite to the subdomain's page
+  const url = request.nextUrl.clone();
+  url.pathname = `${rewritePath}${url.pathname === '/' ? '' : url.pathname}`;
+
+  return NextResponse.rewrite(url);
 }
