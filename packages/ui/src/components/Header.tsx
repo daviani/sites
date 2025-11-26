@@ -3,6 +3,7 @@
 import { ReactNode } from 'react';
 import { DarkModeToggle } from './DarkModeToggle';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { OwlLogo } from './OwlLogo';
 
 export interface HeaderProps {
   children?: ReactNode;
@@ -20,9 +21,16 @@ export function Header({ children, logo, className = '' }: HeaderProps) {
           {/* Logo / Branding */}
           <div className="flex-shrink-0">
             {logo || (
-              <span className="text-xl font-bold text-nord-10">
-                daviani.dev
-              </span>
+              <div className="flex items-center gap-3">
+                <OwlLogo size={48} />
+                <span className="text-xl font-mono font-bold">
+                  <span className="text-nord-3 dark:text-nord-4">&lt;</span>
+                  <span className="text-nord-10 dark:text-nord-8">Daviani</span>
+                  <span className="text-nord-3 dark:text-nord-4">.</span>
+                  <span className="text-nord-9 dark:text-nord-7">dev</span>
+                  <span className="text-nord-3 dark:text-nord-4">/&gt;</span>
+                </span>
+              </div>
             )}
           </div>
 

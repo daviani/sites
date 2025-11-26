@@ -11,6 +11,8 @@ export { DarkModeToggle } from './components/DarkModeToggle';
 
 export { LanguageSwitcher } from './components/LanguageSwitcher';
 
+export { OwlLogo } from './components/OwlLogo';
+
 export { useTheme } from './hooks/use-theme';
 
 export { useLanguage, LanguageProvider } from './hooks/use-language';
