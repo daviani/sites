@@ -1,8 +1,11 @@
+import createMDX from '@next/mdx';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
+  pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
 
   // Headers de sécurité
   async headers() {
@@ -49,4 +52,8 @@ const nextConfig = {
   }
 };
 
-export default nextConfig;
+const withMDX = createMDX({
+  extension: /\.mdx?$/,
+});
+
+export default withMDX(nextConfig);
