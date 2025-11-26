@@ -21,7 +21,7 @@ export function Header({ children, logo, className = '' }: HeaderProps) {
           {/* Logo / Branding */}
           <div className="flex-shrink-0">
             {logo || (
-              <div className="flex items-center gap-3">
+              <a href="/" className="flex items-center gap-3">
                 <OwlLogo size={48} />
                 <span className="text-xl font-mono font-bold">
                   <span className="text-nord-3 dark:text-nord-4">&lt;</span>
@@ -30,7 +30,7 @@ export function Header({ children, logo, className = '' }: HeaderProps) {
                   <span className="text-nord-9 dark:text-nord-7">dev</span>
                   <span className="text-nord-3 dark:text-nord-4">/&gt;</span>
                 </span>
-              </div>
+              </a>
             )}
           </div>
 
