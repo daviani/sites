@@ -42,12 +42,18 @@ describe('Header Component', () => {
   describe('Rendering', () => {
     it('renders with default logo text', () => {
       render(<Header />);
-      expect(screen.getByText('daviani.dev')).toBeInTheDocument();
+      expect(screen.getByText('Daviani')).toBeInTheDocument();
+      expect(screen.getByText('dev')).toBeInTheDocument();
     });
 
     it('renders as header element', () => {
       const { container } = render(<Header />);
       expect(container.querySelector('header')).toBeInTheDocument();
+    });
+
+    it('renders OwlLogo SVG', () => {
+      const { container } = render(<Header />);
+      expect(container.querySelector('svg')).toBeInTheDocument();
     });
   });
 
@@ -55,7 +61,7 @@ describe('Header Component', () => {
     it('renders custom logo when provided', () => {
       render(<Header logo={<span>My Logo</span>} />);
       expect(screen.getByText('My Logo')).toBeInTheDocument();
-      expect(screen.queryByText('daviani.dev')).not.toBeInTheDocument();
+      expect(screen.queryByText('Daviani')).not.toBeInTheDocument();
     });
 
     it('renders children in actions area', () => {
