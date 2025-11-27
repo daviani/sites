@@ -5,6 +5,20 @@ import {
 } from '@/app/blog/[slug]/page';
 import { getArticleBySlug } from '@/lib/content/blog';
 
+// Mock Giscus
+jest.mock('@giscus/react', () => ({
+  __esModule: true,
+  default: () => <div data-testid="giscus-widget">Giscus Widget</div>,
+}));
+
+// Mock @daviani/ui hooks
+jest.mock('@daviani/ui', () => ({
+  useTheme: () => ({ theme: 'light', mounted: true }),
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
+
 describe('Blog Article Page', () => {
   describe('generateStaticParams', () => {
     it('returns an array of slug params', async () => {

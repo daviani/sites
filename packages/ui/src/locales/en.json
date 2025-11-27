@@ -38,6 +38,12 @@
       "description": "Legal notice"
     }
   },
+  "comments": {
+    "title": "Comments",
+    "consentText": "Comments are managed via GitHub Discussions. By clicking \"Accept\", you authorize loading external content from GitHub.",
+    "privacyNote": "Your data will be processed according to GitHub's privacy policy.",
+    "acceptButton": "Accept and show comments"
+  },
   "pages": {
     "portfolio": {
       "title": "Portfolio",

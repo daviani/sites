@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getAllArticles, getArticleBySlug } from '@/lib/content/blog';
+import { Comments } from '@/components/blog/Comments';
 import type { Metadata } from 'next';
 
 interface BlogPostProps {
@@ -119,6 +120,9 @@ export default async function BlogPost({ params }: BlogPostProps) {
         <div className="prose-nord">
           <Content />
         </div>
+
+        {/* Comments */}
+        <Comments slug={slug} />
       </article>
     </div>
   );
