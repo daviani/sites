@@ -38,6 +38,12 @@
       "description": "Mentions légales"
     }
   },
+  "comments": {
+    "title": "Commentaires",
+    "consentText": "Les commentaires sont gérés via GitHub Discussions. En cliquant sur \"Accepter\", vous autorisez le chargement de contenu externe depuis GitHub.",
+    "privacyNote": "Vos données seront traitées selon la politique de confidentialité de GitHub.",
+    "acceptButton": "Accepter et afficher les commentaires"
+  },
   "pages": {
     "portfolio": {
       "title": "Portfolio",
