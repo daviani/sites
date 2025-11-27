@@ -22,6 +22,8 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
     return { title: 'Article non trouvé' };
   }
 
+  const ogImageUrl = `/api/og/${slug}`;
+
   return {
     title: article.meta.title,
     description: article.meta.description,
@@ -31,6 +33,20 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
       type: 'article',
       publishedTime: article.meta.date,
       tags: article.meta.tags,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: article.meta.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.meta.title,
+      description: article.meta.description,
+      images: [ogImageUrl],
     },
   };
 }
