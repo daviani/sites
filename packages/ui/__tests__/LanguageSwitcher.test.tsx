@@ -141,7 +141,7 @@ describe('LanguageSwitcher Component', () => {
       renderWithProvider(<LanguageSwitcher />);
 
       const button = screen.getByRole('button');
-      expect(button.className).toContain('hover:scale-110');
+      expect(button.className).toContain('hover:scale-105');
     });
 
     it('has focus ring styles', () => {
