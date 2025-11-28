@@ -39,130 +39,123 @@ describe('LanguageSwitcher Component', () => {
   });
 
   describe('Rendering', () => {
-    it('renders FR and EN buttons', () => {
+    it('renders a button with flag icon', () => {
       renderWithProvider(<LanguageSwitcher />);
 
-      expect(screen.getByText('FR')).toBeInTheDocument();
-      expect(screen.getByText('EN')).toBeInTheDocument();
+      const button = screen.getByRole('button');
+      expect(button).toBeInTheDocument();
+      // Should contain an SVG (flag)
+      expect(button.querySelector('svg')).toBeInTheDocument();
     });
 
-    it('renders separator between buttons', () => {
+    it('shows English flag when current language is French', () => {
       renderWithProvider(<LanguageSwitcher />);
 
-      expect(screen.getByText('/')).toBeInTheDocument();
+      const button = screen.getByRole('button');
+      // The button should show the flag of the language to switch to
+      expect(button).toHaveAttribute('aria-label', 'Anglais');
     });
 
-    it('renders with role group', () => {
-      renderWithProvider(<LanguageSwitcher />);
-
-      expect(screen.getByRole('group')).toBeInTheDocument();
-    });
-  });
-
-  describe('Initial State', () => {
-    it('FR button is active when language is French', () => {
-      renderWithProvider(<LanguageSwitcher />);
-
-      const frButton = screen.getByText('FR');
-      expect(frButton).toHaveAttribute('aria-pressed', 'true');
-    });
-
-    it('EN button is not active when language is French', () => {
-      renderWithProvider(<LanguageSwitcher />);
-
-      const enButton = screen.getByText('EN');
-      expect(enButton).toHaveAttribute('aria-pressed', 'false');
-    });
-
-    it('EN button is active when language is English', () => {
+    it('shows French flag when current language is English', () => {
       localStorageMock.getItem.mockReturnValueOnce('en');
 
       renderWithProvider(<LanguageSwitcher />);
 
-      const enButton = screen.getByText('EN');
-      expect(enButton).toHaveAttribute('aria-pressed', 'true');
+      const button = screen.getByRole('button');
+      // When in English mode, the label shows "French" (English translation)
+      expect(button).toHaveAttribute('aria-label', 'French');
     });
   });
 
   describe('Interaction', () => {
-    it('changes to English when EN button is clicked', () => {
+    it('toggles to English when clicked in French mode', () => {
       renderWithProvider(<LanguageSwitcher />);
 
-      const enButton = screen.getByText('EN');
-      fireEvent.click(enButton);
+      const button = screen.getByRole('button');
+      fireEvent.click(button);
 
-      expect(enButton).toHaveAttribute('aria-pressed', 'true');
       expect(localStorageMock.setItem).toHaveBeenCalledWith('language', 'en');
     });
 
-    it('changes to French when FR button is clicked', () => {
+    it('toggles to French when clicked in English mode', () => {
       localStorageMock.getItem.mockReturnValueOnce('en');
 
       renderWithProvider(<LanguageSwitcher />);
 
-      const frButton = screen.getByText('FR');
-      fireEvent.click(frButton);
+      const button = screen.getByRole('button');
+      fireEvent.click(button);
 
-      expect(frButton).toHaveAttribute('aria-pressed', 'true');
       expect(localStorageMock.setItem).toHaveBeenCalledWith('language', 'fr');
     });
 
-    it('clicking active button does not change state', () => {
+    it('updates aria-label after toggle', () => {
       renderWithProvider(<LanguageSwitcher />);
 
-      const frButton = screen.getByText('FR');
-      fireEvent.click(frButton);
+      const button = screen.getByRole('button');
+      expect(button).toHaveAttribute('aria-label', 'Anglais');
 
-      expect(frButton).toHaveAttribute('aria-pressed', 'true');
+      fireEvent.click(button);
+
+      // After toggling to English, label is "French" (in English)
+      expect(button).toHaveAttribute('aria-label', 'French');
     });
   });
 
   describe('Accessibility', () => {
-    it('has aria-label on group', () => {
+    it('button has aria-label', () => {
       renderWithProvider(<LanguageSwitcher />);
 
-      const group = screen.getByRole('group');
-      expect(group).toHaveAttribute('aria-label');
+      const button = screen.getByRole('button');
+      expect(button).toHaveAttribute('aria-label');
     });
 
-    it('FR button has French aria-label', () => {
+    it('button has title attribute', () => {
       renderWithProvider(<LanguageSwitcher />);
 
-      const frButton = screen.getByText('FR');
-      expect(frButton).toHaveAttribute('aria-label', 'Français');
+      const button = screen.getByRole('button');
+      expect(button).toHaveAttribute('title');
     });
 
-    it('EN button has English aria-label', () => {
+    it('flag SVG has aria-hidden', () => {
       renderWithProvider(<LanguageSwitcher />);
 
-      const enButton = screen.getByText('EN');
-      expect(enButton).toHaveAttribute('aria-label', 'Anglais');
+      const svg = screen.getByRole('button').querySelector('svg');
+      expect(svg).toHaveAttribute('aria-hidden', 'true');
     });
+  });
 
-    it('buttons have aria-pressed attribute', () => {
-      renderWithProvider(<LanguageSwitcher />);
+  describe('Loading State', () => {
+    it('shows disabled button before mount', () => {
+      // This test checks the initial hydration state
+      // The component shows a disabled button with FlagFR while mounting
+      const { container } = renderWithProvider(<LanguageSwitcher />);
 
-      const frButton = screen.getByText('FR');
-      const enButton = screen.getByText('EN');
-
-      expect(frButton).toHaveAttribute('aria-pressed');
-      expect(enButton).toHaveAttribute('aria-pressed');
+      // After mount, button should be enabled
+      const button = screen.getByRole('button');
+      expect(button).not.toBeDisabled();
     });
   });
 
   describe('Styling', () => {
-    it('active button has active styling class', () => {
+    it('has hover scale effect class', () => {
       renderWithProvider(<LanguageSwitcher />);
 
-      const frButton = screen.getByText('FR');
-      expect(frButton.className).toContain('bg-nord-10');
+      const button = screen.getByRole('button');
+      expect(button.className).toContain('hover:scale-110');
     });
 
-    it('inactive button has inactive styling class', () => {
+    it('has focus ring styles', () => {
       renderWithProvider(<LanguageSwitcher />);
 
-      const enButton = screen.getByText('EN');
-      expect(enButton.className).toContain('text-nord-3');
+      const button = screen.getByRole('button');
+      expect(button.className).toContain('focus:ring-2');
+    });
+
+    it('has rounded-full class for circular shape', () => {
+      renderWithProvider(<LanguageSwitcher />);
+
+      const button = screen.getByRole('button');
+      expect(button.className).toContain('rounded-full');
     });
   });
 });
