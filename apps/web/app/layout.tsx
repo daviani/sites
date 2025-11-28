@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Header, Footer } from "@daviani/ui";
 import { Providers } from "@/components/Providers";
+import { SubHeaderNav } from "@/components/SubHeaderNav";
 import { getBaseUrl, getSubdomainUrl } from "@/lib/domains/config";
 import "./globals.css";
 
@@ -36,6 +37,7 @@ export default function RootLayout({
         <Providers>
           <div className="min-h-screen flex flex-col">
             <Header homeUrl={getBaseUrl()} />
+            <SubHeaderNav />
             <main className="flex-1">{children}</main>
             <Footer
               legalUrl={getSubdomainUrl("legal")}
