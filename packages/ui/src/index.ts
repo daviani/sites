@@ -13,7 +13,8 @@ export { LanguageSwitcher } from './components/LanguageSwitcher';
 
 export { OwlLogo } from './components/OwlLogo';
 
-export { useTheme } from './hooks/use-theme';
+export { useTheme, ThemeProvider } from './hooks/use-theme';
+export type { Theme } from './hooks/use-theme';
 
 export { useLanguage, LanguageProvider } from './hooks/use-language';
 export type { Language } from './hooks/use-language';
