@@ -6,16 +6,15 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 import { OwlLogo } from './OwlLogo';
 
 export interface HeaderProps {
-  children?: ReactNode;
   logo?: ReactNode;
   className?: string;
   homeUrl?: string;
 }
 
-export function Header({ children, logo, className = '', homeUrl = '/' }: HeaderProps) {
+export function Header({ logo, className = '', homeUrl = '/' }: HeaderProps) {
   return (
     <header
-      className={`w-full border-b border-nord-4 dark:border-nord-3 bg-nord-6 dark:bg-nord-0 transition-colors ${className}`}
+      className={`sticky top-[10px] left-[10px] right-[10px] mx-[10px] z-50 shadow-lg backdrop-blur-md bg-nord-6/70 dark:bg-nord-0/70 rounded-[2.5rem] transition-colors ${className}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -35,9 +34,8 @@ export function Header({ children, logo, className = '', homeUrl = '/' }: Header
             )}
           </div>
 
-          {/* Actions (LanguageSwitcher, DarkModeToggle, Navigation, etc.) */}
+          {/* Actions */}
           <div className="flex items-center gap-4">
-            {children}
             <LanguageSwitcher />
             <DarkModeToggle />
           </div>
