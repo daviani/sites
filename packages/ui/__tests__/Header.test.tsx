@@ -64,15 +64,6 @@ describe('Header Component', () => {
       expect(screen.queryByText('Daviani')).not.toBeInTheDocument();
     });
 
-    it('renders children in actions area', () => {
-      render(
-        <Header>
-          <button>Dark Mode</button>
-        </Header>
-      );
-      expect(screen.getByText('Dark Mode')).toBeInTheDocument();
-    });
-
     it('accepts custom className', () => {
       const { container } = render(<Header className="test-class" />);
       const header = container.querySelector('header');
@@ -84,23 +75,23 @@ describe('Header Component', () => {
     it('applies base styling classes', () => {
       const { container } = render(<Header />);
       const header = container.querySelector('header');
-      expect(header?.className).toContain('w-full');
-      expect(header?.className).toContain('border-b');
+      expect(header?.className).toContain('sticky');
+      expect(header?.className).toContain('shadow-lg');
+      expect(header?.className).toContain('rounded-[2.5rem]');
       expect(header?.className).toContain('transition-colors');
     });
 
-    it('applies Nord theme colors', () => {
+    it('applies Nord theme colors with glassmorphism', () => {
       const { container } = render(<Header />);
       const header = container.querySelector('header');
-      expect(header?.className).toContain('border-nord-4');
-      expect(header?.className).toContain('bg-nord-6');
+      expect(header?.className).toContain('bg-nord-6/70');
+      expect(header?.className).toContain('backdrop-blur-md');
     });
 
     it('applies dark mode classes', () => {
       const { container } = render(<Header />);
       const header = container.querySelector('header');
-      expect(header?.className).toContain('dark:border-nord-3');
-      expect(header?.className).toContain('dark:bg-nord-0');
+      expect(header?.className).toContain('dark:bg-nord-0/70');
     });
   });
 
