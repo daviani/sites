@@ -15,6 +15,8 @@ export { OwlLogo } from './components/OwlLogo';
 
 export { FlagFR, FlagEN } from './components/icons/FlagIcons';
 
+export { GitHubIcon } from './components/icons/GitHubIcon';
+
 export { useTheme, ThemeProvider } from './hooks/use-theme';
 export type { Theme } from './hooks/use-theme';
 
