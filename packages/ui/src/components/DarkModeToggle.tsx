@@ -7,14 +7,18 @@ export function DarkModeToggle() {
   const { theme, toggleTheme, mounted } = useTheme();
   const { t } = useTranslation();
 
+  // Common button styles for consistency with LanguageSwitcher
+  const buttonStyles =
+    'p-2 rounded-full transition-all hover:scale-105 hover:bg-nord-5 dark:hover:bg-nord-2 focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2 dark:focus:ring-offset-nord-0 cursor-pointer';
+
   if (!mounted) {
     return (
       <button
-        className="p-2 rounded-lg text-nord-3 dark:text-nord-4"
+        className="p-2 rounded-full text-nord-3 dark:text-nord-4 opacity-50"
         aria-label={t('darkMode.switchToDark')}
         disabled
       >
-        <span className="w-5 h-5 block" />
+        <span className="w-6 h-6 block" />
       </button>
     );
   }
@@ -22,17 +26,19 @@ export function DarkModeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-lg hover:bg-nord-5 dark:hover:bg-nord-2 transition-colors text-nord-10 dark:text-nord-8 cursor-pointer"
+      className={`${buttonStyles} text-nord-10 dark:text-nord-8`}
       aria-label={theme === 'light' ? t('darkMode.switchToDark') : t('darkMode.switchToLight')}
+      title={theme === 'light' ? t('darkMode.switchToDark') : t('darkMode.switchToLight')}
     >
       {theme === 'light' ? (
         // Moon icon for dark mode
         <svg
-          className="w-5 h-5"
+          className="w-7 h-7"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
         >
           <path
             strokeLinecap="round"
@@ -44,11 +50,12 @@ export function DarkModeToggle() {
       ) : (
         // Sun icon for light mode
         <svg
-          className="w-5 h-5"
+          className="w-7 h-7"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
         >
           <path
             strokeLinecap="round"

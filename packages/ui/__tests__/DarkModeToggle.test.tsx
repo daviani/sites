@@ -98,8 +98,8 @@ describe('DarkModeToggle Component', () => {
       render(<DarkModeToggle />);
       const button = screen.getByRole('button');
       expect(button.className).toContain('p-2');
-      expect(button.className).toContain('rounded-lg');
-      expect(button.className).toContain('transition-colors');
+      expect(button.className).toContain('rounded-full');
+      expect(button.className).toContain('transition-all');
     });
 
     it('applies Nord theme colors', () => {
