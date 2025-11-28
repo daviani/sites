@@ -13,6 +13,8 @@ export { LanguageSwitcher } from './components/LanguageSwitcher';
 
 export { OwlLogo } from './components/OwlLogo';
 
+export { FlagFR, FlagEN } from './components/icons/FlagIcons';
+
 export { useTheme, ThemeProvider } from './hooks/use-theme';
 export type { Theme } from './hooks/use-theme';
 

@@ -2,6 +2,7 @@
 
 import { useLanguage, Language } from '../hooks/use-language';
 import { useTranslation } from '../hooks/use-translation';
+import { FlagFR, FlagEN } from './icons/FlagIcons';
 
 export function LanguageSwitcher() {
   const { language, setLanguage, mounted } = useLanguage();
@@ -9,52 +10,36 @@ export function LanguageSwitcher() {
 
   if (!mounted) {
     return (
-      <div className="flex items-center gap-1 text-sm">
+      <div className="flex items-center gap-2">
         <button
-          className="px-2 py-1 rounded text-nord-3 dark:text-nord-4"
+          className="rounded-full opacity-50 cursor-not-allowed"
           disabled
+          aria-label="Loading..."
         >
-          FR
-        </button>
-        <span className="text-nord-3 dark:text-nord-4">/</span>
-        <button
-          className="px-2 py-1 rounded text-nord-3 dark:text-nord-4"
-          disabled
-        >
-          EN
+          <FlagFR size={24} />
         </button>
       </div>
     );
   }
 
-  const buttonClass = (lang: Language) => {
-    const isActive = language === lang;
-    return `px-2 py-1 rounded text-sm font-medium transition-colors cursor-pointer ${
-      isActive
-        ? 'bg-nord-10 text-nord-6'
-        : 'text-nord-3 dark:text-nord-4 hover:bg-nord-5 dark:hover:bg-nord-2'
-    }`;
+  const handleToggle = () => {
+    setLanguage(language === 'fr' ? 'en' : 'fr');
   };
 
+  // Show the flag of the OTHER language (the one you can switch to)
+  const Flag = language === 'fr' ? FlagEN : FlagFR;
+  const nextLang: Language = language === 'fr' ? 'en' : 'fr';
+  const ariaLabel =
+    language === 'fr' ? t('common.english') : t('common.french');
+
   return (
-    <div className="flex items-center gap-1" role="group" aria-label={t('common.languageSelection')}>
-      <button
-        onClick={() => setLanguage('fr')}
-        className={buttonClass('fr')}
-        aria-pressed={language === 'fr'}
-        aria-label={t('common.french')}
-      >
-        FR
-      </button>
-      <span className="text-nord-3 dark:text-nord-4">/</span>
-      <button
-        onClick={() => setLanguage('en')}
-        className={buttonClass('en')}
-        aria-pressed={language === 'en'}
-        aria-label={t('common.english')}
-      >
-        EN
-      </button>
-    </div>
+    <button
+      onClick={handleToggle}
+      className="rounded-full transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2 dark:focus:ring-offset-nord-0 cursor-pointer"
+      aria-label={ariaLabel}
+      title={ariaLabel}
+    >
+      <Flag size={24} />
+    </button>
   );
 }
