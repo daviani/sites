@@ -17,6 +17,8 @@ export { FlagFR, FlagEN } from './components/icons/FlagIcons';
 
 export { GitHubIcon } from './components/icons/GitHubIcon';
 
+export { Footer } from './components/Footer';
+
 export { useTheme, ThemeProvider } from './hooks/use-theme';
 export type { Theme } from './hooks/use-theme';
 

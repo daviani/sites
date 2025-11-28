@@ -1,4 +1,10 @@
 {
+  "footer": {
+    "legal": "Mentions légales",
+    "contact": "Contact",
+    "github": "GitHub",
+    "copyright": "© {year} Daviani.dev - Tous droits réservés"
+  },
   "common": {
     "languageSelection": "Sélection de la langue",
     "french": "Français",

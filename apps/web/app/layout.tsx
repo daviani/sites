@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Header } from "@daviani/ui";
+import { Header, Footer } from "@daviani/ui";
 import { Providers } from "@/components/Providers";
-import { getBaseUrl } from "@/lib/domains/config";
+import { getBaseUrl, getSubdomainUrl } from "@/lib/domains/config";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -34,8 +34,15 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
-          <Header homeUrl={getBaseUrl()} />
-          {children}
+          <div className="min-h-screen flex flex-col">
+            <Header homeUrl={getBaseUrl()} />
+            <main className="flex-1">{children}</main>
+            <Footer
+              legalUrl={getSubdomainUrl("legal")}
+              contactUrl={getSubdomainUrl("contact")}
+              githubUrl="https://github.com/daviani"
+            />
+          </div>
         </Providers>
         <Analytics />
         <SpeedInsights />
