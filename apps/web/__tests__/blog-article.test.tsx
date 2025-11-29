@@ -53,7 +53,7 @@ describe('Blog Article Page', () => {
       });
       expect(metadata.openGraph).toBeDefined();
       expect(metadata.openGraph?.title).toBe('Hello World');
-      expect(metadata.openGraph?.type).toBe('article');
+      expect((metadata.openGraph as { type?: string })?.type).toBe('article');
     });
   });
 
