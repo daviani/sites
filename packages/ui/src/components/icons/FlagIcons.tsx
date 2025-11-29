@@ -46,40 +46,49 @@ export function FlagEN({ size = 24, className, ...props }: FlagProps) {
     >
       <defs>
         <clipPath id="circle-uk">
-          <circle cx="100" cy="100" r="100" />
+          <circle cx="100" cy="100" r="96" />
         </clipPath>
       </defs>
 
       <g clipPath="url(#circle-uk)">
-        {/* White background - Nord Snow */}
-        <circle cx="100" cy="100" r="100" fill="#ECEFF4" />
+        {/* Blue background - Nord Frost (darker for visibility) */}
+        <circle cx="100" cy="100" r="96" fill="#5E81AC" />
 
-        {/* Diagonal stripes */}
+        {/* White diagonal stripes */}
         <path
           d="M0 0 L200 200 M200 0 L0 200"
-          stroke="#5E81AC"
-          strokeWidth="30"
+          stroke="#ECEFF4"
+          strokeWidth="35"
           fill="none"
         />
+
+        {/* Red diagonal stripes (thinner, on top) */}
         <path
           d="M0 0 L200 200 M200 0 L0 200"
           stroke="#BF616A"
-          strokeWidth="10"
+          strokeWidth="12"
           fill="none"
         />
 
-        {/* Cross background */}
-        <rect x="80" y="0" width="40" height="200" fill="#ECEFF4" />
-        <rect x="0" y="80" width="200" height="40" fill="#ECEFF4" />
-
-        {/* Blue cross - Nord Frost */}
-        <rect x="85" y="0" width="30" height="200" fill="#5E81AC" />
-        <rect x="0" y="85" width="200" height="30" fill="#5E81AC" />
+        {/* White cross */}
+        <rect x="75" y="0" width="50" height="200" fill="#ECEFF4" />
+        <rect x="0" y="75" width="200" height="50" fill="#ECEFF4" />
 
         {/* Red cross - Nord Aurora */}
-        <rect x="90" y="0" width="20" height="200" fill="#BF616A" />
-        <rect x="0" y="90" width="200" height="20" fill="#BF616A" />
+        <rect x="88" y="0" width="24" height="200" fill="#BF616A" />
+        <rect x="0" y="88" width="200" height="24" fill="#BF616A" />
       </g>
+
+      {/* Border circle for visibility */}
+      <circle
+        cx="100"
+        cy="100"
+        r="96"
+        fill="none"
+        stroke="#4C566A"
+        strokeWidth="4"
+        opacity="0.5"
+      />
     </svg>
   );
 }
