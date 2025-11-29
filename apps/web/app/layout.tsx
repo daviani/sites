@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Footer } from "@daviani/ui";
+import { Footer, SkipLink } from "@daviani/ui";
 import { Providers } from "@/components/Providers";
 import { HeaderNav } from "@/components/HeaderNav";
 import { SubHeaderNav } from "@/components/SubHeaderNav";
@@ -36,14 +36,18 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
+          <SkipLink />
           <HeaderNav />
           <SubHeaderNav />
           <div className="min-h-screen flex flex-col">
-            <main className="flex-1 pt-[86px] md:pt-[150px] px-[10px]">{children}</main>
+            <main id="main-content" className="flex-1 pt-[86px] md:pt-[150px] px-[10px]">{children}</main>
             <Footer
               legalUrl={getSubdomainUrl("legal")}
               contactUrl={getSubdomainUrl("contact")}
               githubUrl="https://github.com/daviani"
+              accessibilityUrl={getSubdomainUrl("accessibility")}
+              sitemapUrl={getSubdomainUrl("sitemap")}
+              helpUrl={getSubdomainUrl("help")}
             />
           </div>
         </Providers>

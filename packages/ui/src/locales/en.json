@@ -10,7 +10,8 @@
     "french": "French",
     "english": "English",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "skipToContent": "Skip to content"
   },
   "darkMode": {
     "switchToDark": "Switch to dark mode",
@@ -45,6 +46,18 @@
     "legal": {
       "title": "Legal",
       "description": "Legal notice"
+    },
+    "accessibility": {
+      "title": "Accessibility",
+      "description": "Accessibility info"
+    },
+    "sitemap": {
+      "title": "Sitemap",
+      "description": "Site structure"
+    },
+    "help": {
+      "title": "Help",
+      "description": "Navigation help"
     }
   },
   "comments": {
@@ -91,6 +104,36 @@
     "legal": {
       "title": "Legal notice",
       "subtitle": "Legal information"
+    },
+    "accessibility": {
+      "title": "Accessibility",
+      "subtitle": "Accessibility statement",
+      "status": "Accessibility improvement in progress",
+      "commitment": "Commitment",
+      "commitmentText": "We are committed to making this website accessible to everyone, regardless of their abilities or the technologies they use.",
+      "standards": "Standards",
+      "standardsText": "This site aims to comply with RGAA 4.1 (French General Accessibility Reference Framework) and WCAG 2.1 level AA.",
+      "contact": "Report an issue",
+      "contactText": "If you encounter an accessibility barrier on this site, please contact us so we can address it.",
+      "declarationDate": "Declaration date"
+    },
+    "sitemap": {
+      "title": "Sitemap",
+      "subtitle": "Website structure",
+      "mainPages": "Main pages",
+      "utilities": "Utilities"
+    },
+    "help": {
+      "title": "Navigation Help",
+      "subtitle": "How to navigate this site",
+      "keyboard": "Keyboard navigation",
+      "keyboardText": "Use Tab to move between interactive elements, Enter to activate links and buttons, and Escape to close menus.",
+      "skipLink": "Skip to content",
+      "skipLinkText": "A skip link appears when you start navigating with the keyboard. It allows you to jump directly to the main content.",
+      "theme": "Dark mode",
+      "themeText": "Toggle between light and dark mode using the sun/moon button in the header. Your preference is saved automatically.",
+      "language": "Language",
+      "languageText": "Switch between French and English using the flag button in the header."
     }
   }
 }

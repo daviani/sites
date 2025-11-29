@@ -10,7 +10,8 @@
     "french": "Français",
     "english": "Anglais",
     "openMenu": "Ouvrir le menu",
-    "closeMenu": "Fermer le menu"
+    "closeMenu": "Fermer le menu",
+    "skipToContent": "Aller au contenu"
   },
   "darkMode": {
     "switchToDark": "Passer en mode sombre",
@@ -45,6 +46,18 @@
     "legal": {
       "title": "Légal",
       "description": "Mentions légales"
+    },
+    "accessibility": {
+      "title": "Accessibilité",
+      "description": "Infos accessibilité"
+    },
+    "sitemap": {
+      "title": "Plan du site",
+      "description": "Structure du site"
+    },
+    "help": {
+      "title": "Aide",
+      "description": "Aide à la navigation"
     }
   },
   "comments": {
@@ -91,6 +104,36 @@
     "legal": {
       "title": "Mentions légales",
       "subtitle": "Informations légales"
+    },
+    "accessibility": {
+      "title": "Accessibilité",
+      "subtitle": "Déclaration d'accessibilité",
+      "status": "Démarche d'accessibilité en cours",
+      "commitment": "Engagement",
+      "commitmentText": "Nous nous engageons à rendre ce site accessible à tous, quelles que soient les capacités ou les technologies utilisées.",
+      "standards": "Référentiels",
+      "standardsText": "Ce site vise à être conforme au RGAA 4.1 (Référentiel Général d'Amélioration de l'Accessibilité) et aux WCAG 2.1 niveau AA.",
+      "contact": "Signaler un problème",
+      "contactText": "Si vous rencontrez un obstacle d'accessibilité sur ce site, merci de nous contacter afin que nous puissions y remédier.",
+      "declarationDate": "Date de la déclaration"
+    },
+    "sitemap": {
+      "title": "Plan du site",
+      "subtitle": "Structure du site",
+      "mainPages": "Pages principales",
+      "utilities": "Utilitaires"
+    },
+    "help": {
+      "title": "Aide à la navigation",
+      "subtitle": "Comment naviguer sur ce site",
+      "keyboard": "Navigation au clavier",
+      "keyboardText": "Utilisez Tab pour vous déplacer entre les éléments interactifs, Entrée pour activer les liens et boutons, et Échap pour fermer les menus.",
+      "skipLink": "Aller au contenu",
+      "skipLinkText": "Un lien d'évitement apparaît lorsque vous commencez à naviguer au clavier. Il permet d'accéder directement au contenu principal.",
+      "theme": "Mode sombre",
+      "themeText": "Basculez entre le mode clair et sombre avec le bouton soleil/lune dans l'en-tête. Votre préférence est sauvegardée automatiquement.",
+      "language": "Langue",
+      "languageText": "Changez entre le français et l'anglais avec le bouton drapeau dans l'en-tête."
     }
   }
 }

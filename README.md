@@ -23,6 +23,9 @@ Portfolio professionnel démontrant une expertise Full-Stack et DevOps. Architec
 | `rdv.daviani.dev` | Prise de rendez-vous |
 | `cv.daviani.dev` | CV interactif |
 | `legal.daviani.dev` | Mentions légales |
+| `accessibility.daviani.dev` | Déclaration d'accessibilité |
+| `sitemap.daviani.dev` | Plan du site |
+| `help.daviani.dev` | Aide à la navigation |
 
 ---
 
@@ -56,14 +59,17 @@ daviani-dev/
 │   └── web/                # Next.js App Router
 │       ├── app/
 │       │   ├── (marketing)/
-│       │   ├── (blog)/
-│       │   ├── (contact)/
-│       │   ├── (rdv)/
-│       │   ├── (cv)/
-│       │   └── (legal)/
+│       │   ├── blog/
+│       │   ├── contact/
+│       │   ├── rdv/
+│       │   ├── cv/
+│       │   ├── legal/
+│       │   ├── accessibility/
+│       │   ├── sitemap/
+│       │   └── help/
 │       └── middleware.ts   # Routing multi-domaines
 ├── packages/
-│   ├── ui/                 # Composants partagés
+│   ├── ui/                 # Composants partagés (SkipLink, Footer, etc.)
 │   ├── config/             # Config ESLint, TS
 │   ├── emails/             # Templates email
 │   └── content/            # Schémas CV, projets
@@ -115,6 +121,17 @@ pnpm start
 | `pnpm test` | Tests unitaires |
 | `pnpm test:e2e` | Tests E2E |
 | `pnpm clean` | Nettoyage |
+
+---
+
+## ♿ Accessibilité
+
+- Skip-link pour navigation clavier
+- Conformité RGAA 4.1 / WCAG 2.1 AA (en cours)
+- Support i18n (FR/EN)
+- Mode sombre
+- Déclaration d'accessibilité
+- Page d'aide à la navigation
 
 ---
 
