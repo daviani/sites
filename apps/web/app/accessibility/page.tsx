@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslation } from '@daviani/ui';
+import { useTranslation, Breadcrumb } from '@daviani/ui';
 import { getSubdomainUrl } from '@/lib/domains/config';
 
 export default function AccessibilityPage() {
@@ -14,6 +14,9 @@ export default function AccessibilityPage() {
   return (
     <div className="min-h-screen bg-nord6 dark:bg-nord0">
       <div className="max-w-4xl mx-auto px-4 py-16">
+        <div className="mb-8">
+          <Breadcrumb items={[{ href: '/accessibility', labelKey: 'nav.accessibility.title' }]} />
+        </div>
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-nord0 dark:text-nord6">
             {t('pages.accessibility.title')}

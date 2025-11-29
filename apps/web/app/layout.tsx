@@ -40,7 +40,7 @@ export default function RootLayout({
           <HeaderNav />
           <SubHeaderNav />
           <div className="min-h-screen flex flex-col">
-            <main id="main-content" className="flex-1 pt-[86px] md:pt-[150px] px-[10px] pb-[200px] md:pb-[140px]">{children}</main>
+            <main id="main-content" className="flex-1 pt-[86px] md:pt-[150px] px-[10px] pb-[220px] md:pb-[200px]">{children}</main>
             <Footer
               legalUrl={getSubdomainUrl("legal")}
               contactUrl={getSubdomainUrl("contact")}

@@ -14,7 +14,9 @@
     "english": "Anglais",
     "openMenu": "Ouvrir le menu",
     "closeMenu": "Fermer le menu",
-    "skipToContent": "Aller au contenu"
+    "skipToContent": "Aller au contenu",
+    "home": "Accueil",
+    "breadcrumb": "Fil d'Ariane"
   },
   "darkMode": {
     "switchToDark": "Passer en mode sombre",

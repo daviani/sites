@@ -14,7 +14,9 @@
     "english": "English",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "home": "Home",
+    "breadcrumb": "Breadcrumb"
   },
   "darkMode": {
     "switchToDark": "Switch to dark mode",
