@@ -136,21 +136,23 @@ describe('Responsive Design Tests', () => {
       legalUrl: '/legal',
       contactUrl: '/contact',
       githubUrl: 'https://github.com/test',
+      linkedinUrl: 'https://linkedin.com/in/test',
     };
 
     it('renders all links correctly', () => {
       render(<Footer {...footerProps} />);
 
       // Check for legal link (translated text)
-      expect(screen.getByRole('link', { name: /legal/i })).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: /contact/i })).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: /legal|mentions/i })).toBeInTheDocument();
+      expect(screen.getAllByRole('link', { name: /contact/i }).length).toBeGreaterThan(0);
       expect(screen.getByRole('link', { name: /github/i })).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: /linkedin/i })).toBeInTheDocument();
     });
 
-    it('uses flexbox for horizontal link layout', () => {
+    it('uses grid layout for 3 columns on desktop', () => {
       const { container } = render(<Footer {...footerProps} />);
-      const linksContainer = container.querySelector('.flex.items-center.justify-center');
-      expect(linksContainer).toBeInTheDocument();
+      const gridContainer = container.querySelector('.grid.grid-cols-1.md\\:grid-cols-3');
+      expect(gridContainer).toBeInTheDocument();
     });
 
     it('has container with responsive padding', () => {

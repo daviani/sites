@@ -35,47 +35,58 @@ describe('Footer Component', () => {
   const mockLegalUrl = '/legal';
   const mockContactUrl = '/contact';
   const mockGithubUrl = 'https://github.com/daviani';
+  const mockLinkedinUrl = 'https://linkedin.com/in/daviani';
+
+  const defaultProps = {
+    legalUrl: mockLegalUrl,
+    contactUrl: mockContactUrl,
+    githubUrl: mockGithubUrl,
+    linkedinUrl: mockLinkedinUrl,
+  };
 
   describe('Rendering', () => {
     it('renders footer element', () => {
-      renderWithProviders(
-        <Footer legalUrl={mockLegalUrl} contactUrl={mockContactUrl} githubUrl={mockGithubUrl} />
-      );
+      renderWithProviders(<Footer {...defaultProps} />);
       expect(screen.getByRole('contentinfo')).toBeInTheDocument();
     });
 
-    it('renders legal link', () => {
-      renderWithProviders(
-        <Footer legalUrl={mockLegalUrl} contactUrl={mockContactUrl} githubUrl={mockGithubUrl} />
-      );
-      const legalLink = screen.getByRole('link', { name: /l[eé]gal|mentions/i });
+    it('renders legal notice link', () => {
+      renderWithProviders(<Footer {...defaultProps} />);
+      const legalLink = screen.getByRole('link', { name: /l[eé]gal|mentions|notice/i });
       expect(legalLink).toBeInTheDocument();
       expect(legalLink).toHaveAttribute('href', mockLegalUrl);
     });
 
+    it('renders column titles', () => {
+      renderWithProviders(<Footer {...defaultProps} />);
+      expect(screen.getByRole('heading', { name: /navigation/i })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /l[eé]gal/i })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /contact/i })).toBeInTheDocument();
+    });
+
     it('renders contact link', () => {
-      renderWithProviders(
-        <Footer legalUrl={mockLegalUrl} contactUrl={mockContactUrl} githubUrl={mockGithubUrl} />
-      );
+      renderWithProviders(<Footer {...defaultProps} />);
       const contactLink = screen.getByRole('link', { name: /contact/i });
       expect(contactLink).toBeInTheDocument();
       expect(contactLink).toHaveAttribute('href', mockContactUrl);
     });
 
-    it('renders GitHub link with icon', () => {
-      renderWithProviders(
-        <Footer legalUrl={mockLegalUrl} contactUrl={mockContactUrl} githubUrl={mockGithubUrl} />
-      );
+    it('renders GitHub link', () => {
+      renderWithProviders(<Footer {...defaultProps} />);
       const githubLink = screen.getByRole('link', { name: /github/i });
       expect(githubLink).toBeInTheDocument();
       expect(githubLink).toHaveAttribute('href', mockGithubUrl);
-      expect(githubLink.querySelector('svg')).toBeInTheDocument();
+    });
+
+    it('renders LinkedIn link', () => {
+      renderWithProviders(<Footer {...defaultProps} />);
+      const linkedinLink = screen.getByRole('link', { name: /linkedin/i });
+      expect(linkedinLink).toBeInTheDocument();
+      expect(linkedinLink).toHaveAttribute('href', mockLinkedinUrl);
     });
 
     it('renders copyright text with current year', () => {
-      renderWithProviders(
-        <Footer legalUrl={mockLegalUrl} contactUrl={mockContactUrl} githubUrl={mockGithubUrl} />
-      );
+      renderWithProviders(<Footer {...defaultProps} />);
       const currentYear = new Date().getFullYear().toString();
       expect(screen.getByText(new RegExp(currentYear))).toBeInTheDocument();
       expect(screen.getByText(/daviani\.dev/i)).toBeInTheDocument();
@@ -84,29 +95,36 @@ describe('Footer Component', () => {
 
   describe('Accessibility', () => {
     it('has proper ARIA landmark', () => {
-      renderWithProviders(
-        <Footer legalUrl={mockLegalUrl} contactUrl={mockContactUrl} githubUrl={mockGithubUrl} />
-      );
+      renderWithProviders(<Footer {...defaultProps} />);
       expect(screen.getByRole('contentinfo')).toBeInTheDocument();
     });
 
     it('GitHub link opens in new tab with security attributes', () => {
-      renderWithProviders(
-        <Footer legalUrl={mockLegalUrl} contactUrl={mockContactUrl} githubUrl={mockGithubUrl} />
-      );
+      renderWithProviders(<Footer {...defaultProps} />);
       const githubLink = screen.getByRole('link', { name: /github/i });
       expect(githubLink).toHaveAttribute('target', '_blank');
       expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer');
+    });
+
+    it('LinkedIn link opens in new tab with security attributes', () => {
+      renderWithProviders(<Footer {...defaultProps} />);
+      const linkedinLink = screen.getByRole('link', { name: /linkedin/i });
+      expect(linkedinLink).toHaveAttribute('target', '_blank');
+      expect(linkedinLink).toHaveAttribute('rel', 'noopener noreferrer');
     });
   });
 
   describe('Styling', () => {
     it('has dark mode classes', () => {
-      renderWithProviders(
-        <Footer legalUrl={mockLegalUrl} contactUrl={mockContactUrl} githubUrl={mockGithubUrl} />
-      );
+      renderWithProviders(<Footer {...defaultProps} />);
       const footer = screen.getByRole('contentinfo');
       expect(footer.className).toMatch(/dark:/);
+    });
+
+    it('uses 3-column grid layout on desktop', () => {
+      const { container } = renderWithProviders(<Footer {...defaultProps} />);
+      const grid = container.querySelector('.grid.grid-cols-1.md\\:grid-cols-3');
+      expect(grid).toBeInTheDocument();
     });
   });
 });

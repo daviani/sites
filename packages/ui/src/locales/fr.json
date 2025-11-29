@@ -1,8 +1,11 @@
 {
   "footer": {
-    "legal": "Mentions légales",
+    "navigation": "Navigation",
+    "legal": "Légal",
     "contact": "Contact",
+    "legalNotice": "Mentions légales",
     "github": "GitHub",
+    "linkedin": "LinkedIn",
     "copyright": "© {year} Daviani.dev - Tous droits réservés"
   },
   "common": {
