@@ -40,11 +40,12 @@ export default function RootLayout({
           <HeaderNav />
           <SubHeaderNav />
           <div className="min-h-screen flex flex-col">
-            <main id="main-content" className="flex-1 pt-[86px] md:pt-[150px] px-[10px]">{children}</main>
+            <main id="main-content" className="flex-1 pt-[86px] md:pt-[150px] px-[10px] pb-[200px] md:pb-[140px]">{children}</main>
             <Footer
               legalUrl={getSubdomainUrl("legal")}
               contactUrl={getSubdomainUrl("contact")}
               githubUrl="https://github.com/daviani"
+              linkedinUrl="https://linkedin.com/in/daviani"
               accessibilityUrl={getSubdomainUrl("accessibility")}
               sitemapUrl={getSubdomainUrl("sitemap")}
               helpUrl={getSubdomainUrl("help")}
