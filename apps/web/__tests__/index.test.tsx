@@ -1,6 +1,5 @@
 import { render, screen } from './helpers/test-utils';
 import RootPage from '@/app/page';
-import { getSubdomainUrl } from '@/lib/domains/config';
 
 describe('Homepage', () => {
   it('renders the main heading', () => {
@@ -16,18 +15,16 @@ describe('Homepage', () => {
     expect(subtitle).toBeInTheDocument();
   });
 
-  it('renders navigation cards', () => {
+  it('renders the description', () => {
     render(<RootPage />);
-    expect(screen.getByRole('heading', { name: /Portfolio/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /Blog/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /Contact/i })).toBeInTheDocument();
-    // CV in French, Resume in English
-    expect(screen.getByRole('heading', { name: /CV|Resume/i })).toBeInTheDocument();
+    // Text can be in French or English depending on language
+    const description = screen.getByText(/From code to deployment|Du code au déploiement/i);
+    expect(description).toBeInTheDocument();
   });
 
-  it('has correct links for navigation cards', () => {
-    render(<RootPage />);
-    const portfolioLink = screen.getByRole('link', { name: /Portfolio/i });
-    expect(portfolioLink).toHaveAttribute('href', getSubdomainUrl('portfolio'));
+  it('renders the OwlLogo', () => {
+    const { container } = render(<RootPage />);
+    const svg = container.querySelector('svg');
+    expect(svg).toBeInTheDocument();
   });
 });

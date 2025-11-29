@@ -8,7 +8,9 @@
   "common": {
     "languageSelection": "Language selection",
     "french": "French",
-    "english": "English"
+    "english": "English",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "darkMode": {
     "switchToDark": "Switch to dark mode",

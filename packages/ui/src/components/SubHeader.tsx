@@ -24,7 +24,7 @@ export function SubHeader({ items, currentPath }: SubHeaderProps) {
 
   return (
     <nav
-      className="fixed top-[86px] left-[10px] right-[10px] z-40 shadow-lg backdrop-blur-md bg-white/40 dark:bg-nord-3/50 rounded-[2.5rem]"
+      className="hidden md:block fixed top-[86px] left-[10px] right-[10px] z-40 shadow-lg backdrop-blur-md bg-white/40 dark:bg-nord-3/50 rounded-[2.5rem]"
       aria-label={t('nav.portfolio.title')}
     >
       <div className="container mx-auto px-4">

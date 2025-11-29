@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Header, Footer } from "@daviani/ui";
+import { Footer } from "@daviani/ui";
 import { Providers } from "@/components/Providers";
+import { HeaderNav } from "@/components/HeaderNav";
 import { SubHeaderNav } from "@/components/SubHeaderNav";
-import { getBaseUrl, getSubdomainUrl } from "@/lib/domains/config";
+import { getSubdomainUrl } from "@/lib/domains/config";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -35,12 +36,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
-          <div>
-            <Header homeUrl={getBaseUrl()} />
-            <SubHeaderNav />
-          </div>
+          <HeaderNav />
+          <SubHeaderNav />
           <div className="min-h-screen flex flex-col">
-            <main className="flex-1 pt-[150px] px-[10px]">{children}</main>
+            <main className="flex-1 pt-[86px] md:pt-[150px] px-[10px]">{children}</main>
             <Footer
               legalUrl={getSubdomainUrl("legal")}
               contactUrl={getSubdomainUrl("contact")}
