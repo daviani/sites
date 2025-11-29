@@ -8,7 +8,9 @@
   "common": {
     "languageSelection": "Sélection de la langue",
     "french": "Français",
-    "english": "Anglais"
+    "english": "Anglais",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
   },
   "darkMode": {
     "switchToDark": "Passer en mode sombre",

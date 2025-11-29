@@ -106,10 +106,24 @@ describe('SubHeader Component', () => {
       expect(nav.className).toMatch(/dark:/);
     });
 
-    it('has solid background (Apple-inspired)', () => {
+    it('has glassmorphism background', () => {
       renderWithProviders(<SubHeader items={mockNavItems} currentPath="/portfolio" />);
       const nav = screen.getByRole('navigation');
-      expect(nav.className).toContain('bg-nord-6');
+      expect(nav.className).toContain('backdrop-blur');
+      expect(nav.className).toContain('bg-white/40');
+    });
+
+    it('has rounded corners', () => {
+      renderWithProviders(<SubHeader items={mockNavItems} currentPath="/portfolio" />);
+      const nav = screen.getByRole('navigation');
+      expect(nav.className).toContain('rounded-');
+    });
+
+    it('is hidden on mobile', () => {
+      renderWithProviders(<SubHeader items={mockNavItems} currentPath="/portfolio" />);
+      const nav = screen.getByRole('navigation');
+      expect(nav.className).toContain('hidden');
+      expect(nav.className).toContain('md:block');
     });
   });
 });
