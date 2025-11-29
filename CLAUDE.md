@@ -1,5 +1,15 @@
 # Project Guidelines
 
+## Git Commits
+
+**RULE: No auto-generated footers in commit messages**
+
+Never include these lines in commit messages:
+- `🤖 Generated with [Claude Code](https://claude.com/claude-code)`
+- `Co-Authored-By: Claude <noreply@anthropic.com>`
+
+Commit messages should only contain the actual commit message without any auto-generated attribution.
+
 ## i18n - Internationalization
 
 **RULE: No hardcoded text in code**
