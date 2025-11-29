@@ -8,6 +8,9 @@ export const VALID_SUBDOMAINS = [
   'contact',
   'rdv',
   'legal',
+  'accessibility',
+  'sitemap',
+  'help',
 ] as const;
 
 export type ValidSubdomain = (typeof VALID_SUBDOMAINS)[number];

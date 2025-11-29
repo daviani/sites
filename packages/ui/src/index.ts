@@ -21,6 +21,8 @@ export { Footer } from './components/Footer';
 
 export { SubHeader } from './components/SubHeader';
 
+export { SkipLink } from './components/SkipLink';
+
 export { useTheme, ThemeProvider } from './hooks/use-theme';
 export type { Theme } from './hooks/use-theme';
 
