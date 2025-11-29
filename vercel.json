@@ -3,5 +3,8 @@
   "buildCommand": "pnpm turbo run build --filter=web",
   "devCommand": "pnpm turbo run dev --filter=web",
   "installCommand": "pnpm install",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "git": {
+    "deploymentEnabled": false
+  }
 }
