@@ -14,10 +14,10 @@ export function Footer({ legalUrl, contactUrl, githubUrl }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   const linkStyles =
-    'text-nord-3 dark:text-nord-4 hover:text-nord-10 dark:hover:text-nord-8 transition-colors';
+    'text-nord-3 dark:text-nord-4 hover:text-nord-10 dark:hover:text-nord-8 transition-colors rounded focus:outline-none focus:ring-2 focus:ring-nord-8 focus:ring-offset-2';
 
   return (
-    <footer className="bg-nord-6 dark:bg-nord-0 border-t border-nord-5 dark:border-nord-1 py-4">
+    <footer className="mx-[10px] mb-[10px] shadow-lg backdrop-blur-md bg-white/40 dark:bg-nord-3/50 rounded-[2.5rem] py-4">
       <div className="container mx-auto px-4">
         {/* Line 1: Links */}
         <div className="flex items-center justify-center gap-4 text-sm">
