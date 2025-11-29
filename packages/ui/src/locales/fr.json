@@ -16,7 +16,8 @@
   },
   "home": {
     "title": "Daviani Fillatre",
-    "subtitle": "Développeur Full-Stack & DevOps"
+    "subtitle": "Développeur Full-Stack & DevOps",
+    "description": "Du code au déploiement. Applications accessibles, interfaces soignées, infrastructure maîtrisée."
   },
   "nav": {
     "portfolio": {
