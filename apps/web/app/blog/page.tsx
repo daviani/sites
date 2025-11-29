@@ -71,7 +71,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 className="p-6 bg-white dark:bg-nord-1 rounded-lg shadow-md hover:shadow-lg transition-shadow"
               >
                 <Link href={`/${article.slug}`} className="block cursor-pointer">
-                  <h2 className="text-2xl font-bold mb-2 text-nord-0 dark:text-nord-6 hover:text-nord-10 dark:hover:text-nord-8 transition-colors">
+                  <h2 className="text-2xl font-bold mb-2 text-nord-0 dark:text-nord-6 hover:text-nord-0 dark:hover:text-nord-8 transition-colors">
                     {article.meta.title}
                   </h2>
                   <p className="text-nord-3 dark:text-nord-4 mb-4">
