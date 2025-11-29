@@ -13,12 +13,12 @@ export function Card({
   className = '',
   ...props
 }: CardProps) {
-  const baseStyles = 'rounded-xl transition-all';
+  const baseStyles = 'rounded-[2.5rem] transition-all backdrop-blur-md';
 
   const variants = {
-    default: 'bg-white dark:bg-nord-1 shadow-md hover:shadow-lg',
-    elevated: 'bg-white dark:bg-nord-1 shadow-lg hover:shadow-2xl',
-    outlined: 'bg-white dark:bg-nord-1 border-2 border-nord-4 dark:border-nord-3 hover:border-nord-10 dark:hover:border-nord-8'
+    default: 'bg-white/40 dark:bg-nord-3/50 shadow-lg hover:shadow-xl',
+    elevated: 'bg-white/40 dark:bg-nord-3/50 shadow-xl hover:shadow-2xl',
+    outlined: 'bg-white/40 dark:bg-nord-3/50 border-2 border-nord-4 dark:border-nord-3 hover:border-nord-10 dark:hover:border-nord-8'
   };
 
   const paddings = {

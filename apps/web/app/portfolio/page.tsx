@@ -13,7 +13,7 @@ export default function PortfolioPage() {
           <h1 className="text-5xl font-bold mb-4 text-nord0 dark:text-nord6">
             {t('home.title')}
           </h1>
-          <p className="text-xl text-nord3 dark:text-nord4 mb-2">
+          <p className="text-xl text-nord0 dark:text-nord4 mb-2">
             {t('home.subtitle')}
           </p>
           <p className="text-lg text-nord10">
@@ -22,9 +22,9 @@ export default function PortfolioPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-          <section className="bg-white dark:bg-nord1 p-6 rounded-lg shadow-md">
+          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
             <h2 className="text-2xl font-bold mb-4 text-nord10">{t('pages.portfolio.skills')}</h2>
-            <ul className="space-y-2 text-nord3 dark:text-nord4">
+            <ul className="space-y-2 text-nord0 dark:text-nord4">
               <li>• {t('pages.portfolio.skillsList.frontend')}</li>
               <li>• {t('pages.portfolio.skillsList.backend')}</li>
               <li>• {t('pages.portfolio.skillsList.cloud')}</li>
@@ -32,9 +32,9 @@ export default function PortfolioPage() {
             </ul>
           </section>
 
-          <section className="bg-white dark:bg-nord1 p-6 rounded-lg shadow-md">
+          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
             <h2 className="text-2xl font-bold mb-4 text-nord10">{t('pages.portfolio.projects')}</h2>
-            <ul className="space-y-2 text-nord3 dark:text-nord4">
+            <ul className="space-y-2 text-nord0 dark:text-nord4">
               <li>• {t('pages.portfolio.projectsList.platform')}</li>
               <li>• {t('pages.portfolio.projectsList.iac')}</li>
               <li>• {t('pages.portfolio.projectsList.distributed')}</li>

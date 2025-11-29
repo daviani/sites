@@ -15,14 +15,14 @@ export function Comments({ slug }: CommentsProps) {
 
   if (!hasConsent) {
     return (
-      <section className="mt-12 p-6 bg-nord-5 dark:bg-nord-1 rounded-lg">
+      <section className="mt-12 p-6 bg-white/40 dark:bg-nord-3/50 backdrop-blur-md rounded-[2.5rem] shadow-lg">
         <h2 className="text-xl font-bold mb-4 text-nord-0 dark:text-nord-6">
           {t('comments.title')}
         </h2>
-        <p className="text-nord-3 dark:text-nord-4 mb-4">
+        <p className="text-nord-0 dark:text-nord-4 mb-4">
           {t('comments.consentText')}
         </p>
-        <p className="text-sm text-nord-3 dark:text-nord-4 mb-6">
+        <p className="text-sm text-nord-0 dark:text-nord-4 mb-6">
           {t('comments.privacyNote')}
         </p>
         <button

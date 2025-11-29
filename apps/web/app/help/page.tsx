@@ -35,7 +35,7 @@ export default function HelpPage() {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-nord0 dark:text-nord6">
             {t('pages.help.title')}
           </h1>
-          <p className="text-xl text-nord3 dark:text-nord4">
+          <p className="text-xl text-nord0 dark:text-nord4">
             {t('pages.help.subtitle')}
           </p>
         </div>
@@ -44,13 +44,13 @@ export default function HelpPage() {
           {helpSections.map((section, index) => (
             <section
               key={index}
-              className="bg-white dark:bg-nord1 p-6 rounded-lg shadow-md"
+              className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg"
             >
               <h2 className="text-2xl font-bold mb-4 text-nord10 flex items-center gap-3">
                 <span aria-hidden="true">{section.icon}</span>
                 {t(section.titleKey)}
               </h2>
-              <p className="text-nord3 dark:text-nord4 leading-relaxed">
+              <p className="text-nord0 dark:text-nord4 leading-relaxed">
                 {t(section.textKey)}
               </p>
             </section>
@@ -61,7 +61,7 @@ export default function HelpPage() {
           <h2 className="text-xl font-bold mb-4 text-nord0 dark:text-nord6">
             {t('pages.help.keyboard')}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-nord3 dark:text-nord4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-nord0 dark:text-nord4">
             <div className="flex items-center gap-3">
               <kbd className="px-3 py-1 bg-white dark:bg-nord1 rounded border border-nord4 dark:border-nord3 font-mono text-sm">
                 Tab

@@ -18,14 +18,14 @@ describe('Card Component', () => {
     it('renders default variant by default', () => {
       const { container } = render(<Card>Default</Card>);
       const card = container.firstChild as HTMLElement;
-      expect(card.className).toContain('shadow-md');
-      expect(card.className).toContain('bg-white');
+      expect(card.className).toContain('shadow-lg');
+      expect(card.className).toContain('bg-white/40');
     });
 
     it('renders elevated variant', () => {
       const { container } = render(<Card variant="elevated">Elevated</Card>);
       const card = container.firstChild as HTMLElement;
-      expect(card.className).toContain('shadow-lg');
+      expect(card.className).toContain('shadow-xl');
     });
 
     it('renders outlined variant', () => {
@@ -46,7 +46,9 @@ describe('Card Component', () => {
     it('renders no padding', () => {
       const { container } = render(<Card padding="none">None</Card>);
       const card = container.firstChild as HTMLElement;
-      expect(card.className).not.toContain('p-');
+      expect(card.className).not.toContain('p-4');
+      expect(card.className).not.toContain('p-6');
+      expect(card.className).not.toContain('p-8');
     });
 
     it('renders small padding', () => {
@@ -90,10 +92,16 @@ describe('Card Component', () => {
       expect(card.className).toContain('transition-all');
     });
 
-    it('applies rounded-xl class', () => {
+    it('applies rounded-[2.5rem] class', () => {
       const { container } = render(<Card>Rounded</Card>);
       const card = container.firstChild as HTMLElement;
-      expect(card.className).toContain('rounded-xl');
+      expect(card.className).toContain('rounded-[2.5rem]');
+    });
+
+    it('applies backdrop-blur-md class', () => {
+      const { container } = render(<Card>Blur</Card>);
+      const card = container.firstChild as HTMLElement;
+      expect(card.className).toContain('backdrop-blur-md');
     });
   });
 });

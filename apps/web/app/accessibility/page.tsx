@@ -18,7 +18,7 @@ export default function AccessibilityPage() {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-nord0 dark:text-nord6">
             {t('pages.accessibility.title')}
           </h1>
-          <p className="text-xl text-nord3 dark:text-nord4">
+          <p className="text-xl text-nord0 dark:text-nord4">
             {t('pages.accessibility.subtitle')}
           </p>
         </div>
@@ -30,29 +30,29 @@ export default function AccessibilityPage() {
         </div>
 
         <div className="space-y-8">
-          <section className="bg-white dark:bg-nord1 p-6 rounded-lg shadow-md">
+          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
             <h2 className="text-2xl font-bold mb-4 text-nord10">
               {t('pages.accessibility.commitment')}
             </h2>
-            <p className="text-nord3 dark:text-nord4">
+            <p className="text-nord0 dark:text-nord4">
               {t('pages.accessibility.commitmentText')}
             </p>
           </section>
 
-          <section className="bg-white dark:bg-nord1 p-6 rounded-lg shadow-md">
+          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
             <h2 className="text-2xl font-bold mb-4 text-nord10">
               {t('pages.accessibility.standards')}
             </h2>
-            <p className="text-nord3 dark:text-nord4">
+            <p className="text-nord0 dark:text-nord4">
               {t('pages.accessibility.standardsText')}
             </p>
           </section>
 
-          <section className="bg-white dark:bg-nord1 p-6 rounded-lg shadow-md">
+          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
             <h2 className="text-2xl font-bold mb-4 text-nord10">
               {t('pages.accessibility.contact')}
             </h2>
-            <p className="text-nord3 dark:text-nord4 mb-4">
+            <p className="text-nord0 dark:text-nord4 mb-4">
               {t('pages.accessibility.contactText')}
             </p>
             <a
@@ -63,7 +63,7 @@ export default function AccessibilityPage() {
             </a>
           </section>
 
-          <div className="text-sm text-nord3 dark:text-nord4 text-center mt-8">
+          <div className="text-sm text-nord0 dark:text-nord4 text-center mt-8">
             <p>
               {t('pages.accessibility.declarationDate')}: {currentDate}
             </p>
