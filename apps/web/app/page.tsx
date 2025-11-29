@@ -1,6 +1,7 @@
 'use client';
 
 import { NavigationCard } from '@/components/NavigationCard';
+import { HeroSection } from '@/components/HeroSection';
 import { useTranslation, TranslationKey } from '@daviani/ui';
 import { getSubdomainUrl, ValidSubdomain } from '@/lib/domains/config';
 
@@ -55,13 +56,8 @@ export default function RootPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-nord-6 via-nord-5 to-nord-4 dark:from-nord-0 dark:via-nord-1 dark:to-nord-2">
-      <div className="max-w-3xl mx-auto px-6 py-12 text-center">
-        <h1 className="text-6xl font-bold mb-6 text-nord-0 dark:text-nord-6">
-          {t('home.title')}
-        </h1>
-        <p className="text-2xl text-nord-2 dark:text-nord-4 mb-12">
-          {t('home.subtitle')}
-        </p>
+      <div className="max-w-3xl mx-auto px-6 py-12">
+        <HeroSection />
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
           {navigationItems.map((item) => (
@@ -74,6 +70,7 @@ export default function RootPage() {
             />
           ))}
         </div>
+
       </div>
     </div>
   );
