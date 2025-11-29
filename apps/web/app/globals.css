@@ -34,13 +34,18 @@
   --color-foreground: var(--color-nord-0);
 }
 
+:root {
+  --background-gradient: linear-gradient(135deg, var(--color-nord-6), var(--color-nord-5), var(--color-nord-4));
+}
+
 .dark {
   --color-background: var(--color-nord-0);
   --color-foreground: var(--color-nord-6);
+  --background-gradient: linear-gradient(135deg, var(--color-nord-0), var(--color-nord-1), var(--color-nord-2));
 }
 
 body {
   color: var(--color-foreground);
-  background: var(--color-background);
+  background: var(--background-gradient);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
 }
