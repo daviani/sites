@@ -20,7 +20,7 @@ export function HeroSection() {
         {t('home.subtitle')}
       </p>
 
-      <p className="text-lg text-nord-3 dark:text-nord-4 max-w-2xl mx-auto">
+      <p className="text-lg text-nord-0 dark:text-nord-4 max-w-2xl mx-auto">
         {t('home.description')}
       </p>
     </section>

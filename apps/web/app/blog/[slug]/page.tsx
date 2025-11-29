@@ -87,10 +87,10 @@ export default async function BlogPost({ params }: BlogPostProps) {
           <h1 className="text-4xl font-bold mb-4 text-nord-0 dark:text-nord-6">
             {meta.title}
           </h1>
-          <p className="text-xl text-nord-3 dark:text-nord-4 mb-4">
+          <p className="text-xl text-nord-0 dark:text-nord-4 mb-4">
             {meta.description}
           </p>
-          <div className="flex items-center gap-4 text-sm text-nord-3 dark:text-nord-4">
+          <div className="flex items-center gap-4 text-sm text-nord-0 dark:text-nord-4">
             <time dateTime={meta.date}>
               {new Date(meta.date).toLocaleDateString('fr-FR', {
                 year: 'numeric',
@@ -107,7 +107,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
                 <Link
                   key={tag}
                   href={`/?tag=${tag}`}
-                  className="px-3 py-1 bg-nord-5 dark:bg-nord-2 text-nord-3 dark:text-nord-4 rounded-full text-sm hover:bg-nord-4 dark:hover:bg-nord-3 transition-colors cursor-pointer"
+                  className="px-3 py-1 bg-nord-5 dark:bg-nord-2 text-nord-0 dark:text-nord-4 rounded-full text-sm hover:bg-nord-4 dark:hover:bg-nord-3 transition-colors cursor-pointer"
                 >
                   {tag}
                 </Link>
