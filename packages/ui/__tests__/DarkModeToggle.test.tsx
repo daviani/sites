@@ -105,7 +105,7 @@ describe('DarkModeToggle Component', () => {
     it('applies Nord theme colors', () => {
       render(<DarkModeToggle />);
       const button = screen.getByRole('button');
-      expect(button.className).toContain('text-nord-10');
+      expect(button.className).toContain('text-nord-3');
       expect(button.className).toContain('hover:bg-nord-5');
     });
 
