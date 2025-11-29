@@ -35,10 +35,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
-          <div className="min-h-screen flex flex-col">
+          <div>
             <Header homeUrl={getBaseUrl()} />
             <SubHeaderNav />
-            <main className="flex-1">{children}</main>
+          </div>
+          <div className="min-h-screen flex flex-col">
+            <main className="flex-1 pt-[150px] px-[10px]">{children}</main>
             <Footer
               legalUrl={getSubdomainUrl("legal")}
               contactUrl={getSubdomainUrl("contact")}
