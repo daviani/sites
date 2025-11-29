@@ -24,7 +24,7 @@ export function Header({ logo, className = '', homeUrl = '/', navItems = [], cur
   const [isOpen, setIsOpen] = useState(false);
 
   const baseStyles =
-    'px-4 py-2 text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-nord-8 focus:ring-offset-2';
+    'px-4 py-2 text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2';
   const inactiveStyles =
     'text-nord-3 dark:text-nord-4 hover:text-nord-0 dark:hover:text-nord-6 hover:bg-nord-5 dark:hover:bg-nord-2';
   const activeStyles =
@@ -39,7 +39,7 @@ export function Header({ logo, className = '', homeUrl = '/', navItems = [], cur
           {/* Logo / Branding */}
           <div className="flex-shrink-0">
             {logo || (
-              <a href={homeUrl} aria-label="Retour à l'accueil" className="flex items-center gap-3 cursor-pointer rounded-lg focus:outline-none focus:ring-2 focus:ring-nord-8 focus:ring-offset-2">
+              <a href={homeUrl} aria-label="Retour à l'accueil" className="flex items-center gap-3 cursor-pointer rounded-lg focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2">
                 <OwlLogo size={48} />
                 <span className="text-xl font-mono font-bold">
                   <span className="text-nord-3 dark:text-nord-4">&lt;</span>
@@ -62,7 +62,7 @@ export function Header({ logo, className = '', homeUrl = '/', navItems = [], cur
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg text-nord-3 dark:text-nord-4 hover:bg-nord-5 dark:hover:bg-nord-2 focus:outline-none focus:ring-2 focus:ring-nord-8 focus:ring-offset-2 transition-colors"
+              className="p-2 rounded-lg text-nord-3 dark:text-nord-4 hover:bg-nord-5 dark:hover:bg-nord-2 focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2 transition-colors"
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
               aria-label={isOpen ? t('common.closeMenu') : t('common.openMenu')}

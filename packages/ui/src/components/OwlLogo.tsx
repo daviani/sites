@@ -38,6 +38,7 @@ export function OwlLogo({ size = 32, className = '' }: OwlLogoProps) {
       height={size}
       className={`${isAnimating ? 'animate-bounce' : ''} ${className}`}
       style={{ animationDuration: '0.6s', animationIterationCount: 1 }}
+      aria-hidden="true"
     >
       <g className="fill-nord-3 dark:fill-nord-4 transition-colors duration-300">
         <path d="M50 8 L35 25 L30 22 L32 35 L25 38 L30 48 L20 55 L35 58 L35 75 L50 92 L65 75 L65 58 L80 55 L70 48 L75 38 L68 35 L70 22 L65 25 Z" />

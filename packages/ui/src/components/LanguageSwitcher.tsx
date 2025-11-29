@@ -10,7 +10,7 @@ export function LanguageSwitcher() {
 
   // Common button styles for consistency with DarkModeToggle
   const buttonStyles =
-    'p-2 rounded-full transition-all hover:scale-105 hover:bg-nord-5 dark:hover:bg-nord-2 focus:outline-none focus:ring-2 focus:ring-nord-8 focus:ring-offset-2 dark:focus:ring-offset-nord-0 cursor-pointer';
+    'p-2 rounded-full transition-all hover:scale-105 hover:bg-nord-5 dark:hover:bg-nord-2 focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2 dark:focus:ring-offset-nord-0 cursor-pointer';
 
   if (!mounted) {
     return (

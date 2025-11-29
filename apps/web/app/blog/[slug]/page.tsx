@@ -77,7 +77,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
         {/* Back link */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-nord-10 dark:text-nord-8 hover:underline mb-8 cursor-pointer"
+          className="inline-flex items-center gap-2 text-nord-3 dark:text-nord-8 hover:underline mb-8 cursor-pointer"
         >
           ← Retour au blog
         </Link>
