@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getAllArticles, getAllTags } from '@/lib/content/blog';
+import { Breadcrumb } from '@daviani/ui';
 
 const PAGE_SIZE = 20;
 
@@ -24,6 +25,9 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   return (
     <div className="min-h-screen bg-nord-6 dark:bg-nord-0">
       <div className="max-w-4xl mx-auto px-4 py-12">
+        <div className="mb-8">
+          <Breadcrumb items={[{ href: '/blog', labelKey: 'nav.blog.title' }]} />
+        </div>
         <header className="mb-12">
           <h1 className="text-4xl font-bold mb-4 text-nord-0 dark:text-nord-6">Blog</h1>
           <p className="text-lg text-nord-0 dark:text-nord-4">

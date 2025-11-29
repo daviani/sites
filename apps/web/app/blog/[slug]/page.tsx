@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getAllArticles, getArticleBySlug } from '@/lib/content/blog';
 import { Comments } from '@/components/blog/Comments';
+import { Breadcrumb } from '@daviani/ui';
 import type { Metadata } from 'next';
 
 interface BlogPostProps {
@@ -74,13 +75,13 @@ export default async function BlogPost({ params }: BlogPostProps) {
   return (
     <div className="min-h-screen bg-nord-6 dark:bg-nord-0">
       <article className="max-w-3xl mx-auto px-4 py-12">
-        {/* Back link */}
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-nord-3 dark:text-nord-8 hover:underline mb-8 cursor-pointer"
-        >
-          ← Retour au blog
-        </Link>
+        {/* Breadcrumb */}
+        <div className="mb-8">
+          <Breadcrumb
+            items={[{ href: '/blog', labelKey: 'nav.blog.title' }]}
+            currentLabel={meta.title}
+          />
+        </div>
 
         {/* Header */}
         <header className="mb-8">

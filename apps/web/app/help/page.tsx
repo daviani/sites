@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslation, TranslationKey } from '@daviani/ui';
+import { useTranslation, TranslationKey, Breadcrumb } from '@daviani/ui';
 
 export default function HelpPage() {
   const { t } = useTranslation();
@@ -31,6 +31,9 @@ export default function HelpPage() {
   return (
     <div className="min-h-screen bg-nord6 dark:bg-nord0">
       <div className="max-w-4xl mx-auto px-4 py-16">
+        <div className="mb-8">
+          <Breadcrumb items={[{ href: '/help', labelKey: 'nav.help.title' }]} />
+        </div>
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-nord0 dark:text-nord6">
             {t('pages.help.title')}
