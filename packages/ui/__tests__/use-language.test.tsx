@@ -2,18 +2,24 @@ import { renderHook, act } from '@testing-library/react';
 import { useLanguage, LanguageProvider } from '../src/hooks/use-language';
 import { ReactNode } from 'react';
 
-const localStorageMock = (() => {
-  let store: Record<string, string> = {};
-  return {
-    getItem: jest.fn((key: string) => store[key] || null),
-    setItem: jest.fn((key: string, value: string) => {
-      store[key] = value;
-    }),
-    clear: jest.fn(() => {
-      store = {};
-    }),
-  };
-})();
+// Mock document.cookie
+let cookieStore: Record<string, string> = {};
+
+const mockCookie = {
+  get: () => {
+    return Object.entries(cookieStore)
+      .map(([key, value]) => `${key}=${value}`)
+      .join('; ');
+  },
+  set: (cookieStr: string) => {
+    const [nameValue] = cookieStr.split(';');
+    const [name, value] = nameValue.split('=');
+    cookieStore[name.trim()] = value.trim();
+  },
+  clear: () => {
+    cookieStore = {};
+  },
+};
 
 const wrapper = ({ children }: { children: ReactNode }) => (
   <LanguageProvider>{children}</LanguageProvider>
@@ -21,8 +27,14 @@ const wrapper = ({ children }: { children: ReactNode }) => (
 
 describe('useLanguage Hook', () => {
   beforeEach(() => {
-    Object.defineProperty(window, 'localStorage', { value: localStorageMock });
-    localStorageMock.clear();
+    mockCookie.clear();
+    Object.defineProperty(document, 'cookie', {
+      configurable: true,
+      get: () => mockCookie.get(),
+      set: (val: string) => mockCookie.set(val),
+    });
+    // Mock window.location (already configured in jest.setup.js)
+    (window as any).location.hostname = 'localhost';
     document.documentElement.lang = '';
   });
 
@@ -76,8 +88,8 @@ describe('useLanguage Hook', () => {
       expect(result.current.mounted).toBe(true);
     });
 
-    it('uses stored language from localStorage', () => {
-      localStorageMock.getItem.mockReturnValueOnce('en');
+    it('uses stored language from cookie', () => {
+      cookieStore['language'] = 'en';
       Object.defineProperty(navigator, 'language', {
         value: 'fr-FR',
         configurable: true,
@@ -103,12 +115,12 @@ describe('useLanguage Hook', () => {
       });
 
       expect(result.current.language).toBe('en');
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('language', 'en');
+      expect(cookieStore['language']).toBe('en');
       expect(document.documentElement.lang).toBe('en');
     });
 
     it('changes language from en to fr', () => {
-      localStorageMock.getItem.mockReturnValueOnce('en');
+      cookieStore['language'] = 'en';
       Object.defineProperty(navigator, 'language', {
         value: 'en-US',
         configurable: true,
@@ -121,7 +133,7 @@ describe('useLanguage Hook', () => {
       });
 
       expect(result.current.language).toBe('fr');
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('language', 'fr');
+      expect(cookieStore['language']).toBe('fr');
       expect(document.documentElement.lang).toBe('fr');
     });
   });
@@ -143,7 +155,7 @@ describe('useLanguage Hook', () => {
     });
 
     it('toggles from en to fr', () => {
-      localStorageMock.getItem.mockReturnValueOnce('en');
+      cookieStore['language'] = 'en';
       Object.defineProperty(navigator, 'language', {
         value: 'en-US',
         configurable: true,
@@ -184,6 +196,40 @@ describe('useLanguage Hook', () => {
       });
 
       expect(document.documentElement.lang).toBe('en');
+    });
+  });
+
+  describe('Cookie Domain Handling', () => {
+    it('uses localhost domain for *.localhost subdomains', () => {
+      (window as any).location.hostname = 'portfolio.localhost';
+      Object.defineProperty(navigator, 'language', {
+        value: 'fr-FR',
+        configurable: true,
+      });
+
+      const { result } = renderHook(() => useLanguage(), { wrapper });
+
+      act(() => {
+        result.current.setLanguage('en');
+      });
+
+      expect(cookieStore['language']).toBe('en');
+    });
+
+    it('uses root domain for production subdomains', () => {
+      (window as any).location.hostname = 'portfolio.daviani.dev';
+      Object.defineProperty(navigator, 'language', {
+        value: 'fr-FR',
+        configurable: true,
+      });
+
+      const { result } = renderHook(() => useLanguage(), { wrapper });
+
+      act(() => {
+        result.current.setLanguage('en');
+      });
+
+      expect(cookieStore['language']).toBe('en');
     });
   });
 });

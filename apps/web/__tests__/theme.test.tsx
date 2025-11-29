@@ -4,22 +4,24 @@ import { renderHook } from '@testing-library/react';
 import { ThemeProvider, LanguageProvider, useTheme, DarkModeToggle } from '@daviani/ui';
 import { ReactNode } from 'react';
 
-// Mock localStorage
-const localStorageMock = (() => {
-  let store: Record<string, string> = {};
-  return {
-    getItem: jest.fn((key: string) => store[key] || null),
-    setItem: jest.fn((key: string, value: string) => {
-      store[key] = value;
-    }),
-    removeItem: jest.fn((key: string) => {
-      delete store[key];
-    }),
-    clear: jest.fn(() => {
-      store = {};
-    }),
-  };
-})();
+// Mock document.cookie
+let cookieStore: Record<string, string> = {};
+
+const mockCookie = {
+  get: () => {
+    return Object.entries(cookieStore)
+      .map(([key, value]) => `${key}=${value}`)
+      .join('; ');
+  },
+  set: (cookieStr: string) => {
+    const [nameValue] = cookieStr.split(';');
+    const [name, value] = nameValue.split('=');
+    cookieStore[name.trim()] = value.trim();
+  },
+  clear: () => {
+    cookieStore = {};
+  },
+};
 
 // Mock matchMedia
 const createMatchMedia = (matches: boolean) => {
@@ -56,14 +58,18 @@ describe('Theme Tests', () => {
 
   beforeEach(() => {
     // Reset mocks
-    localStorageMock.clear();
+    mockCookie.clear();
     jest.clearAllMocks();
 
-    // Setup localStorage mock
-    Object.defineProperty(window, 'localStorage', {
-      value: localStorageMock,
-      writable: true,
+    // Setup cookie mock
+    Object.defineProperty(document, 'cookie', {
+      configurable: true,
+      get: () => mockCookie.get(),
+      set: (val: string) => mockCookie.set(val),
     });
+
+    // Setup location mock (already configured in jest.setup.js)
+    (window as any).location.hostname = 'localhost';
 
     // Setup matchMedia mock (default: light mode)
     mockMatchMedia = createMatchMedia(false);
@@ -122,7 +128,7 @@ describe('Theme Tests', () => {
   // THEME PERSISTENCE
   // ============================================
   describe('Theme Persistence', () => {
-    it('saves theme preference to localStorage when set', async () => {
+    it('saves theme preference to cookie when set', async () => {
       const { result } = renderHook(() => useTheme(), { wrapper });
 
       await waitFor(() => {
@@ -133,11 +139,11 @@ describe('Theme Tests', () => {
         result.current.setTheme('dark');
       });
 
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('theme', 'dark');
+      expect(cookieStore['theme']).toBe('dark');
     });
 
-    it('loads theme preference from localStorage on mount', async () => {
-      localStorageMock.getItem.mockReturnValue('dark');
+    it('loads theme preference from cookie on mount', async () => {
+      cookieStore['theme'] = 'dark';
 
       const { result } = renderHook(() => useTheme(), { wrapper });
 
@@ -149,7 +155,7 @@ describe('Theme Tests', () => {
     });
 
     it('applies dark class to document.documentElement when dark theme', async () => {
-      localStorageMock.getItem.mockReturnValue('dark');
+      cookieStore['theme'] = 'dark';
 
       renderHook(() => useTheme(), { wrapper });
 
@@ -160,7 +166,7 @@ describe('Theme Tests', () => {
 
     it('removes dark class from document.documentElement when light theme', async () => {
       document.documentElement.classList.add('dark');
-      localStorageMock.getItem.mockReturnValue('light');
+      cookieStore['theme'] = 'light';
 
       renderHook(() => useTheme(), { wrapper });
 
@@ -177,7 +183,6 @@ describe('Theme Tests', () => {
     it('detects system dark mode preference when no stored theme', async () => {
       mockMatchMedia = createMatchMedia(true); // System prefers dark
       (window.matchMedia as jest.Mock).mockReturnValue(mockMatchMedia);
-      localStorageMock.getItem.mockReturnValue(null);
 
       const { result } = renderHook(() => useTheme(), { wrapper });
 
@@ -191,7 +196,6 @@ describe('Theme Tests', () => {
     it('detects system light mode preference when no stored theme', async () => {
       mockMatchMedia = createMatchMedia(false); // System prefers light
       (window.matchMedia as jest.Mock).mockReturnValue(mockMatchMedia);
-      localStorageMock.getItem.mockReturnValue(null);
 
       const { result } = renderHook(() => useTheme(), { wrapper });
 
@@ -205,7 +209,7 @@ describe('Theme Tests', () => {
     it('user preference overrides system preference', async () => {
       mockMatchMedia = createMatchMedia(true); // System prefers dark
       (window.matchMedia as jest.Mock).mockReturnValue(mockMatchMedia);
-      localStorageMock.getItem.mockReturnValue('light'); // User set light
+      cookieStore['theme'] = 'light'; // User set light
 
       const { result } = renderHook(() => useTheme(), { wrapper });
 
@@ -248,7 +252,7 @@ describe('Theme Tests', () => {
   // ============================================
   describe('Toggle Functionality', () => {
     it('toggleTheme switches from light to dark', async () => {
-      localStorageMock.getItem.mockReturnValue('light');
+      cookieStore['theme'] = 'light';
 
       const { result } = renderHook(() => useTheme(), { wrapper });
 
@@ -264,7 +268,7 @@ describe('Theme Tests', () => {
     });
 
     it('toggleTheme switches from dark to light', async () => {
-      localStorageMock.getItem.mockReturnValue('dark');
+      cookieStore['theme'] = 'dark';
 
       const { result } = renderHook(() => useTheme(), { wrapper });
 
@@ -331,9 +335,6 @@ describe('Theme Tests', () => {
     );
 
     it('DarkModeToggle changes theme on click', async () => {
-      // Ensure localStorage returns null for fresh start
-      localStorageMock.getItem.mockReturnValue(null);
-
       const TestApp = () => {
         const { theme, mounted } = useTheme();
         return (
