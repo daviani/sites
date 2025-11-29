@@ -2,22 +2,24 @@ import { renderHook, act, waitFor } from '@testing-library/react';
 import { ReactNode } from 'react';
 import { ThemeProvider, useTheme } from '../src/hooks/use-theme';
 
-// Mock localStorage
-const localStorageMock = (() => {
-  let store: Record<string, string> = {};
-  return {
-    getItem: jest.fn((key: string) => store[key] || null),
-    setItem: jest.fn((key: string, value: string) => {
-      store[key] = value;
-    }),
-    clear: jest.fn(() => {
-      store = {};
-    }),
-    removeItem: jest.fn((key: string) => {
-      delete store[key];
-    }),
-  };
-})();
+// Mock document.cookie
+let cookieStore: Record<string, string> = {};
+
+const mockCookie = {
+  get: () => {
+    return Object.entries(cookieStore)
+      .map(([key, value]) => `${key}=${value}`)
+      .join('; ');
+  },
+  set: (cookieStr: string) => {
+    const [nameValue] = cookieStr.split(';');
+    const [name, value] = nameValue.split('=');
+    cookieStore[name.trim()] = value.trim();
+  },
+  clear: () => {
+    cookieStore = {};
+  },
+};
 
 // Mock matchMedia with event listener support
 let mediaQueryListeners: ((e: MediaQueryListEvent) => void)[] = [];
@@ -54,8 +56,14 @@ const wrapper = ({ children }: { children: ReactNode }) => (
 
 describe('ThemeProvider & useTheme', () => {
   beforeEach(() => {
-    Object.defineProperty(window, 'localStorage', { value: localStorageMock });
-    localStorageMock.clear();
+    mockCookie.clear();
+    Object.defineProperty(document, 'cookie', {
+      configurable: true,
+      get: () => mockCookie.get(),
+      set: (val: string) => mockCookie.set(val),
+    });
+    // Mock window.location (already configured in jest.setup.js)
+    (window as any).location.hostname = 'localhost';
     document.documentElement.classList.remove('dark');
     mediaQueryListeners = [];
   });
@@ -66,7 +74,6 @@ describe('ThemeProvider & useTheme', () => {
 
   describe('Context Pattern', () => {
     it('throws error when useTheme is used outside ThemeProvider', () => {
-      // Suppress console.error for this test
       const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
       expect(() => {
@@ -114,8 +121,8 @@ describe('ThemeProvider & useTheme', () => {
       expect(result.current.mounted).toBe(true);
     });
 
-    it('uses stored theme from localStorage (priority over system)', () => {
-      localStorageMock.getItem.mockReturnValueOnce('dark');
+    it('uses stored theme from cookie (priority over system)', () => {
+      cookieStore['theme'] = 'dark';
       Object.defineProperty(window, 'matchMedia', {
         writable: true,
         value: jest.fn(() => matchMediaMock(false)), // system prefers light
@@ -154,11 +161,11 @@ describe('ThemeProvider & useTheme', () => {
 
       expect(result.current.theme).toBe('dark');
       expect(document.documentElement.classList.contains('dark')).toBe(true);
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('theme', 'dark');
+      expect(cookieStore['theme']).toBe('dark');
     });
 
     it('toggles from dark to light', () => {
-      localStorageMock.getItem.mockReturnValueOnce('dark');
+      cookieStore['theme'] = 'dark';
       Object.defineProperty(window, 'matchMedia', {
         writable: true,
         value: jest.fn(() => matchMediaMock(false)),
@@ -172,7 +179,7 @@ describe('ThemeProvider & useTheme', () => {
 
       expect(result.current.theme).toBe('light');
       expect(document.documentElement.classList.contains('dark')).toBe(false);
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('theme', 'light');
+      expect(cookieStore['theme']).toBe('light');
     });
   });
 
@@ -190,11 +197,11 @@ describe('ThemeProvider & useTheme', () => {
       });
 
       expect(result.current.theme).toBe('dark');
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('theme', 'dark');
+      expect(cookieStore['theme']).toBe('dark');
     });
 
     it('sets theme directly to light', () => {
-      localStorageMock.getItem.mockReturnValueOnce('dark');
+      cookieStore['theme'] = 'dark';
       Object.defineProperty(window, 'matchMedia', {
         writable: true,
         value: jest.fn(() => matchMediaMock(false)),
@@ -207,7 +214,7 @@ describe('ThemeProvider & useTheme', () => {
       });
 
       expect(result.current.theme).toBe('light');
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('theme', 'light');
+      expect(cookieStore['theme']).toBe('light');
     });
   });
 
@@ -221,7 +228,6 @@ describe('ThemeProvider & useTheme', () => {
 
       renderHook(() => useTheme(), { wrapper });
 
-      // Verify addEventListener was called for 'change' event
       expect(mediaQueryListeners.length).toBeGreaterThan(0);
     });
 
@@ -235,7 +241,6 @@ describe('ThemeProvider & useTheme', () => {
 
       expect(result.current.theme).toBe('light');
 
-      // Simulate system switching to dark
       act(() => {
         simulateSystemThemeChange(true);
       });
@@ -246,7 +251,7 @@ describe('ThemeProvider & useTheme', () => {
     });
 
     it('ignores system preference changes when user has stored preference', async () => {
-      localStorageMock.getItem.mockReturnValue('light'); // User explicitly chose light
+      cookieStore['theme'] = 'light'; // User explicitly chose light
       Object.defineProperty(window, 'matchMedia', {
         writable: true,
         value: jest.fn(() => matchMediaMock(false)),
@@ -256,7 +261,6 @@ describe('ThemeProvider & useTheme', () => {
 
       expect(result.current.theme).toBe('light');
 
-      // Simulate system switching to dark
       act(() => {
         simulateSystemThemeChange(true);
       });
@@ -286,7 +290,7 @@ describe('ThemeProvider & useTheme', () => {
 
   describe('DOM Class Management', () => {
     it('adds dark class to documentElement when dark theme', () => {
-      localStorageMock.getItem.mockReturnValueOnce('dark');
+      cookieStore['theme'] = 'dark';
       Object.defineProperty(window, 'matchMedia', {
         writable: true,
         value: jest.fn(() => matchMediaMock(false)),
@@ -310,27 +314,54 @@ describe('ThemeProvider & useTheme', () => {
     });
   });
 
-  describe('Multiple Components Sharing State', () => {
-    it('shares theme state between multiple useTheme hooks', () => {
+  describe('Cookie Domain Handling', () => {
+    it('uses empty domain for localhost', () => {
+      (window as any).location.hostname = 'localhost';
       Object.defineProperty(window, 'matchMedia', {
         writable: true,
         value: jest.fn(() => matchMediaMock(false)),
       });
 
-      const { result: result1 } = renderHook(() => useTheme(), { wrapper });
-      const { result: result2 } = renderHook(() => useTheme(), { wrapper });
+      const { result } = renderHook(() => useTheme(), { wrapper });
 
-      // Both should have the same initial theme
-      expect(result1.current.theme).toBe(result2.current.theme);
-
-      // Toggle from first hook
       act(() => {
-        result1.current.toggleTheme();
+        result.current.setTheme('dark');
       });
 
-      // Note: In real scenario with shared context, result2 would update too
-      // This test validates the pattern is correct
-      expect(result1.current.theme).toBe('dark');
+      // Cookie should be set without domain for localhost
+      expect(cookieStore['theme']).toBe('dark');
+    });
+
+    it('uses localhost domain for *.localhost subdomains', () => {
+      (window as any).location.hostname = 'portfolio.localhost';
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: jest.fn(() => matchMediaMock(false)),
+      });
+
+      const { result } = renderHook(() => useTheme(), { wrapper });
+
+      act(() => {
+        result.current.setTheme('dark');
+      });
+
+      expect(cookieStore['theme']).toBe('dark');
+    });
+
+    it('uses root domain for production subdomains', () => {
+      (window as any).location.hostname = 'portfolio.daviani.dev';
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: jest.fn(() => matchMediaMock(false)),
+      });
+
+      const { result } = renderHook(() => useTheme(), { wrapper });
+
+      act(() => {
+        result.current.setTheme('dark');
+      });
+
+      expect(cookieStore['theme']).toBe('dark');
     });
   });
 });

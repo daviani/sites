@@ -3,18 +3,24 @@ import { useTranslation } from '../src/hooks/use-translation';
 import { LanguageProvider } from '../src/hooks/use-language';
 import { ReactNode } from 'react';
 
-const localStorageMock = (() => {
-  let store: Record<string, string> = {};
-  return {
-    getItem: jest.fn((key: string) => store[key] || null),
-    setItem: jest.fn((key: string, value: string) => {
-      store[key] = value;
-    }),
-    clear: jest.fn(() => {
-      store = {};
-    }),
-  };
-})();
+// Mock document.cookie
+let cookieStore: Record<string, string> = {};
+
+const mockCookie = {
+  get: () => {
+    return Object.entries(cookieStore)
+      .map(([key, value]) => `${key}=${value}`)
+      .join('; ');
+  },
+  set: (cookieStr: string) => {
+    const [nameValue] = cookieStr.split(';');
+    const [name, value] = nameValue.split('=');
+    cookieStore[name.trim()] = value.trim();
+  },
+  clear: () => {
+    cookieStore = {};
+  },
+};
 
 const wrapper = ({ children }: { children: ReactNode }) => (
   <LanguageProvider>{children}</LanguageProvider>
@@ -22,8 +28,14 @@ const wrapper = ({ children }: { children: ReactNode }) => (
 
 describe('useTranslation Hook', () => {
   beforeEach(() => {
-    Object.defineProperty(window, 'localStorage', { value: localStorageMock });
-    localStorageMock.clear();
+    mockCookie.clear();
+    Object.defineProperty(document, 'cookie', {
+      configurable: true,
+      get: () => mockCookie.get(),
+      set: (val: string) => mockCookie.set(val),
+    });
+    // Mock window.location (already configured in jest.setup.js)
+    (window as any).location.hostname = 'localhost';
     Object.defineProperty(navigator, 'language', {
       value: 'fr-FR',
       configurable: true,
@@ -43,7 +55,7 @@ describe('useTranslation Hook', () => {
     });
 
     it('returns English translation when language is en', () => {
-      localStorageMock.getItem.mockReturnValueOnce('en');
+      cookieStore['language'] = 'en';
 
       const { result } = renderHook(() => useTranslation(), { wrapper });
 
@@ -93,7 +105,7 @@ describe('useTranslation Hook', () => {
     });
 
     it('returns dark mode translations in English', () => {
-      localStorageMock.getItem.mockReturnValueOnce('en');
+      cookieStore['language'] = 'en';
 
       const { result } = renderHook(() => useTranslation(), { wrapper });
 
@@ -123,7 +135,7 @@ describe('useTranslation Hook', () => {
     });
 
     it('returns all navigation items in English', () => {
-      localStorageMock.getItem.mockReturnValueOnce('en');
+      cookieStore['language'] = 'en';
 
       const { result } = renderHook(() => useTranslation(), { wrapper });
 
@@ -147,7 +159,7 @@ describe('useTranslation Hook', () => {
     });
 
     it('returns page titles in English', () => {
-      localStorageMock.getItem.mockReturnValueOnce('en');
+      cookieStore['language'] = 'en';
 
       const { result } = renderHook(() => useTranslation(), { wrapper });
 

@@ -3,18 +3,24 @@ import { LanguageSwitcher } from '../src/components/LanguageSwitcher';
 import { LanguageProvider } from '../src/hooks/use-language';
 import { ReactNode } from 'react';
 
-const localStorageMock = (() => {
-  let store: Record<string, string> = {};
-  return {
-    getItem: jest.fn((key: string) => store[key] || null),
-    setItem: jest.fn((key: string, value: string) => {
-      store[key] = value;
-    }),
-    clear: jest.fn(() => {
-      store = {};
-    }),
-  };
-})();
+// Mock document.cookie
+let cookieStore: Record<string, string> = {};
+
+const mockCookie = {
+  get: () => {
+    return Object.entries(cookieStore)
+      .map(([key, value]) => `${key}=${value}`)
+      .join('; ');
+  },
+  set: (cookieStr: string) => {
+    const [nameValue] = cookieStr.split(';');
+    const [name, value] = nameValue.split('=');
+    cookieStore[name.trim()] = value.trim();
+  },
+  clear: () => {
+    cookieStore = {};
+  },
+};
 
 const Wrapper = ({ children }: { children: ReactNode }) => (
   <LanguageProvider>{children}</LanguageProvider>
@@ -26,8 +32,14 @@ const renderWithProvider = (ui: React.ReactElement) => {
 
 describe('LanguageSwitcher Component', () => {
   beforeEach(() => {
-    Object.defineProperty(window, 'localStorage', { value: localStorageMock });
-    localStorageMock.clear();
+    mockCookie.clear();
+    Object.defineProperty(document, 'cookie', {
+      configurable: true,
+      get: () => mockCookie.get(),
+      set: (val: string) => mockCookie.set(val),
+    });
+    // Mock window.location (already configured in jest.setup.js)
+    (window as any).location.hostname = 'localhost';
     Object.defineProperty(navigator, 'language', {
       value: 'fr-FR',
       configurable: true,
@@ -57,7 +69,7 @@ describe('LanguageSwitcher Component', () => {
     });
 
     it('shows French flag when current language is English', () => {
-      localStorageMock.getItem.mockReturnValueOnce('en');
+      cookieStore['language'] = 'en';
 
       renderWithProvider(<LanguageSwitcher />);
 
@@ -74,18 +86,18 @@ describe('LanguageSwitcher Component', () => {
       const button = screen.getByRole('button');
       fireEvent.click(button);
 
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('language', 'en');
+      expect(cookieStore['language']).toBe('en');
     });
 
     it('toggles to French when clicked in English mode', () => {
-      localStorageMock.getItem.mockReturnValueOnce('en');
+      cookieStore['language'] = 'en';
 
       renderWithProvider(<LanguageSwitcher />);
 
       const button = screen.getByRole('button');
       fireEvent.click(button);
 
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('language', 'fr');
+      expect(cookieStore['language']).toBe('fr');
     });
 
     it('updates aria-label after toggle', () => {

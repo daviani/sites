@@ -13,7 +13,7 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | null>(null);
 
-const THEME_STORAGE_KEY = 'theme';
+const THEME_COOKIE_NAME = 'theme';
 
 function applyTheme(theme: Theme) {
   if (theme === 'dark') {
@@ -28,15 +28,54 @@ function getSystemTheme(): Theme {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
+function getCookieDomain(): string {
+  if (typeof window === 'undefined') return '';
+  const hostname = window.location.hostname;
+
+  // localhost sans sous-domaine -> pas de domain
+  if (hostname === 'localhost') {
+    return '';
+  }
+
+  // *.localhost (ex: portfolio.localhost) -> domain=localhost
+  if (hostname.endsWith('.localhost')) {
+    return 'localhost';
+  }
+
+  // Production: *.daviani.dev -> domain=.daviani.dev
+  const parts = hostname.split('.');
+  if (parts.length >= 2) {
+    return '.' + parts.slice(-2).join('.');
+  }
+
+  return '';
+}
+
 function getStoredTheme(): Theme | null {
   if (typeof window === 'undefined') return null;
-  return localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
+  const cookies = document.cookie.split(';');
+  for (const cookie of cookies) {
+    const [name, value] = cookie.trim().split('=');
+    if (name === THEME_COOKIE_NAME && (value === 'light' || value === 'dark')) {
+      return value as Theme;
+    }
+  }
+  return null;
+}
+
+function setThemeCookie(theme: Theme) {
+  const domain = getCookieDomain();
+  const maxAge = 365 * 24 * 60 * 60; // 1 an
+  let cookieStr = `${THEME_COOKIE_NAME}=${theme}; path=/; max-age=${maxAge}; SameSite=Lax`;
+  if (domain) {
+    cookieStr += `; domain=${domain}`;
+  }
+  document.cookie = cookieStr;
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>('light');
   const [mounted, setMounted] = useState(false);
-  const [hasUserPreference, setHasUserPreference] = useState(false);
 
   // Initialize theme on mount
   useEffect(() => {
@@ -46,7 +85,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const systemTheme = getSystemTheme();
     const initialTheme = storedTheme || systemTheme;
 
-    setHasUserPreference(!!storedTheme);
     setThemeState(initialTheme);
     applyTheme(initialTheme);
   }, []);
@@ -74,8 +112,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   const setTheme = useCallback((newTheme: Theme) => {
     setThemeState(newTheme);
-    setHasUserPreference(true);
-    localStorage.setItem(THEME_STORAGE_KEY, newTheme);
+    setThemeCookie(newTheme);
     applyTheme(newTheme);
   }, []);
 
