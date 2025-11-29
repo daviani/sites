@@ -16,7 +16,7 @@ export function SubHeader({ items, currentPath }: SubHeaderProps) {
   const { t } = useTranslation();
 
   const baseStyles =
-    'px-4 py-2 text-sm font-medium rounded-lg transition-colors';
+    'px-4 py-2 text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-nord-8 focus:ring-offset-2';
   const inactiveStyles =
     'text-nord-3 dark:text-nord-4 hover:text-nord-0 dark:hover:text-nord-6 hover:bg-nord-5 dark:hover:bg-nord-2';
   const activeStyles =
@@ -24,7 +24,7 @@ export function SubHeader({ items, currentPath }: SubHeaderProps) {
 
   return (
     <nav
-      className="bg-nord-6 dark:bg-nord-0 border-b border-nord-5 dark:border-nord-1"
+      className="fixed top-[86px] left-[10px] right-[10px] z-40 shadow-lg backdrop-blur-md bg-white/40 dark:bg-nord-3/50 rounded-[2.5rem]"
       aria-label={t('nav.portfolio.title')}
     >
       <div className="container mx-auto px-4">
