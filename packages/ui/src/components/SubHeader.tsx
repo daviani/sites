@@ -16,7 +16,7 @@ export function SubHeader({ items, currentPath }: SubHeaderProps) {
   const { t } = useTranslation();
 
   const baseStyles =
-    'px-4 py-2 text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2';
+    'px-4 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2';
   const inactiveStyles =
     'text-nord-3 dark:text-nord-4 hover:text-nord-0 dark:hover:text-nord-6 hover:bg-nord-5 dark:hover:bg-nord-2';
   const activeStyles =
