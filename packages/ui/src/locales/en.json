@@ -72,6 +72,13 @@
     "privacyNote": "Your data will be processed according to GitHub's privacy policy.",
     "acceptButton": "Accept and show comments"
   },
+  "rdv": {
+    "showCalendar": "Show calendar",
+    "consent": "By clicking, you agree to load the Calendly widget (third-party service).",
+    "loading": "Loading...",
+    "fallback": "Problem with the calendar? Contact me by email.",
+    "description": "Book a 60-minute slot for an in-depth discussion."
+  },
   "pages": {
     "portfolio": {
       "title": "Portfolio",
