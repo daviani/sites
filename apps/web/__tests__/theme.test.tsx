@@ -69,6 +69,7 @@ describe('Theme Tests', () => {
     });
 
     // Setup location mock (already configured in jest.setup.js)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).location.hostname = 'localhost';
 
     // Setup matchMedia mock (default: light mode)
