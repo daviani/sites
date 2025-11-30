@@ -74,7 +74,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
 
   return (
     <div className="min-h-screen bg-nord-6 dark:bg-nord-0">
-      <article className="max-w-3xl mx-auto px-4 py-12">
+      <article className="max-w-3xl mx-auto px-4 py-16">
         {/* Breadcrumb */}
         <div className="mb-8">
           <Breadcrumb

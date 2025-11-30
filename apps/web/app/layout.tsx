@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Footer, SkipLink } from "@daviani/ui";
+import { Footer, SkipLink, ScrollToTop } from "@daviani/ui";
 import { Providers } from "@/components/Providers";
 import { HeaderNav } from "@/components/HeaderNav";
 import { SubHeaderNav } from "@/components/SubHeaderNav";
@@ -41,6 +41,7 @@ export default function RootLayout({
           <SubHeaderNav />
           <div className="min-h-screen flex flex-col">
             <main id="main-content" className="flex-1 pt-[86px] md:pt-[150px] px-[10px] pb-[220px] md:pb-[200px]">{children}</main>
+            <ScrollToTop />
             <Footer
               legalUrl={getSubdomainUrl("legal")}
               contactUrl={getSubdomainUrl("contact")}
