@@ -15,19 +15,19 @@ export function Comments({ slug }: CommentsProps) {
 
   if (!hasConsent) {
     return (
-      <section className="mt-12 p-6 bg-white/40 dark:bg-nord-3/50 backdrop-blur-md rounded-[2.5rem] shadow-lg">
-        <h2 className="text-xl font-bold mb-4 text-nord-0 dark:text-nord-6">
+      <section className="mt-8 p-8 bg-white/40 dark:bg-nord-3/50 backdrop-blur-md rounded-[2.5rem] shadow-lg">
+        <h2 className="text-xl font-bold mb-4 text-nord0 dark:text-nord6">
           {t('comments.title')}
         </h2>
-        <p className="text-nord-0 dark:text-nord-4 mb-4">
+        <p className="text-nord3 dark:text-nord4 mb-4">
           {t('comments.consentText')}
         </p>
-        <p className="text-sm text-nord-0 dark:text-nord-4 mb-6">
+        <p className="text-sm text-nord3 dark:text-nord4 mb-6">
           {t('comments.privacyNote')}
         </p>
         <button
           onClick={() => setHasConsent(true)}
-          className="px-6 py-2 bg-nord-10 text-white rounded-lg hover:bg-nord-9 transition-colors"
+          className="px-6 py-3 bg-nord-10 text-white rounded-full font-semibold hover:bg-nord-9 hover:scale-105 transition-all cursor-pointer"
         >
           {t('comments.acceptButton')}
         </button>
@@ -36,7 +36,7 @@ export function Comments({ slug }: CommentsProps) {
   }
 
   return (
-    <section className="mt-12">
+    <section className="mt-8">
       <Giscus
         repo={process.env.NEXT_PUBLIC_GISCUS_REPO as `${string}/${string}`}
         repoId={process.env.NEXT_PUBLIC_GISCUS_REPO_ID!}

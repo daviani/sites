@@ -84,14 +84,14 @@ export default async function BlogPost({ params }: BlogPostProps) {
         </div>
 
         {/* Header */}
-        <header className="mb-8">
-          <h1 className="text-4xl font-bold mb-4 text-nord-0 dark:text-nord-6">
+        <header className="mb-10 p-8 bg-white/40 dark:bg-nord-3/50 backdrop-blur-md rounded-[2.5rem] shadow-lg">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-nord0 dark:text-nord6">
             {meta.title}
           </h1>
-          <p className="text-xl text-nord-0 dark:text-nord-4 mb-4">
+          <p className="text-lg text-nord3 dark:text-nord4 mb-6 leading-relaxed">
             {meta.description}
           </p>
-          <div className="flex items-center gap-4 text-sm text-nord-0 dark:text-nord-4">
+          <div className="flex items-center gap-4 text-sm text-nord3 dark:text-nord4">
             <time dateTime={meta.date}>
               {new Date(meta.date).toLocaleDateString('fr-FR', {
                 year: 'numeric',
@@ -103,14 +103,14 @@ export default async function BlogPost({ params }: BlogPostProps) {
             {meta.lang && <span>· {meta.lang.toUpperCase()}</span>}
           </div>
           {meta.tags.length > 0 && (
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-5 flex flex-wrap gap-2">
               {meta.tags.map((tag) => (
                 <Link
                   key={tag}
                   href={`/?tag=${tag}`}
-                  className="px-3 py-1 bg-nord-5 dark:bg-nord-2 text-nord-0 dark:text-nord-4 rounded-full text-sm hover:bg-nord-4 dark:hover:bg-nord-3 transition-colors cursor-pointer"
+                  className="px-4 py-1.5 bg-nord10/10 dark:bg-nord8/10 text-nord10 dark:text-nord8 rounded-full text-sm font-medium hover:bg-nord10/20 dark:hover:bg-nord8/20 transition-colors cursor-pointer"
                 >
-                  {tag}
+                  #{tag}
                 </Link>
               ))}
             </div>
@@ -118,8 +118,10 @@ export default async function BlogPost({ params }: BlogPostProps) {
         </header>
 
         {/* Content */}
-        <div className="prose-nord">
-          <Content />
+        <div className="mt-8 p-8 bg-white/40 dark:bg-nord-3/50 backdrop-blur-md rounded-[2.5rem] shadow-lg">
+          <div className="prose-nord">
+            <Content />
+          </div>
         </div>
 
         {/* Comments */}
