@@ -16,7 +16,8 @@
     "closeMenu": "Close menu",
     "skipToContent": "Skip to content",
     "home": "Home",
-    "breadcrumb": "Breadcrumb"
+    "breadcrumb": "Breadcrumb",
+    "scrollToTop": "Back to top"
   },
   "darkMode": {
     "switchToDark": "Switch to dark mode",

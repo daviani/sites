@@ -16,7 +16,8 @@
     "closeMenu": "Fermer le menu",
     "skipToContent": "Aller au contenu",
     "home": "Accueil",
-    "breadcrumb": "Fil d'Ariane"
+    "breadcrumb": "Fil d'Ariane",
+    "scrollToTop": "Retour en haut"
   },
   "darkMode": {
     "switchToDark": "Passer en mode sombre",

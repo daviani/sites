@@ -26,6 +26,8 @@ export { SkipLink } from './components/SkipLink';
 export { Breadcrumb } from './components/Breadcrumb';
 export type { BreadcrumbProps, BreadcrumbItem } from './components/Breadcrumb';
 
+export { ScrollToTop } from './components/ScrollToTop';
+
 export { useTheme, ThemeProvider } from './hooks/use-theme';
 export type { Theme } from './hooks/use-theme';
 
