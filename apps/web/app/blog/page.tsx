@@ -23,14 +23,14 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const allTags = getAllTags();
 
   return (
-    <div className="min-h-screen bg-nord-6 dark:bg-nord-0">
-      <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="min-h-screen bg-nord6 dark:bg-nord0">
+      <div className="max-w-4xl mx-auto px-4 pt-5 pb-16">
         <div className="mb-8">
           <Breadcrumb items={[{ href: '/blog', labelKey: 'nav.blog.title' }]} />
         </div>
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-nord-0 dark:text-nord-6">Blog</h1>
-          <p className="text-xl text-nord-0 dark:text-nord-4">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-nord0 dark:text-nord6">Blog</h1>
+          <p className="text-xl text-nord3 dark:text-nord4">
             Articles sur le développement web, DevOps et plus encore.
           </p>
         </div>
