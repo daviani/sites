@@ -18,7 +18,7 @@ export function Breadcrumb({ items, currentLabel }: BreadcrumbProps) {
   const allItems = [{ href: '/', labelKey: 'common.home' as TranslationKey }, ...items];
 
   return (
-    <nav aria-label={t('common.breadcrumb')} className="text-sm">
+    <nav aria-label={t('common.breadcrumb')} className="text-base">
       <ol className="flex items-center gap-2 flex-wrap">
         {allItems.map((item, index) => {
           const isLast = index === allItems.length - 1 && !currentLabel;
@@ -31,12 +31,12 @@ export function Breadcrumb({ items, currentLabel }: BreadcrumbProps) {
                   className="text-nord-3 dark:text-nord-4"
                   aria-hidden="true"
                 >
-                  /
+                  ›
                 </span>
               )}
               {isLast ? (
                 <span
-                  className="text-nord-0 dark:text-nord-6 font-medium"
+                  className="text-nord-0 dark:text-nord-6 font-semibold"
                   aria-current="page"
                 >
                   {label}
@@ -44,7 +44,7 @@ export function Breadcrumb({ items, currentLabel }: BreadcrumbProps) {
               ) : (
                 <a
                   href={item.href}
-                  className="text-nord-3 dark:text-nord-4 hover:text-nord-10 dark:hover:text-nord-8 transition-colors focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2 rounded"
+                  className="text-nord-3 dark:text-nord-4 hover:text-nord-10 dark:hover:text-nord-8 hover:underline underline-offset-4 transition-all focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2 rounded px-1 -mx-1"
                 >
                   {label}
                 </a>
@@ -58,10 +58,10 @@ export function Breadcrumb({ items, currentLabel }: BreadcrumbProps) {
               className="text-nord-3 dark:text-nord-4"
               aria-hidden="true"
             >
-              /
+              ›
             </span>
             <span
-              className="text-nord-0 dark:text-nord-6 font-medium"
+              className="text-nord-0 dark:text-nord-6 font-semibold"
               aria-current="page"
             >
               {currentLabel}
