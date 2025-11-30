@@ -73,8 +73,8 @@ export default async function BlogPost({ params }: BlogPostProps) {
   const { meta } = article;
 
   return (
-    <div className="min-h-screen bg-nord-6 dark:bg-nord-0">
-      <article className="max-w-3xl mx-auto px-4 py-16">
+    <div className="min-h-screen bg-nord6 dark:bg-nord0">
+      <article className="max-w-3xl mx-auto px-4 pt-5 pb-16">
         {/* Breadcrumb */}
         <div className="mb-8">
           <Breadcrumb
