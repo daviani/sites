@@ -28,6 +28,10 @@ export type { BreadcrumbProps, BreadcrumbItem } from './components/Breadcrumb';
 
 export { ScrollToTop } from './components/ScrollToTop';
 
+export { CalendlyEmbed } from './components/CalendlyEmbed';
+
+export { ConsentGate } from './components/ConsentGate';
+
 export { useTheme, ThemeProvider } from './hooks/use-theme';
 export type { Theme } from './hooks/use-theme';
 
@@ -36,3 +40,5 @@ export type { Language } from './hooks/use-language';
 
 export { useTranslation } from './hooks/use-translation';
 export type { TranslationKey } from './hooks/use-translation';
+
+export { useRecaptcha } from './hooks/use-recaptcha';
