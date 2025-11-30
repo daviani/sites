@@ -7,7 +7,7 @@ export default function LegalPage() {
 
   return (
     <div className="min-h-screen bg-nord6 dark:bg-nord0">
-      <div className="max-w-4xl mx-auto px-4 py-16">
+      <div className="max-w-4xl mx-auto px-4 pt-5 pb-16">
         <div className="mb-8">
           <Breadcrumb items={[{ href: '/legal', labelKey: 'nav.legal.title' }]} />
         </div>
