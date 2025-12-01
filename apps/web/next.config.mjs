@@ -55,6 +55,14 @@ const nextConfig = {
               "base-uri 'self'",
               "form-action 'self'"
             ].join('; ')
+          },
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin-allow-popups'
+          },
+          {
+            key: 'X-Permitted-Cross-Domain-Policies',
+            value: 'none'
           }
         ]
       }
