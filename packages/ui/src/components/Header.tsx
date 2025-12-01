@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState, useEffect, useRef } from 'react';
 import { DarkModeToggle } from './DarkModeToggle';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { OwlLogo } from './OwlLogo';
@@ -16,12 +16,28 @@ export interface HeaderProps {
   className?: string;
   homeUrl?: string;
   navItems?: NavItem[];
+  secondaryNavItems?: NavItem[];
   currentPath?: string;
 }
 
-export function Header({ logo, className = '', homeUrl = '/', navItems = [], currentPath = '' }: HeaderProps) {
+export function Header({ logo, className = '', homeUrl = '/', navItems = [], secondaryNavItems = [], currentPath = '' }: HeaderProps) {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function handleClickOutside(event: MouseEvent) {
+      if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen]);
 
   const baseStyles =
     'px-4 py-2 text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2';
@@ -32,6 +48,7 @@ export function Header({ logo, className = '', homeUrl = '/', navItems = [], cur
 
   return (
     <header
+      ref={headerRef}
       className={`fixed top-[10px] left-[10px] right-[10px] z-50 shadow-lg backdrop-blur-md bg-white/40 dark:bg-nord-3/50 rounded-[2.5rem] transition-colors ${className}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -85,7 +102,7 @@ export function Header({ logo, className = '', homeUrl = '/', navItems = [], cur
           <div id="mobile-menu" className="md:hidden pb-4">
             {/* Navigation Links */}
             {navItems.length > 0 && (
-              <ul className="flex flex-col items-center gap-1 mb-4">
+              <ul className="flex flex-col items-center gap-1">
                 {navItems.map((item) => {
                   const isActive = currentPath === item.href || currentPath.startsWith(`${item.href}/`);
                   return (
@@ -104,8 +121,29 @@ export function Header({ logo, className = '', homeUrl = '/', navItems = [], cur
               </ul>
             )}
 
+            {/* Secondary Navigation Links (Accessibility, Sitemap, Help) */}
+            {secondaryNavItems.length > 0 && (
+              <ul className="flex flex-col items-center gap-1 mt-2 pt-2 border-t border-nord-3/30 dark:border-nord-4/30">
+                {secondaryNavItems.map((item) => {
+                  const isActive = currentPath === item.href || currentPath.startsWith(`${item.href}/`);
+                  return (
+                    <li key={item.href} className="w-full">
+                      <a
+                        href={item.href}
+                        className={`${baseStyles} ${isActive ? activeStyles : inactiveStyles} block text-center text-xs`}
+                        aria-current={isActive ? 'page' : undefined}
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {t(item.labelKey)}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+
             {/* Theme & Language toggles */}
-            <div className={`flex items-center justify-center gap-4 ${navItems.length > 0 ? 'pt-2 border-t border-nord-5 dark:border-nord-2' : ''}`}>
+            <div className="flex items-center justify-center gap-4 mt-2 pt-2 border-t border-nord-3/30 dark:border-nord-4/30">
               <LanguageSwitcher />
               <DarkModeToggle />
             </div>

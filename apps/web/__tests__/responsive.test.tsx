@@ -142,16 +142,16 @@ describe('Responsive Design Tests', () => {
     it('renders all links correctly', () => {
       render(<Footer {...footerProps} />);
 
-      // Check for legal link (translated text)
-      expect(screen.getByRole('link', { name: /legal|mentions/i })).toBeInTheDocument();
+      // Check for links (mobile and desktop versions)
+      expect(screen.getAllByRole('link', { name: /legal|mentions/i }).length).toBeGreaterThan(0);
       expect(screen.getAllByRole('link', { name: /contact/i }).length).toBeGreaterThan(0);
-      expect(screen.getByRole('link', { name: /github/i })).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: /linkedin/i })).toBeInTheDocument();
+      expect(screen.getAllByRole('link', { name: /github/i }).length).toBeGreaterThan(0);
+      expect(screen.getAllByRole('link', { name: /linkedin/i }).length).toBeGreaterThan(0);
     });
 
     it('uses grid layout for 3 columns on desktop', () => {
       const { container } = render(<Footer {...footerProps} />);
-      const gridContainer = container.querySelector('.grid.grid-cols-1.md\\:grid-cols-3');
+      const gridContainer = container.querySelector('.hidden.md\\:grid.grid-cols-3');
       expect(gridContainer).toBeInTheDocument();
     });
 

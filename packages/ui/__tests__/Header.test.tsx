@@ -36,6 +36,12 @@ const mockNavItems = [
   { href: '/blog', labelKey: 'nav.blog.title' as const },
 ];
 
+const mockSecondaryNavItems = [
+  { href: '/accessibility', labelKey: 'nav.accessibility.title' as const },
+  { href: '/sitemap', labelKey: 'nav.sitemap.title' as const },
+  { href: '/help', labelKey: 'nav.help.title' as const },
+];
+
 describe('Header Component', () => {
   describe('Rendering', () => {
     it('renders with default logo text', () => {
@@ -189,6 +195,90 @@ describe('Header Component', () => {
       renderWithProviders(<Header />);
       const toggleButton = screen.getByRole('button', { name: /switch to dark mode|passer en mode sombre/i });
       expect(toggleButton).toBeInTheDocument();
+    });
+  });
+
+  describe('Secondary Navigation Items', () => {
+    it('renders secondary nav items in mobile menu when provided', () => {
+      renderWithProviders(
+        <Header
+          navItems={mockNavItems}
+          secondaryNavItems={mockSecondaryNavItems}
+          currentPath="/portfolio"
+        />
+      );
+      const hamburgerButton = screen.getByRole('button', { name: /ouvrir le menu|open menu/i });
+
+      fireEvent.click(hamburgerButton);
+
+      expect(screen.getByRole('link', { name: /accessibilit[eé]|accessibility/i })).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: /plan du site|sitemap/i })).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: /aide|help/i })).toBeInTheDocument();
+    });
+
+    it('secondary nav items have smaller text', () => {
+      renderWithProviders(
+        <Header
+          navItems={mockNavItems}
+          secondaryNavItems={mockSecondaryNavItems}
+          currentPath="/portfolio"
+        />
+      );
+      const hamburgerButton = screen.getByRole('button', { name: /ouvrir le menu|open menu/i });
+
+      fireEvent.click(hamburgerButton);
+
+      const accessibilityLink = screen.getByRole('link', { name: /accessibilit[eé]|accessibility/i });
+      expect(accessibilityLink.className).toContain('text-xs');
+    });
+
+    it('secondary nav items appear after primary nav items', () => {
+      renderWithProviders(
+        <Header
+          navItems={mockNavItems}
+          secondaryNavItems={mockSecondaryNavItems}
+          currentPath="/portfolio"
+        />
+      );
+      const hamburgerButton = screen.getByRole('button', { name: /ouvrir le menu|open menu/i });
+
+      fireEvent.click(hamburgerButton);
+
+      const links = screen.getAllByRole('link');
+      const portfolioIndex = links.findIndex((link) => /portfolio/i.test(link.textContent || ''));
+      const accessibilityIndex = links.findIndex((link) => /accessibilit/i.test(link.textContent || ''));
+      expect(accessibilityIndex).toBeGreaterThan(portfolioIndex);
+    });
+  });
+
+  describe('Click Outside to Close', () => {
+    it('closes mobile menu when clicking outside header', () => {
+      renderWithProviders(<Header navItems={mockNavItems} currentPath="/portfolio" />);
+      const hamburgerButton = screen.getByRole('button', { name: /ouvrir le menu|open menu/i });
+
+      fireEvent.click(hamburgerButton);
+      expect(hamburgerButton).toHaveAttribute('aria-expanded', 'true');
+
+      // Simulate click outside
+      fireEvent.mouseDown(document.body);
+
+      expect(screen.getByRole('button', { name: /ouvrir le menu|open menu/i })).toHaveAttribute('aria-expanded', 'false');
+    });
+
+    it('does not close menu when clicking inside header', () => {
+      const { container } = renderWithProviders(<Header navItems={mockNavItems} currentPath="/portfolio" />);
+      const hamburgerButton = screen.getByRole('button', { name: /ouvrir le menu|open menu/i });
+
+      fireEvent.click(hamburgerButton);
+      expect(hamburgerButton).toHaveAttribute('aria-expanded', 'true');
+
+      // Click inside the header
+      const header = container.querySelector('header');
+      if (header) {
+        fireEvent.mouseDown(header);
+      }
+
+      expect(screen.getByRole('button', { name: /fermer le menu|close menu/i })).toHaveAttribute('aria-expanded', 'true');
     });
   });
 });

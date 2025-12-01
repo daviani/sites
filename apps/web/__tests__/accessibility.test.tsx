@@ -270,13 +270,15 @@ describe('RGAA AAA - Accessibility Tests', () => {
       expect(svg).toHaveAttribute('aria-hidden', 'true');
     });
 
-    it('GitHub link has accessible text content', () => {
+    it('GitHub links have accessible text content', () => {
       render(
         <Footer legalUrl="/legal" contactUrl="/contact" githubUrl="https://github.com" linkedinUrl="https://linkedin.com/in/test" />
       );
-      const githubLink = screen.getByRole('link', { name: /github/i });
-      expect(githubLink).toBeInTheDocument();
-      expect(githubLink.textContent).toBeTruthy();
+      const githubLinks = screen.getAllByRole('link', { name: /github/i });
+      expect(githubLinks.length).toBeGreaterThanOrEqual(1);
+      githubLinks.forEach((link) => {
+        expect(link.textContent).toBeTruthy();
+      });
     });
   });
 

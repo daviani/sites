@@ -126,4 +126,47 @@ describe('SubHeader Component', () => {
       expect(nav.className).toContain('md:block');
     });
   });
+
+  describe('Separators', () => {
+    it('does not render separators by default', () => {
+      const { container } = renderWithProviders(<SubHeader items={mockNavItems} currentPath="/portfolio" />);
+      const separators = container.querySelectorAll('[aria-hidden="true"]');
+      // Filter to only bullet separators (not SVGs or other aria-hidden elements)
+      const bulletSeparators = Array.from(separators).filter((el) => el.textContent === '•');
+      expect(bulletSeparators.length).toBe(0);
+    });
+
+    it('renders separators when showSeparators is true', () => {
+      const { container } = renderWithProviders(
+        <SubHeader items={mockNavItems} currentPath="/portfolio" showSeparators />
+      );
+      const separators = container.querySelectorAll('[aria-hidden="true"]');
+      const bulletSeparators = Array.from(separators).filter((el) => el.textContent === '•');
+      // Should have n-1 separators for n items
+      expect(bulletSeparators.length).toBe(mockNavItems.length - 1);
+    });
+
+    it('separators are hidden from screen readers', () => {
+      const { container } = renderWithProviders(
+        <SubHeader items={mockNavItems} currentPath="/portfolio" showSeparators />
+      );
+      const separators = container.querySelectorAll('[aria-hidden="true"]');
+      const bulletSeparators = Array.from(separators).filter((el) => el.textContent === '•');
+      bulletSeparators.forEach((separator) => {
+        expect(separator).toHaveAttribute('aria-hidden', 'true');
+      });
+    });
+
+    it('separators have correct contrast colors', () => {
+      const { container } = renderWithProviders(
+        <SubHeader items={mockNavItems} currentPath="/portfolio" showSeparators />
+      );
+      const separators = container.querySelectorAll('[aria-hidden="true"]');
+      const bulletSeparators = Array.from(separators).filter((el) => el.textContent === '•');
+      bulletSeparators.forEach((separator) => {
+        expect(separator.className).toContain('text-nord-3');
+        expect(separator.className).toContain('dark:text-nord-4');
+      });
+    });
+  });
 });

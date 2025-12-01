@@ -50,46 +50,59 @@ describe('Footer Component', () => {
       expect(screen.getByRole('contentinfo')).toBeInTheDocument();
     });
 
-    it('renders legal notice link', () => {
+    it('renders legal notice links (mobile and desktop)', () => {
       renderWithProviders(<Footer {...defaultProps} />);
-      const legalLink = screen.getByRole('link', { name: /l[eé]gal|mentions|notice/i });
-      expect(legalLink).toBeInTheDocument();
-      expect(legalLink).toHaveAttribute('href', mockLegalUrl);
+      const legalLinks = screen.getAllByRole('link', { name: /l[eé]gal|mentions|notice/i });
+      expect(legalLinks.length).toBeGreaterThanOrEqual(1);
+      legalLinks.forEach((link) => {
+        expect(link).toHaveAttribute('href', mockLegalUrl);
+      });
     });
 
-    it('renders column titles', () => {
-      renderWithProviders(<Footer {...defaultProps} />);
+    it('renders column titles on desktop', () => {
+      const { container } = renderWithProviders(<Footer {...defaultProps} />);
+      // Titles are only visible on desktop (hidden md:grid)
+      const desktopGrid = container.querySelector('.hidden.md\\:grid');
+      expect(desktopGrid).toBeInTheDocument();
       expect(screen.getByRole('heading', { name: /navigation/i })).toBeInTheDocument();
       expect(screen.getByRole('heading', { name: /l[eé]gal/i })).toBeInTheDocument();
       expect(screen.getByRole('heading', { name: /contact/i })).toBeInTheDocument();
     });
 
-    it('renders contact link', () => {
+    it('renders contact links (mobile and desktop)', () => {
       renderWithProviders(<Footer {...defaultProps} />);
-      const contactLink = screen.getByRole('link', { name: /contact/i });
-      expect(contactLink).toBeInTheDocument();
-      expect(contactLink).toHaveAttribute('href', mockContactUrl);
+      const contactLinks = screen.getAllByRole('link', { name: /^contact$/i });
+      expect(contactLinks.length).toBeGreaterThanOrEqual(1);
+      contactLinks.forEach((link) => {
+        expect(link).toHaveAttribute('href', mockContactUrl);
+      });
     });
 
-    it('renders GitHub link', () => {
+    it('renders GitHub links (mobile and desktop)', () => {
       renderWithProviders(<Footer {...defaultProps} />);
-      const githubLink = screen.getByRole('link', { name: /github/i });
-      expect(githubLink).toBeInTheDocument();
-      expect(githubLink).toHaveAttribute('href', mockGithubUrl);
+      const githubLinks = screen.getAllByRole('link', { name: /github/i });
+      expect(githubLinks.length).toBeGreaterThanOrEqual(1);
+      githubLinks.forEach((link) => {
+        expect(link).toHaveAttribute('href', mockGithubUrl);
+      });
     });
 
-    it('renders LinkedIn link', () => {
+    it('renders LinkedIn links (mobile and desktop)', () => {
       renderWithProviders(<Footer {...defaultProps} />);
-      const linkedinLink = screen.getByRole('link', { name: /linkedin/i });
-      expect(linkedinLink).toBeInTheDocument();
-      expect(linkedinLink).toHaveAttribute('href', mockLinkedinUrl);
+      const linkedinLinks = screen.getAllByRole('link', { name: /linkedin/i });
+      expect(linkedinLinks.length).toBeGreaterThanOrEqual(1);
+      linkedinLinks.forEach((link) => {
+        expect(link).toHaveAttribute('href', mockLinkedinUrl);
+      });
     });
 
-    it('renders copyright text with current year', () => {
+    it('renders copyright text with current year (mobile and desktop)', () => {
       renderWithProviders(<Footer {...defaultProps} />);
       const currentYear = new Date().getFullYear().toString();
-      expect(screen.getByText(new RegExp(currentYear))).toBeInTheDocument();
-      expect(screen.getByText(/daviani\.dev/i)).toBeInTheDocument();
+      const yearElements = screen.getAllByText(new RegExp(currentYear));
+      expect(yearElements.length).toBeGreaterThanOrEqual(1);
+      const davianiElements = screen.getAllByText(/daviani\.dev/i);
+      expect(davianiElements.length).toBeGreaterThanOrEqual(1);
     });
   });
 
@@ -99,18 +112,22 @@ describe('Footer Component', () => {
       expect(screen.getByRole('contentinfo')).toBeInTheDocument();
     });
 
-    it('GitHub link opens in new tab with security attributes', () => {
+    it('GitHub links open in new tab with security attributes', () => {
       renderWithProviders(<Footer {...defaultProps} />);
-      const githubLink = screen.getByRole('link', { name: /github/i });
-      expect(githubLink).toHaveAttribute('target', '_blank');
-      expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer');
+      const githubLinks = screen.getAllByRole('link', { name: /github/i });
+      githubLinks.forEach((link) => {
+        expect(link).toHaveAttribute('target', '_blank');
+        expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+      });
     });
 
-    it('LinkedIn link opens in new tab with security attributes', () => {
+    it('LinkedIn links open in new tab with security attributes', () => {
       renderWithProviders(<Footer {...defaultProps} />);
-      const linkedinLink = screen.getByRole('link', { name: /linkedin/i });
-      expect(linkedinLink).toHaveAttribute('target', '_blank');
-      expect(linkedinLink).toHaveAttribute('rel', 'noopener noreferrer');
+      const linkedinLinks = screen.getAllByRole('link', { name: /linkedin/i });
+      linkedinLinks.forEach((link) => {
+        expect(link).toHaveAttribute('target', '_blank');
+        expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+      });
     });
   });
 
@@ -123,8 +140,43 @@ describe('Footer Component', () => {
 
     it('uses 3-column grid layout on desktop', () => {
       const { container } = renderWithProviders(<Footer {...defaultProps} />);
-      const grid = container.querySelector('.grid.grid-cols-1.md\\:grid-cols-3');
-      expect(grid).toBeInTheDocument();
+      const desktopGrid = container.querySelector('.hidden.md\\:grid.grid-cols-3');
+      expect(desktopGrid).toBeInTheDocument();
+    });
+
+    it('has compact mobile layout', () => {
+      const { container } = renderWithProviders(<Footer {...defaultProps} />);
+      const mobileLayout = container.querySelector('.md\\:hidden');
+      expect(mobileLayout).toBeInTheDocument();
+    });
+  });
+
+  describe('Mobile Layout', () => {
+    it('renders links inline on mobile', () => {
+      const { container } = renderWithProviders(<Footer {...defaultProps} />);
+      const mobileLayout = container.querySelector('.md\\:hidden');
+      expect(mobileLayout).toBeInTheDocument();
+      // Mobile layout uses flex-wrap for inline display
+      const flexContainer = mobileLayout?.querySelector('.flex.flex-wrap');
+      expect(flexContainer).toBeInTheDocument();
+    });
+
+    it('has separators between mobile links', () => {
+      const { container } = renderWithProviders(<Footer {...defaultProps} />);
+      const mobileLayout = container.querySelector('.md\\:hidden');
+      const separators = mobileLayout?.querySelectorAll('[aria-hidden="true"]');
+      // 4 links = 3 separators
+      expect(separators?.length).toBe(3);
+    });
+
+    it('separators have correct contrast colors', () => {
+      const { container } = renderWithProviders(<Footer {...defaultProps} />);
+      const mobileLayout = container.querySelector('.md\\:hidden');
+      const separators = mobileLayout?.querySelectorAll('[aria-hidden="true"]');
+      separators?.forEach((separator) => {
+        expect(separator.className).toContain('text-nord-3');
+        expect(separator.className).toContain('dark:text-nord-4');
+      });
     });
   });
 });
