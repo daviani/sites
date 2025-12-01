@@ -525,9 +525,9 @@ describe('RGAA AAA - Accessibility Tests', () => {
   describe('11. Touch Targets (RGAA 13.11 - minimum 44x44px)', () => {
     it('Hamburger button has adequate padding for touch', () => {
       const { container } = render(<Header navItems={navItems} currentPath="/" />);
-      const button = container.querySelector('button');
-      // p-2 = 8px padding, icon 24px = 40px total (close to 44px minimum)
-      expect(button?.className).toContain('p-2');
+      const hamburgerButton = container.querySelector('button[aria-controls="mobile-menu"]');
+      // p-3 = 12px padding, icon 24px = 48px total (exceeds 44px minimum)
+      expect(hamburgerButton?.className).toContain('p-3');
     });
 
     it('Navigation links have adequate padding', () => {
