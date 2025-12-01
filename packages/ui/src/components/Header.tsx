@@ -62,7 +62,7 @@ export function Header({ logo, className = '', homeUrl = '/', navItems = [], cur
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg text-nord-3 dark:text-nord-4 hover:bg-nord-5 dark:hover:bg-nord-2 focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2 transition-colors"
+              className="p-3 rounded-lg text-nord-3 dark:text-nord-4 hover:bg-nord-5 dark:hover:bg-nord-2 focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2 transition-colors"
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
               aria-label={isOpen ? t('common.closeMenu') : t('common.openMenu')}
