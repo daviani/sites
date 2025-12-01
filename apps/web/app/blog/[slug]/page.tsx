@@ -125,7 +125,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
         </div>
 
         {/* Comments */}
-        <Comments slug={slug} />
+        <Comments />
       </article>
     </div>
   );

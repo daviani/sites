@@ -4,11 +4,7 @@ import { useState } from 'react';
 import Giscus from '@giscus/react';
 import { useTheme, useTranslation } from '@daviani/ui';
 
-interface CommentsProps {
-  slug: string;
-}
-
-export function Comments({ slug }: CommentsProps) {
+export function Comments() {
   const [hasConsent, setHasConsent] = useState(false);
   const { theme } = useTheme();
   const { t } = useTranslation();

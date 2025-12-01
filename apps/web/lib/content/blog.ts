@@ -37,7 +37,6 @@ function extractMeta(content: string, slug: string): ArticleMeta {
   }
 
   try {
-    // eslint-disable-next-line no-new-func
     const metaObj = new Function(`return ${metaMatch[1]}`)();
     return metaSchema.parse({ ...metaObj, slug });
   } catch {

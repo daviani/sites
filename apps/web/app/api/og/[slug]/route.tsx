@@ -30,8 +30,10 @@ export async function GET(request: Request, { params }: RouteParams) {
         }}
       >
         {/* Logo owl */}
+{/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`${new URL(request.url).origin}/owl-logo.png`}
+          alt=""
           width="120"
           height="120"
           style={{ marginBottom: '40px' }}
