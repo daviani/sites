@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "jest.setup.d.ts", "__tests__/**/*"],
   "exclude": ["node_modules", "dist"]
 }

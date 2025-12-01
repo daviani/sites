@@ -1,6 +1,6 @@
 /// <reference types="@testing-library/jest-dom" />
 import { render, screen } from '@testing-library/react';
-import { CalendlyEmbed } from '../src/components/CalendlyEmbed';
+import { CalendlyEmbed } from '../src';
 
 describe('CalendlyEmbed', () => {
   const defaultUrl = 'https://calendly.com/test-user/30min';

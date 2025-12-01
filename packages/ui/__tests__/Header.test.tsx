@@ -1,35 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { Header } from '../src/components/Header';
-import { LanguageProvider } from '../src/hooks/use-language';
-import { ThemeProvider } from '../src/hooks/use-theme';
-import { ReactNode } from 'react';
-
-// Mock matchMedia
-if (typeof window !== 'undefined' && !window.matchMedia) {
-  Object.defineProperty(window, 'matchMedia', {
-    writable: true,
-    value: jest.fn().mockImplementation((query) => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addListener: jest.fn(),
-      removeListener: jest.fn(),
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    })),
-  });
-}
-
-const Wrapper = ({ children }: { children: ReactNode }) => (
-  <ThemeProvider>
-    <LanguageProvider>{children}</LanguageProvider>
-  </ThemeProvider>
-);
-
-const renderWithProviders = (ui: React.ReactElement) => {
-  return render(ui, { wrapper: Wrapper });
-};
+import { screen, fireEvent, renderWithProviders } from './helpers/test-utils';
+import { Header } from '../src';
 
 const mockNavItems = [
   { href: '/portfolio', labelKey: 'nav.portfolio.title' as const },

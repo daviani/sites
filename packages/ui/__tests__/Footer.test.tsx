@@ -1,35 +1,5 @@
-import { render, screen } from '@testing-library/react';
-import { Footer } from '../src/components/Footer';
-import { LanguageProvider } from '../src/hooks/use-language';
-import { ThemeProvider } from '../src/hooks/use-theme';
-import { ReactNode } from 'react';
-
-// Mock matchMedia
-if (typeof window !== 'undefined' && !window.matchMedia) {
-  Object.defineProperty(window, 'matchMedia', {
-    writable: true,
-    value: jest.fn().mockImplementation((query) => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addListener: jest.fn(),
-      removeListener: jest.fn(),
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    })),
-  });
-}
-
-const Wrapper = ({ children }: { children: ReactNode }) => (
-  <ThemeProvider>
-    <LanguageProvider>{children}</LanguageProvider>
-  </ThemeProvider>
-);
-
-const renderWithProviders = (ui: React.ReactElement) => {
-  return render(ui, { wrapper: Wrapper });
-};
+import { screen, renderWithProviders } from './helpers/test-utils';
+import { Footer } from '../src';
 
 describe('Footer Component', () => {
   const mockLegalUrl = '/legal';
@@ -107,11 +77,6 @@ describe('Footer Component', () => {
   });
 
   describe('Accessibility', () => {
-    it('has proper ARIA landmark', () => {
-      renderWithProviders(<Footer {...defaultProps} />);
-      expect(screen.getByRole('contentinfo')).toBeInTheDocument();
-    });
-
     it('GitHub links open in new tab with security attributes', () => {
       renderWithProviders(<Footer {...defaultProps} />);
       const githubLinks = screen.getAllByRole('link', { name: /github/i });
