@@ -1,15 +1,28 @@
 'use client';
 
-import { useTranslation, Breadcrumb } from '@daviani/ui';
+import { useTranslation, useLanguage, Breadcrumb } from '@daviani/ui';
 import { getSubdomainUrl } from '@/lib/domains/config';
 
 export default function AccessibilityPage() {
   const { t } = useTranslation();
-  const currentDate = new Date().toLocaleDateString('fr-FR', {
+  const { language } = useLanguage();
+  const currentDate = new Date().toLocaleDateString(language === 'fr' ? 'fr-FR' : 'en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
+
+  const conformityItems = [
+    'semantics',
+    'contrast',
+    'forms',
+    'keyboard',
+    'focus',
+    'motion',
+    'lang',
+    'touch',
+    'skiplink',
+  ] as const;
 
   return (
     <div className="min-h-screen bg-nord6 dark:bg-nord0">
@@ -26,9 +39,12 @@ export default function AccessibilityPage() {
           </p>
         </div>
 
-        <div className="bg-nord5 dark:bg-nord1 rounded-lg p-6 mb-8 border-l-4 border-nord10">
-          <p className="text-lg font-semibold text-nord10">
+        <div className="bg-nord5 dark:bg-nord1 rounded-lg p-6 mb-8 border-l-4 border-nord14">
+          <p className="text-lg font-semibold text-nord14">
             {t('pages.accessibility.status')}
+          </p>
+          <p className="text-nord0 dark:text-nord4 mt-2">
+            {t('pages.accessibility.statusDetail')}
           </p>
         </div>
 
@@ -48,6 +64,29 @@ export default function AccessibilityPage() {
             </h2>
             <p className="text-nord0 dark:text-nord4">
               {t('pages.accessibility.standardsText')}
+            </p>
+          </section>
+
+          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+            <h2 className="text-2xl font-bold mb-4 text-nord10">
+              {t('pages.accessibility.conformity')}
+            </h2>
+            <ul className="space-y-2">
+              {conformityItems.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-nord0 dark:text-nord4">
+                  <span className="text-nord14 mt-1">✓</span>
+                  <span>{t(`pages.accessibility.conformityItems.${item}`)}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+            <h2 className="text-2xl font-bold mb-4 text-nord10">
+              {t('pages.accessibility.testing')}
+            </h2>
+            <p className="text-nord0 dark:text-nord4">
+              {t('pages.accessibility.testingText')}
             </p>
           </section>
 

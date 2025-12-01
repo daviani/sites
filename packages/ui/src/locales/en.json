@@ -184,11 +184,26 @@
     "accessibility": {
       "title": "Accessibility",
       "subtitle": "Accessibility statement",
-      "status": "Accessibility improvement in progress",
+      "status": "Partially compliant",
+      "statusDetail": "This site is partially compliant with RGAA 4.1 and WCAG 2.1 AA.",
       "commitment": "Commitment",
       "commitmentText": "We are committed to making this website accessible to everyone, regardless of their abilities or the technologies they use.",
       "standards": "Standards",
       "standardsText": "This site aims to comply with RGAA 4.1 (French General Accessibility Reference Framework) and WCAG 2.1 level AA.",
+      "conformity": "Conformity status",
+      "conformityItems": {
+        "semantics": "Semantic HTML structure (landmarks, headings)",
+        "contrast": "WCAG AAA color contrast (7:1 ratio)",
+        "forms": "Accessible forms (labels, ARIA, errors)",
+        "keyboard": "Full keyboard navigation",
+        "focus": "Visible focus indicators",
+        "motion": "Respects prefers-reduced-motion",
+        "lang": "Dynamic lang attribute (FR/EN)",
+        "touch": "48px minimum touch targets",
+        "skiplink": "Skip link to main content"
+      },
+      "testing": "Automated testing",
+      "testingText": "The site is automatically tested with jest-axe and ESLint jsx-a11y on each deployment.",
       "contact": "Report an issue",
       "contactText": "If you encounter an accessibility barrier on this site, please contact us so we can address it.",
       "declarationDate": "Declaration date"

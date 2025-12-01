@@ -184,11 +184,26 @@
     "accessibility": {
       "title": "Accessibilité",
       "subtitle": "Déclaration d'accessibilité",
-      "status": "Démarche d'accessibilité en cours",
+      "status": "Partiellement conforme",
+      "statusDetail": "Ce site est partiellement conforme au RGAA 4.1 et WCAG 2.1 AA.",
       "commitment": "Engagement",
       "commitmentText": "Nous nous engageons à rendre ce site accessible à tous, quelles que soient les capacités ou les technologies utilisées.",
       "standards": "Référentiels",
       "standardsText": "Ce site vise à être conforme au RGAA 4.1 (Référentiel Général d'Amélioration de l'Accessibilité) et aux WCAG 2.1 niveau AA.",
+      "conformity": "État de conformité",
+      "conformityItems": {
+        "semantics": "Structure sémantique HTML (landmarks, headings)",
+        "contrast": "Contraste des couleurs WCAG AAA (ratio 7:1)",
+        "forms": "Formulaires accessibles (labels, ARIA, erreurs)",
+        "keyboard": "Navigation au clavier complète",
+        "focus": "Indicateurs de focus visibles",
+        "motion": "Respect de prefers-reduced-motion",
+        "lang": "Attribut lang dynamique (FR/EN)",
+        "touch": "Touch targets 48px minimum",
+        "skiplink": "Lien d'évitement vers le contenu"
+      },
+      "testing": "Tests automatisés",
+      "testingText": "Le site est testé automatiquement avec jest-axe et ESLint jsx-a11y à chaque déploiement.",
       "contact": "Signaler un problème",
       "contactText": "Si vous rencontrez un obstacle d'accessibilité sur ce site, merci de nous contacter afin que nous puissions y remédier.",
       "declarationDate": "Date de la déclaration"
