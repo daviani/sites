@@ -1,7 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { LanguageSwitcher } from '../src/components/LanguageSwitcher';
-import { LanguageProvider } from '../src/hooks/use-language';
-import { ReactNode } from 'react';
+import { screen, fireEvent, renderWithProviders } from './helpers/test-utils';
+import { LanguageSwitcher } from '../src';
 
 // Mock document.cookie
 let cookieStore: Record<string, string> = {};
@@ -20,14 +18,6 @@ const mockCookie = {
   clear: () => {
     cookieStore = {};
   },
-};
-
-const Wrapper = ({ children }: { children: ReactNode }) => (
-  <LanguageProvider>{children}</LanguageProvider>
-);
-
-const renderWithProvider = (ui: React.ReactElement) => {
-  return render(ui, { wrapper: Wrapper });
 };
 
 describe('LanguageSwitcher Component', () => {
@@ -52,7 +42,7 @@ describe('LanguageSwitcher Component', () => {
 
   describe('Rendering', () => {
     it('renders a button with flag icon', () => {
-      renderWithProvider(<LanguageSwitcher />);
+      renderWithProviders(<LanguageSwitcher />);
 
       const button = screen.getByRole('button');
       expect(button).toBeInTheDocument();
@@ -61,7 +51,7 @@ describe('LanguageSwitcher Component', () => {
     });
 
     it('shows English flag when current language is French', () => {
-      renderWithProvider(<LanguageSwitcher />);
+      renderWithProviders(<LanguageSwitcher />);
 
       const button = screen.getByRole('button');
       // The button should show the flag of the language to switch to
@@ -71,7 +61,7 @@ describe('LanguageSwitcher Component', () => {
     it('shows French flag when current language is English', () => {
       cookieStore['language'] = 'en';
 
-      renderWithProvider(<LanguageSwitcher />);
+      renderWithProviders(<LanguageSwitcher />);
 
       const button = screen.getByRole('button');
       // When in English mode, the label shows "French" (English translation)
@@ -81,7 +71,7 @@ describe('LanguageSwitcher Component', () => {
 
   describe('Interaction', () => {
     it('toggles to English when clicked in French mode', () => {
-      renderWithProvider(<LanguageSwitcher />);
+      renderWithProviders(<LanguageSwitcher />);
 
       const button = screen.getByRole('button');
       fireEvent.click(button);
@@ -92,7 +82,7 @@ describe('LanguageSwitcher Component', () => {
     it('toggles to French when clicked in English mode', () => {
       cookieStore['language'] = 'en';
 
-      renderWithProvider(<LanguageSwitcher />);
+      renderWithProviders(<LanguageSwitcher />);
 
       const button = screen.getByRole('button');
       fireEvent.click(button);
@@ -101,7 +91,7 @@ describe('LanguageSwitcher Component', () => {
     });
 
     it('updates aria-label after toggle', () => {
-      renderWithProvider(<LanguageSwitcher />);
+      renderWithProviders(<LanguageSwitcher />);
 
       const button = screen.getByRole('button');
       expect(button).toHaveAttribute('aria-label', 'Anglais');
@@ -115,21 +105,21 @@ describe('LanguageSwitcher Component', () => {
 
   describe('Accessibility', () => {
     it('button has aria-label', () => {
-      renderWithProvider(<LanguageSwitcher />);
+      renderWithProviders(<LanguageSwitcher />);
 
       const button = screen.getByRole('button');
       expect(button).toHaveAttribute('aria-label');
     });
 
     it('button has title attribute', () => {
-      renderWithProvider(<LanguageSwitcher />);
+      renderWithProviders(<LanguageSwitcher />);
 
       const button = screen.getByRole('button');
       expect(button).toHaveAttribute('title');
     });
 
     it('flag SVG has aria-hidden', () => {
-      renderWithProvider(<LanguageSwitcher />);
+      renderWithProviders(<LanguageSwitcher />);
 
       const svg = screen.getByRole('button').querySelector('svg');
       expect(svg).toHaveAttribute('aria-hidden', 'true');
@@ -140,7 +130,7 @@ describe('LanguageSwitcher Component', () => {
     it('shows disabled button before mount', () => {
       // This test checks the initial hydration state
       // The component shows a disabled button with FlagFR while mounting
-      const { container } = renderWithProvider(<LanguageSwitcher />);
+      const { container } = renderWithProviders(<LanguageSwitcher />);
 
       // After mount, button should be enabled
       const button = screen.getByRole('button');
@@ -150,21 +140,21 @@ describe('LanguageSwitcher Component', () => {
 
   describe('Styling', () => {
     it('has hover scale effect class', () => {
-      renderWithProvider(<LanguageSwitcher />);
+      renderWithProviders(<LanguageSwitcher />);
 
       const button = screen.getByRole('button');
       expect(button.className).toContain('hover:scale-105');
     });
 
     it('has focus ring styles', () => {
-      renderWithProvider(<LanguageSwitcher />);
+      renderWithProviders(<LanguageSwitcher />);
 
       const button = screen.getByRole('button');
       expect(button.className).toContain('focus:ring-2');
     });
 
     it('has rounded-full class for circular shape', () => {
-      renderWithProvider(<LanguageSwitcher />);
+      renderWithProviders(<LanguageSwitcher />);
 
       const button = screen.getByRole('button');
       expect(button.className).toContain('rounded-full');

@@ -1,6 +1,6 @@
 /// <reference types="@testing-library/jest-dom" />
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { ConsentGate } from '../src/components/ConsentGate';
+import { ConsentGate } from '../src';
 
 // Mock ReCaptcha
 const mockExecute = jest.fn();

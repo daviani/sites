@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { FlagFR, FlagEN } from '../src/components/icons/FlagIcons';
+import { FlagFR, FlagEN } from '../src';
 
 describe('FlagFR', () => {
   it('renders an SVG element', () => {

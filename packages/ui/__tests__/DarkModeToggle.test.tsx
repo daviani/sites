@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { DarkModeToggle } from '../src/components/DarkModeToggle';
+import { DarkModeToggle } from '../src';
 
 // Mock useTheme hook
 const mockToggleTheme = jest.fn();

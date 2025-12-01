@@ -15,8 +15,6 @@ export { OwlLogo } from './components/OwlLogo';
 
 export { FlagFR, FlagEN } from './components/icons/FlagIcons';
 
-export { GitHubIcon } from './components/icons/GitHubIcon';
-
 export { Footer } from './components/Footer';
 
 export { SubHeader } from './components/SubHeader';
