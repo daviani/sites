@@ -136,7 +136,50 @@
     },
     "legal": {
       "title": "Legal notice",
-      "subtitle": "Legal information"
+      "subtitle": "Legal information",
+      "publisher": {
+        "title": "Site publisher",
+        "name": "Daviani Fillatre",
+        "status": "Developer / DevOps",
+        "email": "hello@daviani.dev",
+        "website": "https://daviani.dev"
+      },
+      "hosting": {
+        "title": "Hosting",
+        "provider": "Vercel Inc.",
+        "address": "340 S Lemon Ave #4133, Walnut, CA 91789, USA",
+        "website": "https://vercel.com"
+      },
+      "privacy": {
+        "title": "Privacy policy",
+        "intro": "Protecting your personal data is a priority. This policy explains how your data is collected and used on this site.",
+        "dataCollected": {
+          "title": "Data collected",
+          "text": "This site only collects data you voluntarily provide through the contact form: name, email address, and message."
+        },
+        "purpose": {
+          "title": "Purpose of processing",
+          "text": "Your data is used exclusively to respond to your contact requests. It is never sold or shared with third parties for commercial purposes."
+        },
+        "retention": {
+          "title": "Data retention",
+          "text": "Your data is kept for the time necessary to process your request, then deleted within a maximum of 3 years."
+        },
+        "rights": {
+          "title": "Your rights",
+          "text": "In accordance with GDPR, you have the right to access, rectify, delete, and port your data. To exercise these rights, contact us at hello@daviani.dev."
+        }
+      },
+      "cookies": {
+        "title": "Cookies",
+        "text": "This site only uses essential technical cookies for proper functioning (theme and language preferences). No tracking or advertising cookies are used.",
+        "thirdParty": "Third-party services (Calendly, GitHub) may set their own cookies when you consent to loading them."
+      },
+      "intellectual": {
+        "title": "Intellectual property",
+        "text": "All content on this site (text, images, code) is protected by copyright. Any reproduction without prior authorization is prohibited."
+      },
+      "lastUpdate": "Last updated"
     },
     "accessibility": {
       "title": "Accessibility",
