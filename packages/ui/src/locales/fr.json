@@ -136,7 +136,50 @@
     },
     "legal": {
       "title": "Mentions légales",
-      "subtitle": "Informations légales"
+      "subtitle": "Informations légales",
+      "publisher": {
+        "title": "Éditeur du site",
+        "name": "Daviani Fillatre",
+        "status": "Développeur / DevOps",
+        "email": "hello@daviani.dev",
+        "website": "https://daviani.dev"
+      },
+      "hosting": {
+        "title": "Hébergement",
+        "provider": "Vercel Inc.",
+        "address": "340 S Lemon Ave #4133, Walnut, CA 91789, USA",
+        "website": "https://vercel.com"
+      },
+      "privacy": {
+        "title": "Politique de confidentialité",
+        "intro": "La protection de vos données personnelles est une priorité. Cette politique explique comment vos données sont collectées et utilisées sur ce site.",
+        "dataCollected": {
+          "title": "Données collectées",
+          "text": "Ce site collecte uniquement les données que vous fournissez volontairement via le formulaire de contact : nom, adresse email et message."
+        },
+        "purpose": {
+          "title": "Finalité du traitement",
+          "text": "Vos données sont utilisées exclusivement pour répondre à vos demandes de contact. Elles ne sont jamais vendues ou partagées avec des tiers à des fins commerciales."
+        },
+        "retention": {
+          "title": "Conservation des données",
+          "text": "Vos données sont conservées le temps nécessaire au traitement de votre demande, puis supprimées dans un délai maximum de 3 ans."
+        },
+        "rights": {
+          "title": "Vos droits",
+          "text": "Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, de suppression et de portabilité de vos données. Pour exercer ces droits, contactez-nous à hello@daviani.dev."
+        }
+      },
+      "cookies": {
+        "title": "Cookies",
+        "text": "Ce site utilise uniquement des cookies techniques essentiels au bon fonctionnement (préférences de thème et de langue). Aucun cookie de tracking ou publicitaire n'est utilisé.",
+        "thirdParty": "Des services tiers (Calendly, GitHub) peuvent déposer leurs propres cookies lorsque vous consentez à leur chargement."
+      },
+      "intellectual": {
+        "title": "Propriété intellectuelle",
+        "text": "L'ensemble du contenu de ce site (textes, images, code) est protégé par le droit d'auteur. Toute reproduction sans autorisation préalable est interdite."
+      },
+      "lastUpdate": "Dernière mise à jour"
     },
     "accessibility": {
       "title": "Accessibilité",
