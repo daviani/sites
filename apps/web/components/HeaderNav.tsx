@@ -12,6 +12,12 @@ const navItems: { subdomain: ValidSubdomain; labelKey: 'nav.portfolio.title' | '
   { subdomain: 'rdv', labelKey: 'nav.rdv.title' },
 ];
 
+const secondaryNavItems: { subdomain: ValidSubdomain; labelKey: 'nav.accessibility.title' | 'nav.sitemap.title' | 'nav.help.title' }[] = [
+  { subdomain: 'accessibility', labelKey: 'nav.accessibility.title' },
+  { subdomain: 'sitemap', labelKey: 'nav.sitemap.title' },
+  { subdomain: 'help', labelKey: 'nav.help.title' },
+];
+
 export function HeaderNav() {
   const pathname = usePathname();
 
@@ -20,5 +26,10 @@ export function HeaderNav() {
     labelKey: item.labelKey,
   }));
 
-  return <Header homeUrl={getBaseUrl()} navItems={items} currentPath={pathname} />;
+  const secondaryItems = secondaryNavItems.map((item) => ({
+    href: getSubdomainUrl(item.subdomain),
+    labelKey: item.labelKey,
+  }));
+
+  return <Header homeUrl={getBaseUrl()} navItems={items} secondaryNavItems={secondaryItems} currentPath={pathname} />;
 }
