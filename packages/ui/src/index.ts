@@ -32,6 +32,8 @@ export { CalendlyEmbed } from './components/CalendlyEmbed';
 
 export { ConsentGate } from './components/ConsentGate';
 
+export { ContactForm } from './components/ContactForm';
+
 export { useTheme, ThemeProvider } from './hooks/use-theme';
 export type { Theme } from './hooks/use-theme';
 
