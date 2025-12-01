@@ -72,6 +72,26 @@
     "privacyNote": "Vos données seront traitées selon la politique de confidentialité de GitHub.",
     "acceptButton": "Accepter et afficher les commentaires"
   },
+  "contact": {
+    "form": {
+      "name": "Nom",
+      "namePlaceholder": "Votre nom",
+      "email": "Email",
+      "emailPlaceholder": "votre@email.com",
+      "message": "Message",
+      "messagePlaceholder": "Votre message...",
+      "submit": "Envoyer",
+      "sending": "Envoi en cours...",
+      "success": "Message envoyé avec succès !",
+      "error": "Une erreur est survenue. Veuillez réessayer.",
+      "rateLimited": "Trop de tentatives. Réessayez dans une minute.",
+      "botDetected": "Soumission non valide.",
+      "recaptchaFailed": "Vérification de sécurité échouée. Veuillez réessayer.",
+      "validationError": "Veuillez vérifier les champs du formulaire."
+    },
+    "intro": "Vous avez un projet, une question ou simplement envie d'échanger ? N'hésitez pas à m'écrire.",
+    "fallback": "Vous pouvez aussi me contacter directement par email."
+  },
   "rdv": {
     "showCalendar": "Afficher le calendrier",
     "consent": "En cliquant, vous acceptez le chargement du widget Calendly (service tiers).",
