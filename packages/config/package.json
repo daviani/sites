@@ -5,12 +5,15 @@
   "exports": {
     "./typescript/*": "./typescript/*"
   },
-  "files": ["typescript", "eslint"],
+  "files": [
+    "typescript",
+    "eslint"
+  ],
   "scripts": {
     "test": "jest",
     "clean": "rm -rf .turbo node_modules"
   },
   "devDependencies": {
-    "jest": "^30.0.0"
+    "jest": "^30.2.0"
   }
 }

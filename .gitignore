@@ -37,7 +37,7 @@ pnpm-debug.log*
 next-env.d.ts
 
 # Assistant IA config
-.CLAUDE.md
+CLAUDE.md
 
 # IDE
 .idea/

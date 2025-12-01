@@ -25,20 +25,20 @@ jest.mock('@daviani/ui', () => ({
 
 describe('Comments Component', () => {
   it('displays consent block by default', () => {
-    render(<Comments slug="hello-world" />);
+    render(<Comments />);
 
     expect(screen.getByRole('heading', { name: /commentaires/i })).toBeInTheDocument();
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
   it('does not display Giscus without consent', () => {
-    render(<Comments slug="hello-world" />);
+    render(<Comments />);
 
     expect(screen.queryByTestId('giscus-widget')).not.toBeInTheDocument();
   });
 
   it('displays Giscus after clicking accept button', () => {
-    render(<Comments slug="hello-world" />);
+    render(<Comments />);
 
     const acceptButton = screen.getByRole('button');
     fireEvent.click(acceptButton);
@@ -47,7 +47,7 @@ describe('Comments Component', () => {
   });
 
   it('hides consent block after acceptance', () => {
-    render(<Comments slug="hello-world" />);
+    render(<Comments />);
 
     const acceptButton = screen.getByRole('button');
     fireEvent.click(acceptButton);
