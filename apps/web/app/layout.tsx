@@ -44,10 +44,9 @@ export default function RootLayout({
             <ScrollToTop />
             <Footer
               legalUrl={getSubdomainUrl("legal")}
-              contactUrl={getSubdomainUrl("contact")}
+              accessibilityUrl={getSubdomainUrl("accessibility")}
               githubUrl="https://github.com/daviani"
               linkedinUrl="https://linkedin.com/in/daviani"
-              accessibilityUrl={getSubdomainUrl("accessibility")}
               sitemapUrl={getSubdomainUrl("sitemap")}
               helpUrl={getSubdomainUrl("help")}
             />

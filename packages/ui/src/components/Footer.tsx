@@ -4,20 +4,18 @@ import { useTranslation } from '../hooks/use-translation';
 
 interface FooterProps {
   legalUrl: string;
-  contactUrl: string;
+  accessibilityUrl: string;
   githubUrl: string;
   linkedinUrl: string;
-  accessibilityUrl?: string;
   sitemapUrl?: string;
   helpUrl?: string;
 }
 
 export function Footer({
   legalUrl,
-  contactUrl,
+  accessibilityUrl,
   githubUrl,
   linkedinUrl,
-  accessibilityUrl,
   sitemapUrl,
   helpUrl,
 }: FooterProps) {
@@ -39,10 +37,6 @@ export function Footer({
           <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs">
             <a href={legalUrl} className={linkStyles}>
               {t('footer.legalNotice')}
-            </a>
-            <span className={separatorStyles} aria-hidden="true">•</span>
-            <a href={contactUrl} className={linkStyles}>
-              {t('footer.contact')}
             </a>
             <span className={separatorStyles} aria-hidden="true">•</span>
             <a
@@ -85,25 +79,20 @@ export function Footer({
             )}
           </div>
 
-          {/* Column 2: Legal */}
+          {/* Column 2: Infos */}
           <div className="flex flex-col items-center gap-1">
-            <h3 className={titleStyles}>{t('footer.legal')}</h3>
+            <h3 className={titleStyles}>{t('footer.infos')}</h3>
             <a href={legalUrl} className={linkStyles}>
               {t('footer.legalNotice')}
             </a>
-            {accessibilityUrl && (
-              <a href={accessibilityUrl} className={linkStyles}>
-                {t('nav.accessibility.title')}
-              </a>
-            )}
+            <a href={accessibilityUrl} className={linkStyles}>
+              {t('nav.accessibility.title')}
+            </a>
           </div>
 
-          {/* Column 3: Contact */}
+          {/* Column 3: Links */}
           <div className="flex flex-col items-center gap-1">
-            <h3 className={titleStyles}>{t('footer.contact')}</h3>
-            <a href={contactUrl} className={linkStyles}>
-              {t('footer.contact')}
-            </a>
+            <h3 className={titleStyles}>{t('footer.links')}</h3>
             <a
               href={githubUrl}
               target="_blank"
@@ -124,7 +113,7 @@ export function Footer({
         </div>
 
         {/* Desktop Copyright */}
-        <div className="hidden md:block text-center text-xs text-nord-3 dark:text-nord-4 mt-3 pt-3 border-t border-nord-4/30 dark:border-nord-2/30">
+        <div className="hidden md:block text-center text-xs text-nord-3 dark:text-nord-4 mt-3 pt-3 border-t border-nord-3 dark:border-nord-4">
           {t('footer.copyright').replace('{year}', currentYear.toString())}
         </div>
       </div>

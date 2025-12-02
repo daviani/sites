@@ -3,13 +3,13 @@ import { Footer } from '../src';
 
 describe('Footer Component', () => {
   const mockLegalUrl = '/legal';
-  const mockContactUrl = '/contact';
+  const mockAccessibilityUrl = '/accessibility';
   const mockGithubUrl = 'https://github.com/daviani';
   const mockLinkedinUrl = 'https://linkedin.com/in/daviani';
 
   const defaultProps = {
     legalUrl: mockLegalUrl,
-    contactUrl: mockContactUrl,
+    accessibilityUrl: mockAccessibilityUrl,
     githubUrl: mockGithubUrl,
     linkedinUrl: mockLinkedinUrl,
   };
@@ -35,17 +35,14 @@ describe('Footer Component', () => {
       const desktopGrid = container.querySelector('.hidden.md\\:grid');
       expect(desktopGrid).toBeInTheDocument();
       expect(screen.getByRole('heading', { name: /navigation/i })).toBeInTheDocument();
-      expect(screen.getByRole('heading', { name: /l[eé]gal/i })).toBeInTheDocument();
-      expect(screen.getByRole('heading', { name: /contact/i })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /infos?/i })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /links|suivre|follow/i })).toBeInTheDocument();
     });
 
-    it('renders contact links (mobile and desktop)', () => {
+    it('renders accessibility link on desktop', () => {
       renderWithProviders(<Footer {...defaultProps} />);
-      const contactLinks = screen.getAllByRole('link', { name: /^contact$/i });
-      expect(contactLinks.length).toBeGreaterThanOrEqual(1);
-      contactLinks.forEach((link) => {
-        expect(link).toHaveAttribute('href', mockContactUrl);
-      });
+      const accessibilityLink = screen.getByRole('link', { name: /accessibilit[eé]|accessibility/i });
+      expect(accessibilityLink).toHaveAttribute('href', mockAccessibilityUrl);
     });
 
     it('renders GitHub links (mobile and desktop)', () => {
@@ -130,8 +127,8 @@ describe('Footer Component', () => {
       const { container } = renderWithProviders(<Footer {...defaultProps} />);
       const mobileLayout = container.querySelector('.md\\:hidden');
       const separators = mobileLayout?.querySelectorAll('[aria-hidden="true"]');
-      // 4 links = 3 separators
-      expect(separators?.length).toBe(3);
+      // 3 links = 2 separators
+      expect(separators?.length).toBe(2);
     });
 
     it('separators have correct contrast colors', () => {
