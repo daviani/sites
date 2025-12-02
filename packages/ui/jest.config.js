@@ -5,6 +5,12 @@ module.exports = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
+  coverageProvider: 'v8',
+  collectCoverageFrom: [
+    'src/**/*.{ts,tsx}',
+    '!src/**/*.d.ts',
+    '!src/index.ts',
+  ],
   transform: {
     '^.+\\.(ts|tsx)$': ['@swc/jest', {
       jsc: {
