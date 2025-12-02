@@ -134,7 +134,7 @@ describe('Responsive Design Tests', () => {
   describe('Footer Responsive', () => {
     const footerProps = {
       legalUrl: '/legal',
-      contactUrl: '/contact',
+      accessibilityUrl: '/accessibility',
       githubUrl: 'https://github.com/test',
       linkedinUrl: 'https://linkedin.com/in/test',
     };
@@ -144,7 +144,6 @@ describe('Responsive Design Tests', () => {
 
       // Check for links (mobile and desktop versions)
       expect(screen.getAllByRole('link', { name: /legal|mentions/i }).length).toBeGreaterThan(0);
-      expect(screen.getAllByRole('link', { name: /contact/i }).length).toBeGreaterThan(0);
       expect(screen.getAllByRole('link', { name: /github/i }).length).toBeGreaterThan(0);
       expect(screen.getAllByRole('link', { name: /linkedin/i }).length).toBeGreaterThan(0);
     });
