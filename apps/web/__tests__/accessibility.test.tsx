@@ -105,7 +105,7 @@ describe('RGAA AAA - Accessibility Tests', () => {
 
     it('Footer has no accessibility violations', async () => {
       const { container } = render(
-        <Footer legalUrl="/legal" contactUrl="/contact" githubUrl="https://github.com/daviani" linkedinUrl="https://linkedin.com/in/daviani" />
+        <Footer legalUrl="/legal" accessibilityUrl="/accessibility" githubUrl="https://github.com/daviani" linkedinUrl="https://linkedin.com/in/daviani" />
       );
       const results = await axe(container);
       expect(results).toHaveNoViolations();
@@ -190,7 +190,7 @@ describe('RGAA AAA - Accessibility Tests', () => {
 
       it('Footer uses <footer> landmark', () => {
         const { container } = render(
-          <Footer legalUrl="/legal" contactUrl="/contact" githubUrl="https://github.com" linkedinUrl="https://linkedin.com/in/test" />
+          <Footer legalUrl="/legal" accessibilityUrl="/accessibility" githubUrl="https://github.com" linkedinUrl="https://linkedin.com/in/test" />
         );
         expect(container.querySelector('footer')).toBeInTheDocument();
       });
@@ -240,7 +240,7 @@ describe('RGAA AAA - Accessibility Tests', () => {
 
       it('Footer links use semantic list', () => {
         const { container } = render(
-          <Footer legalUrl="/legal" contactUrl="/contact" githubUrl="https://github.com" linkedinUrl="https://linkedin.com/in/test" />
+          <Footer legalUrl="/legal" accessibilityUrl="/accessibility" githubUrl="https://github.com" linkedinUrl="https://linkedin.com/in/test" />
         );
         const links = container.querySelectorAll('a');
         expect(links.length).toBeGreaterThan(0);
@@ -272,7 +272,7 @@ describe('RGAA AAA - Accessibility Tests', () => {
 
     it('GitHub links have accessible text content', () => {
       render(
-        <Footer legalUrl="/legal" contactUrl="/contact" githubUrl="https://github.com" linkedinUrl="https://linkedin.com/in/test" />
+        <Footer legalUrl="/legal" accessibilityUrl="/accessibility" githubUrl="https://github.com" linkedinUrl="https://linkedin.com/in/test" />
       );
       const githubLinks = screen.getAllByRole('link', { name: /github/i });
       expect(githubLinks.length).toBeGreaterThanOrEqual(1);
@@ -310,7 +310,7 @@ describe('RGAA AAA - Accessibility Tests', () => {
 
     it('External links (GitHub) open in new tab with proper attributes', () => {
       const { container } = render(
-        <Footer legalUrl="/legal" contactUrl="/contact" githubUrl="https://github.com" linkedinUrl="https://linkedin.com/in/test" />
+        <Footer legalUrl="/legal" accessibilityUrl="/accessibility" githubUrl="https://github.com" linkedinUrl="https://linkedin.com/in/test" />
       );
       const externalLinks = container.querySelectorAll('a[href^="http"]');
       externalLinks.forEach((link) => {
@@ -352,7 +352,7 @@ describe('RGAA AAA - Accessibility Tests', () => {
         <>
           <Header navItems={navItems} currentPath="/" />
           <SubHeader items={navItems} currentPath="/" />
-          <Footer legalUrl="/legal" contactUrl="/contact" githubUrl="https://github.com" linkedinUrl="https://linkedin.com/in/test" />
+          <Footer legalUrl="/legal" accessibilityUrl="/accessibility" githubUrl="https://github.com" linkedinUrl="https://linkedin.com/in/test" />
         </>
       );
       const allElements = container.querySelectorAll('[tabindex]');
@@ -405,7 +405,7 @@ describe('RGAA AAA - Accessibility Tests', () => {
 
     it('Footer links have focus ring styles', () => {
       const { container } = render(
-        <Footer legalUrl="/legal" contactUrl="/contact" githubUrl="https://github.com" linkedinUrl="https://linkedin.com/in/test" />
+        <Footer legalUrl="/legal" accessibilityUrl="/accessibility" githubUrl="https://github.com" linkedinUrl="https://linkedin.com/in/test" />
       );
       const links = container.querySelectorAll('a');
       links.forEach((link) => {
@@ -475,7 +475,7 @@ describe('RGAA AAA - Accessibility Tests', () => {
       const { container } = render(
         <>
           <Header navItems={navItems} currentPath="/" />
-          <Footer legalUrl="/legal" contactUrl="/contact" githubUrl="https://github.com" linkedinUrl="https://linkedin.com/in/test" />
+          <Footer legalUrl="/legal" accessibilityUrl="/accessibility" githubUrl="https://github.com" linkedinUrl="https://linkedin.com/in/test" />
         </>
       );
       const svgs = container.querySelectorAll('svg');
@@ -543,7 +543,7 @@ describe('RGAA AAA - Accessibility Tests', () => {
 
     it('Footer links have adequate spacing', () => {
       const { container } = render(
-        <Footer legalUrl="/legal" contactUrl="/contact" githubUrl="https://github.com" linkedinUrl="https://linkedin.com/in/test" />
+        <Footer legalUrl="/legal" accessibilityUrl="/accessibility" githubUrl="https://github.com" linkedinUrl="https://linkedin.com/in/test" />
       );
       const links = container.querySelectorAll('a');
       expect(links.length).toBeGreaterThan(0);
