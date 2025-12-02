@@ -99,6 +99,22 @@
     "fallback": "Problème avec le calendrier ? Contactez-moi par email.",
     "description": "Réservez un créneau de 60 minutes pour une discussion approfondie."
   },
+  "easterEggs": {
+    "matrix": {
+      "closeHint": "Appuyez sur Échap ou cliquez pour fermer"
+    },
+    "confetti": {
+      "activated": "Konami Code activé !"
+    },
+    "notFound": {
+      "title": "404",
+      "subtitle": "Page introuvable",
+      "description": "Oups ! Cette page semble avoir disparu dans le cyberespace.",
+      "backHome": "Retour à l'accueil",
+      "hint": "Psst... essayez le Konami Code",
+      "glitchText": "ERREUR_404_PAGE_NON_TROUVÉE"
+    }
+  },
   "pages": {
     "portfolio": {
       "title": "Portfolio",

@@ -99,6 +99,22 @@
     "fallback": "Problem with the calendar? Contact me by email.",
     "description": "Book a 60-minute slot for an in-depth discussion."
   },
+  "easterEggs": {
+    "matrix": {
+      "closeHint": "Press Escape or click to close"
+    },
+    "confetti": {
+      "activated": "Konami Code activated!"
+    },
+    "notFound": {
+      "title": "404",
+      "subtitle": "Page not found",
+      "description": "Oops! This page seems to have vanished into cyberspace.",
+      "backHome": "Back to home",
+      "hint": "Psst... try the Konami Code",
+      "glitchText": "ERROR_404_PAGE_NOT_FOUND"
+    }
+  },
   "pages": {
     "portfolio": {
       "title": "Portfolio",
