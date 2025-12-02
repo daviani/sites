@@ -1,12 +1,14 @@
 'use client';
 
-import { LanguageProvider, ThemeProvider } from '@daviani/ui';
+import { LanguageProvider, ThemeProvider, EasterEggProvider } from '@daviani/ui';
 import { ReactNode } from 'react';
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider>
-      <LanguageProvider>{children}</LanguageProvider>
+      <LanguageProvider>
+        <EasterEggProvider>{children}</EasterEggProvider>
+      </LanguageProvider>
     </ThemeProvider>
   );
 }

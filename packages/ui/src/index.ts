@@ -42,3 +42,15 @@ export { useTranslation } from './hooks/use-translation';
 export type { TranslationKey } from './hooks/use-translation';
 
 export { useRecaptcha } from './hooks/use-recaptcha';
+
+export { useKonamiCode } from './hooks/use-konami-code';
+
+export { useMatrixRain } from './hooks/use-matrix-rain';
+
+export { useConsoleMessage } from './hooks/use-console-message';
+
+export { Confetti } from './components/Confetti';
+
+export { MatrixRain } from './components/MatrixRain';
+
+export { EasterEggProvider, useEasterEggs } from './components/EasterEggProvider';
