@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getAllArticles, getAllTags } from '@/lib/content/blog';
 import { Breadcrumb } from '@daviani/ui';
+import { RssButton } from '@/components/blog/RssButton';
 
 const PAGE_SIZE = 20;
 
@@ -30,9 +31,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         </div>
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-nord0 dark:text-nord6">Blog</h1>
-          <p className="text-xl text-nord3 dark:text-nord4">
+          <p className="text-xl text-nord3 dark:text-nord4 mb-6">
             Articles sur le développement web, DevOps et plus encore.
           </p>
+          <RssButton />
         </div>
 
         {/* Tags filter */}

@@ -4,6 +4,7 @@
   "private": true,
   "exports": {
     "./components/*": "./src/components/*.tsx",
+    "./locales/*": "./src/locales/*.json",
     ".": "./src/index.ts"
   },
   "scripts": {

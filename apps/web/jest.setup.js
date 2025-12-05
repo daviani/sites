@@ -10,16 +10,19 @@ console.error = (...args) => {
 };
 
 // Mock window.location to avoid jsdom navigation errors
-// First delete the existing location, then define a writable one
-delete window.location;
-window.location = {
-  hostname: 'localhost',
-  href: 'http://localhost/',
-  origin: 'http://localhost',
-  pathname: '/',
-  search: '',
-  hash: '',
-  assign: jest.fn(),
-  replace: jest.fn(),
-  reload: jest.fn(),
-};
+// Only run in jsdom environment (when window exists)
+if (typeof window !== 'undefined') {
+  // First delete the existing location, then define a writable one
+  delete window.location;
+  window.location = {
+    hostname: 'localhost',
+    href: 'http://localhost/',
+    origin: 'http://localhost',
+    pathname: '/',
+    search: '',
+    hash: '',
+    assign: jest.fn(),
+    replace: jest.fn(),
+    reload: jest.fn(),
+  };
+}
