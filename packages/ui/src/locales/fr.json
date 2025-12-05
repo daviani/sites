@@ -115,6 +115,10 @@
       "glitchText": "ERREUR_404_PAGE_NON_TROUVÉE"
     }
   },
+  "rss": {
+    "subscribe": "S'abonner au flux RSS",
+    "title": "Flux RSS"
+  },
   "pages": {
     "portfolio": {
       "title": "Portfolio",
