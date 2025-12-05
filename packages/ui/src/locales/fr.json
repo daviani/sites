@@ -156,11 +156,11 @@
     },
     "legal": {
       "title": "Mentions légales",
-      "subtitle": "Informations légales",
+      "subtitle": "Informations légales et politique de confidentialité",
       "publisher": {
         "title": "Éditeur du site",
         "name": "Daviani Fillatre",
-        "status": "Développeur / DevOps",
+        "status": "Développeur Full-Stack & DevOps",
         "email": "hello@daviani.dev",
         "website": "https://daviani.dev"
       },
@@ -177,27 +177,115 @@
           "title": "Données collectées",
           "text": "Ce site collecte uniquement les données que vous fournissez volontairement via le formulaire de contact : nom, adresse email et message."
         },
-        "purpose": {
-          "title": "Finalité du traitement",
-          "text": "Vos données sont utilisées exclusivement pour répondre à vos demandes de contact. Elles ne sont jamais vendues ou partagées avec des tiers à des fins commerciales."
+        "legalBasis": {
+          "title": "Bases légales et finalités",
+          "intro": "Chaque traitement de données repose sur une base légale conforme au RGPD :",
+          "contact": "Formulaire de contact",
+          "contactBasis": "Intérêt légitime",
+          "contactPurpose": "Répondre à vos demandes",
+          "appointment": "Prise de rendez-vous",
+          "appointmentBasis": "Consentement",
+          "appointmentPurpose": "Planifier un échange",
+          "comments": "Commentaires blog",
+          "commentsBasis": "Consentement",
+          "commentsPurpose": "Permettre les discussions",
+          "security": "Sécurité du site",
+          "securityBasis": "Intérêt légitime",
+          "securityPurpose": "Protection anti-spam et contre les attaques"
         },
         "retention": {
           "title": "Conservation des données",
           "text": "Vos données sont conservées le temps nécessaire au traitement de votre demande, puis supprimées dans un délai maximum de 3 ans."
         },
         "rights": {
-          "title": "Vos droits",
-          "text": "Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, de suppression et de portabilité de vos données. Pour exercer ces droits, contactez-nous à hello@daviani.dev."
+          "title": "Vos droits RGPD",
+          "text": "Conformément au RGPD, vous disposez des droits suivants :",
+          "access": "Droit d'accès à vos données",
+          "rectification": "Droit de rectification",
+          "deletion": "Droit à l'effacement (« droit à l'oubli »)",
+          "portability": "Droit à la portabilité",
+          "opposition": "Droit d'opposition au traitement",
+          "contact": "Pour exercer ces droits, contactez-nous à hello@daviani.dev."
         }
+      },
+      "thirdParty": {
+        "title": "Services tiers et sous-traitants",
+        "intro": "Ce site utilise des services tiers pour son fonctionnement. Voici la liste complète avec leurs usages et politiques de confidentialité :",
+        "service": "Service",
+        "usage": "Usage",
+        "basis": "Base légale",
+        "policy": "Politique",
+        "services": {
+          "vercel": {
+            "name": "Vercel",
+            "usage": "Hébergement du site",
+            "basis": "Intérêt légitime",
+            "url": "https://vercel.com/legal/privacy-policy"
+          },
+          "cloudflare": {
+            "name": "Cloudflare",
+            "usage": "DNS, CDN, protection WAF",
+            "basis": "Intérêt légitime",
+            "url": "https://www.cloudflare.com/privacypolicy"
+          },
+          "recaptcha": {
+            "name": "Google reCAPTCHA",
+            "usage": "Protection anti-spam du formulaire",
+            "basis": "Intérêt légitime",
+            "url": "https://policies.google.com/privacy"
+          },
+          "resend": {
+            "name": "Resend",
+            "usage": "Envoi des emails de contact",
+            "basis": "Intérêt légitime",
+            "url": "https://resend.com/legal/privacy-policy"
+          },
+          "calendly": {
+            "name": "Calendly",
+            "usage": "Prise de rendez-vous",
+            "basis": "Consentement",
+            "url": "https://calendly.com/privacy"
+          },
+          "github": {
+            "name": "GitHub (Giscus)",
+            "usage": "Système de commentaires",
+            "basis": "Consentement",
+            "url": "https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement"
+          }
+        }
+      },
+      "dataTransfers": {
+        "title": "Transferts de données hors UE",
+        "text": "Certains de nos sous-traitants sont situés aux États-Unis. Ces transferts sont encadrés par les Clauses Contractuelles Types (Standard Contractual Clauses) approuvées par la Commission Européenne, garantissant un niveau de protection adéquat de vos données."
       },
       "cookies": {
         "title": "Cookies",
-        "text": "Ce site utilise uniquement des cookies techniques essentiels au bon fonctionnement (préférences de thème et de langue). Aucun cookie de tracking ou publicitaire n'est utilisé.",
-        "thirdParty": "Des services tiers (Calendly, GitHub) peuvent déposer leurs propres cookies lorsque vous consentez à leur chargement."
+        "intro": "Ce site utilise différents types de cookies :",
+        "technical": {
+          "title": "Cookies techniques (sans consentement requis)",
+          "text": "Ces cookies sont essentiels au fonctionnement du site :",
+          "theme": "Préférence de thème (clair/sombre)",
+          "language": "Préférence de langue (FR/EN)"
+        },
+        "thirdParty": {
+          "title": "Cookies tiers (avec consentement)",
+          "text": "Les services suivants peuvent déposer des cookies uniquement après votre consentement explicite via notre système ConsentGate :",
+          "calendly": "Calendly (prise de rendez-vous)",
+          "github": "GitHub/Giscus (commentaires)"
+        },
+        "noTracking": "Aucun cookie de tracking, d'analyse ou publicitaire n'est utilisé sur ce site."
       },
       "intellectual": {
         "title": "Propriété intellectuelle",
-        "text": "L'ensemble du contenu de ce site (textes, images, code) est protégé par le droit d'auteur. Toute reproduction sans autorisation préalable est interdite."
+        "content": "L'ensemble du contenu éditorial de ce site (textes, images, design) est protégé par le droit d'auteur. Toute reproduction sans autorisation préalable est interdite.",
+        "code": "Le code source de ce site est disponible sur GitHub sous licence MIT, permettant sa réutilisation libre avec attribution.",
+        "github": "Voir le code source"
+      },
+      "contact": {
+        "title": "Contact et réclamations",
+        "text": "Pour toute question concernant vos données personnelles ou pour exercer vos droits, contactez-nous :",
+        "dpo": "Délégué à la protection des données : hello@daviani.dev",
+        "cnil": "En cas de réclamation non résolue, vous pouvez saisir la CNIL (Commission Nationale de l'Informatique et des Libertés)."
       },
       "lastUpdate": "Dernière mise à jour"
     },

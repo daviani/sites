@@ -1,15 +1,26 @@
 'use client';
 
 import { useTranslation, Breadcrumb } from '@daviani/ui';
-import { getSubdomainUrl } from '@/lib/domains/config';
+
+const GITHUB_REPO_URL = 'https://github.com/daviani/daviani-dev';
+const LAST_UPDATE_DATE = '2025-12-05';
+
+const THIRD_PARTY_SERVICES = [
+  'vercel',
+  'cloudflare',
+  'recaptcha',
+  'resend',
+  'calendly',
+  'github',
+] as const;
 
 export default function LegalPage() {
-  const { t } = useTranslation();
-  const currentDate = new Date().toLocaleDateString('fr-FR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  const { t, language } = useTranslation();
+
+  const formattedDate = new Date(LAST_UPDATE_DATE).toLocaleDateString(
+    language === 'fr' ? 'fr-FR' : 'en-US',
+    { year: 'numeric', month: 'long', day: 'numeric' }
+  );
 
   return (
     <div className="min-h-screen bg-nord6 dark:bg-nord0">
@@ -17,54 +28,53 @@ export default function LegalPage() {
         <div className="mb-8">
           <Breadcrumb items={[{ href: '/legal', labelKey: 'nav.legal.title' }]} />
         </div>
+
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-nord0 dark:text-nord6">
             {t('pages.legal.title')}
           </h1>
-          <p className="text-xl text-nord0 dark:text-nord4">
+          <p className="text-xl text-nord3 dark:text-nord4">
             {t('pages.legal.subtitle')}
           </p>
         </div>
 
         <div className="space-y-8">
-          {/* Publisher section */}
+          {/* 1. Publisher section */}
           <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
             <h2 className="text-2xl font-bold mb-4 text-nord10">
               {t('pages.legal.publisher.title')}
             </h2>
-            <ul className="space-y-2 text-nord0 dark:text-nord4">
-              <li><strong>{t('pages.legal.publisher.name')}</strong></li>
-              <li>{t('pages.legal.publisher.status')}</li>
-              <li>
+            <div className="text-nord0 dark:text-nord4 space-y-2">
+              <p><strong>{t('pages.legal.publisher.name')}</strong></p>
+              <p>{t('pages.legal.publisher.status')}</p>
+              <p>
                 <a
                   href={`mailto:${t('pages.legal.publisher.email')}`}
                   className="text-nord10 hover:underline"
                 >
                   {t('pages.legal.publisher.email')}
                 </a>
-              </li>
-              <li>
+              </p>
+              <p>
                 <a
                   href={t('pages.legal.publisher.website')}
                   className="text-nord10 hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   {t('pages.legal.publisher.website')}
                 </a>
-              </li>
-            </ul>
+              </p>
+            </div>
           </section>
 
-          {/* Hosting section */}
+          {/* 2. Hosting section */}
           <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
             <h2 className="text-2xl font-bold mb-4 text-nord10">
               {t('pages.legal.hosting.title')}
             </h2>
-            <ul className="space-y-2 text-nord0 dark:text-nord4">
-              <li><strong>{t('pages.legal.hosting.provider')}</strong></li>
-              <li>{t('pages.legal.hosting.address')}</li>
-              <li>
+            <div className="text-nord0 dark:text-nord4 space-y-2">
+              <p><strong>{t('pages.legal.hosting.provider')}</strong></p>
+              <p>{t('pages.legal.hosting.address')}</p>
+              <p>
                 <a
                   href={t('pages.legal.hosting.website')}
                   className="text-nord10 hover:underline"
@@ -73,11 +83,11 @@ export default function LegalPage() {
                 >
                   {t('pages.legal.hosting.website')}
                 </a>
-              </li>
-            </ul>
+              </p>
+            </div>
           </section>
 
-          {/* Privacy section */}
+          {/* 3. Privacy Policy section */}
           <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
             <h2 className="text-2xl font-bold mb-4 text-nord10">
               {t('pages.legal.privacy.title')}
@@ -86,7 +96,8 @@ export default function LegalPage() {
               {t('pages.legal.privacy.intro')}
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-6">
+              {/* Data collected */}
               <div>
                 <h3 className="text-lg font-semibold text-nord0 dark:text-nord6 mb-2">
                   {t('pages.legal.privacy.dataCollected.title')}
@@ -96,15 +107,56 @@ export default function LegalPage() {
                 </p>
               </div>
 
+              {/* Legal basis table */}
               <div>
-                <h3 className="text-lg font-semibold text-nord0 dark:text-nord6 mb-2">
-                  {t('pages.legal.privacy.purpose.title')}
+                <h3 className="text-lg font-semibold text-nord0 dark:text-nord6 mb-3">
+                  {t('pages.legal.privacy.legalBasis.title')}
                 </h3>
-                <p className="text-nord0 dark:text-nord4">
-                  {t('pages.legal.privacy.purpose.text')}
+                <p className="text-nord0 dark:text-nord4 mb-4">
+                  {t('pages.legal.privacy.legalBasis.intro')}
                 </p>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm text-nord0 dark:text-nord4">
+                    <thead>
+                      <tr className="border-b border-nord4 dark:border-nord3">
+                        <th className="text-left py-2 pr-4 font-semibold">
+                          {t('pages.legal.thirdParty.usage')}
+                        </th>
+                        <th className="text-left py-2 pr-4 font-semibold">
+                          {t('pages.legal.thirdParty.basis')}
+                        </th>
+                        <th className="text-left py-2 font-semibold">
+                          {language === 'fr' ? 'Finalité' : 'Purpose'}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-nord5 dark:border-nord2">
+                        <td className="py-2 pr-4">{t('pages.legal.privacy.legalBasis.contact')}</td>
+                        <td className="py-2 pr-4">{t('pages.legal.privacy.legalBasis.contactBasis')}</td>
+                        <td className="py-2">{t('pages.legal.privacy.legalBasis.contactPurpose')}</td>
+                      </tr>
+                      <tr className="border-b border-nord5 dark:border-nord2">
+                        <td className="py-2 pr-4">{t('pages.legal.privacy.legalBasis.appointment')}</td>
+                        <td className="py-2 pr-4">{t('pages.legal.privacy.legalBasis.appointmentBasis')}</td>
+                        <td className="py-2">{t('pages.legal.privacy.legalBasis.appointmentPurpose')}</td>
+                      </tr>
+                      <tr className="border-b border-nord5 dark:border-nord2">
+                        <td className="py-2 pr-4">{t('pages.legal.privacy.legalBasis.comments')}</td>
+                        <td className="py-2 pr-4">{t('pages.legal.privacy.legalBasis.commentsBasis')}</td>
+                        <td className="py-2">{t('pages.legal.privacy.legalBasis.commentsPurpose')}</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 pr-4">{t('pages.legal.privacy.legalBasis.security')}</td>
+                        <td className="py-2 pr-4">{t('pages.legal.privacy.legalBasis.securityBasis')}</td>
+                        <td className="py-2">{t('pages.legal.privacy.legalBasis.securityPurpose')}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
 
+              {/* Data retention */}
               <div>
                 <h3 className="text-lg font-semibold text-nord0 dark:text-nord6 mb-2">
                   {t('pages.legal.privacy.retention.title')}
@@ -114,56 +166,176 @@ export default function LegalPage() {
                 </p>
               </div>
 
+              {/* GDPR Rights */}
               <div>
                 <h3 className="text-lg font-semibold text-nord0 dark:text-nord6 mb-2">
                   {t('pages.legal.privacy.rights.title')}
                 </h3>
-                <p className="text-nord0 dark:text-nord4">
+                <p className="text-nord0 dark:text-nord4 mb-3">
                   {t('pages.legal.privacy.rights.text')}
+                </p>
+                <ul className="list-disc list-inside text-nord0 dark:text-nord4 space-y-1 ml-2">
+                  <li>{t('pages.legal.privacy.rights.access')}</li>
+                  <li>{t('pages.legal.privacy.rights.rectification')}</li>
+                  <li>{t('pages.legal.privacy.rights.deletion')}</li>
+                  <li>{t('pages.legal.privacy.rights.portability')}</li>
+                  <li>{t('pages.legal.privacy.rights.opposition')}</li>
+                </ul>
+                <p className="text-nord0 dark:text-nord4 mt-3">
+                  {t('pages.legal.privacy.rights.contact')}
                 </p>
               </div>
             </div>
           </section>
 
-          {/* Cookies section */}
+          {/* 4. Third-party services section */}
+          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+            <h2 className="text-2xl font-bold mb-4 text-nord10">
+              {t('pages.legal.thirdParty.title')}
+            </h2>
+            <p className="text-nord0 dark:text-nord4 mb-4">
+              {t('pages.legal.thirdParty.intro')}
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm text-nord0 dark:text-nord4">
+                <thead>
+                  <tr className="border-b border-nord4 dark:border-nord3">
+                    <th className="text-left py-2 pr-4 font-semibold">
+                      {t('pages.legal.thirdParty.service')}
+                    </th>
+                    <th className="text-left py-2 pr-4 font-semibold">
+                      {t('pages.legal.thirdParty.usage')}
+                    </th>
+                    <th className="text-left py-2 pr-4 font-semibold">
+                      {t('pages.legal.thirdParty.basis')}
+                    </th>
+                    <th className="text-left py-2 font-semibold">
+                      {t('pages.legal.thirdParty.policy')}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {THIRD_PARTY_SERVICES.map((service) => (
+                    <tr key={service} className="border-b border-nord5 dark:border-nord2 last:border-0">
+                      <td className="py-2 pr-4 font-medium">
+                        {t(`pages.legal.thirdParty.services.${service}.name`)}
+                      </td>
+                      <td className="py-2 pr-4">
+                        {t(`pages.legal.thirdParty.services.${service}.usage`)}
+                      </td>
+                      <td className="py-2 pr-4">
+                        {t(`pages.legal.thirdParty.services.${service}.basis`)}
+                      </td>
+                      <td className="py-2">
+                        <a
+                          href={t(`pages.legal.thirdParty.services.${service}.url`)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-nord10 hover:underline"
+                        >
+                          ↗
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          {/* 5. Data transfers section */}
+          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+            <h2 className="text-2xl font-bold mb-4 text-nord10">
+              {t('pages.legal.dataTransfers.title')}
+            </h2>
+            <p className="text-nord0 dark:text-nord4">
+              {t('pages.legal.dataTransfers.text')}
+            </p>
+          </section>
+
+          {/* 6. Cookies section */}
           <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
             <h2 className="text-2xl font-bold mb-4 text-nord10">
               {t('pages.legal.cookies.title')}
             </h2>
             <p className="text-nord0 dark:text-nord4 mb-4">
-              {t('pages.legal.cookies.text')}
+              {t('pages.legal.cookies.intro')}
             </p>
-            <p className="text-nord0 dark:text-nord4">
-              {t('pages.legal.cookies.thirdParty')}
-            </p>
+
+            <div className="space-y-4">
+              {/* Technical cookies */}
+              <div>
+                <h3 className="text-lg font-semibold text-nord0 dark:text-nord6 mb-2">
+                  {t('pages.legal.cookies.technical.title')}
+                </h3>
+                <p className="text-nord0 dark:text-nord4 mb-2">
+                  {t('pages.legal.cookies.technical.text')}
+                </p>
+                <ul className="list-disc list-inside text-nord0 dark:text-nord4 space-y-1 ml-2">
+                  <li>{t('pages.legal.cookies.technical.theme')}</li>
+                  <li>{t('pages.legal.cookies.technical.language')}</li>
+                </ul>
+              </div>
+
+              {/* Third-party cookies */}
+              <div>
+                <h3 className="text-lg font-semibold text-nord0 dark:text-nord6 mb-2">
+                  {t('pages.legal.cookies.thirdParty.title')}
+                </h3>
+                <p className="text-nord0 dark:text-nord4 mb-2">
+                  {t('pages.legal.cookies.thirdParty.text')}
+                </p>
+                <ul className="list-disc list-inside text-nord0 dark:text-nord4 space-y-1 ml-2">
+                  <li>{t('pages.legal.cookies.thirdParty.calendly')}</li>
+                  <li>{t('pages.legal.cookies.thirdParty.github')}</li>
+                </ul>
+              </div>
+
+              <p className="text-nord0 dark:text-nord4 font-medium">
+                {t('pages.legal.cookies.noTracking')}
+              </p>
+            </div>
           </section>
 
-          {/* Intellectual property section */}
+          {/* 7. Intellectual property section */}
           <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
             <h2 className="text-2xl font-bold mb-4 text-nord10">
               {t('pages.legal.intellectual.title')}
             </h2>
-            <p className="text-nord0 dark:text-nord4">
-              {t('pages.legal.intellectual.text')}
-            </p>
+            <div className="text-nord0 dark:text-nord4 space-y-3">
+              <p>{t('pages.legal.intellectual.content')}</p>
+              <p>{t('pages.legal.intellectual.code')}</p>
+              <p>
+                <a
+                  href={GITHUB_REPO_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-nord10 hover:underline"
+                >
+                  {t('pages.legal.intellectual.github')} ↗
+                </a>
+              </p>
+            </div>
           </section>
 
-          {/* Contact link */}
-          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg text-center">
-            <p className="text-nord0 dark:text-nord4 mb-4">
-              {t('pages.legal.privacy.rights.text').split('.')[0]}.
-            </p>
-            <a
-              href={getSubdomainUrl('contact')}
-              className="inline-block px-6 py-3 bg-nord10 text-white rounded-lg hover:bg-nord9 transition-colors"
-            >
-              {t('nav.contact.title')}
-            </a>
+          {/* 8. Contact section */}
+          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+            <h2 className="text-2xl font-bold mb-4 text-nord10">
+              {t('pages.legal.contact.title')}
+            </h2>
+            <div className="text-nord0 dark:text-nord4 space-y-3">
+              <p>{t('pages.legal.contact.text')}</p>
+              <p>
+                <strong>{t('pages.legal.contact.dpo')}</strong>
+              </p>
+              <p className="text-sm">{t('pages.legal.contact.cnil')}</p>
+            </div>
           </section>
 
-          <div className="text-sm text-nord0 dark:text-nord4 text-center mt-8">
+          {/* Last update */}
+          <div className="text-sm text-nord3 dark:text-nord4 text-center mt-8">
             <p>
-              {t('pages.legal.lastUpdate')}: {currentDate}
+              {t('pages.legal.lastUpdate')}: {formattedDate}
             </p>
           </div>
         </div>
