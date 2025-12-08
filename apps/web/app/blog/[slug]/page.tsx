@@ -73,7 +73,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
   const { meta } = article;
 
   return (
-    <div className="min-h-screen bg-nord6 dark:bg-nord0">
+    <div className="min-h-screen">
       <article className="max-w-3xl mx-auto px-4 pt-5 pb-16">
         {/* Breadcrumb */}
         <div className="mb-8">
@@ -85,13 +85,13 @@ export default async function BlogPost({ params }: BlogPostProps) {
 
         {/* Header */}
         <header className="mb-10 p-8 bg-white/40 dark:bg-nord-3/50 backdrop-blur-md rounded-[2.5rem] shadow-lg">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-nord0 dark:text-nord6">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-nord-0 dark:text-nord-6">
             {meta.title}
           </h1>
-          <p className="text-lg text-nord3 dark:text-nord4 mb-6 leading-relaxed">
+          <p className="text-lg text-nord-3 dark:text-nord-4 mb-6 leading-relaxed">
             {meta.description}
           </p>
-          <div className="flex items-center gap-4 text-sm text-nord3 dark:text-nord4">
+          <div className="flex items-center gap-4 text-sm text-nord-3 dark:text-nord-4">
             <time dateTime={meta.date}>
               {new Date(meta.date).toLocaleDateString('fr-FR', {
                 year: 'numeric',
@@ -108,7 +108,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
                 <Link
                   key={tag}
                   href={`/?tag=${tag}`}
-                  className="px-4 py-1.5 bg-nord10/10 dark:bg-nord8/10 text-nord10 dark:text-nord8 rounded-full text-sm font-medium hover:bg-nord10/20 dark:hover:bg-nord8/20 transition-colors cursor-pointer"
+                  className="px-4 py-1.5 bg-nord-10/10 dark:bg-nord-8/10 text-nord-10 dark:text-nord-8 rounded-full text-sm font-medium hover:bg-nord-10/20 dark:hover:bg-nord-8/20 transition-colors cursor-pointer"
                 >
                   #{tag}
                 </Link>

@@ -25,7 +25,7 @@ export function CvMain() {
   const education = tObject<TranslatedEducation[]>('pages.cv.data.education') ?? [];
 
   return (
-    <main className="rounded-xl bg-white dark:bg-[#2E3440]" style={{ width: '65%', padding: '20px 24px' }}>
+    <main className="rounded-xl bg-white dark:bg-nord-0" style={{ width: '65%', padding: '20px 24px' }}>
       {/* Experiences Section */}
       <MainSectionTitle first>{t('pages.cv.sections.experience')}</MainSectionTitle>
 
@@ -56,7 +56,7 @@ export function CvMain() {
 function MainSectionTitle({ children, first }: { children: React.ReactNode; first?: boolean }) {
   return (
     <h2
-      className="text-[#2E3440] dark:text-[#ECEFF4]"
+      className="text-nord-0 dark:text-nord-6"
       style={{
         fontSize: '17px',
         margin: first ? '0 0 12px 0' : '20px 0 12px 0',
@@ -82,7 +82,7 @@ function ExperienceCard({
 
   return (
     <div
-      className="border border-[#E5E9F0] bg-white transition-all duration-300 hover:-translate-y-px dark:border-[#4C566A] dark:bg-[#434C5E]"
+      className="border border-nord-5 bg-white transition-all duration-300 hover:-translate-y-px dark:border-nord-3 dark:bg-nord-2"
       style={{
         marginBottom: '11px',
         padding: isCompact ? '10px 14px' : '11px 14px',
@@ -93,7 +93,7 @@ function ExperienceCard({
       <div className="flex items-start justify-between" style={{ marginBottom: '8px', gap: '12px' }}>
         <div>
           <div
-            className="text-[#2E3440] dark:text-[#ECEFF4]"
+            className="text-nord-0 dark:text-nord-6"
             style={{
               fontSize: '12.5px',
               fontWeight: 600,
@@ -104,12 +104,12 @@ function ExperienceCard({
           >
             {experience.role}
           </div>
-          <div className="text-[#88C0D0]" style={{ fontSize: '11px', fontWeight: 500 }}>
+          <div className="text-nord-8" style={{ fontSize: '11px', fontWeight: 500 }}>
             {experience.company}
           </div>
         </div>
         <div
-          className="shrink-0 whitespace-nowrap text-[#4C566A] dark:text-[#D8DEE9]"
+          className="shrink-0 whitespace-nowrap text-nord-3 dark:text-nord-4"
           style={{
             fontSize: '10px',
             fontWeight: 500,
@@ -124,7 +124,7 @@ function ExperienceCard({
 
       {/* Description */}
       <div
-        className="text-[#4C566A] dark:text-[#D8DEE9]"
+        className="text-nord-3 dark:text-nord-4"
         style={{
           fontSize: isCompact ? '10px' : '10.5px',
           lineHeight: 1.5,
@@ -134,7 +134,7 @@ function ExperienceCard({
           <ul style={{ margin: '6px 0 6px 14px', listStyle: 'none' }}>
             {experience.highlights.map((highlight, i) => (
               <li key={i} className="relative" style={{ margin: '4px 0', paddingLeft: '14px', lineHeight: 1.5 }}>
-                <span className="absolute left-0 text-[#88C0D0]" style={{ fontWeight: 600, fontSize: '11px' }}>
+                <span className="absolute left-0 text-nord-8" style={{ fontWeight: 600, fontSize: '11px' }}>
                   →
                 </span>
                 {highlight}
@@ -146,7 +146,7 @@ function ExperienceCard({
         ) : null}
 
         {staticExp.stack && staticExp.stack.length > 0 && (
-          <strong className="mt-1 block text-[#88C0D0]" style={{ fontSize: '10px', fontWeight: 600 }}>
+          <strong className="mt-1 block text-nord-8" style={{ fontSize: '10px', fontWeight: 600 }}>
             {t('pages.cv.labels.stack')} : {staticExp.stack.join(', ')}
           </strong>
         )}
@@ -164,13 +164,13 @@ function EducationCard({
 }) {
   return (
     <div
-      className="border border-[#E5E9F0] bg-white transition-all duration-300 hover:-translate-y-px dark:border-[#4C566A] dark:bg-[#434C5E]"
+      className="border border-nord-5 bg-white transition-all duration-300 hover:-translate-y-px dark:border-nord-3 dark:bg-nord-2"
       style={{ padding: '11px 14px', borderRadius: '9px' }}
     >
       <div className="flex items-start justify-between" style={{ gap: '12px' }}>
         <div>
           <div
-            className="text-[#2E3440] dark:text-[#ECEFF4]"
+            className="text-nord-0 dark:text-nord-6"
             style={{
               fontSize: '12.5px',
               fontWeight: 600,
@@ -181,12 +181,12 @@ function EducationCard({
           >
             {education.degree}
           </div>
-          <div className="text-[#88C0D0]" style={{ fontSize: '11px', fontWeight: 500 }}>
+          <div className="text-nord-8" style={{ fontSize: '11px', fontWeight: 500 }}>
             {education.institution}
           </div>
         </div>
         <div
-          className="shrink-0 whitespace-nowrap text-[#4C566A] dark:text-[#D8DEE9]"
+          className="shrink-0 whitespace-nowrap text-nord-3 dark:text-nord-4"
           style={{
             fontSize: '10px',
             fontWeight: 500,

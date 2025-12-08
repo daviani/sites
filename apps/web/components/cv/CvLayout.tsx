@@ -6,7 +6,7 @@ import { CvMain } from './CvMain';
 export function CvLayout() {
   return (
     <div
-      className="mx-auto flex overflow-hidden rounded-xl bg-white shadow-xl dark:bg-[#2E3440]"
+      className="mx-auto flex overflow-hidden rounded-xl bg-white shadow-xl dark:bg-nord-0"
       style={{
         maxWidth: '210mm',
         gap: '10px',

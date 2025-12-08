@@ -10,7 +10,7 @@ export function CvExportButtons() {
       <a
         href="/api/cv/pdf"
         download
-        className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-nord10 text-white text-sm rounded-lg hover:bg-nord9 transition-colors"
+        className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-nord-10 text-white text-sm rounded-lg hover:bg-nord-9 transition-colors"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@ export function CvExportButtons() {
       <a
         href="/api/cv/docx"
         download
-        className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-nord3 text-nord6 text-sm rounded-lg hover:bg-nord2 transition-colors"
+        className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-nord-3 text-nord-6 text-sm rounded-lg hover:bg-nord-2 transition-colors"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
