@@ -71,10 +71,10 @@ export function CvDownloadButton() {
           />
 
           {/* Modal content */}
-          <div className="relative z-10 min-w-[300px] rounded-xl bg-white p-6 shadow-2xl dark:bg-[#3B4252]">
+          <div className="relative z-10 min-w-[300px] rounded-xl bg-white p-6 shadow-2xl dark:bg-nord-1">
             <h2
               id="download-modal-title"
-              className="mb-4 text-lg font-semibold text-[#2E3440] dark:text-[#ECEFF4]"
+              className="mb-4 text-lg font-semibold text-nord-0 dark:text-nord-6"
             >
               {t('pages.cv.labels.chooseFormat')}
             </h2>
@@ -84,7 +84,7 @@ export function CvDownloadButton() {
               <a
                 href="/api/cv/pdf"
                 download="Daviani-Fillatre-CV.pdf"
-                className="cursor-pointer rounded-lg bg-[#5E81AC] px-4 py-3 text-center font-semibold text-white shadow-md transition-all duration-200 hover:scale-[1.02] hover:bg-[#81A1C1] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#88C0D0] focus:ring-offset-2 dark:focus:ring-offset-[#3B4252]"
+                className="cursor-pointer rounded-lg bg-nord-10 px-4 py-3 text-center font-semibold text-white shadow-md transition-all duration-200 hover:scale-[1.02] hover:bg-nord-9 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-nord-8 focus:ring-offset-2 dark:focus:ring-offset-nord-1"
                 onClick={() => setIsOpen(false)}
               >
                 {t('pages.cv.labels.downloadPdf')}
@@ -94,7 +94,7 @@ export function CvDownloadButton() {
               <a
                 href="/api/cv/docx"
                 download="Daviani-Fillatre-CV.docx"
-                className="cursor-pointer rounded-lg border-2 border-[#4C566A] bg-transparent px-4 py-3 text-center font-semibold text-[#2E3440] shadow-md transition-all duration-200 hover:scale-[1.02] hover:bg-[#4C566A] hover:text-white hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#4C566A] focus:ring-offset-2 dark:border-[#D8DEE9] dark:text-[#ECEFF4] dark:hover:bg-[#D8DEE9] dark:hover:text-[#2E3440] dark:focus:ring-offset-[#3B4252]"
+                className="cursor-pointer rounded-lg border-2 border-nord-3 bg-transparent px-4 py-3 text-center font-semibold text-nord-0 shadow-md transition-all duration-200 hover:scale-[1.02] hover:bg-nord-3 hover:text-white hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-nord-3 focus:ring-offset-2 dark:border-nord-4 dark:text-nord-6 dark:hover:bg-nord-4 dark:hover:text-nord-0 dark:focus:ring-offset-nord-1"
                 onClick={() => setIsOpen(false)}
               >
                 {t('pages.cv.labels.downloadDocx')}
@@ -103,7 +103,7 @@ export function CvDownloadButton() {
               {/* Cancel Button */}
               <button
                 onClick={() => setIsOpen(false)}
-                className="cursor-pointer px-4 py-2 text-center font-medium text-[#BF616A] transition-colors hover:text-[#D08770] focus:outline-none"
+                className="cursor-pointer px-4 py-2 text-center font-medium text-nord-11 transition-colors hover:text-nord-12 focus:outline-none"
               >
                 {t('pages.cv.labels.cancel')}
               </button>

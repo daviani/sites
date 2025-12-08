@@ -26,7 +26,7 @@ export function CvSidebar() {
   const contributions = tObject<TranslatedContribution[]>('pages.cv.data.contributions') ?? [];
 
   return (
-    <aside className="relative flex flex-col overflow-hidden rounded-xl bg-[#3B4252] shadow-lg" style={{ width: '35%' }}>
+    <aside className="relative flex flex-col overflow-hidden rounded-xl bg-nord-1 shadow-lg" style={{ width: '35%' }}>
       {/* Radial gradient overlay */}
       <div
         className="pointer-events-none absolute left-0 right-0 top-0"
@@ -52,7 +52,7 @@ export function CvSidebar() {
           />
         ) : (
           <div
-            className="mx-auto mb-4 flex items-center justify-center rounded-full bg-nord3"
+            className="mx-auto mb-4 flex items-center justify-center rounded-full bg-nord-3"
             style={{
               width: '100px',
               height: '100px',
@@ -60,19 +60,19 @@ export function CvSidebar() {
               boxShadow: '0 6px 20px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.2)',
             }}
           >
-            <span className="text-3xl text-[#88C0D0]">{name.charAt(0)}</span>
+            <span className="text-3xl text-nord-8">{name.charAt(0)}</span>
           </div>
         )}
 
-        <div className="mb-1 text-[#ECEFF4]" style={{ fontSize: '19px', fontWeight: 600, letterSpacing: '-0.35px', lineHeight: 1.2 }}>
+        <div className="mb-1 text-nord-6" style={{ fontSize: '19px', fontWeight: 600, letterSpacing: '-0.35px', lineHeight: 1.2 }}>
           {name}
         </div>
 
-        <div className="mb-1 text-[#88C0D0]" style={{ fontSize: '12.5px', fontWeight: 500, letterSpacing: '-0.05px' }}>
+        <div className="mb-1 text-nord-8" style={{ fontSize: '12.5px', fontWeight: 500, letterSpacing: '-0.05px' }}>
           {title}
         </div>
 
-        <div className="text-[#D8DEE9]" style={{ fontSize: '10px', fontWeight: 400, opacity: 0.7 }}>
+        <div className="text-nord-4" style={{ fontSize: '10px', fontWeight: 400, opacity: 0.7 }}>
           {staticData.personal.experienceYears} {t('pages.cv.labels.yearsExperience')}
         </div>
       </div>
@@ -124,7 +124,7 @@ export function CvSidebar() {
 function SectionTitle({ children, first }: { children: React.ReactNode; first?: boolean }) {
   return (
     <div
-      className="text-[#88C0D0]"
+      className="text-nord-8"
       style={{
         fontSize: '10px',
         margin: first ? '0 0 12px 0' : '24px 0 12px 0',
@@ -151,21 +151,21 @@ function ContactItem({
       href={href}
       target={href.startsWith('mailto:') ? undefined : '_blank'}
       rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-      className="text-[#D8DEE9] transition-all duration-200 hover:text-[#88C0D0] hover:opacity-100"
+      className="text-nord-4 transition-all duration-200 hover:text-nord-8 hover:opacity-100"
       style={{ textDecoration: 'none', opacity: 0.85, wordBreak: 'break-word' }}
     >
       {children}
     </a>
   ) : (
-    <span className="text-[#D8DEE9]" style={{ opacity: 0.85 }}>{children}</span>
+    <span className="text-nord-4" style={{ opacity: 0.85 }}>{children}</span>
   );
 
   return (
     <div
-      className="relative text-[#D8DEE9]"
+      className="relative text-nord-4"
       style={{ margin: '10px 0', paddingLeft: '14px', fontSize: '10px', fontWeight: 400, lineHeight: 1.4 }}
     >
-      <span className="absolute left-0 text-[#88C0D0]" style={{ fontWeight: 700, fontSize: '13px' }}>
+      <span className="absolute left-0 text-nord-8" style={{ fontWeight: 700, fontSize: '13px' }}>
         •
       </span>
       {content}
@@ -176,10 +176,10 @@ function ContactItem({
 function ExpertiseItem({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className="relative text-[#D8DEE9]"
+      className="relative text-nord-4"
       style={{ margin: '10px 0', paddingLeft: '14px', fontSize: '10px', lineHeight: 1.45, fontWeight: 400, opacity: 0.9 }}
     >
-      <span className="absolute left-0 text-[#88C0D0]" style={{ fontWeight: 700, fontSize: '13px' }}>
+      <span className="absolute left-0 text-nord-8" style={{ fontWeight: 700, fontSize: '13px' }}>
         •
       </span>
       {children}
@@ -190,7 +190,7 @@ function ExpertiseItem({ children }: { children: React.ReactNode }) {
 function SkillTag({ children }: { children: React.ReactNode }) {
   return (
     <span
-      className="bg-[#5E81AC]/90 text-white shadow-[0_0_12px_rgba(94,129,172,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-105"
+      className="bg-nord-10/90 text-white shadow-[0_0_12px_rgba(94,129,172,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-105"
       style={{
         padding: '6px 11px',
         borderRadius: '7px',
@@ -215,10 +215,10 @@ function ContributionsSection({ contributions, title }: { contributions: Transla
       }}
     >
       <div
+        className="text-nord-14"
         style={{
           fontSize: '10px',
           fontWeight: 600,
-          color: '#A3BE8C',
           marginBottom: '12px',
           textTransform: 'uppercase',
           letterSpacing: '1.2px',
@@ -230,10 +230,10 @@ function ContributionsSection({ contributions, title }: { contributions: Transla
       {contributions.map((contrib, i) => (
         <div key={i} style={{ marginBottom: i < contributions.length - 1 ? '12px' : 0 }}>
           <div
+            className="text-nord-14"
             style={{
               fontSize: '9px',
               fontWeight: 600,
-              color: '#A3BE8C',
               marginBottom: '4px',
               textTransform: 'uppercase',
               letterSpacing: '0.5px',
@@ -241,7 +241,7 @@ function ContributionsSection({ contributions, title }: { contributions: Transla
           >
             {contrib.type} • {contrib.date}
           </div>
-          <div className="text-[#D8DEE9]" style={{ fontSize: '9.5px', lineHeight: 1.5, opacity: 0.9 }}>
+          <div className="text-nord-4" style={{ fontSize: '9.5px', lineHeight: 1.5, opacity: 0.9 }}>
             {contrib.description}
           </div>
         </div>

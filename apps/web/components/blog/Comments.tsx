@@ -12,13 +12,13 @@ export function Comments() {
   if (!hasConsent) {
     return (
       <section className="mt-8 p-8 bg-white/40 dark:bg-nord-3/50 backdrop-blur-md rounded-[2.5rem] shadow-lg">
-        <h2 className="text-xl font-bold mb-4 text-nord0 dark:text-nord6">
+        <h2 className="text-xl font-bold mb-4 text-nord-0 dark:text-nord-6">
           {t('comments.title')}
         </h2>
-        <p className="text-nord3 dark:text-nord4 mb-4">
+        <p className="text-nord-3 dark:text-nord-4 mb-4">
           {t('comments.consentText')}
         </p>
-        <p className="text-sm text-nord3 dark:text-nord4 mb-6">
+        <p className="text-sm text-nord-3 dark:text-nord-4 mb-6">
           {t('comments.privacyNote')}
         </p>
         <button

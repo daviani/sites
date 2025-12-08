@@ -28,30 +28,30 @@ export default function SitemapPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-nord6 dark:bg-nord0">
+    <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-4 pt-5 pb-16">
         <div className="mb-8">
           <Breadcrumb items={[{ href: '/sitemap', labelKey: 'nav.sitemap.title' }]} />
         </div>
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-nord0 dark:text-nord6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-nord-0 dark:text-nord-6">
             {t('pages.sitemap.title')}
           </h1>
-          <p className="text-xl text-nord0 dark:text-nord4">
+          <p className="text-xl text-nord-0 dark:text-nord-4">
             {t('pages.sitemap.subtitle')}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
-            <h2 className="text-2xl font-bold mb-6 text-nord10">
+            <h2 className="text-2xl font-bold mb-6 text-nord-10">
               {t('pages.sitemap.mainPages')}
             </h2>
             <ul className="space-y-3">
               <li>
                 <a
                   href={getBaseUrl()}
-                  className="flex items-center text-nord0 dark:text-nord4 hover:text-nord10 dark:hover:text-nord8 transition-colors"
+                  className="flex items-center text-nord-0 dark:text-nord-4 hover:text-nord-10 dark:hover:text-nord-8 transition-colors"
                 >
                   <span className="mr-2">→</span>
                   {t('home.title')}
@@ -61,11 +61,11 @@ export default function SitemapPage() {
                 <li key={page.subdomain}>
                   <a
                     href={getSubdomainUrl(page.subdomain)}
-                    className="flex items-center text-nord0 dark:text-nord4 hover:text-nord10 dark:hover:text-nord8 transition-colors"
+                    className="flex items-center text-nord-0 dark:text-nord-4 hover:text-nord-10 dark:hover:text-nord-8 transition-colors"
                   >
                     <span className="mr-2">→</span>
                     {t(page.titleKey)}
-                    <span className="ml-2 text-sm text-nord3 dark:text-nord3">
+                    <span className="ml-2 text-sm text-nord-3 dark:text-nord-3">
                       ({t(page.descKey)})
                     </span>
                   </a>
@@ -75,7 +75,7 @@ export default function SitemapPage() {
           </section>
 
           <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
-            <h2 className="text-2xl font-bold mb-6 text-nord10">
+            <h2 className="text-2xl font-bold mb-6 text-nord-10">
               {t('pages.sitemap.utilities')}
             </h2>
             <ul className="space-y-3">
@@ -83,11 +83,11 @@ export default function SitemapPage() {
                 <li key={page.subdomain}>
                   <a
                     href={getSubdomainUrl(page.subdomain)}
-                    className="flex items-center text-nord0 dark:text-nord4 hover:text-nord10 dark:hover:text-nord8 transition-colors"
+                    className="flex items-center text-nord-0 dark:text-nord-4 hover:text-nord-10 dark:hover:text-nord-8 transition-colors"
                   >
                     <span className="mr-2">→</span>
                     {t(page.titleKey)}
-                    <span className="ml-2 text-sm text-nord3 dark:text-nord3">
+                    <span className="ml-2 text-sm text-nord-3 dark:text-nord-3">
                       ({t(page.descKey)})
                     </span>
                   </a>

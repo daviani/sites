@@ -51,7 +51,7 @@ export default function NotFound() {
       position: absolute;
       width: 100%;
       height: 4px;
-      background: linear-gradient(to bottom, transparent, rgba(163, 190, 140, 0.3), transparent);
+      background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--color-nord-14) 30%, transparent), transparent);
       animation: scanline 2s linear infinite;
     }
   `,
@@ -59,7 +59,7 @@ export default function NotFound() {
   );
 
   return (
-    <div className="min-h-screen bg-nord6 dark:bg-nord0 flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
       <style>{glitchStyles}</style>
 
       {/* Scanline effect */}
@@ -70,8 +70,8 @@ export default function NotFound() {
         className="absolute inset-0 opacity-5 dark:opacity-10 pointer-events-none"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(163, 190, 140, 0.5) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(163, 190, 140, 0.5) 1px, transparent 1px)
+            linear-gradient(color-mix(in srgb, var(--color-nord-14) 50%, transparent) 1px, transparent 1px),
+            linear-gradient(90deg, color-mix(in srgb, var(--color-nord-14) 50%, transparent) 1px, transparent 1px)
           `,
           backgroundSize: '50px 50px',
         }}
@@ -87,9 +87,11 @@ export default function NotFound() {
           style={{
             color: 'transparent',
             WebkitTextStroke: '2px',
-            WebkitTextStrokeColor: glitchActive ? '#BF616A' : '#5E81AC',
+            WebkitTextStrokeColor: glitchActive
+              ? 'var(--color-nord-11)'
+              : 'var(--color-nord-10)',
             textShadow: glitchActive
-              ? '2px 2px #BF616A, -2px -2px #A3BE8C'
+              ? '2px 2px var(--color-nord-11), -2px -2px var(--color-nord-14)'
               : 'none',
             transition: 'all 0.1s ease',
           }}
@@ -102,32 +104,32 @@ export default function NotFound() {
 
         {/* Glitch text decoration */}
         <div
-          className="font-mono text-xs text-nord11 dark:text-nord12 mb-8 tracking-widest opacity-60"
+          className="font-mono text-xs text-nord-11 dark:text-nord-12 mb-8 tracking-widest opacity-60"
           aria-hidden="true"
         >
           {t('easterEggs.notFound.glitchText')}
         </div>
 
         {/* Subtitle */}
-        <h2 className="text-2xl md:text-3xl font-semibold text-nord0 dark:text-nord6 mb-4">
+        <h2 className="text-2xl md:text-3xl font-semibold text-nord-0 dark:text-nord-6 mb-4">
           {t('easterEggs.notFound.subtitle')}
         </h2>
 
         {/* Description */}
-        <p className="text-nord3 dark:text-nord4 mb-8 max-w-md mx-auto">
+        <p className="text-nord-3 dark:text-nord-4 mb-8 max-w-md mx-auto">
           {t('easterEggs.notFound.description')}
         </p>
 
         {/* Back home button */}
         <Link
           href="/"
-          className="inline-block px-8 py-4 bg-nord10 text-white rounded-lg hover:bg-nord9 transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-nord10 focus:ring-offset-2 dark:focus:ring-offset-nord0"
+          className="inline-block px-8 py-4 bg-nord-10 text-white rounded-lg hover:bg-nord-9 transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2 dark:focus:ring-offset-nord-0"
         >
           {t('easterEggs.notFound.backHome')}
         </Link>
 
         {/* Easter egg hint */}
-        <p className="mt-12 text-sm text-nord3 dark:text-nord4 opacity-50 font-mono">
+        <p className="mt-12 text-sm text-nord-3 dark:text-nord-4 opacity-50 font-mono">
           {t('easterEggs.notFound.hint')}
         </p>
       </div>
