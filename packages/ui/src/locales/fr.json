@@ -144,7 +144,149 @@
     },
     "cv": {
       "title": "Curriculum Vitae",
-      "subtitle": "Parcours et compétences"
+      "subtitle": "Parcours et compétences",
+      "sections": {
+        "summary": "Profil",
+        "expertise": "Domaines d'expertise",
+        "skills": "Compétences Clés",
+        "experience": "Expériences Professionnelles",
+        "education": "Formation",
+        "languages": "Langues",
+        "contributions": "Contributions"
+      },
+      "labels": {
+        "current": "Aujourd'hui",
+        "stack": "Stack",
+        "download": "Télécharger le CV",
+        "chooseFormat": "Choisir un format",
+        "downloadPdf": "PDF",
+        "downloadDocx": "DOCX",
+        "cancel": "Annuler",
+        "yearsOld": "ans",
+        "yearsExperience": "ans d'expérience",
+        "contact": "Contact"
+      },
+      "categories": {
+        "frontend": "Front-End",
+        "backend": "Back-End",
+        "devops": "DevOps",
+        "tools": "Outils",
+        "soft": "Soft Skills"
+      },
+      "data": {
+        "personal": {
+          "name": "Daviani FILLATRE",
+          "title": "Développeur Full-Stack & DevOps"
+        },
+        "summary": "Développeur Full-Stack et DevOps avec 5 ans d'expérience",
+        "expertise": [
+          {
+            "title": "Développement Full-Stack",
+            "description": "Applications web complètes front et back"
+          },
+          {
+            "title": "DevOps & CI/CD",
+            "description": "Pipelines GitLab, Jenkins, Docker"
+          },
+          {
+            "title": "Architecture d'applications",
+            "description": "Conception et structuration de projets"
+          },
+          {
+            "title": "Accessibilité numérique (RGAA)",
+            "description": "Applications conformes aux normes d'accessibilité"
+          },
+          {
+            "title": "Administration système",
+            "description": "Windows Server, Linux, IIS, Apache"
+          },
+          {
+            "title": "Bases de données PostgreSQL",
+            "description": "Migrations, optimisation, maintenance"
+          }
+        ],
+        "experiences": [
+          {
+            "company": "ATIPY - Accessibilité Numérique",
+            "role": "Développeur Full-Stack & DevOps",
+            "location": "Lyon",
+            "highlights": [
+              "Développement d'applications web accessibles conformes RGAA pour collectivités territoriales",
+              "Architecture et maintenance CI/CD : GitLab, Jenkins, Docker, blue-green deployment",
+              "Administration système : Windows Server, Linux, IIS, Apache, SSL/TLS, monitoring",
+              "Gestion bases de données PostgreSQL : migrations Entity Framework Core, optimisation"
+            ]
+          },
+          {
+            "company": "Web-Atrio",
+            "role": "Consultant en Développement",
+            "location": "Lyon",
+            "summary": "Développement d'outils d'automatisation pour optimiser les workflows internes. Extension Chrome pour intégration CRM/Gmail avec automatisation de processus métier et intégration API tierces."
+          },
+          {
+            "company": "Anikop",
+            "role": "Analyste Développeur",
+            "location": "Lyon",
+            "summary": "Conception et développement d'applications web et mobile JavaScript, APIs Node.js jusqu'au déploiement production. Méthodologie Agile (SCRUM)."
+          },
+          {
+            "company": "Méphistophélès Pub",
+            "role": "Développeur Web",
+            "location": "Lyon",
+            "summary": "Création site vitrine multilingue (fr/en) avec CMS headless DatoCMS. Gestion de la production avec Vercel."
+          },
+          {
+            "company": "Majelice",
+            "role": "Développeur Front-End React",
+            "location": "Lyon",
+            "summary": "Refonte front-end application d'assemblée générale et votes dématérialisés. Focus UX et sécurité."
+          },
+          {
+            "company": "Brightceps",
+            "role": "Développeur Web",
+            "location": "Lyon",
+            "summary": "Application de coaching sportif en React. Organisation et gestion de projet."
+          },
+          {
+            "company": "Silico",
+            "role": "Développeur Front-End Vue.js",
+            "location": "Lyon",
+            "summary": "Intégration maquettes et développement interactions front-end/back-end pour application santé."
+          }
+        ],
+        "education": [
+          {
+            "institution": "ADREC - Bac +3/4",
+            "degree": "Concepteur Développeur d'Applications"
+          },
+          {
+            "institution": "Titre Professionnel",
+            "degree": "Développeur Web et Web Mobile"
+          }
+        ],
+        "languages": [
+          {
+            "language": "Français",
+            "level": "Natif"
+          },
+          {
+            "language": "Anglais",
+            "level": "Professionnel"
+          }
+        ],
+        "contributions": [
+          {
+            "type": "Mentorat",
+            "date": "2024/2025",
+            "description": "Accompagnement de 2 développeurs juniors, aujourd'hui en poste"
+          },
+          {
+            "type": "Speaker",
+            "date": "Mars 2023",
+            "description": "ApéroWeb Lyon : Introduction au CMS headless avec DatoCMS & NextJS"
+          }
+        ]
+      }
     },
     "contact": {
       "title": "Contact",

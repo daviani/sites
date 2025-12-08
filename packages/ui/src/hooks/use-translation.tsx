@@ -38,6 +38,21 @@ function getNestedValue(obj: unknown, path: string): string {
   return typeof current === 'string' ? current : path;
 }
 
+function getNestedObject<T>(obj: unknown, path: string): T | null {
+  const keys = path.split('.');
+  let current: unknown = obj;
+
+  for (const key of keys) {
+    if (current && typeof current === 'object' && key in current) {
+      current = (current as Record<string, unknown>)[key];
+    } else {
+      return null;
+    }
+  }
+
+  return current as T;
+}
+
 export function useTranslation() {
   const { language, mounted } = useLanguage();
 
@@ -48,5 +63,12 @@ export function useTranslation() {
     return getNestedValue(translations[language], key);
   };
 
-  return { t, language, mounted };
+  const tObject = <T,>(path: string): T | null => {
+    if (!mounted) {
+      return getNestedObject<T>(translations.fr, path);
+    }
+    return getNestedObject<T>(translations[language], path);
+  };
+
+  return { t, tObject, language, mounted };
 }
