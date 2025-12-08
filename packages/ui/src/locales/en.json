@@ -144,7 +144,149 @@
     },
     "cv": {
       "title": "Curriculum Vitae",
-      "subtitle": "Background and skills"
+      "subtitle": "Background and skills",
+      "sections": {
+        "summary": "Profile",
+        "expertise": "Areas of Expertise",
+        "skills": "Key Skills",
+        "experience": "Professional Experience",
+        "education": "Education",
+        "languages": "Languages",
+        "contributions": "Contributions"
+      },
+      "labels": {
+        "current": "Present",
+        "stack": "Stack",
+        "download": "Download Resume",
+        "chooseFormat": "Choose a format",
+        "downloadPdf": "PDF",
+        "downloadDocx": "DOCX",
+        "cancel": "Cancel",
+        "yearsOld": "years old",
+        "yearsExperience": "years of experience",
+        "contact": "Contact"
+      },
+      "categories": {
+        "frontend": "Front-End",
+        "backend": "Back-End",
+        "devops": "DevOps",
+        "tools": "Tools",
+        "soft": "Soft Skills"
+      },
+      "data": {
+        "personal": {
+          "name": "Daviani FILLATRE",
+          "title": "Full-Stack & DevOps Developer"
+        },
+        "summary": "Full-Stack and DevOps Developer with 5 years of experience",
+        "expertise": [
+          {
+            "title": "Full-Stack Development",
+            "description": "Complete front-end and back-end web applications"
+          },
+          {
+            "title": "DevOps & CI/CD",
+            "description": "GitLab, Jenkins, Docker pipelines"
+          },
+          {
+            "title": "Application Architecture",
+            "description": "Project design and structuring"
+          },
+          {
+            "title": "Digital Accessibility (RGAA)",
+            "description": "Applications compliant with accessibility standards"
+          },
+          {
+            "title": "System Administration",
+            "description": "Windows Server, Linux, IIS, Apache"
+          },
+          {
+            "title": "PostgreSQL Databases",
+            "description": "Migrations, optimization, maintenance"
+          }
+        ],
+        "experiences": [
+          {
+            "company": "ATIPY - Digital Accessibility",
+            "role": "Full-Stack & DevOps Developer",
+            "location": "Lyon, France",
+            "highlights": [
+              "Development of RGAA-compliant accessible web applications for local authorities",
+              "CI/CD architecture and maintenance: GitLab, Jenkins, Docker, blue-green deployment",
+              "System administration: Windows Server, Linux, IIS, Apache, SSL/TLS, monitoring",
+              "PostgreSQL database management: Entity Framework Core migrations, optimization"
+            ]
+          },
+          {
+            "company": "Web-Atrio",
+            "role": "Development Consultant",
+            "location": "Lyon, France",
+            "summary": "Development of automation tools to optimize internal workflows. Chrome extension for CRM/Gmail integration with business process automation and third-party API integration."
+          },
+          {
+            "company": "Anikop",
+            "role": "Developer Analyst",
+            "location": "Lyon, France",
+            "summary": "Design and development of JavaScript web and mobile applications, Node.js APIs through to production deployment. Agile methodology (SCRUM)."
+          },
+          {
+            "company": "Méphistophélès Pub",
+            "role": "Web Developer",
+            "location": "Lyon, France",
+            "summary": "Creation of multilingual showcase website (FR/EN) with DatoCMS headless CMS. Production management with Vercel."
+          },
+          {
+            "company": "Majelice",
+            "role": "Front-End React Developer",
+            "location": "Lyon, France",
+            "summary": "Front-end redesign of general assembly and digital voting application. Focus on UX and security."
+          },
+          {
+            "company": "Brightceps",
+            "role": "Web Developer",
+            "location": "Lyon, France",
+            "summary": "Sports coaching application in React. Organization and project management."
+          },
+          {
+            "company": "Silico",
+            "role": "Front-End Vue.js Developer",
+            "location": "Lyon, France",
+            "summary": "Mockup integration and front-end/back-end interaction development for healthcare application."
+          }
+        ],
+        "education": [
+          {
+            "institution": "ADREC - Bachelor's +3/4",
+            "degree": "Application Designer Developer"
+          },
+          {
+            "institution": "Professional Certificate",
+            "degree": "Web and Mobile Web Developer"
+          }
+        ],
+        "languages": [
+          {
+            "language": "French",
+            "level": "Native"
+          },
+          {
+            "language": "English",
+            "level": "Professional"
+          }
+        ],
+        "contributions": [
+          {
+            "type": "Mentoring",
+            "date": "2024/2025",
+            "description": "Mentoring of 2 junior developers, now employed"
+          },
+          {
+            "type": "Speaker",
+            "date": "March 2023",
+            "description": "ApéroWeb Lyon: Introduction to headless CMS with DatoCMS & NextJS"
+          }
+        ]
+      }
     },
     "contact": {
       "title": "Contact",
