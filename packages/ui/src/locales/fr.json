@@ -29,9 +29,9 @@
     "description": "Du code au déploiement. Applications accessibles, interfaces soignées, infrastructure maîtrisée."
   },
   "nav": {
-    "portfolio": {
-      "title": "Portfolio",
-      "description": "Projets & compétences"
+    "about": {
+      "title": "À propos",
+      "description": "Qui suis-je"
     },
     "blog": {
       "title": "Blog",
@@ -120,22 +120,40 @@
     "title": "Flux RSS"
   },
   "pages": {
-    "portfolio": {
-      "title": "Portfolio",
-      "subtitle": "Architecture cloud, automatisation et développement web moderne",
-      "skills": "Compétences",
-      "projects": "Projets",
-      "skillsList": {
-        "frontend": "Next.js, React, TypeScript",
-        "backend": "Node.js, Python",
-        "cloud": "AWS, Vercel, Cloudflare",
-        "devops": "Docker, CI/CD, Turborepo"
+    "about": {
+      "title": "À propos",
+      "crossroad": {
+        "title": "Un chemin de traverse",
+        "p1": "J'ai été soudeur pendant plusieurs années. La chaleur de l'atelier, le masque, l'odeur du métal. Un métier physique, concret, où le manque de précision ne pardonne pas.",
+        "p2": "Mais à un moment donné, j'ai eu besoin d'autre chose. L'impression d'avoir fait le tour, de ne plus apprendre. Je voulais me remettre en difficulté, me tourner vers un domaine plus intellectuel. L'idée a mûri longtemps.",
+        "p3": "En 2017, l'opportunité s'est présentée. J'ai tout repris à zéro et je me suis formé au développement."
       },
-      "projectsList": {
-        "platform": "Plateforme portfolio multi-tenant",
-        "iac": "Infrastructure as Code",
-        "distributed": "Systèmes distribués",
-        "automation": "Automatisation DevOps"
+      "building": {
+        "title": "Construire autrement",
+        "p1": "Aujourd'hui, je façonne toujours. Des applications web, des pipelines de déploiement, des infrastructures. Le geste a changé, pas l'exigence.",
+        "p2": "Ce qui me plaît dans ce métier, c'est qu'on ne cesse jamais d'apprendre. Chaque projet pose de nouveaux défis, donc de nouvelles solutions à implémenter. Le confort n'existe pas — et c'est ce que je cherchais.",
+        "p3": "Une soudure mal faite, ça casse. Un code mal pensé aussi, mais plus tard, plus sournoisement. Le sens du détail reste le même.",
+        "p4": "Je crois au web bien fait. Accessible, pour que tout le monde puisse l'utiliser. Sobre, pour ne pas gaspiller des ressources inutilement. Un code propre, une page légère, un impact mesuré — c'est aussi ça, être artisan développeur."
+      },
+      "transmit": {
+        "title": "Transmettre",
+        "p1": "À mes débuts, la communauté m'a aidé. Aujourd'hui, j'essaie de rendre la pareille.",
+        "p2": "J'accompagne des développeurs juniors. Deux d'entre eux sont désormais en poste. J'ai aussi donné une conférence pour partager mes connaissances."
+      },
+      "breathe": {
+        "title": "Respirer",
+        "p1": "Pour déconnecter, il y a la montagne, le ciel étoilé, l'appareil photo. Une autre façon de cadrer le monde.",
+        "p2Start": "J'en ai gardé ",
+        "p2Link": "quelques-unes",
+        "p2End": "."
+      },
+      "next": {
+        "title": "La suite",
+        "p1": "Les meilleures collaborations commencent souvent par un premier échange."
+      },
+      "cta": {
+        "contact": "Me contacter",
+        "appointment": "Prendre rendez-vous"
       }
     },
     "blog": {

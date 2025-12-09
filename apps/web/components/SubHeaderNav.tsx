@@ -7,13 +7,13 @@ import { getSubdomainUrl, ValidSubdomain } from '@/lib/domains/config';
 const navItems: {
   subdomain: ValidSubdomain;
   labelKey:
-    | 'nav.portfolio.title'
+    | 'nav.about.title'
     | 'nav.blog.title'
     | 'nav.cv.title'
     | 'nav.contact.title'
     | 'nav.rdv.title';
 }[] = [
-  { subdomain: 'portfolio', labelKey: 'nav.portfolio.title' },
+  { subdomain: 'about', labelKey: 'nav.about.title' },
   { subdomain: 'blog', labelKey: 'nav.blog.title' },
   { subdomain: 'cv', labelKey: 'nav.cv.title' },
   { subdomain: 'contact', labelKey: 'nav.contact.title' },

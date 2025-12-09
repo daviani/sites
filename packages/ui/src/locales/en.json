@@ -29,9 +29,9 @@
     "description": "From code to deployment. Accessible applications, polished interfaces, mastered infrastructure."
   },
   "nav": {
-    "portfolio": {
-      "title": "Portfolio",
-      "description": "Projects & skills"
+    "about": {
+      "title": "About",
+      "description": "About me"
     },
     "blog": {
       "title": "Blog",
@@ -120,22 +120,40 @@
     "title": "RSS Feed"
   },
   "pages": {
-    "portfolio": {
-      "title": "Portfolio",
-      "subtitle": "Cloud architecture, automation and modern web development",
-      "skills": "Skills",
-      "projects": "Projects",
-      "skillsList": {
-        "frontend": "Next.js, React, TypeScript",
-        "backend": "Node.js, Python",
-        "cloud": "AWS, Vercel, Cloudflare",
-        "devops": "Docker, CI/CD, Turborepo"
+    "about": {
+      "title": "About",
+      "crossroad": {
+        "title": "A different path",
+        "p1": "I was a welder for several years. The heat of the workshop, the mask, the smell of metal. A physical, hands-on trade where a lack of precision doesn't forgive.",
+        "p2": "But at some point, I needed something else. The feeling of having reached a plateau, of no longer learning. I wanted to challenge myself again, to turn toward a more intellectual field. The idea matured over time.",
+        "p3": "In 2017, the opportunity came. I started from scratch and trained in software development."
       },
-      "projectsList": {
-        "platform": "Multi-tenant portfolio platform",
-        "iac": "Infrastructure as Code",
-        "distributed": "Distributed systems",
-        "automation": "DevOps automation"
+      "building": {
+        "title": "Building differently",
+        "p1": "Today, I still shape things. Web applications, deployment pipelines, infrastructure. The craft has changed, but not the standards.",
+        "p2": "What I love about this job is that you never stop learning. Every project brings new challenges, new solutions to implement. Comfort doesn't exist — and that's exactly what I was looking for.",
+        "p3": "A bad weld breaks. Poorly thought-out code does too, but later, more insidiously. The attention to detail remains the same.",
+        "p4": "I believe in well-made web. Accessible, so everyone can use it. Lean, to avoid wasting resources unnecessarily. Clean code, lightweight pages, measured impact — that's also what being a developer craftsman means."
+      },
+      "transmit": {
+        "title": "Giving back",
+        "p1": "When I started, the community helped me. Today, I try to return the favor.",
+        "p2": "I mentor junior developers. Two of them are now employed. I've also given a talk to share my knowledge."
+      },
+      "breathe": {
+        "title": "Breathe",
+        "p1": "To disconnect, there's the mountains, the starry sky, the camera. Another way to frame the world.",
+        "p2Start": "I've kept ",
+        "p2Link": "a few of them",
+        "p2End": "."
+      },
+      "next": {
+        "title": "What's next",
+        "p1": "The best collaborations often start with a first conversation."
+      },
+      "cta": {
+        "contact": "Contact me",
+        "appointment": "Book an appointment"
       }
     },
     "blog": {

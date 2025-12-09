@@ -16,8 +16,8 @@ describe('Subdomain Routing', () => {
       expect(getSubdomain('blog.daviani.dev')).toBe('blog');
     });
 
-    it('returns subdomain for portfolio.daviani.dev', () => {
-      expect(getSubdomain('portfolio.daviani.dev')).toBe('portfolio');
+    it('returns subdomain for about.daviani.dev', () => {
+      expect(getSubdomain('about.daviani.dev')).toBe('about');
     });
 
     it('returns subdomain for cv.daviani.dev', () => {
@@ -50,8 +50,8 @@ describe('Subdomain Routing', () => {
       expect(getRewritePath('blog')).toBe('/blog');
     });
 
-    it('returns /portfolio for portfolio subdomain', () => {
-      expect(getRewritePath('portfolio')).toBe('/portfolio');
+    it('returns /about for about subdomain', () => {
+      expect(getRewritePath('about')).toBe('/about');
     });
 
     it('returns /cv for cv subdomain', () => {
@@ -88,9 +88,9 @@ describe('Subdomain Routing', () => {
       expect(url).toMatch(/^https?:\/\//);
     });
 
-    it('returns URL for portfolio subdomain', () => {
-      const url = getSubdomainUrl('portfolio');
-      expect(url).toContain('portfolio');
+    it('returns URL for about subdomain', () => {
+      const url = getSubdomainUrl('about');
+      expect(url).toContain('about');
     });
 
     it('returns URL for cv subdomain', () => {
