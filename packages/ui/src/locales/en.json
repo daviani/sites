@@ -64,6 +64,10 @@
     "help": {
       "title": "Help",
       "description": "Navigation help"
+    },
+    "photos": {
+      "title": "Photos",
+      "description": "Photo gallery"
     }
   },
   "comments": {
@@ -493,6 +497,10 @@
       "themeText": "Toggle between light and dark mode using the sun/moon button in the header. Your preference is saved automatically.",
       "language": "Language",
       "languageText": "Switch between French and English using the flag button in the header."
+    },
+    "photos": {
+      "title": "Photo Gallery",
+      "subtitle": "Moments captured between mountains and nature"
     }
   }
 }
