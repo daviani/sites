@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslation, Breadcrumb } from '@daviani/ui';
+import { getSubdomainUrl } from '@/lib/domains/config';
 
 export default function AboutPage() {
   const { t } = useTranslation();
@@ -74,7 +75,7 @@ export default function AboutPage() {
             <p className="text-nord-3 dark:text-nord-4 leading-relaxed">
               {t('pages.about.breathe.p2Start')}
               <a
-                href="/photos"
+                href={getSubdomainUrl('photos')}
                 className="text-nord-10 hover:text-nord-9 underline underline-offset-2 transition-colors"
               >
                 {t('pages.about.breathe.p2Link')}
@@ -94,13 +95,13 @@ export default function AboutPage() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
             <a
-              href="/contact"
+              href={getSubdomainUrl('contact')}
               className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg bg-nord-10 text-white hover:bg-nord-9 transition-colors focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2"
             >
               {t('pages.about.cta.contact')}
             </a>
             <a
-              href="/rdv"
+              href={getSubdomainUrl('rdv')}
               className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg border-2 border-nord-10 text-nord-10 dark:text-nord-8 hover:bg-nord-10 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2"
             >
               {t('pages.about.cta.appointment')}
