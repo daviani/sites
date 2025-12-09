@@ -64,6 +64,10 @@
     "help": {
       "title": "Aide",
       "description": "Aide à la navigation"
+    },
+    "photos": {
+      "title": "Photos",
+      "description": "Galerie photos"
     }
   },
   "comments": {
@@ -493,6 +497,10 @@
       "themeText": "Basculez entre le mode clair et sombre avec le bouton soleil/lune dans l'en-tête. Votre préférence est sauvegardée automatiquement.",
       "language": "Langue",
       "languageText": "Changez entre le français et l'anglais avec le bouton drapeau dans l'en-tête."
+    },
+    "photos": {
+      "title": "Galerie photos",
+      "subtitle": "Instants capturés entre montagne et nature"
     }
   }
 }
