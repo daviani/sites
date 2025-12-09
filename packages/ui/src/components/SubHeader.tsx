@@ -26,7 +26,7 @@ export function SubHeader({ items, currentPath, showSeparators = false }: SubHea
   return (
     <nav
       className="hidden md:block fixed top-[86px] left-[10px] right-[10px] z-40 shadow-lg backdrop-blur-md bg-white/40 dark:bg-nord-3/50 rounded-[2.5rem]"
-      aria-label={t('nav.portfolio.title')}
+      aria-label={t('footer.navigation')}
     >
       <div className="container mx-auto px-4">
         <ul className="flex items-center justify-center gap-1 py-2">

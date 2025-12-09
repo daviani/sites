@@ -65,14 +65,14 @@ describe('useTranslation Hook', () => {
     it('returns nested translations', () => {
       const { result } = renderHook(() => useTranslation(), { wrapper });
 
-      expect(result.current.t('nav.portfolio.title')).toBe('Portfolio');
-      expect(result.current.t('nav.portfolio.description')).toBe('Projets & compétences');
+      expect(result.current.t('nav.about.title')).toBe('À propos');
+      expect(result.current.t('nav.about.description')).toBe('Qui suis-je');
     });
 
     it('returns deeply nested translations', () => {
       const { result } = renderHook(() => useTranslation(), { wrapper });
 
-      expect(result.current.t('pages.portfolio.skillsList.frontend')).toBe('Next.js, React, TypeScript');
+      expect(result.current.t('pages.about.crossroad.title')).toBe('Un chemin de traverse');
     });
 
     it('returns key if translation not found', () => {

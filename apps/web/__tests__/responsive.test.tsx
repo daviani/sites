@@ -4,7 +4,7 @@ import { Header, Footer, SubHeader } from '@daviani/ui';
 import { HeroSection } from '@/components/HeroSection';
 
 const navItems = [
-  { href: '/portfolio', labelKey: 'nav.portfolio.title' as const },
+  { href: '/about', labelKey: 'nav.about.title' as const },
   { href: '/blog', labelKey: 'nav.blog.title' as const },
   { href: '/cv', labelKey: 'nav.cv.title' as const },
 ];
@@ -80,9 +80,9 @@ describe('Responsive Design Tests', () => {
 
       // Click a navigation link
       const navLinks = screen.getAllByRole('link');
-      const portfolioLink = navLinks.find(link => link.getAttribute('href') === '/portfolio');
-      if (portfolioLink) {
-        fireEvent.click(portfolioLink);
+      const aboutLink = navLinks.find(link => link.getAttribute('href') === '/about');
+      if (aboutLink) {
+        fireEvent.click(aboutLink);
       }
 
       // Menu should be closed
@@ -96,7 +96,7 @@ describe('Responsive Design Tests', () => {
   describe('SubHeader Responsive', () => {
     it('has hidden md:block classes (hidden on mobile, visible on desktop)', () => {
       const { container } = render(
-        <SubHeader items={navItems} currentPath="/portfolio" />
+        <SubHeader items={navItems} currentPath="/about" />
       );
       const nav = container.querySelector('nav');
       expect(nav).toHaveClass('hidden');
@@ -105,7 +105,7 @@ describe('Responsive Design Tests', () => {
 
     it('is positioned below header with correct top offset', () => {
       const { container } = render(
-        <SubHeader items={navItems} currentPath="/portfolio" />
+        <SubHeader items={navItems} currentPath="/about" />
       );
       const nav = container.querySelector('nav');
       expect(nav?.className).toMatch(/top-\[86px\]/);
@@ -113,7 +113,7 @@ describe('Responsive Design Tests', () => {
 
     it('has lower z-index than header (z-40 vs z-50)', () => {
       const { container } = render(
-        <SubHeader items={navItems} currentPath="/portfolio" />
+        <SubHeader items={navItems} currentPath="/about" />
       );
       const nav = container.querySelector('nav');
       expect(nav).toHaveClass('z-40');
@@ -121,7 +121,7 @@ describe('Responsive Design Tests', () => {
 
     it('navigation list uses horizontal flexbox layout', () => {
       const { container } = render(
-        <SubHeader items={navItems} currentPath="/portfolio" />
+        <SubHeader items={navItems} currentPath="/about" />
       );
       const ul = container.querySelector('ul');
       expect(ul).toHaveClass('flex');

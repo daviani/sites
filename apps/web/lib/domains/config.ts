@@ -3,7 +3,7 @@
  */
 export const VALID_SUBDOMAINS = [
   'blog',
-  'portfolio',
+  'about',
   'cv',
   'contact',
   'rdv',

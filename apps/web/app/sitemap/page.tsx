@@ -13,7 +13,7 @@ export default function SitemapPage() {
   const { t } = useTranslation();
 
   const mainPages: PageLink[] = [
-    { subdomain: 'portfolio', titleKey: 'nav.portfolio.title', descKey: 'nav.portfolio.description' },
+    { subdomain: 'about', titleKey: 'nav.about.title', descKey: 'nav.about.description' },
     { subdomain: 'blog', titleKey: 'nav.blog.title', descKey: 'nav.blog.description' },
     { subdomain: 'cv', titleKey: 'nav.cv.title', descKey: 'nav.cv.description' },
     { subdomain: 'contact', titleKey: 'nav.contact.title', descKey: 'nav.contact.description' },

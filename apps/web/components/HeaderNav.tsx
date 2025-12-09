@@ -1,11 +1,12 @@
+
 'use client';
 
 import { usePathname } from 'next/navigation';
 import { Header } from '@daviani/ui';
 import { getSubdomainUrl, getBaseUrl, ValidSubdomain } from '@/lib/domains/config';
 
-const navItems: { subdomain: ValidSubdomain; labelKey: 'nav.portfolio.title' | 'nav.blog.title' | 'nav.cv.title' | 'nav.contact.title' | 'nav.rdv.title' }[] = [
-  { subdomain: 'portfolio', labelKey: 'nav.portfolio.title' },
+const navItems: { subdomain: ValidSubdomain; labelKey: 'nav.about.title' | 'nav.blog.title' | 'nav.cv.title' | 'nav.contact.title' | 'nav.rdv.title' }[] = [
+  { subdomain: 'about', labelKey: 'nav.about.title' },
   { subdomain: 'blog', labelKey: 'nav.blog.title' },
   { subdomain: 'cv', labelKey: 'nav.cv.title' },
   { subdomain: 'contact', labelKey: 'nav.contact.title' },

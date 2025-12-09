@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from './helpers/test-utils';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import RootPage from '@/app/page';
-import PortfolioPage from '@/app/portfolio/page';
+import AboutPage from '@/app/about/page';
 import { Header, Footer, SubHeader } from '@daviani/ui';
 
 expect.extend(toHaveNoViolations);
@@ -61,7 +61,7 @@ const NORD_COLORS = {
 };
 
 const navItems = [
-  { href: '/portfolio', labelKey: 'nav.portfolio.title' as const },
+  { href: '/about', labelKey: 'nav.about.title' as const },
   { href: '/blog', labelKey: 'nav.blog.title' as const },
   { href: '/cv', labelKey: 'nav.cv.title' as const },
   { href: '/contact', labelKey: 'nav.contact.title' as const },
@@ -80,7 +80,7 @@ describe('RGAA AAA - Accessibility Tests', () => {
     });
 
     it('Portfolio page has no accessibility violations', async () => {
-      const { container } = render(<PortfolioPage />);
+      const { container } = render(<AboutPage />);
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
@@ -92,13 +92,13 @@ describe('RGAA AAA - Accessibility Tests', () => {
     });
 
     it('Header with navigation has no accessibility violations', async () => {
-      const { container } = render(<Header navItems={navItems} currentPath="/portfolio" />);
+      const { container } = render(<Header navItems={navItems} currentPath="/about" />);
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
 
     it('SubHeader has no accessibility violations', async () => {
-      const { container } = render(<SubHeader items={navItems} currentPath="/portfolio" />);
+      const { container } = render(<SubHeader items={navItems} currentPath="/about" />);
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
@@ -217,7 +217,7 @@ describe('RGAA AAA - Accessibility Tests', () => {
       });
 
       it('Portfolio page has exactly one h1', () => {
-        render(<PortfolioPage />);
+        render(<AboutPage />);
         const h1Elements = screen.getAllByRole('heading', { level: 1 });
         expect(h1Elements).toHaveLength(1);
       });
@@ -321,10 +321,10 @@ describe('RGAA AAA - Accessibility Tests', () => {
     });
 
     it('Current page link has aria-current="page"', () => {
-      const { container } = render(<SubHeader items={navItems} currentPath="/portfolio" />);
+      const { container } = render(<SubHeader items={navItems} currentPath="/about" />);
       const currentLink = container.querySelector('a[aria-current="page"]');
       expect(currentLink).toBeInTheDocument();
-      expect(currentLink).toHaveAttribute('href', '/portfolio');
+      expect(currentLink).toHaveAttribute('href', '/about');
     });
 
     it('Home link has accessible name', () => {
@@ -373,7 +373,7 @@ describe('RGAA AAA - Accessibility Tests', () => {
       const { container } = render(<SubHeader items={navItems} currentPath="/" />);
       const links = Array.from(container.querySelectorAll('a'));
       const hrefs = links.map((link) => link.getAttribute('href'));
-      expect(hrefs).toEqual(['/portfolio', '/blog', '/cv', '/contact', '/rdv']);
+      expect(hrefs).toEqual(['/about', '/blog', '/cv', '/contact', '/rdv']);
     });
   });
 
