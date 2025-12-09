@@ -7,6 +7,7 @@ export const VALID_SUBDOMAINS = [
   'cv',
   'contact',
   'rdv',
+  'photos',
   'legal',
   'accessibility',
   'sitemap',
