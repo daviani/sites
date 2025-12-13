@@ -2,7 +2,7 @@
 
 import { memo } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import type { Photo } from './types';
 
 interface PhotoCardProps {
@@ -17,12 +17,13 @@ export const PhotoCard = memo(function PhotoCard({
   index,
 }: PhotoCardProps) {
   const aspectRatio = photo.width / photo.height;
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.05, ease: 'easeOut' }}
+      transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.4, delay: index * 0.05, ease: 'easeOut' }}
       className="w-full"
     >
       <button

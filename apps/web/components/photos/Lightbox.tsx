@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import type { Photo } from './types';
 
 interface LightboxProps {
@@ -24,8 +24,10 @@ export function Lightbox({
 }: LightboxProps) {
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   const minSwipeDistance = 50;
+  const instantTransition = { duration: 0 };
 
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null);
@@ -63,10 +65,10 @@ export function Lightbox({
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
+      initial={prefersReducedMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
+      exit={prefersReducedMotion ? undefined : { opacity: 0 }}
+      transition={prefersReducedMotion ? instantTransition : { duration: 0.2 }}
       className="fixed inset-0 z-50 flex items-center justify-center"
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.95)' }}
       role="dialog"
@@ -79,9 +81,9 @@ export function Lightbox({
     >
       {/* Close button */}
       <motion.button
-        initial={{ opacity: 0, y: -20 }}
+        initial={prefersReducedMotion ? false : { opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
+        transition={prefersReducedMotion ? instantTransition : { delay: 0.1 }}
         onClick={onClose}
         className="absolute top-6 right-6 p-3 text-nord-4 hover:text-nord-6 transition-colors z-10
           focus:outline-none focus:ring-2 focus:ring-nord-6 rounded-full hover:bg-nord-3/20"
@@ -94,9 +96,9 @@ export function Lightbox({
 
       {/* Navigation - Hidden on mobile (use swipe) */}
       <motion.button
-        initial={{ opacity: 0, x: -20 }}
+        initial={prefersReducedMotion ? false : { opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.15 }}
+        transition={prefersReducedMotion ? instantTransition : { delay: 0.15 }}
         onClick={(e: React.MouseEvent) => { e.stopPropagation(); onPrev(); }}
         className="absolute left-6 p-3 text-nord-4 hover:text-nord-6 transition-colors
           focus:outline-none focus:ring-2 focus:ring-nord-6 rounded-full hover:bg-nord-3/20
@@ -109,9 +111,9 @@ export function Lightbox({
       </motion.button>
 
       <motion.button
-        initial={{ opacity: 0, x: 20 }}
+        initial={prefersReducedMotion ? false : { opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.15 }}
+        transition={prefersReducedMotion ? instantTransition : { delay: 0.15 }}
         onClick={(e: React.MouseEvent) => { e.stopPropagation(); onNext(); }}
         className="absolute right-6 p-3 text-nord-4 hover:text-nord-6 transition-colors
           focus:outline-none focus:ring-2 focus:ring-nord-6 rounded-full hover:bg-nord-3/20
@@ -126,10 +128,10 @@ export function Lightbox({
       {/* Photo container */}
       <motion.div
         key={photo.id}
-        initial={{ opacity: 0, scale: 0.95 }}
+        initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.95 }}
-        transition={{ duration: 0.2 }}
+        exit={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.95 }}
+        transition={prefersReducedMotion ? instantTransition : { duration: 0.2 }}
         className="relative max-w-[90vw] max-h-[85vh]"
         onClick={(e: React.MouseEvent) => e.stopPropagation()}
       >
@@ -145,9 +147,9 @@ export function Lightbox({
 
       {/* Counter - minimal */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
+        transition={prefersReducedMotion ? instantTransition : { delay: 0.2 }}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 text-nord-4 text-sm font-medium tracking-wider"
       >
         {currentIndex + 1} / {total}
