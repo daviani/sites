@@ -500,7 +500,16 @@
     },
     "photos": {
       "title": "Photo Gallery",
-      "subtitle": "Moments captured between mountains and nature"
+      "subtitle": "Moments captured between mountains and nature",
+      "noPhotos": "No photos in this category",
+      "tags": {
+        "all": "All",
+        "nature": "Nature",
+        "nocturne": "Night",
+        "macro": "Macro",
+        "portrait": "Portrait",
+        "urbain": "Urban"
+      }
     }
   }
 }
