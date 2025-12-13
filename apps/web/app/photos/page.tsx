@@ -40,6 +40,7 @@ export default function PhotosPage() {
 
   // Shuffle photos only on client mount to avoid hydration mismatch
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Intentional: Math.random() must run client-side only
     setShuffledPhotos(shuffleArray(PHOTOS));
   }, []);
 

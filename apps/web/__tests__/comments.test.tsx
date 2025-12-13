@@ -1,7 +1,7 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { Comments } from '@/components/blog/Comments';
 
-// Mock Giscus component
+// Mock Giscus component - defined inline to avoid hoisting issues
 jest.mock('@giscus/react', () => ({
   __esModule: true,
   default: () => <div data-testid="giscus-widget">Giscus Widget</div>,
@@ -9,9 +9,12 @@ jest.mock('@giscus/react', () => ({
 
 // Mock next/dynamic to load components synchronously in tests
 jest.mock('next/dynamic', () => {
-  return function dynamic(importFn: () => Promise<{ default: React.ComponentType }>) {
-    const Component = require('@giscus/react').default;
-    return Component;
+  return function dynamic() {
+    function MockedComponent() {
+      return <div data-testid="giscus-widget">Giscus Widget</div>;
+    }
+    MockedComponent.displayName = 'MockedGiscus';
+    return MockedComponent;
   };
 });
 
