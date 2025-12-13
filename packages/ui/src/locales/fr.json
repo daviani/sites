@@ -500,7 +500,16 @@
     },
     "photos": {
       "title": "Galerie photos",
-      "subtitle": "Instants capturés entre montagne et nature"
+      "subtitle": "Instants capturés entre montagne et nature",
+      "noPhotos": "Aucune photo dans cette catégorie",
+      "tags": {
+        "all": "Toutes",
+        "nature": "Nature",
+        "nocturne": "Nocturne",
+        "macro": "Macro",
+        "portrait": "Portrait",
+        "urbain": "Urbain"
+      }
     }
   }
 }
