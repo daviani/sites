@@ -20,6 +20,8 @@
     "@vercel/analytics": "^1.5.0",
     "@vercel/kv": "^3.0.0",
     "@vercel/speed-insights": "^1.2.0",
+    "fast-average-color": "^9.5.0",
+    "framer-motion": "^12.23.26",
     "next": "^16.0.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
