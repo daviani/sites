@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState, ReactNode, useCallback } from 'react';
+import { getCookieDomain } from '../utils/cookies';
 
 export type Theme = 'light' | 'dark';
 
@@ -26,29 +27,6 @@ function applyTheme(theme: Theme) {
 function getSystemTheme(): Theme {
   if (typeof window === 'undefined') return 'light';
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-}
-
-function getCookieDomain(): string {
-  if (typeof window === 'undefined') return '';
-  const hostname = window.location.hostname;
-
-  // localhost sans sous-domaine -> pas de domain
-  if (hostname === 'localhost') {
-    return '';
-  }
-
-  // *.localhost (ex: portfolio.localhost) -> domain=localhost
-  if (hostname.endsWith('.localhost')) {
-    return 'localhost';
-  }
-
-  // Production: *.daviani.dev -> domain=.daviani.dev
-  const parts = hostname.split('.');
-  if (parts.length >= 2) {
-    return '.' + parts.slice(-2).join('.');
-  }
-
-  return '';
 }
 
 function getStoredTheme(): Theme | null {
