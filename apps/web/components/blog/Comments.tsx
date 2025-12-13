@@ -1,8 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import Giscus from '@giscus/react';
+import dynamic from 'next/dynamic';
 import { useTheme, useTranslation } from '@daviani/ui';
+
+const Giscus = dynamic(() => import('@giscus/react').then(mod => mod.default), {
+  ssr: false,
+  loading: () => (
+    <div className="flex justify-center py-8">
+      <div className="animate-pulse text-nord-3 dark:text-nord-4">Chargement des commentaires...</div>
+    </div>
+  ),
+});
 
 export function Comments() {
   const [hasConsent, setHasConsent] = useState(false);
