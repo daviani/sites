@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState, ReactNode, useCallback } from 'react';
+import { getCookieDomain } from '../utils/cookies';
 
 export type Language = 'fr' | 'en';
 
@@ -14,26 +15,6 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | null>(null);
 
 const LANGUAGE_COOKIE_NAME = 'language';
-
-function getCookieDomain(): string {
-  if (typeof window === 'undefined') return '';
-  const hostname = window.location.hostname;
-
-  if (hostname === 'localhost') {
-    return '';
-  }
-
-  if (hostname.endsWith('.localhost')) {
-    return 'localhost';
-  }
-
-  const parts = hostname.split('.');
-  if (parts.length >= 2) {
-    return '.' + parts.slice(-2).join('.');
-  }
-
-  return '';
-}
 
 function getStoredLanguage(): Language | null {
   if (typeof window === 'undefined') return null;
