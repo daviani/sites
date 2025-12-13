@@ -21,6 +21,7 @@ export type ValidSubdomain = (typeof VALID_SUBDOMAINS)[number];
  */
 const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'daviani.dev';
 const PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL || 'https';
+const PORT = process.env.NEXT_PUBLIC_PORT || '';
 
 /**
  * Main domain configuration
@@ -28,17 +29,24 @@ const PROTOCOL = process.env.NEXT_PUBLIC_PROTOCOL || 'https';
 export const MAIN_DOMAIN = DOMAIN;
 
 /**
- * Returns the base URL (protocol + domain)
+ * Returns the port suffix for URLs (e.g., ":3000" in dev, "" in prod)
+ */
+function getPortSuffix(): string {
+  return PORT ? `:${PORT}` : '';
+}
+
+/**
+ * Returns the base URL (protocol + domain + port)
  */
 export function getBaseUrl(): string {
-  return `${PROTOCOL}://${DOMAIN}`;
+  return `${PROTOCOL}://${DOMAIN}${getPortSuffix()}`;
 }
 
 /**
  * Returns the full URL for a subdomain
  */
 export function getSubdomainUrl(subdomain: ValidSubdomain): string {
-  return `${PROTOCOL}://${subdomain}.${DOMAIN}`;
+  return `${PROTOCOL}://${subdomain}.${DOMAIN}${getPortSuffix()}`;
 }
 
 /**
