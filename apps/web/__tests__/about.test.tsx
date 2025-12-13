@@ -1,6 +1,12 @@
 import { render, screen } from './helpers/test-utils';
 import AboutPage from '@/app/about/page';
 
+// Mock getSubdomainUrl to return predictable URLs in tests
+jest.mock('@/lib/domains/config', () => ({
+  ...jest.requireActual('@/lib/domains/config'),
+  getSubdomainUrl: (subdomain: string) => `/${subdomain}`,
+}));
+
 describe('About Page', () => {
   it('renders the main heading', () => {
     render(<AboutPage />);
