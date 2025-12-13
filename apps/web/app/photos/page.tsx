@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect, useMemo } from 'react';
+import { useState, useCallback, useEffect, useMemo, memo } from 'react';
 import { Breadcrumb, useTranslation } from '@daviani/ui';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -42,7 +42,7 @@ function shuffleArray<T>(array: T[]): T[] {
   return shuffled;
 }
 
-function TagFilter({
+const TagFilter = memo(function TagFilter({
   tags,
   activeTag,
   onTagChange,
@@ -80,9 +80,9 @@ function TagFilter({
       ))}
     </div>
   );
-}
+});
 
-function PhotoCard({
+const PhotoCard = memo(function PhotoCard({
   photo,
   onClick,
   index,
@@ -133,7 +133,7 @@ function PhotoCard({
       </button>
     </motion.div>
   );
-}
+});
 
 function Lightbox({
   photo,
