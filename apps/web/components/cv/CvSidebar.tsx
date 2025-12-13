@@ -2,6 +2,7 @@
 
 import { useTranslation } from '@daviani/ui';
 import { getCvStaticData, getAllSkills } from '@/lib/content/cv';
+import Image from 'next/image';
 
 interface TranslatedExpertise {
   title: string;
@@ -39,17 +40,24 @@ export function CvSidebar() {
       {/* Profile Section */}
       <div className="relative text-center" style={{ padding: '28px 18px 24px' }}>
         {staticData.personal.photo ? (
-          <img
-            src={staticData.personal.photo}
-            alt={name}
-            className="mx-auto mb-4 block rounded-full object-cover"
+          <div
+            className="relative mx-auto mb-4 overflow-hidden rounded-full"
             style={{
               width: '100px',
               height: '100px',
               border: '3px solid rgba(136, 192, 208, 0.3)',
               boxShadow: '0 6px 20px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.2)',
             }}
-          />
+          >
+            <Image
+              src={staticData.personal.photo}
+              alt={name}
+              fill
+              className="object-cover"
+              sizes="100px"
+              priority
+            />
+          </div>
         ) : (
           <div
             className="mx-auto mb-4 flex items-center justify-center rounded-full bg-nord-3"
