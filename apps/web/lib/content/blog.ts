@@ -3,18 +3,17 @@ import path from 'node:path';
 import { z } from 'zod';
 
 /**
- * Schema for article metadata validation
+ * Schema for article metadata validation (i18n format)
  */
 const metaSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  date: z.string(),
-  tags: z.array(z.string()).default([]),
-  lang: z.enum(['fr', 'en']).default('fr'),
-  readingTime: z.string().optional(),
-  status: z.enum(['draft', 'published']).default('draft'),
-  featured: z.boolean().optional(),
   slug: z.string(),
+  publishedAt: z.string(),
+  featured: z.boolean().default(false),
+  titleFr: z.string(),
+  titleEn: z.string(),
+  excerptFr: z.string().default(''),
+  excerptEn: z.string().default(''),
+  tags: z.array(z.string()).default([]),
 });
 
 export type ArticleMeta = z.infer<typeof metaSchema>;
@@ -22,64 +21,145 @@ export type ArticleMeta = z.infer<typeof metaSchema>;
 export interface Article {
   slug: string;
   meta: ArticleMeta;
+  content: string;
+  contentEn?: string;
 }
 
-const BLOG_DIR = path.join(process.cwd(), 'content/blog');
+const POSTS_DIR = path.join(process.cwd(), 'content/posts');
 
 /**
- * Extract meta export from MDX file content
+ * Parse YAML frontmatter from markdoc content
  */
-function extractMeta(content: string, slug: string): ArticleMeta {
-  const metaMatch = content.match(/export\s+const\s+meta\s*=\s*(\{[\s\S]*?\});/);
+function parseFrontmatter(content: string): { data: Record<string, unknown>; content: string } {
+  const frontmatterRegex = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/;
+  const match = content.match(frontmatterRegex);
 
-  if (!metaMatch) {
-    return metaSchema.parse({ slug, title: slug, description: '', date: new Date().toISOString() });
+  if (!match) {
+    return { data: {}, content };
   }
 
-  try {
-    const metaObj = new Function(`return ${metaMatch[1]}`)();
-    return metaSchema.parse({ ...metaObj, slug });
-  } catch {
-    return metaSchema.parse({ slug, title: slug, description: '', date: new Date().toISOString() });
+  const yamlContent = match[1];
+  const markdownContent = match[2];
+
+  // Simple YAML parser for our use case
+  const data: Record<string, unknown> = {};
+  let currentKey = '';
+  let inArray = false;
+  let arrayValues: string[] = [];
+
+  for (const line of yamlContent.split('\n')) {
+    // Array item
+    if (line.startsWith('  - ') && inArray) {
+      arrayValues.push(line.slice(4).trim());
+      continue;
+    }
+
+    // If we were in an array, save it
+    if (inArray && !line.startsWith('  - ')) {
+      data[currentKey] = arrayValues;
+      inArray = false;
+      arrayValues = [];
+    }
+
+    // Key-value pair
+    const kvMatch = line.match(/^(\w+):\s*(.*)$/);
+    if (kvMatch) {
+      const [, key, value] = kvMatch;
+      currentKey = key;
+
+      if (value === '') {
+        // Could be start of array
+        inArray = true;
+        arrayValues = [];
+      } else {
+        // Parse value
+        let parsedValue: string | boolean = value;
+
+        // Remove quotes
+        if ((value.startsWith("'") && value.endsWith("'")) || (value.startsWith('"') && value.endsWith('"'))) {
+          parsedValue = value.slice(1, -1);
+        }
+        // Parse boolean
+        else if (value === 'true') {
+          parsedValue = true;
+        } else if (value === 'false') {
+          parsedValue = false;
+        }
+
+        data[key] = parsedValue;
+      }
+    }
   }
+
+  // Handle trailing array
+  if (inArray) {
+    data[currentKey] = arrayValues;
+  }
+
+  return { data, content: markdownContent };
 }
 
 /**
  * Get all published articles sorted by date (newest first)
  */
 export function getAllArticles(): Article[] {
-  if (!fs.existsSync(BLOG_DIR)) {
+  if (!fs.existsSync(POSTS_DIR)) {
     return [];
   }
 
-  const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith('.mdx'));
+  const files = fs.readdirSync(POSTS_DIR).filter((f) => f.endsWith('.mdoc'));
 
   return files
     .map((file) => {
-      const slug = file.replace(/\.mdx$/, '');
-      const filePath = path.join(BLOG_DIR, file);
-      const content = fs.readFileSync(filePath, 'utf-8');
-      const meta = extractMeta(content, slug);
-      return { slug, meta };
+      const slug = file.replace(/\.mdoc$/, '');
+      const filePath = path.join(POSTS_DIR, file);
+      const fileContent = fs.readFileSync(filePath, 'utf-8');
+      const { data, content } = parseFrontmatter(fileContent);
+
+      // Check for English content
+      const enContentPath = path.join(POSTS_DIR, slug, 'contentEn.mdoc');
+      let contentEn: string | undefined;
+      if (fs.existsSync(enContentPath)) {
+        contentEn = fs.readFileSync(enContentPath, 'utf-8');
+      }
+
+      try {
+        const meta = metaSchema.parse({ ...data, slug });
+        return { slug, meta, content, contentEn };
+      } catch {
+        return null;
+      }
     })
-    .filter((a) => a.meta.status === 'published')
-    .sort((a, b) => (a.meta.date < b.meta.date ? 1 : -1));
+    .filter((article): article is Article => article !== null)
+    .sort((a, b) => (a.meta.publishedAt < b.meta.publishedAt ? 1 : -1));
 }
 
 /**
  * Get a single article by slug
  */
 export function getArticleBySlug(slug: string): Article | null {
-  const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
+  const filePath = path.join(POSTS_DIR, `${slug}.mdoc`);
 
   if (!fs.existsSync(filePath)) {
     return null;
   }
 
-  const content = fs.readFileSync(filePath, 'utf-8');
-  const meta = extractMeta(content, slug);
+  const fileContent = fs.readFileSync(filePath, 'utf-8');
+  const { data, content } = parseFrontmatter(fileContent);
 
-  return { slug, meta };
+  // Check for English content
+  const enContentPath = path.join(POSTS_DIR, slug, 'contentEn.mdoc');
+  let contentEn: string | undefined;
+  if (fs.existsSync(enContentPath)) {
+    contentEn = fs.readFileSync(enContentPath, 'utf-8');
+  }
+
+  try {
+    const meta = metaSchema.parse({ ...data, slug });
+    return { slug, meta, content, contentEn };
+  } catch {
+    return null;
+  }
 }
 
 /**
@@ -89,9 +169,18 @@ export function getAllTags(): string[] {
   const articles = getAllArticles();
   const tags = new Set<string>();
 
-  articles.forEach((article) => {
-    article.meta.tags.forEach((tag) => tags.add(tag));
-  });
+  for (const article of articles) {
+    for (const tag of article.meta.tags) {
+      tags.add(tag);
+    }
+  }
 
   return Array.from(tags).sort();
+}
+
+/**
+ * Get featured articles
+ */
+export function getFeaturedArticles(): Article[] {
+  return getAllArticles().filter((article) => article.meta.featured);
 }
