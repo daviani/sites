@@ -22,9 +22,15 @@ export async function GET(req: NextRequest) {
 
   const response = await handler.GET(req);
 
+  // Log redirect details
+  const location = response.headers.get('location');
+  const setCookies = response.headers.get('set-cookie');
+
   console.log('[Keystatic] Response:', {
     status: response.status,
     statusText: response.statusText,
+    redirectTo: location ? location.substring(0, 150) + '...' : null,
+    setCookies: setCookies ? 'YES' : 'NO',
   });
 
   return response;

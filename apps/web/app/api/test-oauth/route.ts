@@ -34,6 +34,7 @@ export async function GET(req: NextRequest) {
         client_id: clientId,
         client_secret: clientSecret,
         code: code,
+        redirect_uri: 'https://www.daviani.dev/api/keystatic/github/oauth/callback',
       }),
     });
 
