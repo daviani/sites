@@ -13,7 +13,7 @@ export async function GET(request: Request, { params }: RouteParams) {
     return new Response('Article not found', { status: 404 });
   }
 
-  const { title, description } = article.meta;
+  const { titleFr, excerptFr } = article.meta;
 
   return new ImageResponse(
     (
@@ -50,7 +50,7 @@ export async function GET(request: Request, { params }: RouteParams) {
             lineHeight: 1.2,
           }}
         >
-          {title}
+          {titleFr}
         </div>
 
         {/* Description */}
@@ -62,7 +62,7 @@ export async function GET(request: Request, { params }: RouteParams) {
             maxWidth: '900px',
           }}
         >
-          {description}
+          {excerptFr}
         </div>
 
         {/* Domain */}

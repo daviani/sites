@@ -27,27 +27,27 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
   const ogImageUrl = `/api/og/${slug}`;
 
   return {
-    title: article.meta.title,
-    description: article.meta.description,
+    title: article.meta.titleFr,
+    description: article.meta.excerptFr,
     openGraph: {
-      title: article.meta.title,
-      description: article.meta.description,
+      title: article.meta.titleFr,
+      description: article.meta.excerptFr,
       type: 'article',
-      publishedTime: article.meta.date,
+      publishedTime: article.meta.publishedAt,
       tags: article.meta.tags,
       images: [
         {
           url: ogImageUrl,
           width: 1200,
           height: 630,
-          alt: article.meta.title,
+          alt: article.meta.titleFr,
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: article.meta.title,
-      description: article.meta.description,
+      title: article.meta.titleFr,
+      description: article.meta.excerptFr,
       images: [ogImageUrl],
     },
   };
@@ -61,16 +61,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
     notFound();
   }
 
-  // Dynamic import of MDX content
-  let Content: React.ComponentType;
-  try {
-    const mdxModule = await import(`@/content/blog/${slug}.mdx`);
-    Content = mdxModule.default;
-  } catch {
-    notFound();
-  }
-
-  const { meta } = article;
+  const { meta, content } = article;
 
   return (
     <div className="min-h-screen">
@@ -79,28 +70,26 @@ export default async function BlogPost({ params }: BlogPostProps) {
         <div className="mb-8">
           <Breadcrumb
             items={[{ href: '/blog', labelKey: 'nav.blog.title' }]}
-            currentLabel={meta.title}
+            currentLabel={meta.titleFr}
           />
         </div>
 
         {/* Header */}
         <header className="mb-10 p-8 bg-white/40 dark:bg-nord-3/50 backdrop-blur-md rounded-[2.5rem] shadow-lg">
           <h1 className="text-3xl md:text-4xl font-bold mb-4 text-nord-0 dark:text-nord-6">
-            {meta.title}
+            {meta.titleFr}
           </h1>
           <p className="text-lg text-nord-3 dark:text-nord-4 mb-6 leading-relaxed">
-            {meta.description}
+            {meta.excerptFr}
           </p>
           <div className="flex items-center gap-4 text-sm text-nord-3 dark:text-nord-4">
-            <time dateTime={meta.date}>
-              {new Date(meta.date).toLocaleDateString('fr-FR', {
+            <time dateTime={meta.publishedAt}>
+              {new Date(meta.publishedAt).toLocaleDateString('fr-FR', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
               })}
             </time>
-            {meta.readingTime && <span>· {meta.readingTime}</span>}
-            {meta.lang && <span>· {meta.lang.toUpperCase()}</span>}
           </div>
           {meta.tags.length > 0 && (
             <div className="mt-5 flex flex-wrap gap-2">
@@ -119,8 +108,8 @@ export default async function BlogPost({ params }: BlogPostProps) {
 
         {/* Content */}
         <div className="mt-8 p-8 bg-white/40 dark:bg-nord-3/50 backdrop-blur-md rounded-[2.5rem] shadow-lg">
-          <div className="prose-nord">
-            <Content />
+          <div className="prose-nord whitespace-pre-wrap">
+            {content}
           </div>
         </div>
 

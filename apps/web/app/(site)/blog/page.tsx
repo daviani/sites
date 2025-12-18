@@ -78,22 +78,19 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               >
                 <Link href={`/${article.slug}`} className="block cursor-pointer">
                   <h2 className="text-2xl font-bold mb-2 text-nord-0 dark:text-nord-6 hover:text-nord-10 dark:hover:text-nord-8 transition-colors">
-                    {article.meta.title}
+                    {article.meta.titleFr}
                   </h2>
                   <p className="text-nord-0 dark:text-nord-4 mb-4">
-                    {article.meta.description}
+                    {article.meta.excerptFr}
                   </p>
                   <div className="flex items-center gap-4 text-sm text-nord-0 dark:text-nord-4">
-                    <time dateTime={article.meta.date}>
-                      {new Date(article.meta.date).toLocaleDateString('fr-FR', {
+                    <time dateTime={article.meta.publishedAt}>
+                      {new Date(article.meta.publishedAt).toLocaleDateString('fr-FR', {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric',
                       })}
                     </time>
-                    {article.meta.readingTime && (
-                      <span>· {article.meta.readingTime}</span>
-                    )}
                   </div>
                   {article.meta.tags.length > 0 && (
                     <div className="mt-4 flex flex-wrap gap-2">

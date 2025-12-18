@@ -2,7 +2,6 @@ import {
   getAllArticles,
   getArticleBySlug,
   getAllTags,
-  ArticleMeta
 } from '@/lib/content/blog';
 
 describe('Blog Content Loader', () => {
@@ -12,19 +11,12 @@ describe('Blog Content Loader', () => {
       expect(Array.isArray(articles)).toBe(true);
     });
 
-    it('only returns published articles', () => {
-      const articles = getAllArticles();
-      articles.forEach((article) => {
-        expect(article.meta.status).toBe('published');
-      });
-    });
-
     it('returns articles sorted by date (newest first)', () => {
       const articles = getAllArticles();
       if (articles.length > 1) {
         for (let i = 0; i < articles.length - 1; i++) {
-          expect(new Date(articles[i].meta.date).getTime())
-            .toBeGreaterThanOrEqual(new Date(articles[i + 1].meta.date).getTime());
+          expect(new Date(articles[i].meta.publishedAt).getTime())
+            .toBeGreaterThanOrEqual(new Date(articles[i + 1].meta.publishedAt).getTime());
         }
       }
     });
@@ -33,10 +25,9 @@ describe('Blog Content Loader', () => {
       const articles = getAllArticles();
       articles.forEach((article) => {
         expect(article.slug).toBeDefined();
-        expect(article.meta.title).toBeDefined();
-        expect(article.meta.description).toBeDefined();
-        expect(article.meta.date).toBeDefined();
-        expect(article.meta.status).toBe('published');
+        expect(article.meta.titleFr).toBeDefined();
+        expect(article.meta.titleEn).toBeDefined();
+        expect(article.meta.publishedAt).toBeDefined();
       });
     });
   });
