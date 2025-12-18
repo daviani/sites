@@ -42,14 +42,14 @@ export async function GET() {
     .map((article) => {
       const { meta, slug } = article;
       const articleUrl = `${BLOG_URL}/${slug}`;
-      const pubDate = new Date(meta.date).toUTCString();
+      const pubDate = new Date(meta.publishedAt).toUTCString();
 
       return `
     <item>
-      <title>${escapeXml(meta.title)}</title>
+      <title>${escapeXml(meta.titleFr)}</title>
       <link>${articleUrl}</link>
       <guid isPermaLink="true">${articleUrl}</guid>
-      <description>${escapeXml(meta.description)}</description>
+      <description>${escapeXml(meta.excerptFr)}</description>
       <pubDate>${pubDate}</pubDate>
       ${meta.tags.map((tag) => `<category>${escapeXml(tag)}</category>`).join('\n      ')}
     </item>`;

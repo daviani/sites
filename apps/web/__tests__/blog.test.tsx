@@ -1,8 +1,5 @@
 import { getAllArticles, getAllTags } from '@/lib/content/blog';
 
-// Note: BlogPage is an async Server Component that doesn't render well in jsdom
-// Testing the underlying functions instead
-
 describe('Blog Page Functions', () => {
   it('getAllArticles returns an array', () => {
     const articles = getAllArticles();
@@ -19,8 +16,9 @@ describe('Blog Page Functions', () => {
     if (articles.length > 0) {
       const article = articles[0];
       expect(article.meta).toBeDefined();
-      expect(article.meta.title).toBeDefined();
-      expect(article.meta.date).toBeDefined();
+      expect(article.meta.titleFr).toBeDefined();
+      expect(article.meta.titleEn).toBeDefined();
+      expect(article.meta.publishedAt).toBeDefined();
       expect(article.meta.tags).toBeDefined();
       expect(article.slug).toBeDefined();
     }

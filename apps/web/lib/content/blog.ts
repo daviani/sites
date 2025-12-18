@@ -108,30 +108,30 @@ export function getAllArticles(): Article[] {
   }
 
   const files = fs.readdirSync(POSTS_DIR).filter((f) => f.endsWith('.mdoc'));
+  const articles: Article[] = [];
 
-  return files
-    .map((file) => {
-      const slug = file.replace(/\.mdoc$/, '');
-      const filePath = path.join(POSTS_DIR, file);
-      const fileContent = fs.readFileSync(filePath, 'utf-8');
-      const { data, content } = parseFrontmatter(fileContent);
+  for (const file of files) {
+    const slug = file.replace(/\.mdoc$/, '');
+    const filePath = path.join(POSTS_DIR, file);
+    const fileContent = fs.readFileSync(filePath, 'utf-8');
+    const { data, content } = parseFrontmatter(fileContent);
 
-      // Check for English content
-      const enContentPath = path.join(POSTS_DIR, slug, 'contentEn.mdoc');
-      let contentEn: string | undefined;
-      if (fs.existsSync(enContentPath)) {
-        contentEn = fs.readFileSync(enContentPath, 'utf-8');
-      }
+    // Check for English content
+    const enContentPath = path.join(POSTS_DIR, slug, 'contentEn.mdoc');
+    let contentEn: string | undefined;
+    if (fs.existsSync(enContentPath)) {
+      contentEn = fs.readFileSync(enContentPath, 'utf-8');
+    }
 
-      try {
-        const meta = metaSchema.parse({ ...data, slug });
-        return { slug, meta, content, contentEn };
-      } catch {
-        return null;
-      }
-    })
-    .filter((article): article is Article => article !== null)
-    .sort((a, b) => (a.meta.publishedAt < b.meta.publishedAt ? 1 : -1));
+    try {
+      const meta = metaSchema.parse({ ...data, slug });
+      articles.push({ slug, meta, content, contentEn });
+    } catch {
+      // Skip invalid articles
+    }
+  }
+
+  return articles.sort((a, b) => (a.meta.publishedAt < b.meta.publishedAt ? 1 : -1));
 }
 
 /**
