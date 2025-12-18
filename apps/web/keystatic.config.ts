@@ -10,7 +10,7 @@ const storage: LocalConfig['storage'] | GitHubConfig['storage'] =
     ? { kind: 'local' }
     : {
         kind: 'github',
-        repo: 'daviani/daviani.dev',
+        repo: 'daviani/sites',
       };
 
 export default config({
