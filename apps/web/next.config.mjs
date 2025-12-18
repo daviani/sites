@@ -49,11 +49,11 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob:",
               "font-src 'self' data:",
-              "connect-src 'self' https://www.google.com https://vitals.vercel-insights.com https://va.vercel-scripts.com",
+              "connect-src 'self' https://www.google.com https://vitals.vercel-insights.com https://va.vercel-scripts.com https://api.github.com",
               "frame-src https://calendly.com https://giscus.app https://www.google.com https://www.recaptcha.net",
               "frame-ancestors 'self'",
               "base-uri 'self'",
-              "form-action 'self'"
+              "form-action 'self' https://github.com"
             ].join('; ')
           },
           {
