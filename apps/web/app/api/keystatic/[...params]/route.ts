@@ -6,22 +6,21 @@ const handler = makeRouteHandler({
   config,
 });
 
-export async function GET(req: NextRequest, context: { params: Promise<{ params: string[] }> }) {
-  const { params } = await context;
+export async function GET(req: NextRequest) {
   const url = new URL(req.url);
+  const pathMatch = url.pathname.match(/\/api\/keystatic\/(.+)/);
+  const path = pathMatch ? pathMatch[1] : '';
 
   // Debug logging
   console.log('[Keystatic] GET request:', {
-    path: params.params?.join('/'),
+    path,
     hasCode: url.searchParams.has('code'),
+    hasState: url.searchParams.has('state'),
     cookies: req.cookies.getAll().map(c => c.name),
-    headers: {
-      host: req.headers.get('host'),
-      referer: req.headers.get('referer'),
-    }
+    host: req.headers.get('host'),
   });
 
-  const response = await handler.GET(req, context);
+  const response = await handler.GET(req);
 
   console.log('[Keystatic] Response:', {
     status: response.status,
@@ -31,15 +30,17 @@ export async function GET(req: NextRequest, context: { params: Promise<{ params:
   return response;
 }
 
-export async function POST(req: NextRequest, context: { params: Promise<{ params: string[] }> }) {
-  const { params } = await context;
+export async function POST(req: NextRequest) {
+  const url = new URL(req.url);
+  const pathMatch = url.pathname.match(/\/api\/keystatic\/(.+)/);
+  const path = pathMatch ? pathMatch[1] : '';
 
   console.log('[Keystatic] POST request:', {
-    path: params.params?.join('/'),
+    path,
     cookies: req.cookies.getAll().map(c => c.name),
   });
 
-  const response = await handler.POST(req, context);
+  const response = await handler.POST(req);
 
   console.log('[Keystatic] Response:', {
     status: response.status,
