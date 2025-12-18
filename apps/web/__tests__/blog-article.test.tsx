@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import {
   generateStaticParams,
   generateMetadata,
-} from '@/app/blog/[slug]/page';
+} from '@/app/(site)/blog/[slug]/page';
 import { getArticleBySlug } from '@/lib/content/blog';
 
 // Mock Giscus

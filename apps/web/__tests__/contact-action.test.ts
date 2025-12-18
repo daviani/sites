@@ -1,6 +1,6 @@
 /* eslint-env jest */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { submitContactForm } from '@/app/contact/actions';
+import { submitContactForm } from '@/app/(site)/contact/actions';
 
 // Mock dependencies
 jest.mock('@/lib/rate-limit', () => ({

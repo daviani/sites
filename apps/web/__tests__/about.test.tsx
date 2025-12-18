@@ -1,5 +1,5 @@
 import { render, screen } from './helpers/test-utils';
-import AboutPage from '@/app/about/page';
+import AboutPage from '@/app/(site)/about/page';
 
 // Mock getSubdomainUrl to return predictable URLs in tests
 jest.mock('@/lib/domains/config', () => ({

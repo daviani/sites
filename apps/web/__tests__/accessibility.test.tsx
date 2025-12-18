@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from './helpers/test-utils';
 import { axe, toHaveNoViolations } from 'jest-axe';
-import RootPage from '@/app/page';
-import AboutPage from '@/app/about/page';
+import RootPage from '@/app/(site)/page';
+import AboutPage from '@/app/(site)/about/page';
 import { Header, Footer, SubHeader } from '@daviani/ui';
 
 expect.extend(toHaveNoViolations);
