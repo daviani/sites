@@ -18,12 +18,59 @@ export default config({
   collections: {
     posts: collection({
       label: 'Articles',
-      slugField: 'title',
+      slugField: 'slug',
       path: 'content/posts/*',
       format: { contentField: 'content' },
       schema: {
-        title: fields.slug({ name: { label: 'Title' } }),
-        content: fields.markdoc({ label: 'Content' }),
+        // Identification
+        slug: fields.slug({ name: { label: 'Slug (URL)' } }),
+        publishedAt: fields.date({ label: 'Date de publication' }),
+        featured: fields.checkbox({
+          label: 'Article mis en avant',
+          defaultValue: false,
+        }),
+
+        // Titre et extrait FR
+        titleFr: fields.text({
+          label: 'Titre (FR)',
+          validation: { isRequired: true },
+        }),
+        excerptFr: fields.text({
+          label: 'Extrait (FR)',
+          multiline: true,
+        }),
+
+        // Titre et extrait EN
+        titleEn: fields.text({
+          label: 'Title (EN)',
+          validation: { isRequired: true },
+        }),
+        excerptEn: fields.text({
+          label: 'Excerpt (EN)',
+          multiline: true,
+        }),
+
+        // Tags
+        tags: fields.array(fields.text({ label: 'Tag' }), {
+          label: 'Tags',
+          itemLabel: (props) => props.value || 'Nouveau tag',
+        }),
+
+        // Contenu principal (FR par défaut)
+        content: fields.markdoc({
+          label: 'Contenu (FR)',
+          options: {
+            heading: [2, 3, 4],
+          },
+        }),
+
+        // Contenu EN (optionnel, dans un sous-dossier)
+        contentEn: fields.markdoc({
+          label: 'Content (EN)',
+          options: {
+            heading: [2, 3, 4],
+          },
+        }),
       },
     }),
   },
