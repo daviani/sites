@@ -53,10 +53,13 @@ describe('OG Image Route', () => {
     url: `http://localhost:3000/api/og/${slug}`,
   });
 
+  // Use an existing article slug for tests
+  const validSlug = 'introduction-devops';
+
   describe('GET /api/og/[slug]', () => {
     it('returns 200 for valid article slug', async () => {
-      const request = createRequest('hello-world');
-      const response = await GET(request as Request, { params: Promise.resolve({ slug: 'hello-world' }) });
+      const request = createRequest(validSlug);
+      const response = await GET(request as Request, { params: Promise.resolve({ slug: validSlug }) });
 
       expect(response.status).toBe(200);
     });
@@ -69,15 +72,15 @@ describe('OG Image Route', () => {
     });
 
     it('returns correct content-type for valid article', async () => {
-      const request = createRequest('hello-world');
-      const response = await GET(request as Request, { params: Promise.resolve({ slug: 'hello-world' }) });
+      const request = createRequest(validSlug);
+      const response = await GET(request as Request, { params: Promise.resolve({ slug: validSlug }) });
 
       expect(response.headers.get('content-type')).toBe('image/png');
     });
 
     it('returns cache headers for performance', async () => {
-      const request = createRequest('hello-world');
-      const response = await GET(request as Request, { params: Promise.resolve({ slug: 'hello-world' }) });
+      const request = createRequest(validSlug);
+      const response = await GET(request as Request, { params: Promise.resolve({ slug: validSlug }) });
 
       expect(response.headers.get('cache-control')).toContain('max-age');
     });

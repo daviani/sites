@@ -56,8 +56,8 @@ describe('RSS Feed API', () => {
     const response = await GET();
     const text = await response.text();
 
-    // Should not contain unescaped special chars in text content
-    // (outside of CDATA or proper escaping)
-    expect(text).not.toMatch(/<title>[^<]*[<>&][^<]*<\/title>/);
+    // Should not contain raw unescaped < or > in text content
+    // (& is allowed as part of entities like &apos; &amp; etc.)
+    expect(text).not.toMatch(/<title>[^<]*[<>][^<]*<\/title>/);
   });
 });
