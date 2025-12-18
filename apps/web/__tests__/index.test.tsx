@@ -1,5 +1,5 @@
 import { render, screen } from './helpers/test-utils';
-import RootPage from '@/app/page';
+import RootPage from '@/app/(site)/page';
 
 describe('Homepage', () => {
   it('renders the main heading', () => {
