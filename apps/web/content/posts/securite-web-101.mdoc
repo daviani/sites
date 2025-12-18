@@ -1,0 +1,35 @@
+---
+slug: securite-web-101
+publishedAt: '2024-12-08'
+featured: false
+titleFr: Sécurité web 101 - Les bases indispensables
+excerptFr: Apprenez les fondamentaux de la sécurité web pour protéger vos applications contre les attaques les plus courantes.
+titleEn: Web Security 101 - Essential Basics
+excerptEn: Learn the fundamentals of web security to protect your applications against the most common attacks.
+tags:
+  - Security
+  - Web
+---
+La sécurité web est un sujet crucial que tout développeur doit maîtriser. Voici les principales vulnérabilités à connaître et comment s'en protéger.
+
+## Les vulnérabilités OWASP Top 10
+
+### XSS (Cross-Site Scripting)
+
+Les attaques XSS permettent à un attaquant d'injecter du code malveillant dans une page web. Pour s'en protéger :
+
+- Échappez toujours les données utilisateur
+- Utilisez des Content Security Policies (CSP)
+- Validez les entrées côté serveur
+
+### SQL Injection
+
+Les injections SQL exploitent les requêtes mal construites. Protégez-vous avec :
+
+- Des requêtes préparées (prepared statements)
+- Un ORM bien configuré
+- Une validation stricte des entrées
+
+### CSRF (Cross-Site Request Forgery)
+
+Cette attaque force un utilisateur authentifié à effectuer des actions non désirées. Utilisez des tokens CSRF pour vous protéger.
