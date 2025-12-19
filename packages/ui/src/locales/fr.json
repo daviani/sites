@@ -123,6 +123,11 @@
     "subscribe": "S'abonner au flux RSS",
     "title": "Flux RSS"
   },
+  "blog": {
+    "featured": "À la une",
+    "readArticle": "Lire l'article",
+    "allArticles": "Tous les articles"
+  },
   "pages": {
     "about": {
       "title": "À propos",

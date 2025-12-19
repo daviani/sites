@@ -123,6 +123,11 @@
     "subscribe": "Subscribe to RSS feed",
     "title": "RSS Feed"
   },
+  "blog": {
+    "featured": "Featured",
+    "readArticle": "Read article",
+    "allArticles": "All articles"
+  },
   "pages": {
     "about": {
       "title": "About",
