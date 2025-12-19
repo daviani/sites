@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { getAllArticles, getAllTags } from '@/lib/content/blog';
+import { getAllArticles, getAllTags, getFeaturedArticles } from '@/lib/content/blog';
 import { Breadcrumb } from '@daviani/ui';
 import { RssButton } from '@/components/blog/RssButton';
+import { FeaturedArticle } from '@/components/blog/FeaturedArticles';
 
 const PAGE_SIZE = 20;
 
@@ -15,9 +16,22 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const tag = params.tag;
 
   const allArticles = getAllArticles();
+  const featuredArticles = getFeaturedArticles();
+
+  // Only show the most recent featured article (first one, already sorted by date)
+  const featuredArticle = featuredArticles[0] ?? null;
+
+  // Show featured section only on first page without tag filter
+  const showFeatured = page === 1 && !tag && featuredArticle !== null;
+
+  // Filter articles: exclude the featured article from main list when showing it
+  const nonFeaturedArticles = showFeatured
+    ? allArticles.filter((a) => a.slug !== featuredArticle.slug)
+    : allArticles;
+
   const filteredArticles = tag
     ? allArticles.filter((a) => a.meta.tags.includes(tag))
-    : allArticles;
+    : nonFeaturedArticles;
 
   const totalPages = Math.ceil(filteredArticles.length / PAGE_SIZE);
   const articles = filteredArticles.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
@@ -36,6 +50,9 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           </p>
           <RssButton />
         </div>
+
+        {/* Featured article hero section */}
+        {showFeatured && featuredArticle && <FeaturedArticle article={featuredArticle} />}
 
         {/* Tags filter */}
         {allTags.length > 0 && (
@@ -67,6 +84,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         )}
 
         {/* Articles list */}
+        {showFeatured && articles.length > 0 && (
+          <h2 className="text-sm font-semibold text-nord-3 dark:text-nord-4 uppercase tracking-wider mb-6">
+            Tous les articles
+          </h2>
+        )}
         {articles.length === 0 ? (
           <p className="text-nord-0 dark:text-nord-4">Aucun article trouvé.</p>
         ) : (
