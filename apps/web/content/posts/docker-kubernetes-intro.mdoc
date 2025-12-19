@@ -1,0 +1,71 @@
+---
+slug: docker-kubernetes-intro
+publishedAt: '2024-12-08'
+featured: false
+titleFr: Docker et Kubernetes - Introduction pratique
+excerptFr: Apprenez les bases de la conteneurisation avec Docker et l'orchestration avec Kubernetes pour déployer vos applications.
+titleEn: Docker and Kubernetes - A Practical Introduction
+excerptEn: Learn the basics of containerization with Docker and orchestration with Kubernetes to deploy your applications.
+tags:
+  - Docker
+  - Kubernetes
+  - DevOps
+---
+La conteneurisation a révolutionné le déploiement d'applications. Découvrons Docker et Kubernetes.
+
+## Docker - Les bases
+
+### Dockerfile
+
+```dockerfile
+FROM node:20-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+EXPOSE 3000
+CMD ["node", "server.js"]
+```
+
+### Commandes essentielles
+
+```bash
+# Construire une image
+docker build -t mon-app:v1 .
+
+# Lancer un conteneur
+docker run -p 3000:3000 mon-app:v1
+
+# Lister les conteneurs
+docker ps
+```
+
+## Kubernetes - Orchestration
+
+### Deployment
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mon-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mon-app
+  template:
+    metadata:
+      labels:
+        app: mon-app
+    spec:
+      containers:
+      - name: mon-app
+        image: mon-app:v1
+        ports:
+        - containerPort: 3000
+```
+
+## Conclusion
+
+Docker et Kubernetes sont des compétences essentielles pour tout développeur moderne.

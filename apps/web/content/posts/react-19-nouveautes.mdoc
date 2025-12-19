@@ -1,0 +1,48 @@
+---
+slug: react-19-nouveautes
+publishedAt: '2024-12-18'
+featured: true
+titleFr: Les nouveautés de React 19
+excerptFr: Découvrez les nouvelles fonctionnalités de React 19 : Actions, use(), Server Components améliorés et bien plus encore.
+titleEn: What's New in React 19
+excerptEn: Discover the new features of React 19: Actions, use(), improved Server Components and much more.
+tags:
+  - React
+  - JavaScript
+  - Frontend
+---
+React 19 apporte son lot de nouveautés passionnantes qui vont transformer notre façon de développer des applications.
+
+## Les Actions
+
+Les Actions simplifient la gestion des mutations de données et des états de chargement.
+
+```tsx
+function UpdateName() {
+  const [name, setName] = useState("");
+  const [error, setError] = useState(null);
+  const [isPending, startTransition] = useTransition();
+
+  const handleSubmit = () => {
+    startTransition(async () => {
+      const error = await updateName(name);
+      if (error) {
+        setError(error);
+        return;
+      }
+    });
+  };
+}
+```
+
+## Le hook use()
+
+Le nouveau hook `use()` permet de lire des ressources dans le rendu, comme des promesses ou du contexte.
+
+## Server Components améliorés
+
+Les Server Components sont maintenant stables et offrent de meilleures performances.
+
+## Conclusion
+
+React 19 marque une évolution majeure du framework avec des API plus intuitives et performantes.
