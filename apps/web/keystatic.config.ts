@@ -1,17 +1,25 @@
 import { config, collection, fields, LocalConfig, GitHubConfig } from '@keystatic/core';
 
+const isDev = process.env.NODE_ENV === 'development';
+
 /**
  * Storage configuration based on environment:
  * - Development: local storage (no auth needed, easy for contributors)
  * - Production: GitHub storage with OAuth (only repo owner can edit)
  */
-const storage: LocalConfig['storage'] | GitHubConfig['storage'] =
-  process.env.NODE_ENV === 'development'
-    ? { kind: 'local' }
-    : {
-        kind: 'github',
-        repo: 'daviani/sites',
-      };
+const storage: LocalConfig['storage'] | GitHubConfig['storage'] = isDev
+  ? { kind: 'local' }
+  : {
+      kind: 'github',
+      repo: 'daviani/sites',
+    };
+
+/**
+ * Content paths based on environment:
+ * - Development: content/posts/local/* (local articles for testing)
+ * - Production: apps/web/content/posts/* (real articles - path relative to repo root for GitHub storage)
+ */
+const postsPath = isDev ? 'content/posts/local/*' : 'apps/web/content/posts/*';
 
 export default config({
   storage,
@@ -19,7 +27,7 @@ export default config({
     posts: collection({
       label: 'Articles',
       slugField: 'slug',
-      path: 'content/posts/*',
+      path: postsPath,
       format: { contentField: 'content' },
       schema: {
         // Identification
