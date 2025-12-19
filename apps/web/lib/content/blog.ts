@@ -53,9 +53,28 @@ function parseFrontmatter(content: string): { data: Record<string, unknown>; con
   const data: Record<string, unknown> = {};
   let currentKey = '';
   let inArray = false;
+  let inMultiline = false;
   let arrayValues: string[] = [];
+  let multilineValues: string[] = [];
 
-  for (const line of yamlContent.split('\n')) {
+  const lines = yamlContent.split('\n');
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    // Multiline continuation (indented line after >- or |-)
+    if (inMultiline && line.startsWith('  ') && !line.startsWith('  - ')) {
+      multilineValues.push(line.trim());
+      continue;
+    }
+
+    // End of multiline
+    if (inMultiline && !line.startsWith('  ')) {
+      data[currentKey] = multilineValues.join(' ');
+      inMultiline = false;
+      multilineValues = [];
+    }
+
     // Array item
     if (line.startsWith('  - ') && inArray) {
       arrayValues.push(line.slice(4).trim());
@@ -79,6 +98,10 @@ function parseFrontmatter(content: string): { data: Record<string, unknown>; con
         // Could be start of array
         inArray = true;
         arrayValues = [];
+      } else if (value === '>-' || value === '|-' || value === '>' || value === '|') {
+        // Multiline string indicator
+        inMultiline = true;
+        multilineValues = [];
       } else {
         // Parse value
         let parsedValue: string | boolean = value;
@@ -102,6 +125,11 @@ function parseFrontmatter(content: string): { data: Record<string, unknown>; con
   // Handle trailing array
   if (inArray) {
     data[currentKey] = arrayValues;
+  }
+
+  // Handle trailing multiline
+  if (inMultiline) {
+    data[currentKey] = multilineValues.join(' ');
   }
 
   return { data, content: markdownContent };
