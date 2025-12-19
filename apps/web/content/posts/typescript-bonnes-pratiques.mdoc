@@ -1,0 +1,52 @@
+---
+slug: typescript-bonnes-pratiques
+publishedAt: '2024-12-15'
+featured: false
+titleFr: TypeScript - Bonnes pratiques en 2024
+excerptFr: Les meilleures pratiques TypeScript pour écrire du code maintenable, typé et robuste dans vos projets modernes.
+titleEn: TypeScript - Best Practices in 2024
+excerptEn: The best TypeScript practices for writing maintainable, typed and robust code in your modern projects.
+tags:
+  - TypeScript
+  - JavaScript
+  - Best Practices
+---
+TypeScript est devenu incontournable dans l'écosystème JavaScript. Voici les bonnes pratiques à adopter.
+
+## Préférez les types stricts
+
+Activez toujours `strict: true` dans votre `tsconfig.json`.
+
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true
+  }
+}
+```
+
+## Utilisez les types utilitaires
+
+TypeScript offre des types utilitaires puissants :
+
+- `Partial<T>` - Rend toutes les propriétés optionnelles
+- `Required<T>` - Rend toutes les propriétés requises
+- `Pick<T, K>` - Sélectionne certaines propriétés
+- `Omit<T, K>` - Exclut certaines propriétés
+
+## Évitez any
+
+Préférez `unknown` à `any` quand le type est inconnu.
+
+```typescript
+// ❌ Évitez
+function parse(input: any) { ... }
+
+// ✅ Préférez
+function parse(input: unknown) { ... }
+```
+
+## Conclusion
+
+Un typage strict dès le départ vous évitera de nombreux bugs en production.

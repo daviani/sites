@@ -1,0 +1,59 @@
+---
+slug: securite-api-rest
+publishedAt: '2024-12-12'
+featured: false
+titleFr: Sécuriser vos API REST en 2024
+excerptFr: Les meilleures pratiques pour protéger vos API REST contre les attaques courantes et garantir la sécurité de vos données.
+titleEn: Securing Your REST APIs in 2024
+excerptEn: Best practices to protect your REST APIs against common attacks and ensure your data security.
+tags:
+  - Sécurité
+  - API
+  - Backend
+---
+La sécurité des API est cruciale dans un monde où les données transitent constamment entre services.
+
+## Authentification et Autorisation
+
+### JWT (JSON Web Tokens)
+
+Utilisez des tokens JWT avec une durée de vie courte.
+
+```typescript
+const token = jwt.sign(
+  { userId: user.id, role: user.role },
+  process.env.JWT_SECRET,
+  { expiresIn: '15m' }
+);
+```
+
+### Refresh Tokens
+
+Implémentez un système de refresh tokens pour renouveler les sessions.
+
+## Rate Limiting
+
+Protégez vos endpoints contre les abus.
+
+```typescript
+import rateLimit from 'express-rate-limit';
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // 100 requêtes par fenêtre
+});
+```
+
+## Validation des entrées
+
+Validez toujours les données entrantes avec des schémas stricts (Zod, Yup).
+
+## Headers de sécurité
+
+- `X-Content-Type-Options: nosniff`
+- `X-Frame-Options: DENY`
+- `Content-Security-Policy`
+
+## Conclusion
+
+La sécurité n'est pas optionnelle. Intégrez ces pratiques dès le début de vos projets.

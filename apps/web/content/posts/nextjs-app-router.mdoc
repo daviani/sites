@@ -1,0 +1,59 @@
+---
+slug: nextjs-app-router
+publishedAt: '2024-12-05'
+featured: true
+titleFr: Next.js App Router - Le guide complet
+excerptFr: Maîtrisez le App Router de Next.js 14+ avec les Server Components, les layouts, et les nouvelles conventions de routing.
+titleEn: Next.js App Router - The Complete Guide
+excerptEn: Master the Next.js 14+ App Router with Server Components, layouts, and new routing conventions.
+tags:
+  - Next.js
+  - React
+  - Full-stack
+---
+Le App Router de Next.js représente une nouvelle ère pour le développement React full-stack.
+
+## Structure des dossiers
+
+```
+app/
+├── layout.tsx      # Layout racine
+├── page.tsx        # Page d'accueil
+├── blog/
+│   ├── page.tsx    # /blog
+│   └── [slug]/
+│       └── page.tsx # /blog/:slug
+└── api/
+    └── route.ts    # API Route
+```
+
+## Server Components par défaut
+
+Dans le App Router, tous les composants sont des Server Components par défaut.
+
+```tsx
+// Ce composant s'exécute sur le serveur
+export default async function Page() {
+  const data = await fetch('https://api.example.com/data');
+  return <div>{data}</div>;
+}
+```
+
+## Client Components
+
+Utilisez la directive `'use client'` pour les composants interactifs.
+
+```tsx
+'use client';
+
+import { useState } from 'react';
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+  return <button onClick={() => setCount(c => c + 1)}>{count}</button>;
+}
+```
+
+## Conclusion
+
+Le App Router offre une DX améliorée et des performances optimisées grâce aux Server Components.
