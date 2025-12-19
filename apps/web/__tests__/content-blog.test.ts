@@ -2,6 +2,7 @@ import {
   getAllArticles,
   getArticleBySlug,
   getAllTags,
+  getFeaturedArticles,
 } from '@/lib/content/blog';
 
 describe('Blog Content Loader', () => {
@@ -68,6 +69,57 @@ describe('Blog Content Loader', () => {
       const tags = getAllTags();
       const sortedTags = [...tags].sort();
       expect(tags).toEqual(sortedTags);
+    });
+  });
+
+  describe('getFeaturedArticles', () => {
+    it('returns an array', () => {
+      const featured = getFeaturedArticles();
+      expect(Array.isArray(featured)).toBe(true);
+    });
+
+    it('returns only articles with featured: true', () => {
+      const featured = getFeaturedArticles();
+      featured.forEach((article) => {
+        expect(article.meta.featured).toBe(true);
+      });
+    });
+
+    it('returns subset of all articles', () => {
+      const allArticles = getAllArticles();
+      const featured = getFeaturedArticles();
+      expect(featured.length).toBeLessThanOrEqual(allArticles.length);
+    });
+
+    it('featured articles have all required meta fields', () => {
+      const featured = getFeaturedArticles();
+      featured.forEach((article) => {
+        expect(article.slug).toBeDefined();
+        expect(article.meta.titleFr).toBeDefined();
+        expect(article.meta.titleEn).toBeDefined();
+        expect(article.meta.publishedAt).toBeDefined();
+        expect(article.meta.featured).toBe(true);
+      });
+    });
+  });
+
+  describe('article content', () => {
+    it('articles have content field', () => {
+      const articles = getAllArticles();
+      articles.forEach((article) => {
+        expect(article.content).toBeDefined();
+        expect(typeof article.content).toBe('string');
+      });
+    });
+
+    it('articles may have English content', () => {
+      const articles = getAllArticles();
+      articles.forEach((article) => {
+        // contentEn is optional, but if present should be a string
+        if (article.contentEn !== undefined) {
+          expect(typeof article.contentEn).toBe('string');
+        }
+      });
     });
   });
 });
