@@ -25,7 +25,15 @@ export interface Article {
   contentEn?: string;
 }
 
-const POSTS_DIR = path.join(process.cwd(), 'content/posts');
+/**
+ * Posts directory based on environment:
+ * - Development: content/posts/local (local articles for testing)
+ * - Production: content/posts (real articles)
+ */
+const POSTS_DIR = path.join(
+  process.cwd(),
+  process.env.NODE_ENV === 'development' ? 'content/posts/local' : 'content/posts'
+);
 
 /**
  * Parse YAML frontmatter from markdoc content
