@@ -27,12 +27,12 @@ export interface Article {
 
 /**
  * Posts directory based on environment:
- * - Development: content/posts/local (local articles for testing)
+ * - Development/Test: content/posts/local (local articles for testing)
  * - Production: content/posts (real articles)
  */
 const POSTS_DIR = path.join(
   process.cwd(),
-  process.env.NODE_ENV === 'development' ? 'content/posts/local' : 'content/posts'
+  process.env.NODE_ENV === 'production' ? 'content/posts' : 'content/posts/local'
 );
 
 /**
