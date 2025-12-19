@@ -1,0 +1,118 @@
+Tailwind CSS is a utility-first CSS framework that allows you to quickly build modern interfaces. Combined with the **Nord** palette, it offers an elegant visual experience.
+
+## Why Tailwind CSS?
+
+Tailwind CSS offers several major advantages:
+
+1. **Increased productivity** - No need to switch files
+2. **Consistency** - Built-in design system
+3. **Performance** - Automatic purging of unused CSS
+4. **Flexibility** - Fully customizable
+
+## Nord Theme Configuration
+
+Here's how to configure Nord colors in `tailwind.config.ts`:
+
+```typescript
+import type { Config } from 'tailwindcss';
+
+const config: Config = {
+  content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        nord: {
+          0: '#2E3440',  // Polar Night
+          1: '#3B4252',
+          2: '#434C5E',
+          3: '#4C566A',
+          4: '#D8DEE9',  // Snow Storm
+          5: '#E5E9F0',
+          6: '#ECEFF4',
+          7: '#8FBCBB',  // Frost
+          8: '#88C0D0',
+          9: '#81A1C1',
+          10: '#5E81AC',
+          11: '#BF616A', // Aurora
+          12: '#D08770',
+          13: '#EBCB8B',
+          14: '#A3BE8C',
+          15: '#B48EAD',
+        },
+      },
+    },
+  },
+};
+
+export default config;
+```
+
+## Using Classes
+
+Once configured, you can use Nord colors like this:
+
+```tsx
+function Card({ title, description }: CardProps) {
+  return (
+    <div className="bg-nord-6 dark:bg-nord-1 rounded-xl p-6 shadow-lg">
+      <h3 className="text-nord-0 dark:text-nord-6 font-bold text-xl">
+        {title}
+      </h3>
+      <p className="text-nord-3 dark:text-nord-4 mt-2">
+        {description}
+      </p>
+    </div>
+  );
+}
+```
+
+## Palette Colors
+
+The Nord palette is divided into **four groups**:
+
+### Polar Night (nord-0 to nord-3)
+
+Dark tones for dark mode backgrounds:
+
+- `nord-0` - Darkest, ideal for main background
+- `nord-1` - For elevated elements
+- `nord-2` - For selections and highlights
+- `nord-3` - For comments and secondary text
+
+### Snow Storm (nord-4 to nord-6)
+
+Light tones for light mode:
+
+- `nord-4` - Secondary text on dark background
+- `nord-5` - Alternative background
+- `nord-6` - Main light background
+
+### Frost (nord-7 to nord-10)
+
+Nord's distinctive blues:
+
+- `nord-7` to `nord-10` - For accents and interactive elements
+
+### Aurora (nord-11 to nord-15)
+
+Vibrant colors for feedback:
+
+- `nord-11` - Red for errors
+- `nord-12` - Orange for warnings
+- `nord-13` - Yellow for information
+- `nord-14` - Green for success
+- `nord-15` - Purple for special elements
+
+## Best Practices
+
+Here are some important recommendations:
+
+> **Tip**: Always use `dark:` variants to ensure a good dark mode experience.
+
+- Maintain **sufficient contrast** (WCAG AA minimum)
+- Use *Aurora* colors sparingly
+- Prefer smooth transitions between states
+
+## Conclusion
+
+Tailwind CSS combined with the Nord theme allows you to create interfaces that are both **elegant** and **accessible**. Feel free to explore different combinations to find your style.
