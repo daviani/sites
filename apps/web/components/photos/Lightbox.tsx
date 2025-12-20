@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
+import { useTranslation } from '@daviani/ui';
 import type { Photo } from './types';
 
 interface LightboxProps {
@@ -22,6 +23,7 @@ export function Lightbox({
   currentIndex,
   total,
 }: LightboxProps) {
+  const { t } = useTranslation();
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [direction, setDirection] = useState<'left' | 'right'>('right');
@@ -98,7 +100,7 @@ export function Lightbox({
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.95)' }}
       role="dialog"
       aria-modal="true"
-      aria-label={`Photo ${currentIndex + 1} sur ${total}`}
+      aria-label={t('pages.photos.lightbox.photoCounter').replace('{current}', String(currentIndex + 1)).replace('{total}', String(total))}
       onClick={onClose}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
@@ -113,7 +115,7 @@ export function Lightbox({
         onClick={onClose}
         className="absolute top-6 right-6 p-3 text-nord-4 hover:text-nord-6 transition-colors z-10 cursor-pointer
           focus:outline-none focus:ring-2 focus:ring-nord-6 rounded-full hover:bg-nord-3/20"
-        aria-label="Fermer"
+        aria-label={t('pages.photos.lightbox.close')}
       >
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -130,7 +132,7 @@ export function Lightbox({
         className="absolute left-6 p-3 text-nord-4 hover:text-nord-6 transition-colors cursor-pointer
           focus:outline-none focus:ring-2 focus:ring-nord-6 rounded-full hover:bg-nord-3/20
           hidden md:block"
-        aria-label="Photo précédente"
+        aria-label={t('pages.photos.lightbox.previousPhoto')}
       >
         <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -146,7 +148,7 @@ export function Lightbox({
         className="absolute right-6 p-3 text-nord-4 hover:text-nord-6 transition-colors cursor-pointer
           focus:outline-none focus:ring-2 focus:ring-nord-6 rounded-full hover:bg-nord-3/20
           hidden md:block"
-        aria-label="Photo suivante"
+        aria-label={t('pages.photos.lightbox.nextPhoto')}
       >
         <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
