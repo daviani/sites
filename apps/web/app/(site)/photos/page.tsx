@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect, useMemo } from 'react';
 import { Breadcrumb, useTranslation } from '@daviani/ui';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Lightbox, PhotoCard, TagFilter } from '@/components/photos';
+import { Lightbox, MasonryGrid, PhotoCard, TagFilter } from '@/components/photos';
 import type { Photo, Tag } from '@/components/photos';
 
 const ALL_TAGS: Tag[] = ['nature', 'nocturne', 'macro', 'portrait', 'urbain'];
@@ -95,21 +95,25 @@ export default function PhotosPage() {
           onTagChange={setActiveTag}
         />
 
-        {/* Gallery - Masonry layout with generous spacing */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 lg:gap-8">
-          {filteredPhotos.map((photo, index) => (
-            <div key={photo.id} className="mb-6 lg:mb-8 break-inside-avoid">
+        {/* Gallery - Masonry layout with animations */}
+        <div className="relative z-10">
+        {filteredPhotos.length > 0 ? (
+          <MasonryGrid
+            items={filteredPhotos}
+            columns={[4, 3, 3, 2, 1]}
+            gap={24}
+            duration={0.5}
+            stagger={0.04}
+            animateFrom="bottom"
+            blurToFocus={true}
+            renderItem={(photo, index) => (
               <PhotoCard
                 photo={photo}
                 onClick={() => openLightbox(index)}
-                index={index}
               />
-            </div>
-          ))}
-        </div>
-
-        {/* Empty state */}
-        {filteredPhotos.length === 0 && (
+            )}
+          />
+        ) : (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -120,6 +124,7 @@ export default function PhotosPage() {
             </p>
           </motion.div>
         )}
+        </div>
       </div>
 
       {/* Lightbox */}
