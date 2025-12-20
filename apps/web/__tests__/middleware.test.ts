@@ -82,35 +82,34 @@ describe('Subdomain Routing', () => {
   });
 
   describe('getSubdomainUrl', () => {
-    it('returns URL for blog subdomain', () => {
+    it('returns path for blog', () => {
       const url = getSubdomainUrl('blog');
-      expect(url).toContain('blog');
-      expect(url).toMatch(/^https?:\/\//);
+      expect(url).toBe('/blog');
     });
 
-    it('returns URL for about subdomain', () => {
+    it('returns path for about', () => {
       const url = getSubdomainUrl('about');
-      expect(url).toContain('about');
+      expect(url).toBe('/about');
     });
 
-    it('returns URL for cv subdomain', () => {
+    it('returns path for cv', () => {
       const url = getSubdomainUrl('cv');
-      expect(url).toContain('cv');
+      expect(url).toBe('/cv');
     });
 
-    it('returns URL for contact subdomain', () => {
+    it('returns path for contact', () => {
       const url = getSubdomainUrl('contact');
-      expect(url).toContain('contact');
+      expect(url).toBe('/contact');
     });
 
-    it('returns URL for rdv subdomain', () => {
+    it('returns path for rdv', () => {
       const url = getSubdomainUrl('rdv');
-      expect(url).toContain('rdv');
+      expect(url).toBe('/rdv');
     });
 
-    it('returns URL for legal subdomain', () => {
+    it('returns path for legal', () => {
       const url = getSubdomainUrl('legal');
-      expect(url).toContain('legal');
+      expect(url).toBe('/legal');
     });
   });
 });
