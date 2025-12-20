@@ -2,6 +2,7 @@
 
 import { memo } from 'react';
 import Image from 'next/image';
+import { useTranslation } from '@daviani/ui';
 import type { Photo } from './types';
 
 interface PhotoCardProps {
@@ -13,6 +14,7 @@ export const PhotoCard = memo(function PhotoCard({
   photo,
   onClick,
 }: PhotoCardProps) {
+  const { t } = useTranslation();
   return (
     <button
       onClick={onClick}
@@ -42,7 +44,7 @@ export const PhotoCard = memo(function PhotoCard({
             key={tag}
             className="px-2 py-1 text-xs font-medium bg-nord-6/90 dark:bg-nord-0/90 text-nord-0 dark:text-nord-6 rounded-md backdrop-blur-sm"
           >
-            {tag}
+            {t(`pages.photos.tags.${tag}`)}
           </span>
         ))}
       </div>

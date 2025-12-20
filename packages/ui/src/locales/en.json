@@ -514,6 +514,12 @@
         "macro": "Macro",
         "portrait": "Portrait",
         "urbain": "Urban"
+      },
+      "lightbox": {
+        "close": "Close",
+        "previousPhoto": "Previous photo",
+        "nextPhoto": "Next photo",
+        "photoCounter": "Photo {current} of {total}"
       }
     }
   }
