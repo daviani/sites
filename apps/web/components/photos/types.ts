@@ -8,3 +8,6 @@ export interface Photo {
   height: number;
   tags: Tag[];
 }
+
+/** Photo type alias for MasonryGrid compatibility */
+export type MasonryPhoto = Photo;
