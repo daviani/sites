@@ -37,3 +37,7 @@ next-env.d.ts
 
 # photos (managed separately, not in git)
 /public/photos/
+
+# local content for development (test data)
+/content/posts/local/
+/content/photos/local/
