@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "tsx scripts/process-photos.ts && next build",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "photos:process": "tsx scripts/process-photos.ts",
+    "photos:watch": "tsx scripts/watch-photos.ts"
   },
   "dependencies": {
     "@daviani/ui": "workspace:*",
@@ -29,6 +31,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "resend": "^6.5.2",
+    "sharp": "^0.34.5",
+    "yaml": "^2.8.2",
     "zod": "^4.1.13"
   },
   "devDependencies": {
@@ -44,6 +48,7 @@
     "@types/node": "^20",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "chokidar": "^5.0.0",
     "eslint": "^9",
     "eslint-config-next": "^16.0.0",
     "glob": ">=10.5.0",
@@ -52,6 +57,7 @@
     "jest-environment-jsdom": "^30.2.0",
     "postcss": "^8",
     "tailwindcss": "^4.0.0",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }
