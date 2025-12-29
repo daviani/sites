@@ -2,7 +2,6 @@
 
 import { memo } from 'react';
 import Image from 'next/image';
-import { useTranslation } from '@daviani/ui';
 import type { Photo } from './types';
 
 interface PhotoCardProps {
@@ -14,7 +13,6 @@ export const PhotoCard = memo(function PhotoCard({
   photo,
   onClick,
 }: PhotoCardProps) {
-  const { t } = useTranslation();
   return (
     <button
       onClick={onClick}
@@ -36,7 +34,13 @@ export const PhotoCard = memo(function PhotoCard({
       {/* Color shift overlay on hover - purple/pink tint */}
       <div className="absolute inset-0 bg-gradient-to-br from-nord-15/30 via-nord-10/20 to-nord-15/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-color" />
       {/* Subtle gradient overlay on hover */}
-      <div className="absolute inset-0 bg-gradient-to-t from-nord-0/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-gradient-to-t from-nord-0/50 via-transparent to-nord-0/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {/* Title on hover */}
+      <div className="absolute top-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <h3 className="text-sm font-semibold text-nord-6 drop-shadow-lg truncate">
+          {photo.title}
+        </h3>
+      </div>
       {/* Tags on hover */}
       <div className="absolute bottom-3 left-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         {photo.tags.map((tag) => (
@@ -44,7 +48,7 @@ export const PhotoCard = memo(function PhotoCard({
             key={tag}
             className="px-2 py-1 text-xs font-medium bg-nord-6/90 dark:bg-nord-0/90 text-nord-0 dark:text-nord-6 rounded-md backdrop-blur-sm"
           >
-            {t(`pages.photos.tags.${tag}`)}
+            {tag}
           </span>
         ))}
       </div>

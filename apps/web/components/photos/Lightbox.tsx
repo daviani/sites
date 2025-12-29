@@ -175,14 +175,19 @@ export function Lightbox({
         />
       </motion.div>
 
-      {/* Counter - minimal */}
+      {/* Counter and title */}
       <motion.div
         initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={prefersReducedMotion ? instantTransition : { delay: 0.2 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-nord-4 text-sm font-medium tracking-wider"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center"
       >
-        {currentIndex + 1} / {total}
+        <div className="text-nord-4 text-sm font-medium tracking-wider">
+          {currentIndex + 1} / {total}
+        </div>
+        <div className="text-nord-5 text-xs mt-1 max-w-[60vw] truncate">
+          {photo.title}
+        </div>
       </motion.div>
     </motion.div>
   );

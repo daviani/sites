@@ -1,12 +1,13 @@
-export type Tag = 'nature' | 'nocturne' | 'macro' | 'portrait' | 'urbain';
+export type Tag = string;
 
 export interface Photo {
-  id: number;
+  id: string | number;
+  title: string;
   src: string;
   alt: string;
   width: number;
   height: number;
-  tags: Tag[];
+  tags: string[];
 }
 
 /** Photo type alias for MasonryGrid compatibility */
