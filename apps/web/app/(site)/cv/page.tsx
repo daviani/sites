@@ -1,31 +1,20 @@
-'use client';
-
-import { useTranslation, Breadcrumb } from '@daviani/ui';
-import { CvLayout, CvDownloadButton } from '@/components/cv';
+import { getLocalizedCvData, getAllCvSkills } from '@/lib/content/cv-keystatic';
+import { CvPageContent } from '@/components/cv/CvPageContent';
 
 export default function CvPage() {
-  const { t } = useTranslation();
+  // Server-side: read CV data from Keystatic YAML
+  // Default to French, client will handle locale switching
+  const cvDataFr = getLocalizedCvData('fr');
+  const cvDataEn = getLocalizedCvData('en');
+  const skills = getAllCvSkills();
 
-  return (
-    <div className="min-h-screen">
-      <div className="mx-auto max-w-5xl px-4 pb-16 pt-5">
-        <div className="mb-8">
-          <Breadcrumb items={[{ href: '/cv', labelKey: 'nav.cv.title' }]} />
-        </div>
-        <div className="mb-6 text-center">
-          <h1 className="mb-3 text-4xl font-bold text-nord-0 md:text-5xl dark:text-nord-6">
-            {t('pages.cv.title')}
-          </h1>
-          <p className="mb-5 text-xl text-nord-0 dark:text-nord-4">
-            {t('pages.cv.subtitle')}
-          </p>
-          <CvDownloadButton />
-        </div>
-        <CvLayout />
-        <div className="mt-8 flex justify-center">
-          <CvDownloadButton />
-        </div>
+  if (!cvDataFr || !cvDataEn) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-nord-4">CV data not found</p>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return <CvPageContent cvDataFr={cvDataFr} cvDataEn={cvDataEn} skills={skills} />;
 }

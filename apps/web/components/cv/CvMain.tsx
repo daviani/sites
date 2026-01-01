@@ -1,28 +1,16 @@
 'use client';
 
 import { useTranslation } from '@daviani/ui';
-import { getCvStaticData } from '@/lib/content/cv';
+import type { LocalizedCvData } from '@/lib/content/cv-keystatic';
 
-interface TranslatedExperience {
-  company: string;
-  role: string;
-  location: string;
-  highlights?: string[];
-  summary?: string;
+interface CvMainProps {
+  cvData: LocalizedCvData;
 }
 
-interface TranslatedEducation {
-  institution: string;
-  degree: string;
-}
+export function CvMain({ cvData }: CvMainProps) {
+  const { t } = useTranslation();
 
-export function CvMain() {
-  const { t, tObject } = useTranslation();
-  const staticData = getCvStaticData();
-
-  // Get translated data
-  const experiences = tObject<TranslatedExperience[]>('pages.cv.data.experiences') ?? [];
-  const education = tObject<TranslatedEducation[]>('pages.cv.data.education') ?? [];
+  const { experiences, education } = cvData;
 
   return (
     <main className="rounded-xl bg-white dark:bg-nord-0" style={{ width: '65%', padding: '20px 24px' }}>
@@ -30,11 +18,7 @@ export function CvMain() {
       <MainSectionTitle first>{t('pages.cv.sections.experience')}</MainSectionTitle>
 
       {experiences.map((exp, i) => (
-        <ExperienceCard
-          key={i}
-          experience={exp}
-          staticExp={staticData.experiences[i]}
-        />
+        <ExperienceCard key={i} experience={exp} />
       ))}
 
       {/* Education Section */}
@@ -42,11 +26,7 @@ export function CvMain() {
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '11px' }}>
         {education.map((edu, i) => (
-          <EducationCard
-            key={i}
-            education={edu}
-            staticEdu={staticData.education[i]}
-          />
+          <EducationCard key={i} education={edu} />
         ))}
       </div>
     </main>
@@ -70,15 +50,22 @@ function MainSectionTitle({ children, first }: { children: React.ReactNode; firs
   );
 }
 
-function ExperienceCard({
-  experience,
-  staticExp,
-}: {
-  experience: TranslatedExperience;
-  staticExp: { start: string; end: string | null; current: boolean; compact?: boolean; stack: string[] };
-}) {
+interface Experience {
+  start: string;
+  end?: string;
+  current: boolean;
+  compact: boolean;
+  company: string;
+  role: string;
+  location: string;
+  summary?: string;
+  highlights: string[];
+  stack: string[];
+}
+
+function ExperienceCard({ experience }: { experience: Experience }) {
   const { t } = useTranslation();
-  const isCompact = staticExp.compact;
+  const isCompact = experience.compact;
 
   return (
     <div
@@ -118,7 +105,7 @@ function ExperienceCard({
             backgroundColor: 'rgba(136, 192, 208, 0.15)',
           }}
         >
-          {staticExp.start} - {staticExp.current ? t('pages.cv.labels.current') : staticExp.end}
+          {experience.start} - {experience.current ? t('pages.cv.labels.current') : experience.end}
         </div>
       </div>
 
@@ -145,9 +132,9 @@ function ExperienceCard({
           <p>{experience.summary}</p>
         ) : null}
 
-        {staticExp.stack && staticExp.stack.length > 0 && (
+        {experience.stack && experience.stack.length > 0 && (
           <strong className="mt-1 block text-nord-8" style={{ fontSize: '10px', fontWeight: 600 }}>
-            {t('pages.cv.labels.stack')} : {staticExp.stack.join(', ')}
+            {t('pages.cv.labels.stack')} : {experience.stack.join(', ')}
           </strong>
         )}
       </div>
@@ -155,13 +142,14 @@ function ExperienceCard({
   );
 }
 
-function EducationCard({
-  education,
-  staticEdu,
-}: {
-  education: TranslatedEducation;
-  staticEdu: { start: string; end: string };
-}) {
+interface Education {
+  start: string;
+  end: string;
+  institution: string;
+  degree: string;
+}
+
+function EducationCard({ education }: { education: Education }) {
   return (
     <div
       className="border border-nord-5 bg-white transition-all duration-300 hover:-translate-y-px dark:border-nord-3 dark:bg-nord-2"
@@ -195,7 +183,7 @@ function EducationCard({
             backgroundColor: 'rgba(136, 192, 208, 0.15)',
           }}
         >
-          {staticEdu.start === staticEdu.end ? staticEdu.start : `${staticEdu.start} - ${staticEdu.end}`}
+          {education.start === education.end ? education.start : `${education.start} - ${education.end}`}
         </div>
       </div>
     </div>
