@@ -2,8 +2,14 @@
 
 import { CvSidebar } from './CvSidebar';
 import { CvMain } from './CvMain';
+import type { LocalizedCvData } from '@/lib/content/cv-keystatic';
 
-export function CvLayout() {
+interface CvLayoutProps {
+  cvData: LocalizedCvData;
+  skills: string[];
+}
+
+export function CvLayout({ cvData, skills }: CvLayoutProps) {
   return (
     <div
       className="mx-auto flex overflow-hidden rounded-xl bg-white shadow-xl dark:bg-nord-0"
@@ -13,8 +19,8 @@ export function CvLayout() {
         padding: '10px',
       }}
     >
-      <CvSidebar />
-      <CvMain />
+      <CvSidebar cvData={cvData} skills={skills} />
+      <CvMain cvData={cvData} />
     </div>
   );
 }

@@ -1,30 +1,18 @@
 'use client';
 
 import { useTranslation } from '@daviani/ui';
-import { getCvStaticData, getAllSkills } from '@/lib/content/cv';
 import Image from 'next/image';
+import type { LocalizedCvData } from '@/lib/content/cv-keystatic';
 
-interface TranslatedExpertise {
-  title: string;
-  description: string;
+interface CvSidebarProps {
+  cvData: LocalizedCvData;
+  skills: string[];
 }
 
-interface TranslatedContribution {
-  type: string;
-  date: string;
-  description: string;
-}
+export function CvSidebar({ cvData, skills }: CvSidebarProps) {
+  const { t } = useTranslation();
 
-export function CvSidebar() {
-  const { t, tObject } = useTranslation();
-  const staticData = getCvStaticData();
-  const skills = getAllSkills();
-
-  // Get translated data
-  const name = t('pages.cv.data.personal.name');
-  const title = t('pages.cv.data.personal.title');
-  const expertise = tObject<TranslatedExpertise[]>('pages.cv.data.expertise') ?? [];
-  const contributions = tObject<TranslatedContribution[]>('pages.cv.data.contributions') ?? [];
+  const { personal, expertise, contributions } = cvData;
 
   return (
     <aside className="relative flex flex-col overflow-hidden rounded-xl bg-nord-1 shadow-lg" style={{ width: '35%' }}>
@@ -39,7 +27,7 @@ export function CvSidebar() {
 
       {/* Profile Section */}
       <div className="relative text-center" style={{ padding: '28px 18px 24px' }}>
-        {staticData.personal.photo ? (
+        {personal.photo ? (
           <div
             className="relative mx-auto mb-4 overflow-hidden rounded-full"
             style={{
@@ -50,8 +38,8 @@ export function CvSidebar() {
             }}
           >
             <Image
-              src={staticData.personal.photo}
-              alt={name}
+              src={personal.photo}
+              alt={personal.name}
               fill
               className="object-cover"
               sizes="100px"
@@ -68,20 +56,20 @@ export function CvSidebar() {
               boxShadow: '0 6px 20px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.2)',
             }}
           >
-            <span className="text-3xl text-nord-8">{name.charAt(0)}</span>
+            <span className="text-3xl text-nord-8">{personal.name.charAt(0)}</span>
           </div>
         )}
 
         <div className="mb-1 text-nord-6" style={{ fontSize: '19px', fontWeight: 600, letterSpacing: '-0.35px', lineHeight: 1.2 }}>
-          {name}
+          {personal.name}
         </div>
 
         <div className="mb-1 text-nord-8" style={{ fontSize: '12.5px', fontWeight: 500, letterSpacing: '-0.05px' }}>
-          {title}
+          {personal.title}
         </div>
 
         <div className="text-nord-4" style={{ fontSize: '10px', fontWeight: 400, opacity: 0.7 }}>
-          {staticData.personal.experienceYears} {t('pages.cv.labels.yearsExperience')}
+          {personal.experienceYears} {t('pages.cv.labels.yearsExperience')}
         </div>
       </div>
 
@@ -89,20 +77,26 @@ export function CvSidebar() {
       <div className="flex-1" style={{ padding: '0 18px 24px' }}>
         {/* Contact Section */}
         <SectionTitle first>{t('pages.cv.labels.contact')}</SectionTitle>
-        <ContactItem>{staticData.personal.location}, {staticData.age} {t('pages.cv.labels.yearsOld')}</ContactItem>
-        {staticData.personal.phone && <ContactItem>{staticData.personal.phone}</ContactItem>}
-        <ContactItem href={`mailto:${staticData.personal.email}`}>
-          {staticData.personal.email}
+        <ContactItem>{personal.location}, {personal.age} {t('pages.cv.labels.yearsOld')}</ContactItem>
+        {personal.phone && <ContactItem>{personal.phone}</ContactItem>}
+        <ContactItem href={`mailto:${personal.email}`}>
+          {personal.email}
         </ContactItem>
-        <ContactItem href={staticData.personal.linkedin}>
-          {staticData.personal.linkedin.replace('https://', '')}
-        </ContactItem>
-        <ContactItem href={staticData.personal.github}>
-          {staticData.personal.github.replace('https://', '')}
-        </ContactItem>
-        <ContactItem href={staticData.personal.website}>
-          {staticData.personal.website.replace('https://', '')}
-        </ContactItem>
+        {personal.linkedin && (
+          <ContactItem href={personal.linkedin}>
+            {personal.linkedin.replace('https://', '')}
+          </ContactItem>
+        )}
+        {personal.github && (
+          <ContactItem href={personal.github}>
+            {personal.github.replace('https://', '')}
+          </ContactItem>
+        )}
+        {personal.website && (
+          <ContactItem href={personal.website}>
+            {personal.website.replace('https://', '')}
+          </ContactItem>
+        )}
 
         {/* Expertise Section */}
         <SectionTitle>{t('pages.cv.sections.expertise')}</SectionTitle>
@@ -211,7 +205,13 @@ function SkillTag({ children }: { children: React.ReactNode }) {
   );
 }
 
-function ContributionsSection({ contributions, title }: { contributions: TranslatedContribution[]; title: string }) {
+interface Contribution {
+  date: string;
+  type: string;
+  description: string;
+}
+
+function ContributionsSection({ contributions, title }: { contributions: Contribution[]; title: string }) {
   return (
     <div
       style={{
