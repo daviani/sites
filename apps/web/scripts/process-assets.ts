@@ -170,19 +170,69 @@ export async function processAllPhotos(
   return results;
 }
 
+/**
+ * Sync CV assets from content/cv to public/cv
+ * - Development: content/cv/local/personal -> public/cv/personal
+ * - Production: content/cv/personal -> public/cv/personal
+ */
+export function syncCvAssets(isProd = false): { synced: string[]; skipped: string[] } {
+  const cvContentDir = path.join(process.cwd(), isProd ? 'content/cv/personal' : 'content/cv/local/personal');
+  const cvOutputDir = path.join(process.cwd(), 'public/cv/personal');
+
+  const synced: string[] = [];
+  const skipped: string[] = [];
+
+  if (!fs.existsSync(cvContentDir)) {
+    return { synced, skipped };
+  }
+
+  // Ensure output directory exists
+  if (!fs.existsSync(cvOutputDir)) {
+    fs.mkdirSync(cvOutputDir, { recursive: true });
+  }
+
+  const files = fs.readdirSync(cvContentDir);
+
+  for (const file of files) {
+    const sourcePath = path.join(cvContentDir, file);
+    const destPath = path.join(cvOutputDir, file);
+
+    // Skip directories
+    if (fs.statSync(sourcePath).isDirectory()) {
+      continue;
+    }
+
+    // Check if sync is needed (compare modification times)
+    if (fs.existsSync(destPath)) {
+      const sourceStat = fs.statSync(sourcePath);
+      const destStat = fs.statSync(destPath);
+      if (sourceStat.mtimeMs <= destStat.mtimeMs) {
+        skipped.push(file);
+        continue;
+      }
+    }
+
+    fs.copyFileSync(sourcePath, destPath);
+    synced.push(file);
+  }
+
+  return { synced, skipped };
+}
+
 // CLI entry point
 async function main() {
   const isProd = process.env.NODE_ENV === 'production';
-  const contentDir = path.join(process.cwd(), isProd ? 'content/photos' : 'content/photos/local');
-  const outputDir = path.join(process.cwd(), 'public/photos');
+  const photosContentDir = path.join(process.cwd(), isProd ? 'content/photos' : 'content/photos/local');
+  const photosOutputDir = path.join(process.cwd(), 'public/photos');
 
   // Create output directory if it doesn't exist
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
+  if (!fs.existsSync(photosOutputDir)) {
+    fs.mkdirSync(photosOutputDir, { recursive: true });
   }
 
+  // Process photos
   console.log('Processing photos...');
-  const results = await processAllPhotos(contentDir, outputDir);
+  const results = await processAllPhotos(photosContentDir, photosOutputDir);
 
   let processed = 0;
   let skipped = 0;
@@ -201,7 +251,23 @@ async function main() {
     }
   }
 
-  console.log(`\nDone: ${processed} processed, ${skipped} skipped, ${failed} failed`);
+  console.log(`Photos: ${processed} processed, ${skipped} skipped, ${failed} failed`);
+
+  // Sync CV assets
+  console.log('\nSyncing CV assets...');
+  const cvResults = syncCvAssets(isProd);
+
+  if (cvResults.synced.length > 0) {
+    console.log(`  ✅ Synced: ${cvResults.synced.join(', ')}`);
+  }
+  if (cvResults.skipped.length > 0) {
+    console.log(`  ⏭️  Up to date: ${cvResults.skipped.join(', ')}`);
+  }
+  if (cvResults.synced.length === 0 && cvResults.skipped.length === 0) {
+    console.log('  No CV assets found');
+  }
+
+  console.log('\nDone!');
 }
 
 // Run if called directly

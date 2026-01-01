@@ -4,15 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "tsx scripts/process-photos.ts && next build",
+    "build": "tsx scripts/process-assets.ts && next build",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "photos:process": "tsx scripts/process-photos.ts",
-    "photos:watch": "tsx scripts/watch-photos.ts"
+    "assets:process": "tsx scripts/process-assets.ts",
+    "assets:watch": "tsx scripts/watch-assets.ts"
   },
   "dependencies": {
     "@daviani/ui": "workspace:*",
@@ -28,6 +28,7 @@
     "fast-average-color": "^9.5.0",
     "framer-motion": "^12.23.26",
     "next": "^16.0.8",
+    "puppeteer": "^24.34.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "resend": "^6.5.2",
