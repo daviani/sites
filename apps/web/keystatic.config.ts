@@ -41,7 +41,7 @@ export default config({
             titleFr: fields.text({ label: 'Titre professionnel (FR)', validation: { isRequired: true } }),
             titleEn: fields.text({ label: 'Professional title (EN)', validation: { isRequired: true } }),
             birthYear: fields.integer({ label: 'Année de naissance', validation: { isRequired: true } }),
-            experienceYears: fields.integer({ label: 'Années d\'expérience' }),
+            experienceStart: fields.date({ label: 'Début de carrière', description: 'Date de début pour calculer les années d\'expérience' }),
             location: fields.text({ label: 'Localisation' }),
             email: fields.text({ label: 'Email', validation: { isRequired: true } }),
             phone: fields.text({ label: 'Téléphone' }),
