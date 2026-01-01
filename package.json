@@ -14,11 +14,11 @@
     "clean": "turbo run clean && rm -rf node_modules .turbo"
   },
   "devDependencies": {
-    "turbo": "^2.1.0",
     "@types/node": "^20.10.0",
-    "typescript": "^5.3.0",
+    "eslint": "^8.55.0",
     "prettier": "^3.1.0",
-    "eslint": "^8.55.0"
+    "turbo": "^2.1.0",
+    "typescript": "^5.3.0"
   },
   "engines": {
     "node": ">=20.0.0",
@@ -30,5 +30,8 @@
       "glob": ">=10.5.0",
       "js-yaml": ">=3.14.2"
     }
+  },
+  "dependencies": {
+    "puppeteer": "^24.34.0"
   }
 }
