@@ -5,7 +5,7 @@ import {
   processPhoto,
   processAllPhotos,
   type ProcessResult,
-} from '@/scripts/process-photos';
+} from '@/scripts/process-assets';
 
 // Mock Sharp
 jest.mock('sharp', () => {
