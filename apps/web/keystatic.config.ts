@@ -40,7 +40,7 @@ export default config({
             nameEn: fields.text({ label: 'Name (EN)', validation: { isRequired: true } }),
             titleFr: fields.text({ label: 'Titre professionnel (FR)', validation: { isRequired: true } }),
             titleEn: fields.text({ label: 'Professional title (EN)', validation: { isRequired: true } }),
-            birthYear: fields.integer({ label: 'Année de naissance', validation: { isRequired: true } }),
+            birthDate: fields.date({ label: 'Date de naissance', validation: { isRequired: true } }),
             experienceStart: fields.date({ label: 'Début de carrière', description: 'Date de début pour calculer les années d\'expérience' }),
             location: fields.text({ label: 'Localisation' }),
             email: fields.text({ label: 'Email', validation: { isRequired: true } }),
