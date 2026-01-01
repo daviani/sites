@@ -41,3 +41,4 @@ next-env.d.ts
 # local content for development (test data)
 /content/posts/local/
 /content/photos/local/
+/content/cv/local/

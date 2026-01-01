@@ -1,0 +1,281 @@
+personal:
+  nameFr: Daviani FILLATRE
+  nameEn: Daviani FILLATRE
+  titleFr: Développeur Full-Stack & DevOps
+  titleEn: Full-Stack & DevOps Developer
+  birthYear: 1989
+  experienceYears: 5
+  location: Villeurbanne
+  email: hello@daviani.dev
+  phone: 06 52 21 34 88
+  linkedin: https://linkedin.com/in/daviani-fillatre
+  github: https://github.com/daviani
+  website: https://daviani.dev
+  photo: /cv/personal/photo.jpg
+summaryFr: Développeur Full-Stack et DevOps avec 5 ans d'expérience
+summaryEn: Full-Stack and DevOps Developer with 5 years of experience
+experiences:
+  - start: 10/2023
+    current: true
+    compact: false
+    companyFr: ATIPY - Accessibilité Numérique
+    companyEn: ATIPY - Digital Accessibility
+    roleFr: Développeur Full-Stack & DevOps
+    roleEn: Full-Stack & DevOps Developer
+    locationFr: Lyon
+    locationEn: Lyon, France
+    highlightsFr:
+      - >-
+        Développement d'applications web accessibles conformes RGAA pour
+        collectivités territoriales
+      - >-
+        Architecture et maintenance CI/CD : GitLab, Jenkins, Docker, blue-green
+        deployment
+      - >-
+        Administration système : Windows Server, Linux, IIS, Apache, SSL/TLS,
+        monitoring
+      - >-
+        Gestion bases de données PostgreSQL : migrations Entity Framework Core,
+        optimisation
+    highlightsEn:
+      - >-
+        Development of RGAA-compliant accessible web applications for local
+        authorities
+      - >-
+        CI/CD architecture and maintenance: GitLab, Jenkins, Docker, blue-green
+        deployment
+      - >-
+        System administration: Windows Server, Linux, IIS, Apache, SSL/TLS,
+        monitoring
+      - >-
+        PostgreSQL database management: Entity Framework Core migrations,
+        optimization
+    stack:
+      - Angular
+      - Next.js
+      - .NET Core
+      - PostgreSQL
+      - Jenkins
+      - GitLab CI/CD
+      - Docker
+      - Windows Server
+      - IIS
+  - start: 12/2022
+    end: 08/2023
+    current: false
+    compact: false
+    companyFr: Web-Atrio
+    companyEn: Web-Atrio
+    roleFr: Consultant en Développement
+    roleEn: Development Consultant
+    locationFr: Lyon
+    locationEn: Lyon, France
+    summaryFr: >-
+      Développement d'outils d'automatisation pour optimiser les workflows
+      internes. Extension Chrome pour intégration CRM/Gmail avec automatisation
+      de processus métier et intégration API tierces.
+    summaryEn: >-
+      Development of automation tools to optimize internal workflows. Chrome
+      extension for CRM/Gmail integration with business process automation and
+      third-party API integration.
+    highlightsFr: []
+    highlightsEn: []
+    stack:
+      - JavaScript
+      - Chrome Extension API
+      - Node.js
+      - intégration CRM
+  - start: 02/2022
+    end: 08/2022
+    current: false
+    compact: true
+    companyFr: Anikop
+    companyEn: Anikop
+    roleFr: Analyste Développeur
+    roleEn: Developer Analyst
+    locationFr: Lyon
+    locationEn: Lyon, France
+    summaryFr: >-
+      Conception et développement d'applications web et mobile JavaScript, APIs
+      Node.js jusqu'au déploiement production. Méthodologie Agile (SCRUM).
+    summaryEn: >-
+      Design and development of JavaScript web and mobile applications, Node.js
+      APIs through to production deployment. Agile methodology (SCRUM).
+    highlightsFr: []
+    highlightsEn: []
+    stack:
+      - React.js
+      - React Native
+      - Nest.js
+      - MariaDB
+      - GitLab CI/CD
+      - Jest
+      - Cypress
+      - Docker
+  - start: 07/2021
+    end: 12/2021
+    current: false
+    compact: true
+    companyFr: Méphistophélès Pub
+    companyEn: Méphistophélès Pub
+    roleFr: Développeur Web
+    roleEn: Web Developer
+    locationFr: Lyon
+    locationEn: Lyon, France
+    summaryFr: >-
+      Création site vitrine multilingue (fr/en) avec CMS headless DatoCMS.
+      Gestion de la production avec Vercel.
+    summaryEn: >-
+      Creation of multilingual showcase website (FR/EN) with DatoCMS headless
+      CMS. Production management with Vercel.
+    highlightsFr: []
+    highlightsEn: []
+    stack:
+      - Next.js
+      - Tailwind CSS
+      - DatoCMS
+      - Vercel
+  - start: 04/2021
+    end: 06/2021
+    current: false
+    compact: true
+    companyFr: Majelice
+    companyEn: Majelice
+    roleFr: Développeur Front-End React
+    roleEn: Front-End React Developer
+    locationFr: Lyon
+    locationEn: Lyon, France
+    summaryFr: >-
+      Refonte front-end application d'assemblée générale et votes
+      dématérialisés. Focus UX et sécurité.
+    summaryEn: >-
+      Front-end redesign of general assembly and digital voting application.
+      Focus on UX and security.
+    highlightsFr: []
+    highlightsEn: []
+    stack: []
+  - start: 09/2020
+    end: 04/2021
+    current: false
+    compact: true
+    companyFr: Brightceps
+    companyEn: Brightceps
+    roleFr: Développeur Web
+    roleEn: Web Developer
+    locationFr: Lyon
+    locationEn: Lyon, France
+    summaryFr: >-
+      Application de coaching sportif en React. Organisation et gestion de
+      projet.
+    summaryEn: Sports coaching application in React. Organization and project management.
+    highlightsFr: []
+    highlightsEn: []
+    stack: []
+  - start: 09/2020
+    end: 12/2020
+    current: false
+    compact: true
+    companyFr: Silico
+    companyEn: Silico
+    roleFr: Développeur Front-End Vue.js
+    roleEn: Front-End Vue.js Developer
+    locationFr: Lyon
+    locationEn: Lyon, France
+    summaryFr: >-
+      Intégration maquettes et développement interactions front-end/back-end
+      pour application santé.
+    summaryEn: >-
+      Mockup integration and front-end/back-end interaction development for
+      healthcare application.
+    highlightsFr: []
+    highlightsEn: []
+    stack: []
+education:
+  - start: '2019'
+    end: '2019'
+    institutionFr: ADREC - Bac +3/4
+    institutionEn: ADREC - Bachelor's +3/4
+    degreeFr: Concepteur Développeur d'Applications
+    degreeEn: Application Designer Developer
+  - start: '2017'
+    end: '2018'
+    institutionFr: Titre Professionnel
+    institutionEn: Professional Certificate
+    degreeFr: Développeur Web et Web Mobile
+    degreeEn: Web and Mobile Web Developer
+skills:
+  - name: .NET Core
+    category: backend
+  - name: ASP.NET
+    category: backend
+  - name: Angular
+    category: frontend
+  - name: React
+    category: frontend
+  - name: Next.js
+    category: frontend
+  - name: Node.js
+    category: backend
+  - name: TypeScript
+    category: frontend
+  - name: PostgreSQL
+    category: backend
+  - name: GitLab CI/CD
+    category: devops
+  - name: Docker
+    category: devops
+  - name: Jenkins
+    category: devops
+  - name: Windows Server
+    category: devops
+  - name: IIS
+    category: devops
+  - name: Linux
+    category: devops
+  - name: Apache
+    category: devops
+languages:
+  - languageFr: Français
+    languageEn: French
+    levelFr: Natif
+    levelEn: Native
+  - languageFr: Anglais
+    languageEn: English
+    levelFr: Professionnel
+    levelEn: Professional
+expertise:
+  - titleFr: Développement Full-Stack
+    titleEn: Full-Stack Development
+    descriptionFr: Applications web complètes front et back
+    descriptionEn: Complete front-end and back-end web applications
+  - titleFr: DevOps & CI/CD
+    titleEn: DevOps & CI/CD
+    descriptionFr: Pipelines GitLab, Jenkins, Docker
+    descriptionEn: GitLab, Jenkins, Docker pipelines
+  - titleFr: Architecture d'applications
+    titleEn: Application Architecture
+    descriptionFr: Conception et structuration de projets
+    descriptionEn: Project design and structuring
+  - titleFr: Accessibilité numérique (RGAA)
+    titleEn: Digital Accessibility (RGAA)
+    descriptionFr: Applications conformes aux normes d'accessibilité
+    descriptionEn: Applications compliant with accessibility standards
+  - titleFr: Administration système
+    titleEn: System Administration
+    descriptionFr: Windows Server, Linux, IIS, Apache
+    descriptionEn: Windows Server, Linux, IIS, Apache
+  - titleFr: Bases de données PostgreSQL
+    titleEn: PostgreSQL Databases
+    descriptionFr: Migrations, optimisation, maintenance
+    descriptionEn: Migrations, optimization, maintenance
+contributions:
+  - date: 2024/2025
+    typeFr: Mentorat
+    typeEn: Mentoring
+    descriptionFr: Accompagnement de 2 développeurs juniors, aujourd'hui en poste
+    descriptionEn: Mentoring of 2 junior developers, now employed
+  - date: Mars 2023
+    typeFr: Speaker
+    typeEn: Speaker
+    descriptionFr: 'ApéroWeb Lyon : Introduction au CMS headless avec DatoCMS & NextJS'
+    descriptionEn: 'ApéroWeb Lyon: Introduction to headless CMS with DatoCMS & NextJS'
