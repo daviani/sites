@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 import { useTranslation } from '@daviani/ui';
 
 function DownloadIcon({ className }: { className?: string }) {
@@ -21,96 +21,78 @@ function DownloadIcon({ className }: { className?: string }) {
   );
 }
 
+function LoadingSpinner({ className }: { className?: string }) {
+  return (
+    <svg
+      className={`animate-spin ${className}`}
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      />
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      />
+    </svg>
+  );
+}
+
 export function CvDownloadButton() {
-  const [isOpen, setIsOpen] = useState(false);
-  const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(false);
+  const { t, language } = useTranslation();
 
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      setIsOpen(false);
-    }
-  }, []);
+  const handleDownload = async () => {
+    setIsLoading(true);
+    try {
+      const params = new URLSearchParams({
+        theme: 'light',
+        lang: language,
+        action: 'download',
+      });
 
-  useEffect(() => {
-    if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'hidden';
+      const response = await fetch(`/api/cv/pdf?${params.toString()}`);
+      if (!response.ok) throw new Error('Failed to generate PDF');
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = language === 'fr' ? 'Daviani-Fillatre-CV.pdf' : 'Daviani-Fillatre-Resume.pdf';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error('Error downloading PDF:', error);
+    } finally {
+      setIsLoading(false);
     }
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = '';
-    };
-  }, [isOpen, handleKeyDown]);
+  };
 
   return (
-    <>
-      {/* Main button */}
-      <div className="flex justify-center">
-        <button
-          onClick={() => setIsOpen(true)}
-          className="flex cursor-pointer items-center gap-2 rounded-lg bg-nord-10/90 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_0_20px_rgba(94,129,172,0.5)] backdrop-blur-sm transition-all duration-300 ease-out hover:scale-105 hover:bg-nord-10 hover:shadow-[0_0_30px_rgba(94,129,172,0.7)] focus:outline-none focus:ring-4 focus:ring-nord-8 focus:ring-offset-2 active:scale-100 dark:shadow-[0_0_25px_rgba(136,192,208,0.4)] dark:hover:shadow-[0_0_35px_rgba(136,192,208,0.6)]"
-        >
+    <div className="flex justify-center">
+      <button
+        onClick={handleDownload}
+        disabled={isLoading}
+        className="flex cursor-pointer items-center gap-2 rounded-lg bg-nord-10/90 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_0_20px_rgba(94,129,172,0.5)] backdrop-blur-sm transition-all duration-300 ease-out hover:scale-105 hover:bg-nord-10 hover:shadow-[0_0_30px_rgba(94,129,172,0.7)] focus:outline-none focus:ring-4 focus:ring-nord-8 focus:ring-offset-2 active:scale-100 disabled:cursor-wait disabled:opacity-70 disabled:hover:scale-100 dark:shadow-[0_0_25px_rgba(136,192,208,0.4)] dark:hover:shadow-[0_0_35px_rgba(136,192,208,0.6)]"
+      >
+        {isLoading ? (
+          <LoadingSpinner className="h-5 w-5" />
+        ) : (
           <DownloadIcon className="h-5 w-5" />
-          {t('pages.cv.labels.download')}
-        </button>
-      </div>
-
-      {/* Modal */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="download-modal-title"
-        >
-          {/* Backdrop */}
-          <div
-            className="absolute inset-0 bg-black/50 transition-opacity"
-            onClick={() => setIsOpen(false)}
-            aria-hidden="true"
-          />
-
-          {/* Modal content */}
-          <div className="relative z-10 min-w-[300px] rounded-xl bg-white p-6 shadow-2xl dark:bg-nord-1">
-            <h2
-              id="download-modal-title"
-              className="mb-4 text-lg font-semibold text-nord-0 dark:text-nord-6"
-            >
-              {t('pages.cv.labels.chooseFormat')}
-            </h2>
-
-            <div className="flex flex-col gap-3">
-              {/* PDF Button */}
-              <a
-                href="/api/cv/pdf"
-                download="Daviani-Fillatre-CV.pdf"
-                className="cursor-pointer rounded-lg bg-nord-10 px-4 py-3 text-center font-semibold text-white shadow-md transition-all duration-200 hover:scale-[1.02] hover:bg-nord-9 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-nord-8 focus:ring-offset-2 dark:focus:ring-offset-nord-1"
-                onClick={() => setIsOpen(false)}
-              >
-                {t('pages.cv.labels.downloadPdf')}
-              </a>
-
-              {/* DOCX Button */}
-              <a
-                href="/api/cv/docx"
-                download="Daviani-Fillatre-CV.docx"
-                className="cursor-pointer rounded-lg border-2 border-nord-3 bg-transparent px-4 py-3 text-center font-semibold text-nord-0 shadow-md transition-all duration-200 hover:scale-[1.02] hover:bg-nord-3 hover:text-white hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-nord-3 focus:ring-offset-2 dark:border-nord-4 dark:text-nord-6 dark:hover:bg-nord-4 dark:hover:text-nord-0 dark:focus:ring-offset-nord-1"
-                onClick={() => setIsOpen(false)}
-              >
-                {t('pages.cv.labels.downloadDocx')}
-              </a>
-
-              {/* Cancel Button */}
-              <button
-                onClick={() => setIsOpen(false)}
-                className="cursor-pointer px-4 py-2 text-center font-medium text-nord-11 transition-colors hover:text-nord-12 focus:outline-none"
-              >
-                {t('pages.cv.labels.cancel')}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
+        )}
+        {t('pages.cv.labels.download')}
+      </button>
+    </div>
   );
 }
