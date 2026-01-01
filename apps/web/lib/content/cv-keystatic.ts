@@ -10,7 +10,7 @@ export interface CvPersonal {
   nameEn: string;
   titleFr: string;
   titleEn: string;
-  birthYear: number;
+  birthDate: string; // Date ISO format (YYYY-MM-DD)
   experienceStart?: string; // Date ISO format (YYYY-MM-DD)
   location: string;
   email: string;
@@ -176,8 +176,15 @@ export function getLocalizedCvData(locale: 'fr' | 'en' = 'fr'): LocalizedCvData 
 
   const isFr = locale === 'fr';
   const now = new Date();
-  const currentYear = now.getFullYear();
-  const age = currentYear - data.personal.birthYear;
+
+  // Calculate age from birth date
+  let age = 0;
+  let birthYear = 0;
+  if (data.personal.birthDate) {
+    const birthDate = new Date(data.personal.birthDate);
+    birthYear = birthDate.getFullYear();
+    age = Math.floor((now.getTime() - birthDate.getTime()) / (1000 * 60 * 60 * 24 * 365.25));
+  }
 
   // Calculate experience years from start date
   let experienceYears = 0;
@@ -190,7 +197,7 @@ export function getLocalizedCvData(locale: 'fr' | 'en' = 'fr'): LocalizedCvData 
     personal: {
       name: isFr ? data.personal.nameFr : data.personal.nameEn,
       title: isFr ? data.personal.titleFr : data.personal.titleEn,
-      birthYear: data.personal.birthYear,
+      birthYear,
       age,
       experienceYears,
       location: data.personal.location,
