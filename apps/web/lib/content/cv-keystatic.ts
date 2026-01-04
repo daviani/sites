@@ -146,20 +146,43 @@ const isProd = process.env.NODE_ENV === 'production';
  * CV file path based on environment:
  * - Development: content/cv/local (test data)
  * - Production: content/cv (real data from GitHub)
+ *
+ * Note: In monorepo with Turborepo, process.cwd() can be either:
+ * - /path/to/sites (monorepo root)
+ * - /path/to/sites/apps/web (app root)
  */
-const CV_FILE_PATH = path.join(process.cwd(), isProd ? 'content/cv/index.yaml' : 'content/cv/local/index.yaml');
+function getCvFilePath(): string {
+  const relativePath = isProd ? 'content/cv/index.yaml' : 'content/cv/local/index.yaml';
+
+  // Try from apps/web first (when cwd is apps/web)
+  const fromAppRoot = path.join(process.cwd(), relativePath);
+  if (fs.existsSync(fromAppRoot)) {
+    return fromAppRoot;
+  }
+
+  // Fallback: try from monorepo root (when cwd is sites/)
+  const fromMonorepoRoot = path.join(process.cwd(), 'apps/web', relativePath);
+  if (fs.existsSync(fromMonorepoRoot)) {
+    return fromMonorepoRoot;
+  }
+
+  // Return the expected path for error message
+  return fromAppRoot;
+}
 
 /**
  * Get raw CV data from Keystatic YAML
  */
 export function getCvData(): CvData | null {
-  if (!fs.existsSync(CV_FILE_PATH)) {
-    console.warn(`CV file not found at ${CV_FILE_PATH}`);
+  const cvFilePath = getCvFilePath();
+
+  if (!fs.existsSync(cvFilePath)) {
+    console.warn(`CV file not found at ${cvFilePath}`);
     return null;
   }
 
   try {
-    const content = fs.readFileSync(CV_FILE_PATH, 'utf-8');
+    const content = fs.readFileSync(cvFilePath, 'utf-8');
     return yaml.parse(content) as CvData;
   } catch (error) {
     console.error('Error parsing CV YAML:', error);

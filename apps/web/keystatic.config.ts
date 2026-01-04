@@ -19,6 +19,8 @@ const storage: LocalConfig['storage'] | GitHubConfig['storage'] = isProd
  * - Development/Test: content/posts/local/* (local articles for testing)
  * - Production: apps/web/content/posts/* (real articles - path relative to repo root for GitHub storage)
  */
+// Keystatic local mode uses git to find files
+// Paths are relative to the app directory (apps/web/) where Next.js runs
 const postsPath = isProd ? 'apps/web/content/posts/*' : 'content/posts/local/*';
 const photosPath = isProd ? 'apps/web/content/photos/*' : 'content/photos/local/*';
 const cvPath = isProd ? 'apps/web/content/cv/' : 'content/cv/local/';
