@@ -38,7 +38,8 @@ next-env.d.ts
 # photos (managed separately, not in git)
 /public/photos/
 
-# local content for development (test data)
-/content/posts/local/
-/content/photos/local/
-/content/cv/local/
+# Note: local content directories are NOT ignored
+# They need to be visible to Keystatic's local storage mode
+# /content/posts/local/
+# /content/photos/local/
+# /content/cv/local/
