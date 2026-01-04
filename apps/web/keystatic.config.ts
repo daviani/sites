@@ -197,6 +197,37 @@ export default config({
             itemLabel: (props) => props.fields.typeFr.value || 'Nouvelle contribution',
           }
         ),
+
+        // ==========================================
+        // Projets personnels
+        // ==========================================
+        projects: fields.array(
+          fields.object({
+            titleFr: fields.text({ label: 'Titre (FR)', validation: { isRequired: true } }),
+            titleEn: fields.text({ label: 'Title (EN)', validation: { isRequired: true } }),
+            start: fields.text({ label: 'Début' }),
+            end: fields.text({ label: 'Fin (ou "En cours")' }),
+            descriptionFr: fields.text({ label: 'Description (FR)', multiline: true }),
+            descriptionEn: fields.text({ label: 'Description (EN)', multiline: true }),
+            highlightsFr: fields.array(fields.text({ label: 'Point clé (FR)' }), {
+              label: 'Points clés (FR)',
+              itemLabel: (props) => props.value || 'Nouveau point',
+            }),
+            highlightsEn: fields.array(fields.text({ label: 'Highlight (EN)' }), {
+              label: 'Highlights (EN)',
+              itemLabel: (props) => props.value || 'New highlight',
+            }),
+            stack: fields.array(fields.text({ label: 'Technologie' }), {
+              label: 'Stack technique',
+              itemLabel: (props) => props.value || 'Nouvelle technologie',
+            }),
+            url: fields.url({ label: 'URL du projet' }),
+          }),
+          {
+            label: 'Projets personnels',
+            itemLabel: (props) => props.fields.titleFr.value || 'Nouveau projet',
+          }
+        ),
       },
     }),
   },

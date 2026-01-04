@@ -75,6 +75,19 @@ export interface CvContribution {
   descriptionEn: string;
 }
 
+export interface CvProject {
+  titleFr: string;
+  titleEn: string;
+  start: string;
+  end: string;
+  descriptionFr: string;
+  descriptionEn: string;
+  highlightsFr: string[];
+  highlightsEn: string[];
+  stack: string[];
+  url?: string;
+}
+
 export interface CvData {
   personal: CvPersonal;
   summaryFr: string;
@@ -85,6 +98,7 @@ export interface CvData {
   languages: CvLanguage[];
   expertise: CvExpertise[];
   contributions: CvContribution[];
+  projects?: CvProject[];
 }
 
 /**
@@ -137,6 +151,15 @@ export interface LocalizedCvData {
     date: string;
     type: string;
     description: string;
+  }[];
+  projects: {
+    title: string;
+    start: string;
+    end: string;
+    description: string;
+    highlights: string[];
+    stack: string[];
+    url?: string;
   }[];
 }
 
@@ -263,6 +286,15 @@ export function getLocalizedCvData(locale: 'fr' | 'en' = 'fr'): LocalizedCvData 
       date: contrib.date,
       type: isFr ? contrib.typeFr : contrib.typeEn,
       description: isFr ? contrib.descriptionFr : contrib.descriptionEn,
+    })),
+    projects: (data.projects || []).map((proj) => ({
+      title: isFr ? proj.titleFr : proj.titleEn,
+      start: proj.start,
+      end: proj.end,
+      description: isFr ? proj.descriptionFr : proj.descriptionEn,
+      highlights: isFr ? proj.highlightsFr : proj.highlightsEn,
+      stack: proj.stack,
+      url: proj.url,
     })),
   };
 }

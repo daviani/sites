@@ -179,7 +179,8 @@
         "experience": "Professional Experience",
         "education": "Education",
         "languages": "Languages",
-        "contributions": "Contributions"
+        "contributions": "Contributions",
+        "projects": "Personal Projects"
       },
       "labels": {
         "current": "Present",

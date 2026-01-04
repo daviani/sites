@@ -132,6 +132,15 @@ interface LocalizedCvData {
     type: string;
     description: string;
   }[];
+  projects: {
+    title: string;
+    start: string;
+    end: string;
+    description: string;
+    highlights: string[];
+    stack: string[];
+    url?: string;
+  }[];
 }
 
 function generateCvHtml(
@@ -181,6 +190,7 @@ function generateCvHtml(
     contributions: isFr ? 'Contributions' : 'Contributions',
     experience: isFr ? 'Expériences Professionnelles' : 'Professional Experience',
     education: isFr ? 'Formation' : 'Education',
+    projects: isFr ? 'Projets Personnels' : 'Personal Projects',
     current: isFr ? "Aujourd'hui" : 'Present',
     stack: isFr ? 'Stack' : 'Stack',
   };
@@ -197,13 +207,8 @@ function generateCvHtml(
         <div class="exp-date">${exp.start} - ${exp.current ? t.current : exp.end}</div>
       </div>
       <div class="exp-content">
-        ${
-          exp.highlights && exp.highlights.length > 0
-            ? `<ul class="exp-highlights">${exp.highlights.map((h) => `<li><span class="arrow">→</span>${h}</li>`).join('')}</ul>`
-            : exp.summary
-              ? `<p>${exp.summary}</p>`
-              : ''
-        }
+        ${exp.summary ? `<p style="margin-bottom: ${exp.highlights && exp.highlights.length > 0 ? '4px' : '0'}">${exp.summary}</p>` : ''}
+        ${exp.highlights && exp.highlights.length > 0 ? `<ul class="exp-highlights">${exp.highlights.map((h) => `<li><span class="arrow">→</span>${h}</li>`).join('')}</ul>` : ''}
         ${exp.stack && exp.stack.length > 0 ? `<div class="exp-stack"><strong>${t.stack} :</strong> ${exp.stack.join(', ')}</div>` : ''}
       </div>
     </div>
@@ -243,6 +248,28 @@ function generateCvHtml(
   `
     )
     .join('');
+
+  const projectsHtml = cvData.projects && cvData.projects.length > 0
+    ? cvData.projects
+        .map(
+          (proj) => `
+    <div class="project-card">
+      <div class="proj-header">
+        <div>
+          <div class="proj-title">${proj.title}</div>
+          ${proj.url ? `<a href="${proj.url}" class="proj-url">${proj.url.replace(/^https?:\/\//, '')}</a>` : ''}
+        </div>
+        <div class="proj-date">${proj.start} - ${proj.end}</div>
+      </div>
+      <div class="proj-content">
+        ${proj.description ? `<p class="proj-desc">${proj.description}</p>` : ''}
+        ${proj.stack && proj.stack.length > 0 ? `<div class="proj-stack"><strong>${t.stack} :</strong> ${proj.stack.join(', ')}</div>` : ''}
+      </div>
+    </div>
+  `
+        )
+        .join('')
+    : '';
 
   return `<!DOCTYPE html>
 <html lang="${lang}">
@@ -594,6 +621,64 @@ function generateCvHtml(
       background: rgba(136, 192, 208, 0.15);
     }
 
+    .project-card {
+      background: ${cardBg};
+      border: 1px solid ${border};
+      border-radius: 6px;
+      padding: 6px 8px;
+      margin-bottom: 5px;
+    }
+
+    .proj-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 3px;
+    }
+
+    .proj-title {
+      font-size: 9px;
+      font-weight: 600;
+      color: ${textPrimary};
+      margin-bottom: 1px;
+      letter-spacing: -0.1px;
+    }
+
+    .proj-url {
+      font-size: 7px;
+      font-weight: 500;
+      color: ${colors.nord8};
+      text-decoration: none;
+    }
+
+    .proj-date {
+      flex-shrink: 0;
+      white-space: nowrap;
+      font-size: 7px;
+      font-weight: 500;
+      color: ${textSecondary};
+      padding: 2px 6px;
+      border-radius: 3px;
+      background: rgba(136, 192, 208, 0.15);
+    }
+
+    .proj-content {
+      font-size: 7.5px;
+      line-height: 1.35;
+      color: ${textSecondary};
+    }
+
+    .proj-desc {
+      margin-bottom: 2px;
+    }
+
+    .proj-stack {
+      margin-top: 2px;
+      font-size: 7px;
+      color: ${colors.nord8};
+    }
+
     @media print {
       body {
         print-color-adjust: exact;
@@ -654,6 +739,11 @@ function generateCvHtml(
       <div class="education-grid">
         ${educationHtml}
       </div>
+
+      ${projectsHtml ? `
+      <h2 class="main-section-title">${t.projects}</h2>
+      ${projectsHtml}
+      ` : ''}
     </main>
   </div>
 </body>
