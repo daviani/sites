@@ -12,8 +12,8 @@ personal:
   github: https://github.com/daviani
   website: https://daviani.dev
   photo: /cv/personal/photo.jpg
-summaryFr: Développeur Full-Stack et DevOps avec 5 ans d'expérience
-summaryEn: Full-Stack and DevOps Developer with 5 years of experience
+summaryFr: Développeur Full-Stack et DevOps avec 6 ans d'expérience
+summaryEn: Full-Stack and DevOps Developer with 6 years of experience
 experiences:
   - start: 10/2023
     current: true
@@ -24,42 +24,50 @@ experiences:
     roleEn: Full-Stack & DevOps Developer
     locationFr: Lyon
     locationEn: Lyon, France
+    summaryFr: >-
+      Développeur unique depuis mars 2025. Gestion de 6 applications (site
+      vitrine, outils internes, projets clients) et maintenance du parc
+      serveurs.
+    summaryEn: >-
+      Sole developer since March 2025. Management of 6 applications (showcase
+      website, internal tools, client projects) and maintenance of the server
+      farm.
     highlightsFr:
       - >-
-        Développement d'applications web accessibles conformes RGAA pour
-        collectivités territoriales
+        Développement et maintenance d'applications conformes RGAA (Angular,
+        Next.js, .NET Core)
       - >-
-        Architecture et maintenance CI/CD : GitLab, Jenkins, Docker, blue-green
-        deployment
+        Conception et optimisation de pipelines CI/CD : GitLab CI, Jenkins,
+        Docker, stratégie blue-green deployment, review apps
       - >-
-        Administration système : Windows Server, Linux, IIS, Apache, SSL/TLS,
-        monitoring
+        Administration système multi-environnements : Windows Server, Linux
+        (OVH, GCP), IIS, Apache, SSL/TLS
       - >-
-        Gestion bases de données PostgreSQL : migrations Entity Framework Core,
-        optimisation
+        Gestion de bases de données PostgreSQL : migrations Entity Framework
+        Core, optimisation de requêtes
+      - Monitoring et gestion des incidents en autonomie complète
     highlightsEn:
       - >-
-        Development of RGAA-compliant accessible web applications for local
-        authorities
+        Development and maintenance of RGAA-compliant applications (Angular,
+        Next.js, .NET Core)
       - >-
-        CI/CD architecture and maintenance: GitLab, Jenkins, Docker, blue-green
-        deployment
+        Design and optimization of CI/CD pipelines: GitLab CI, Jenkins, Docker,
+        blue-green deployment strategy, review apps
       - >-
-        System administration: Windows Server, Linux, IIS, Apache, SSL/TLS,
-        monitoring
+        Multi-environment system administration: Windows Server, Linux (OVH,
+        GCP), IIS, Apache, SSL/TLS
       - >-
-        PostgreSQL database management: Entity Framework Core migrations,
+        PostgreSQL database management: Entity Framework Core migrations, query
         optimization
+      - Monitoring and incident management with complete autonomy
     stack:
       - Angular
       - Next.js
       - .NET Core
       - PostgreSQL
-      - Jenkins
       - GitLab CI/CD
+      - Jenkins
       - Docker
-      - Windows Server
-      - IIS
   - start: 12/2022
     end: 08/2023
     current: false
@@ -182,14 +190,35 @@ experiences:
     locationFr: Lyon
     locationEn: Lyon, France
     summaryFr: >-
-      Intégration maquettes et développement interactions front-end/back-end
-      pour application santé.
+      Intégration maquettes et développement front-end sur une application santé
+      (API Symfony existante).
     summaryEn: >-
-      Mockup integration and front-end/back-end interaction development for
-      healthcare application.
+      Mockup integration and front-end development on a healthcare application
+      (existing Symfony API).
     highlightsFr: []
     highlightsEn: []
-    stack: []
+    stack:
+      - Vue.js
+      - Symfony
+  - start: 09/2019
+    end: 11/2019
+    current: false
+    compact: true
+    companyFr: Aristys-web (Clermont-Ferrand)
+    companyEn: Aristys-web (Clermont-Ferrand)
+    roleFr: Développeur Web (Stage)
+    roleEn: Web Developer (Internship)
+    locationFr: Clermont-Ferrand
+    locationEn: Clermont-Ferrand, France
+    summaryFr: Développement web avec approche éco-conception.
+    summaryEn: Web development with eco-design approach.
+    highlightsFr: []
+    highlightsEn: []
+    stack:
+      - Symfony
+      - Twig
+      - JavaScript
+      - CSS
 education:
   - start: '2019'
     end: '2019'
@@ -208,31 +237,41 @@ skills:
     category: backend
   - name: ASP.NET
     category: backend
+  - name: Node.js
+    category: backend
+  - name: TypeScript
+    category: backend
+  - name: PHP
+    category: backend
+  - name: Symfony
+    category: backend
   - name: Angular
     category: frontend
   - name: React
     category: frontend
   - name: Next.js
     category: frontend
-  - name: Node.js
-    category: backend
-  - name: TypeScript
+  - name: Vue.js
     category: frontend
   - name: PostgreSQL
     category: backend
-  - name: GitLab CI/CD
-    category: devops
+  - name: MySQL
+    category: backend
+  - name: MariaDB
+    category: backend
   - name: Docker
+    category: devops
+  - name: GitLab CI/CD
     category: devops
   - name: Jenkins
     category: devops
-  - name: Windows Server
-    category: devops
-  - name: IIS
-    category: devops
   - name: Linux
     category: devops
-  - name: Apache
+  - name: Windows Server
+    category: devops
+  - name: OVH
+    category: devops
+  - name: GCP
     category: devops
 languages:
   - languageFr: Français
@@ -246,28 +285,28 @@ languages:
 expertise:
   - titleFr: Développement Full-Stack
     titleEn: Full-Stack Development
-    descriptionFr: Applications web complètes front et back
-    descriptionEn: Complete front-end and back-end web applications
+    descriptionFr: .NET, Node.js, PHP
+    descriptionEn: .NET, Node.js, PHP
   - titleFr: DevOps & CI/CD
     titleEn: DevOps & CI/CD
-    descriptionFr: Pipelines GitLab, Jenkins, Docker
-    descriptionEn: GitLab, Jenkins, Docker pipelines
+    descriptionFr: GitLab CI, Jenkins, Docker, déploiement continu
+    descriptionEn: GitLab CI, Jenkins, Docker, continuous deployment
+  - titleFr: Administration système & infra
+    titleEn: System Administration & Infra
+    descriptionFr: Windows Server, Linux, OVH, GCP
+    descriptionEn: Windows Server, Linux, OVH, GCP
   - titleFr: Architecture d'applications
     titleEn: Application Architecture
-    descriptionFr: Conception et structuration de projets
-    descriptionEn: Project design and structuring
+    descriptionFr: Conception, structuration, patterns
+    descriptionEn: Design, structuring, patterns
+  - titleFr: Bases de données relationnelles
+    titleEn: Relational Databases
+    descriptionFr: PostgreSQL, MySQL, MariaDB
+    descriptionEn: PostgreSQL, MySQL, MariaDB
   - titleFr: Accessibilité numérique (RGAA)
     titleEn: Digital Accessibility (RGAA)
     descriptionFr: Applications conformes aux normes d'accessibilité
     descriptionEn: Applications compliant with accessibility standards
-  - titleFr: Administration système
-    titleEn: System Administration
-    descriptionFr: Windows Server, Linux, IIS, Apache
-    descriptionEn: Windows Server, Linux, IIS, Apache
-  - titleFr: Bases de données PostgreSQL
-    titleEn: PostgreSQL Databases
-    descriptionFr: Migrations, optimisation, maintenance
-    descriptionEn: Migrations, optimization, maintenance
 contributions:
   - date: 2024/2025
     typeFr: Mentorat
@@ -279,3 +318,98 @@ contributions:
     typeEn: Speaker
     descriptionFr: 'ApéroWeb Lyon : Introduction au CMS headless avec DatoCMS & NextJS'
     descriptionEn: 'ApéroWeb Lyon: Introduction to headless CMS with DatoCMS & NextJS'
+projects:
+  - titleFr: daviani.dev — Portfolio multi-tenant
+    titleEn: daviani.dev — Multi-tenant Portfolio
+    start: '2025'
+    end: En cours
+    descriptionFr: >-
+      Architecture monorepo multi-tenant pour portfolio professionnel. Focus sur
+      la performance, la sécurité et l'accessibilité.
+    descriptionEn: >-
+      Multi-tenant monorepo architecture for professional portfolio. Focus on
+      performance, security and accessibility.
+    highlightsFr:
+      - Architecture multi-domaines avec middleware de routing personnalisé
+      - >-
+        Sécurité renforcée : CSP strict, HSTS, rate limiting (Vercel KV),
+        ReCaptcha v3
+      - >-
+        Infrastructure : Vercel Edge Functions, Cloudflare WAF/CDN, conformité
+        RGPD
+      - 'CI/CD : GitHub Actions, tests automatisés, déploiement continu'
+      - Objectif Lighthouse >= 95 (Performance, Accessibilité, SEO)
+    highlightsEn:
+      - Multi-domain architecture with custom routing middleware
+      - >-
+        Enhanced security: strict CSP, HSTS, rate limiting (Vercel KV),
+        ReCaptcha v3
+      - >-
+        Infrastructure: Vercel Edge Functions, Cloudflare WAF/CDN, GDPR
+        compliance
+      - 'CI/CD: GitHub Actions, automated tests, continuous deployment'
+      - Lighthouse target >= 95 (Performance, Accessibility, SEO)
+    stack:
+      - Next.js 16
+      - TypeScript
+      - Turborepo
+      - Tailwind CSS
+      - Vercel
+      - Cloudflare
+    url: https://daviani.dev
+  - titleFr: Stack IA Locale — Agents & Workflows
+    titleEn: Local AI Stack — Agents & Workflows
+    start: '2025'
+    end: En cours
+    descriptionFr: >-
+      Infrastructure complète pour le développement assisté par IA, 100% locale
+      et gratuite. Modèle Qwen3-Coder:30B avec 262K tokens de contexte.
+    descriptionEn: >-
+      Complete infrastructure for AI-assisted development, 100% local and free.
+      Qwen3-Coder:30B model with 262K token context.
+    highlightsFr:
+      - >-
+        7 agents spécialisés : Git, sécurité (OWASP), SQL/PostgreSQL, code
+        review, refactoring, debugging
+      - Intégration MCP (Model Context Protocol) avec proxy LiteLLM
+      - Configuration Aider pour édition de code avec IA + Continue.dev pour IDE
+      - 'Scripts Fish shell : fonctions, alias, bootstrap automatisé'
+      - Alternative gratuite aux solutions cloud
+    highlightsEn:
+      - >-
+        7 specialized agents: Git, security (OWASP), SQL/PostgreSQL, code
+        review, refactoring, debugging
+      - MCP (Model Context Protocol) integration with LiteLLM proxy
+      - Aider configuration for AI code editing + Continue.dev for IDE
+      - 'Fish shell scripts: functions, aliases, automated bootstrap'
+      - Free alternative to cloud solutions
+    stack:
+      - Ollama
+      - Qwen3-Coder
+      - MCP
+      - LiteLLM
+      - Aider
+      - Fish Shell
+      - Bash
+    url: https://github.com/daviani/ia
+  - titleFr: CRM Full-Stack
+    titleEn: Full-Stack CRM
+    start: 11/2019
+    end: 09/2020
+    descriptionFr: >-
+      Conception d'un CRM complet démontrant la maîtrise d'une architecture API
+      REST moderne.
+    descriptionEn: Complete CRM design demonstrating mastery of modern REST API architecture.
+    highlightsFr:
+      - 'Backend : API REST avec Symfony et ApiPlatform'
+      - 'Authentification : JWT Token'
+      - 'Frontend : Application React'
+    highlightsEn:
+      - 'Backend: REST API with Symfony and ApiPlatform'
+      - 'Authentication: JWT Token'
+      - 'Frontend: React application'
+    stack:
+      - Symfony
+      - ApiPlatform
+      - React
+      - JWT
