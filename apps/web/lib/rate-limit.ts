@@ -27,7 +27,7 @@ export async function checkRateLimit(
     return { allowed, remaining };
   } catch (error) {
     console.error('Rate limit check failed:', error);
-    // Fail open - allow the request if KV is down
-    return { allowed: true, remaining: MAX_REQUESTS };
+    // Fail closed - block requests if KV is unavailable (security-first approach)
+    return { allowed: false, remaining: 0 };
   }
 }

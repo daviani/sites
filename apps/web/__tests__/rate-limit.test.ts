@@ -80,13 +80,13 @@ describe('Rate Limiter', () => {
       expect(mockKv.incr).toHaveBeenCalledWith('rate-limit:contact:10.0.0.1');
     });
 
-    it('fails open when KV throws an error', async () => {
+    it('fails closed when KV throws an error (security-first)', async () => {
       mockKv.incr.mockRejectedValue(new Error('KV connection failed'));
 
       const result = await checkRateLimit('192.168.1.1', 'contact');
 
-      expect(result.allowed).toBe(true);
-      expect(result.remaining).toBe(5);
+      expect(result.allowed).toBe(false);
+      expect(result.remaining).toBe(0);
     });
   });
 });
