@@ -26,7 +26,7 @@
     "@vercel/kv": "^3.0.0",
     "@vercel/speed-insights": "^1.2.0",
     "framer-motion": "^12.23.26",
-    "next": "^16.0.8",
+    "next": "^16.0.9",
     "puppeteer": "^24.34.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
