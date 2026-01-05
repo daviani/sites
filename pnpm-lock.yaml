@@ -55,6 +55,9 @@ importers:
       '@next/mdx':
         specifier: ^16.0.4
         version: 16.0.4(@mdx-js/loader@3.1.1)
+      '@sparticuz/chromium':
+        specifier: ^143.0.4
+        version: 143.0.4
       '@vercel/analytics':
         specifier: ^1.5.0
         version: 1.5.0(next@16.1.1(@babel/core@7.28.5)(babel-plugin-macros@3.1.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)
@@ -70,9 +73,9 @@ importers:
       next:
         specifier: ^16.0.9
         version: 16.1.1(@babel/core@7.28.5)(babel-plugin-macros@3.1.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      puppeteer:
+      puppeteer-core:
         specifier: ^24.34.0
-        version: 24.34.0(typescript@5.9.3)
+        version: 24.34.0
       react:
         specifier: ^19.0.0
         version: 19.2.0
@@ -1735,6 +1738,10 @@ packages:
   '@sinonjs/fake-timers@13.0.5':
     resolution: {integrity: sha512-36/hTbH2uaWuGVERyC6da9YwGWnzUZXuPro/F2LfsdOsLnCojz/iSH8MxUt/FD2S5XBSVPhmArFUXcpCQ2Hkiw==}
 
+  '@sparticuz/chromium@143.0.4':
+    resolution: {integrity: sha512-/6I7uQTRhRDD2/gGPQ1Gkf+Dqk0RYDACPJDZfSzz0OWk4JmUTonNHPXbrn6UIklOHlnDLf8xAAzkOZKB/cJpLA==}
+    engines: {node: '>=20.11.0'}
+
   '@stablelib/base64@1.0.1':
     resolution: {integrity: sha512-1bnPQqSxSuc3Ii6MhBysoWCg58j97aUjuCSZrGSmDxNqtytIi0k8utUenAwTZN4V5mXXYGsVUI9zeBqy+jBOSQ==}
 
@@ -3165,6 +3172,15 @@ packages:
 
   flatted@3.3.3:
     resolution: {integrity: sha512-GX+ysw4PBCz0PzosHDepZGANEuFCMLrnRTiEy9McGjmkCQYwRq4A/X786G/fjM/+OjsWSU1ZrY5qyARZmO/uwg==}
+
+  follow-redirects@1.15.11:
+    resolution: {integrity: sha512-deG2P0JfjrTxl50XGCDyfI97ZGVCxIpfKYmfyrQ54n5FO/0gfIES8C/Psl6kWVDolizcaaxZJnTS0QSMxvnsBQ==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
 
   for-each@0.3.5:
     resolution: {integrity: sha512-dKx12eRCVIzqCxFGplyFKJMPvLEWgmNtUrpTiJIR5u97zEhRG8ySrtboPHZXx7daLxQVrl643cTzbab2tkQjxg==}
@@ -7364,6 +7380,16 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
+  '@sparticuz/chromium@143.0.4':
+    dependencies:
+      follow-redirects: 1.15.11
+      tar-fs: 3.1.1
+    transitivePeerDependencies:
+      - bare-abort-controller
+      - bare-buffer
+      - debug
+      - react-native-b4a
+
   '@stablelib/base64@1.0.1': {}
 
   '@swc/core-darwin-arm64@1.15.2':
@@ -8992,6 +9018,8 @@ snapshots:
       keyv: 4.5.4
 
   flatted@3.3.3: {}
+
+  follow-redirects@1.15.11: {}
 
   for-each@0.3.5:
     dependencies:

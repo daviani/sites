@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
+import chromium from '@sparticuz/chromium';
 import { getLocalizedCvData, getAllCvSkills } from '@/lib/content/cv-keystatic';
 
 export const dynamic = 'force-dynamic';
@@ -28,10 +29,34 @@ export async function GET(request: NextRequest) {
   const html = generateCvHtml(cvData, skills, theme, lang);
 
   try {
-    // Launch puppeteer
+    // Launch puppeteer with serverless chromium
+    const isProduction = process.env.NODE_ENV === 'production';
+
+    // Get executable path
+    let executablePath: string | undefined;
+    if (isProduction) {
+      executablePath = await chromium.executablePath();
+    } else {
+      // Local dev: try common Chrome paths
+      const { existsSync } = await import('fs');
+      const chromePaths = [
+        '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+        '/Applications/Chromium.app/Contents/MacOS/Chromium',
+        '/usr/bin/google-chrome',
+        '/usr/bin/chromium-browser',
+      ];
+      executablePath = chromePaths.find((p) => existsSync(p));
+    }
+
+    if (!executablePath) {
+      throw new Error('No Chrome/Chromium browser found');
+    }
+
     const browser = await puppeteer.launch({
+      args: isProduction ? chromium.args : ['--no-sandbox', '--disable-setuid-sandbox'],
+      defaultViewport: { width: 794, height: 1123 },
+      executablePath,
       headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
 
     const page = await browser.newPage();
