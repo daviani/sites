@@ -5,13 +5,15 @@ import { CvLayout } from './CvLayout';
 import { CvDownloadButton } from './CvDownloadButton';
 import type { LocalizedCvData } from '@/lib/content/cv-keystatic';
 
+type SkillsByCategory = Record<string, string[]>;
+
 interface CvPageContentProps {
   cvDataFr: LocalizedCvData;
   cvDataEn: LocalizedCvData;
-  skills: string[];
+  skillsByCategory: SkillsByCategory;
 }
 
-export function CvPageContent({ cvDataFr, cvDataEn, skills }: CvPageContentProps) {
+export function CvPageContent({ cvDataFr, cvDataEn, skillsByCategory }: CvPageContentProps) {
   const { t, language } = useTranslation();
 
   // Select data based on current language
@@ -32,7 +34,7 @@ export function CvPageContent({ cvDataFr, cvDataEn, skills }: CvPageContentProps
           </p>
           <CvDownloadButton />
         </div>
-        <CvLayout cvData={cvData} skills={skills} />
+        <CvLayout cvData={cvData} skillsByCategory={skillsByCategory} />
         <div className="mt-8 flex justify-center">
           <CvDownloadButton />
         </div>
