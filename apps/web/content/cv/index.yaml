@@ -18,8 +18,8 @@ experiences:
   - start: 10/2023
     current: true
     compact: false
-    companyFr: ATIPY - Accessibilité Numérique
-    companyEn: ATIPY - Digital Accessibility
+    companyFr: ATIPY
+    companyEn: ATIPY
     roleFr: Développeur Full-Stack & DevOps
     roleEn: Full-Stack & DevOps Developer
     locationFr: Lyon
@@ -233,19 +233,13 @@ education:
     degreeFr: Développeur d'application front-end
     degreeEn: Front-end Application Developer
 skills:
-  # Front-end
   - name: Angular
     category: frontend
   - name: React
     category: frontend
   - name: Next.js
     category: frontend
-  - name: Vue.js
-    category: frontend
-  # Back-end
   - name: .NET Core
-    category: backend
-  - name: ASP.NET
     category: backend
   - name: Node.js
     category: backend
@@ -255,43 +249,33 @@ skills:
     category: backend
   - name: Symfony
     category: backend
-  # Databases
   - name: PostgreSQL
     category: databases
   - name: MySQL
     category: databases
-  - name: MariaDB
-    category: databases
-  # CI/CD
   - name: Docker
     category: cicd
   - name: GitLab CI/CD
     category: cicd
   - name: Jenkins
     category: cicd
-  # OS
   - name: Linux
     category: os
   - name: Windows Server
     category: os
-  # Cloud
   - name: OVH
     category: cloud
   - name: GCP
     category: cloud
-  # Testing
   - name: Jest
     category: testing
   - name: Cypress
     category: testing
-  # Outils
   - name: Git
     category: tools
   - name: Rider
     category: tools
   - name: WebStorm
-    category: tools
-  - name: DataGrip
     category: tools
   - name: PgAdmin
     category: tools
@@ -348,8 +332,8 @@ projects:
     start: '2025'
     end: En cours
     descriptionFr: >-
-      Architecture monorepo multi-domaines pour portfolio professionnel. Focus sur
-      la performance, la sécurité et l'accessibilité.
+      Architecture monorepo multi-domaines pour portfolio professionnel. Focus
+      sur la performance, la sécurité et l'accessibilité.
     descriptionEn: >-
       Multi-domain monorepo architecture for professional portfolio. Focus on
       performance, security and accessibility.
