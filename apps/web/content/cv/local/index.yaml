@@ -18,8 +18,8 @@ experiences:
   - start: 10/2023
     current: true
     compact: false
-    companyFr: ATIPY - Accessibilité Numérique
-    companyEn: ATIPY - Digital Accessibility
+    companyFr: ATIPY
+    companyEn: ATIPY
     roleFr: Développeur Full-Stack & DevOps
     roleEn: Full-Stack & DevOps Developer
     locationFr: Lyon
@@ -228,14 +228,18 @@ education:
     degreeEn: Application Designer Developer
   - start: '2017'
     end: '2018'
-    institutionFr: Titre Professionnel
-    institutionEn: Professional Certificate
-    degreeFr: Développeur Web et Web Mobile
-    degreeEn: Web and Mobile Web Developer
+    institutionFr: OpenClassrooms
+    institutionEn: OpenClassrooms
+    degreeFr: Développeur d'application front-end
+    degreeEn: Front-end Application Developer
 skills:
+  - name: Angular
+    category: frontend
+  - name: React
+    category: frontend
+  - name: Next.js
+    category: frontend
   - name: .NET Core
-    category: backend
-  - name: ASP.NET
     category: backend
   - name: Node.js
     category: backend
@@ -245,34 +249,38 @@ skills:
     category: backend
   - name: Symfony
     category: backend
-  - name: Angular
-    category: frontend
-  - name: React
-    category: frontend
-  - name: Next.js
-    category: frontend
-  - name: Vue.js
-    category: frontend
   - name: PostgreSQL
-    category: backend
+    category: databases
   - name: MySQL
-    category: backend
-  - name: MariaDB
-    category: backend
+    category: databases
   - name: Docker
-    category: devops
+    category: cicd
   - name: GitLab CI/CD
-    category: devops
+    category: cicd
   - name: Jenkins
-    category: devops
+    category: cicd
   - name: Linux
-    category: devops
+    category: os
   - name: Windows Server
-    category: devops
+    category: os
   - name: OVH
-    category: devops
+    category: cloud
   - name: GCP
-    category: devops
+    category: cloud
+  - name: Jest
+    category: testing
+  - name: Cypress
+    category: testing
+  - name: Git
+    category: tools
+  - name: Rider
+    category: tools
+  - name: WebStorm
+    category: tools
+  - name: PgAdmin
+    category: tools
+  - name: Postman
+    category: tools
 languages:
   - languageFr: Français
     languageEn: French
@@ -319,15 +327,15 @@ contributions:
     descriptionFr: 'ApéroWeb Lyon : Introduction au CMS headless avec DatoCMS & NextJS'
     descriptionEn: 'ApéroWeb Lyon: Introduction to headless CMS with DatoCMS & NextJS'
 projects:
-  - titleFr: daviani.dev — Portfolio multi-tenant
-    titleEn: daviani.dev — Multi-tenant Portfolio
+  - titleFr: daviani.dev — Portfolio multi-domaines
+    titleEn: daviani.dev — Multi-domain Portfolio
     start: '2025'
     end: En cours
     descriptionFr: >-
-      Architecture monorepo multi-tenant pour portfolio professionnel. Focus sur
-      la performance, la sécurité et l'accessibilité.
+      Architecture monorepo multi-domaines pour portfolio professionnel. Focus
+      sur la performance, la sécurité et l'accessibilité.
     descriptionEn: >-
-      Multi-tenant monorepo architecture for professional portfolio. Focus on
+      Multi-domain monorepo architecture for professional portfolio. Focus on
       performance, security and accessibility.
     highlightsFr:
       - Architecture multi-domaines avec middleware de routing personnalisé
