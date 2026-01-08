@@ -134,11 +134,14 @@ export default config({
             category: fields.select({
               label: 'Catégorie',
               options: [
-                { label: 'Frontend', value: 'frontend' },
-                { label: 'Backend', value: 'backend' },
-                { label: 'DevOps', value: 'devops' },
+                { label: 'Front-end', value: 'frontend' },
+                { label: 'Back-end', value: 'backend' },
+                { label: 'Bases de données', value: 'databases' },
+                { label: 'CI/CD', value: 'cicd' },
+                { label: 'Systèmes (OS)', value: 'os' },
+                { label: 'Cloud', value: 'cloud' },
+                { label: 'Testing', value: 'testing' },
                 { label: 'Outils', value: 'tools' },
-                { label: 'Soft skills', value: 'soft' },
               ],
               defaultValue: 'frontend',
             }),
