@@ -17,7 +17,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Daviani Fillatre",
-  description: "Portfolio multi-tenant avec Next.js 14",
+  description: "Portfolio multi-domaines avec Next.js 16",
 };
 
 export default function RootLayout({

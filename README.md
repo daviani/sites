@@ -1,6 +1,6 @@
 # daviani.dev
 
-> Portfolio multi-tenant avec Next.js 16, Turborepo et architecture sécurisée
+> Portfolio multi-domaines avec Next.js 16, Turborepo et architecture sécurisée
 
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
@@ -11,7 +11,7 @@
 
 ## Vue d'ensemble
 
-Portfolio professionnel démontrant une expertise Full-Stack et DevOps. Architecture monorepo multi-tenant avec Next.js 16, sécurité renforcée et performance optimale.
+Portfolio professionnel démontrant une expertise Full-Stack et DevOps. Architecture monorepo multi-domaines avec Next.js 16, sécurité renforcée et performance optimale.
 
 ### Domaines
 

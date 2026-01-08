@@ -2,7 +2,7 @@
   "name": "sites",
   "version": "1.0.0",
   "private": true,
-  "description": "Portfolio multi-tenant avec Turborepo + Next.js 14",
+  "description": "Portfolio multi-domaines avec Turborepo + Next.js 16",
   "author": "Daviani Fillatre",
   "license": "MIT",
   "scripts": {
