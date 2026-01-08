@@ -4,15 +4,30 @@ import { useTranslation } from '@daviani/ui';
 import Image from 'next/image';
 import type { LocalizedCvData } from '@/lib/content/cv-keystatic';
 
+type SkillsByCategory = Record<string, string[]>;
+
 interface CvSidebarProps {
   cvData: LocalizedCvData;
-  skills: string[];
+  skillsByCategory: SkillsByCategory;
 }
 
-export function CvSidebar({ cvData, skills }: CvSidebarProps) {
-  const { t } = useTranslation();
+const categoryLabels: Record<string, { fr: string; en: string }> = {
+  frontend: { fr: 'Front-end', en: 'Front-end' },
+  backend: { fr: 'Back-end', en: 'Back-end' },
+  databases: { fr: 'BDD', en: 'Databases' },
+  cicd: { fr: 'CI/CD', en: 'CI/CD' },
+  os: { fr: 'Systèmes', en: 'Systems' },
+  cloud: { fr: 'Cloud', en: 'Cloud' },
+  testing: { fr: 'Testing', en: 'Testing' },
+  tools: { fr: 'Outils', en: 'Tools' },
+};
 
-  const { personal, expertise, contributions } = cvData;
+const categoryOrder = ['frontend', 'backend', 'databases', 'cicd', 'os', 'cloud', 'testing', 'tools'];
+
+export function CvSidebar({ cvData, skillsByCategory }: CvSidebarProps) {
+  const { t, language } = useTranslation();
+
+  const { personal, expertise, contributions, languages } = cvData;
 
   return (
     <aside className="relative flex flex-col overflow-hidden rounded-xl bg-nord-1 shadow-lg" style={{ width: '35%' }}>
@@ -108,11 +123,51 @@ export function CvSidebar({ cvData, skills }: CvSidebarProps) {
 
         {/* Skills Section */}
         <SectionTitle>{t('pages.cv.sections.skills')}</SectionTitle>
-        <div className="flex flex-wrap" style={{ gap: '7px', marginTop: '12px' }}>
-          {skills.map((skill, i) => (
-            <SkillTag key={i}>{skill}</SkillTag>
-          ))}
-        </div>
+        {categoryOrder.map((category) => {
+          const categorySkills = skillsByCategory[category] || [];
+          if (categorySkills.length === 0) return null;
+          return (
+            <div key={category} style={{ marginTop: '10px' }}>
+              <div
+                className="text-nord-4"
+                style={{
+                  fontSize: '8px',
+                  fontWeight: 600,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.8px',
+                  opacity: 0.6,
+                  marginBottom: '6px',
+                }}
+              >
+                {categoryLabels[category]?.[language as 'fr' | 'en'] || category}
+              </div>
+              <div className="flex flex-wrap" style={{ gap: '5px' }}>
+                {categorySkills.map((skill, i) => (
+                  <SkillTag key={i}>{skill}</SkillTag>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+
+        {/* Languages Section */}
+        {languages && languages.length > 0 && (
+          <>
+            <SectionTitle>{t('pages.cv.sections.languages')}</SectionTitle>
+            <div style={{ marginTop: '8px' }}>
+              {languages.map((lang, i) => (
+                <div
+                  key={i}
+                  className="flex items-center justify-between text-nord-4"
+                  style={{ margin: '6px 0', fontSize: '10px' }}
+                >
+                  <span style={{ opacity: 0.9 }}>{lang.language}</span>
+                  <span className="text-nord-8" style={{ fontWeight: 500 }}>{lang.level}</span>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
 
         {/* Contributions Section */}
         {contributions && contributions.length > 0 && (

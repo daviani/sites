@@ -1,4 +1,4 @@
-import { getLocalizedCvData, getAllCvSkills } from '@/lib/content/cv-keystatic';
+import { getLocalizedCvData, getCvSkillsByCategory } from '@/lib/content/cv-keystatic';
 import { CvPageContent } from '@/components/cv/CvPageContent';
 
 export default function CvPage() {
@@ -6,7 +6,7 @@ export default function CvPage() {
   // Default to French, client will handle locale switching
   const cvDataFr = getLocalizedCvData('fr');
   const cvDataEn = getLocalizedCvData('en');
-  const skills = getAllCvSkills();
+  const skillsByCategory = getCvSkillsByCategory();
 
   if (!cvDataFr || !cvDataEn) {
     return (
@@ -16,5 +16,5 @@ export default function CvPage() {
     );
   }
 
-  return <CvPageContent cvDataFr={cvDataFr} cvDataEn={cvDataEn} skills={skills} />;
+  return <CvPageContent cvDataFr={cvDataFr} cvDataEn={cvDataEn} skillsByCategory={skillsByCategory} />;
 }
