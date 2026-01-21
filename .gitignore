@@ -43,6 +43,9 @@ CLAUDE.md
 .idea/
 .claude/
 
+# MCP & Browser automation
+.playwright-mcp/
+
 # Documentation locale
 .doc/
 CLAUDE.md
