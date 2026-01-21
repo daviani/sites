@@ -7,6 +7,17 @@ const nextConfig = {
   compress: true,
   pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
 
+  // Configuration des images externes
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'daviani.dev',
+        pathname: '/images/**',
+      },
+    ],
+  },
+
   // Headers de sécurité
   async headers() {
     return [
