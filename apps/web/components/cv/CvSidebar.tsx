@@ -30,7 +30,7 @@ export function CvSidebar({ cvData, skillsByCategory }: CvSidebarProps) {
   const { personal, expertise, contributions, languages } = cvData;
 
   return (
-    <aside className="relative flex flex-col overflow-hidden rounded-xl bg-nord-1 shadow-lg" style={{ width: '35%' }}>
+    <aside className="relative mx-auto flex w-[calc(100%-2rem)] flex-col overflow-hidden rounded-xl bg-nord-1 shadow-lg md:mx-0 md:w-[35%]">
       {/* Radial gradient overlay */}
       <div
         className="pointer-events-none absolute left-0 right-0 top-0"
@@ -41,17 +41,9 @@ export function CvSidebar({ cvData, skillsByCategory }: CvSidebarProps) {
       />
 
       {/* Profile Section */}
-      <div className="relative text-center" style={{ padding: '28px 18px 24px' }}>
+      <div className="relative px-4 pb-6 pt-7 text-center">
         {personal.photo ? (
-          <div
-            className="relative mx-auto mb-4 overflow-hidden rounded-full"
-            style={{
-              width: '100px',
-              height: '100px',
-              border: '3px solid rgba(136, 192, 208, 0.3)',
-              boxShadow: '0 6px 20px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.2)',
-            }}
-          >
+          <div className="relative mx-auto mb-4 h-24 w-24 overflow-hidden rounded-full border-[3px] border-nord-8/30 shadow-[0_6px_20px_rgba(0,0,0,0.3),0_2px_6px_rgba(0,0,0,0.2)] md:h-[100px] md:w-[100px]">
             <Image
               src={personal.photo}
               alt={personal.name}
@@ -62,34 +54,26 @@ export function CvSidebar({ cvData, skillsByCategory }: CvSidebarProps) {
             />
           </div>
         ) : (
-          <div
-            className="mx-auto mb-4 flex items-center justify-center rounded-full bg-nord-3"
-            style={{
-              width: '100px',
-              height: '100px',
-              border: '3px solid rgba(136, 192, 208, 0.3)',
-              boxShadow: '0 6px 20px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.2)',
-            }}
-          >
+          <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full border-[3px] border-nord-8/30 bg-nord-3 shadow-[0_6px_20px_rgba(0,0,0,0.3),0_2px_6px_rgba(0,0,0,0.2)] md:h-[100px] md:w-[100px]">
             <span className="text-3xl text-nord-8">{personal.name.charAt(0)}</span>
           </div>
         )}
 
-        <div className="mb-1 text-nord-6" style={{ fontSize: '19px', fontWeight: 600, letterSpacing: '-0.35px', lineHeight: 1.2 }}>
+        <div className="mb-1 text-lg font-semibold leading-tight tracking-tight text-nord-6 md:text-[19px]">
           {personal.name}
         </div>
 
-        <div className="mb-1 text-nord-8" style={{ fontSize: '12.5px', fontWeight: 500, letterSpacing: '-0.05px' }}>
+        <div className="mb-1 text-sm font-medium text-nord-8 md:text-[12.5px]">
           {personal.title}
         </div>
 
-        <div className="text-nord-4" style={{ fontSize: '10px', fontWeight: 400, opacity: 0.7 }}>
+        <div className="text-xs font-normal text-nord-4 opacity-70 md:text-[10px]">
           {personal.experienceYears} {t('pages.cv.labels.yearsExperience')}
         </div>
       </div>
 
       {/* Sidebar Content */}
-      <div className="flex-1" style={{ padding: '0 18px 24px' }}>
+      <div className="flex-1 px-8 pb-6 md:px-4">
         {/* Contact Section */}
         <SectionTitle first>{t('pages.cv.labels.contact')}</SectionTitle>
         <ContactItem>{personal.location}, {personal.age} {t('pages.cv.labels.yearsOld')}</ContactItem>
@@ -115,7 +99,7 @@ export function CvSidebar({ cvData, skillsByCategory }: CvSidebarProps) {
 
         {/* Expertise Section */}
         <SectionTitle>{t('pages.cv.sections.expertise')}</SectionTitle>
-        <div style={{ marginTop: '12px' }}>
+        <div className="mt-3">
           {expertise.map((exp, i) => (
             <ExpertiseItem key={i}>{exp.title}</ExpertiseItem>
           ))}
@@ -127,21 +111,11 @@ export function CvSidebar({ cvData, skillsByCategory }: CvSidebarProps) {
           const categorySkills = skillsByCategory[category] || [];
           if (categorySkills.length === 0) return null;
           return (
-            <div key={category} style={{ marginTop: '10px' }}>
-              <div
-                className="text-nord-4"
-                style={{
-                  fontSize: '8px',
-                  fontWeight: 600,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.8px',
-                  opacity: 0.6,
-                  marginBottom: '6px',
-                }}
-              >
+            <div key={category} className="mt-2.5">
+              <div className="mb-1.5 text-center text-[9px] font-semibold uppercase tracking-wide text-nord-4 opacity-60 md:text-left md:text-[8px]">
                 {categoryLabels[category]?.[language as 'fr' | 'en'] || category}
               </div>
-              <div className="flex flex-wrap" style={{ gap: '5px' }}>
+              <div className="flex flex-wrap justify-center gap-1.5 md:justify-start">
                 {categorySkills.map((skill, i) => (
                   <SkillTag key={i}>{skill}</SkillTag>
                 ))}
@@ -154,15 +128,14 @@ export function CvSidebar({ cvData, skillsByCategory }: CvSidebarProps) {
         {languages && languages.length > 0 && (
           <>
             <SectionTitle>{t('pages.cv.sections.languages')}</SectionTitle>
-            <div style={{ marginTop: '8px' }}>
+            <div className="mt-2">
               {languages.map((lang, i) => (
                 <div
                   key={i}
-                  className="flex items-center justify-between text-nord-4"
-                  style={{ margin: '6px 0', fontSize: '10px' }}
+                  className="my-1.5 flex items-center justify-between text-xs text-nord-4 md:text-[10px]"
                 >
-                  <span style={{ opacity: 0.9 }}>{lang.language}</span>
-                  <span className="text-nord-8" style={{ fontWeight: 500 }}>{lang.level}</span>
+                  <span className="opacity-90">{lang.language}</span>
+                  <span className="font-medium text-nord-8">{lang.level}</span>
                 </div>
               ))}
             </div>
@@ -181,15 +154,7 @@ export function CvSidebar({ cvData, skillsByCategory }: CvSidebarProps) {
 function SectionTitle({ children, first }: { children: React.ReactNode; first?: boolean }) {
   return (
     <div
-      className="text-nord-8"
-      style={{
-        fontSize: '10px',
-        margin: first ? '0 0 12px 0' : '24px 0 12px 0',
-        fontWeight: 600,
-        textTransform: 'uppercase',
-        letterSpacing: '1.3px',
-        opacity: 0.9,
-      }}
+      className={`text-center text-xs font-semibold uppercase tracking-wider text-nord-8 opacity-90 md:text-left md:text-[10px] ${first ? 'mb-3' : 'mb-3 mt-6'}`}
     >
       {children}
     </div>
@@ -208,23 +173,17 @@ function ContactItem({
       href={href}
       target={href.startsWith('mailto:') ? undefined : '_blank'}
       rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-      className="text-nord-4 transition-all duration-200 hover:text-nord-8 hover:opacity-100"
-      style={{ textDecoration: 'none', opacity: 0.85, wordBreak: 'break-word' }}
+      className="break-words text-nord-4 opacity-85 no-underline transition-all duration-200 hover:text-nord-8 hover:opacity-100"
     >
       {children}
     </a>
   ) : (
-    <span className="text-nord-4" style={{ opacity: 0.85 }}>{children}</span>
+    <span className="text-nord-4 opacity-85">{children}</span>
   );
 
   return (
-    <div
-      className="relative text-nord-4"
-      style={{ margin: '10px 0', paddingLeft: '14px', fontSize: '10px', fontWeight: 400, lineHeight: 1.4 }}
-    >
-      <span className="absolute left-0 text-nord-8" style={{ fontWeight: 700, fontSize: '13px' }}>
-        •
-      </span>
+    <div className="relative my-2.5 pl-3.5 text-xs font-normal leading-relaxed text-nord-4 md:text-[10px]">
+      <span className="absolute left-0 text-sm font-bold text-nord-8">•</span>
       {content}
     </div>
   );
@@ -232,13 +191,8 @@ function ContactItem({
 
 function ExpertiseItem({ children }: { children: React.ReactNode }) {
   return (
-    <div
-      className="relative text-nord-4"
-      style={{ margin: '10px 0', paddingLeft: '14px', fontSize: '10px', lineHeight: 1.45, fontWeight: 400, opacity: 0.9 }}
-    >
-      <span className="absolute left-0 text-nord-8" style={{ fontWeight: 700, fontSize: '13px' }}>
-        •
-      </span>
+    <div className="relative my-2.5 pl-3.5 text-xs font-normal leading-relaxed text-nord-4 opacity-90 md:text-[10px]">
+      <span className="absolute left-0 text-sm font-bold text-nord-8">•</span>
       {children}
     </div>
   );
@@ -246,15 +200,7 @@ function ExpertiseItem({ children }: { children: React.ReactNode }) {
 
 function SkillTag({ children }: { children: React.ReactNode }) {
   return (
-    <span
-      className="bg-nord-10/90 text-white shadow-[0_0_12px_rgba(94,129,172,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-105"
-      style={{
-        padding: '6px 11px',
-        borderRadius: '7px',
-        fontSize: '9px',
-        fontWeight: 500,
-      }}
-    >
+    <span className="rounded-lg bg-nord-10/90 px-3 py-1.5 text-xs font-medium text-white shadow-[0_0_12px_rgba(94,129,172,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 md:px-2.5 md:py-1.5 md:text-[9px]">
       {children}
     </span>
   );
@@ -268,43 +214,17 @@ interface Contribution {
 
 function ContributionsSection({ contributions, title }: { contributions: Contribution[]; title: string }) {
   return (
-    <div
-      style={{
-        marginTop: '24px',
-        padding: '14px',
-        background: 'rgba(163, 190, 140, 0.1)',
-        borderRadius: '10px',
-        border: '1px solid rgba(163, 190, 140, 0.15)',
-      }}
-    >
-      <div
-        className="text-nord-14"
-        style={{
-          fontSize: '10px',
-          fontWeight: 600,
-          marginBottom: '12px',
-          textTransform: 'uppercase',
-          letterSpacing: '1.2px',
-        }}
-      >
+    <div className="mt-6 rounded-xl border border-nord-14/15 bg-nord-14/10 p-4 md:p-3.5">
+      <div className="mb-3 text-center text-xs font-semibold uppercase tracking-wider text-nord-14 md:mb-2.5 md:text-left md:text-[10px]">
         {title}
       </div>
 
       {contributions.map((contrib, i) => (
-        <div key={i} style={{ marginBottom: i < contributions.length - 1 ? '12px' : 0 }}>
-          <div
-            className="text-nord-14"
-            style={{
-              fontSize: '9px',
-              fontWeight: 600,
-              marginBottom: '4px',
-              textTransform: 'uppercase',
-              letterSpacing: '0.5px',
-            }}
-          >
+        <div key={i} className={i < contributions.length - 1 ? 'mb-4 md:mb-3' : ''}>
+          <div className="mb-1.5 text-center text-[11px] font-semibold uppercase tracking-wide text-nord-14 md:mb-1 md:text-left md:text-[9px]">
             {contrib.type} • {contrib.date}
           </div>
-          <div className="text-nord-4" style={{ fontSize: '9.5px', lineHeight: 1.5, opacity: 0.9 }}>
+          <div className="text-center text-xs leading-relaxed text-nord-4 opacity-90 md:text-left md:text-[9.5px]">
             {contrib.description}
           </div>
         </div>
