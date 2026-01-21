@@ -45,7 +45,7 @@ export function ConsentGate({
       <button
         onClick={handleClick}
         disabled={isLoading}
-        className="px-6 py-3 rounded-full font-semibold bg-nord-10 text-white hover:bg-nord-9 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-nord-8 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 cursor-pointer"
+        className="px-6 py-3 rounded-full font-semibold bg-nord-btn text-white hover:bg-nord-btn-hover hover:scale-105 focus:outline-none focus:ring-4 focus:ring-nord-8 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 cursor-pointer"
       >
         {isLoading ? t('rdv.loading') : buttonText || t('rdv.showCalendar')}
       </button>
