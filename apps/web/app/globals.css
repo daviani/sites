@@ -192,6 +192,11 @@ body {
   margin: 1.5em 0;
 }
 
+/* ReCAPTCHA badge positioning - above footer and scroll-to-top button */
+.grecaptcha-badge {
+  top: 150px !important;
+}
+
 /* Respect user preference for reduced motion (RGAA 13.8, WCAG 2.3.3) */
 @media (prefers-reduced-motion: reduce) {
   *,
