@@ -61,7 +61,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               href="/"
               className={`px-3 py-1 rounded-full text-sm transition-colors cursor-pointer ${
                 !tag
-                  ? 'bg-nord-10 text-white'
+                  ? 'bg-nord-btn text-white'
                   : 'bg-nord-5 dark:bg-nord-2 text-nord-0 dark:text-nord-4 hover:bg-nord-4 dark:hover:bg-nord-3'
               }`}
             >
@@ -73,7 +73,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 href={`/?tag=${t}`}
                 className={`px-3 py-1 rounded-full text-sm transition-colors cursor-pointer ${
                   tag === t
-                    ? 'bg-nord-10 text-white'
+                    ? 'bg-nord-btn text-white'
                     : 'bg-nord-5 dark:bg-nord-2 text-nord-0 dark:text-nord-4 hover:bg-nord-4 dark:hover:bg-nord-3'
                 }`}
               >

@@ -99,7 +99,7 @@ export default function AccessibilityPage() {
             </p>
             <a
               href={getSubdomainUrl('contact')}
-              className="inline-block px-6 py-3 bg-nord-10 text-white rounded-lg hover:bg-nord-9 transition-colors"
+              className="inline-block px-6 py-3 bg-nord-btn text-white rounded-lg hover:bg-nord-btn-hover transition-colors"
             >
               {t('nav.contact.title')}
             </a>

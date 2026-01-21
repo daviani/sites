@@ -32,7 +32,7 @@ export function Comments() {
         </p>
         <button
           onClick={() => setHasConsent(true)}
-          className="px-6 py-3 bg-nord-10 text-white rounded-full font-semibold hover:bg-nord-9 hover:scale-105 transition-all cursor-pointer"
+          className="px-6 py-3 bg-nord-btn text-white rounded-full font-semibold hover:bg-nord-btn-hover hover:scale-105 transition-all cursor-pointer"
         >
           {t('comments.acceptButton')}
         </button>
