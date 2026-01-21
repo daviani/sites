@@ -31,7 +31,7 @@ interface ContactFormProps {
 
 export function ContactForm({ onSubmit }: ContactFormProps) {
   const { t } = useTranslation();
-  const { execute, isLoaded } = useRecaptcha();
+  const { execute, load, isLoaded } = useRecaptcha();
 
   const [status, setStatus] = useState<FormStatus>('idle');
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -66,11 +66,8 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
     setFieldErrors({});
 
     try {
-      // Get reCAPTCHA token
-      let recaptchaToken = '';
-      if (isLoaded) {
-        recaptchaToken = await execute('contact_form');
-      }
+      // Get reCAPTCHA token (auto-loads if not already loaded)
+      const recaptchaToken = await execute('contact_form');
 
       const result = await onSubmit({
         ...formData,
@@ -127,6 +124,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
+      onFocus={() => !isLoaded && load()}
       className="p-8 rounded-[2.5rem] backdrop-blur-md bg-white/40 dark:bg-nord-3/50 shadow-lg space-y-6"
       noValidate
     >
