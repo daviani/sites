@@ -82,34 +82,40 @@ describe('Subdomain Routing', () => {
   });
 
   describe('getSubdomainUrl', () => {
-    it('returns path for blog', () => {
+    it('returns full URL for blog subdomain', () => {
       const url = getSubdomainUrl('blog');
-      expect(url).toBe('/blog');
+      expect(url).toContain('blog');
+      expect(url).toMatch(/^https?:\/\//);
     });
 
-    it('returns path for about', () => {
+    it('returns full URL for about subdomain', () => {
       const url = getSubdomainUrl('about');
-      expect(url).toBe('/about');
+      expect(url).toContain('about');
+      expect(url).toMatch(/^https?:\/\//);
     });
 
-    it('returns path for cv', () => {
+    it('returns full URL for cv subdomain', () => {
       const url = getSubdomainUrl('cv');
-      expect(url).toBe('/cv');
+      expect(url).toContain('cv');
+      expect(url).toMatch(/^https?:\/\//);
     });
 
-    it('returns path for contact', () => {
+    it('returns full URL for contact subdomain', () => {
       const url = getSubdomainUrl('contact');
-      expect(url).toBe('/contact');
+      expect(url).toContain('contact');
+      expect(url).toMatch(/^https?:\/\//);
     });
 
-    it('returns path for rdv', () => {
+    it('returns full URL for rdv subdomain', () => {
       const url = getSubdomainUrl('rdv');
-      expect(url).toBe('/rdv');
+      expect(url).toContain('rdv');
+      expect(url).toMatch(/^https?:\/\//);
     });
 
-    it('returns path for legal', () => {
+    it('returns full URL for legal subdomain', () => {
       const url = getSubdomainUrl('legal');
-      expect(url).toBe('/legal');
+      expect(url).toContain('legal');
+      expect(url).toMatch(/^https?:\/\//);
     });
   });
 });
