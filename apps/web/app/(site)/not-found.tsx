@@ -123,7 +123,7 @@ export default function NotFound() {
         {/* Back home button */}
         <Link
           href="/"
-          className="inline-block px-8 py-4 bg-nord-10 text-white rounded-lg hover:bg-nord-9 transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2 dark:focus:ring-offset-nord-0"
+          className="inline-block px-8 py-4 bg-nord-btn text-white rounded-lg hover:bg-nord-btn-hover transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2 dark:focus:ring-offset-nord-0"
         >
           {t('easterEggs.notFound.backHome')}
         </Link>

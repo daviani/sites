@@ -200,7 +200,7 @@ function ExpertiseItem({ children }: { children: React.ReactNode }) {
 
 function SkillTag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="rounded-lg bg-nord-10/90 px-3 py-1.5 text-xs font-medium text-white shadow-[0_0_12px_rgba(94,129,172,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 md:px-2.5 md:py-1.5 md:text-[9px]">
+    <span className="rounded-lg bg-nord-btn/90 px-3 py-1.5 text-xs font-medium text-white shadow-[0_0_12px_rgba(74,111,165,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 md:px-2.5 md:py-1.5 md:text-[9px]">
       {children}
     </span>
   );
