@@ -256,7 +256,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="w-full px-6 py-3 rounded-full font-semibold bg-nord-10 text-white hover:bg-nord-9 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-nord-8 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-200 cursor-pointer"
+        className="w-full px-6 py-3 rounded-full font-semibold bg-nord-btn text-white hover:bg-nord-btn-hover hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-nord-8 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-200 cursor-pointer"
       >
         {status === 'loading'
           ? t('contact.form.sending')
