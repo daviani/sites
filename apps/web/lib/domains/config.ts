@@ -43,11 +43,10 @@ export function getBaseUrl(): string {
 }
 
 /**
- * Returns the path for a section (previously subdomain)
- * Now uses simple paths instead of subdomains for simplicity
+ * Returns the full URL for a subdomain
  */
 export function getSubdomainUrl(subdomain: ValidSubdomain): string {
-  return `/${subdomain}`;
+  return `${PROTOCOL}://${subdomain}.${DOMAIN}${getPortSuffix()}`;
 }
 
 /**
