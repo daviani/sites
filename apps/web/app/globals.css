@@ -21,6 +21,9 @@
   --color-nord-8: #88C0D0;
   --color-nord-9: #81A1C1;
   --color-nord-10: #5E81AC;
+  /* Accessible button colors for white text (WCAG AA 4.5:1 contrast) */
+  --color-nord-btn: #4A6FA5;
+  --color-nord-btn-hover: #3D5D8A;
 
   /* Aurora */
   --color-nord-11: #BF616A;
