@@ -56,7 +56,7 @@ export function Header({ logo, className = '', homeUrl = '/', navItems = [], sec
           {/* Logo / Branding */}
           <div className="flex-shrink-0">
             {logo || (
-              <a href={homeUrl} aria-label="Retour à l'accueil" className="flex items-center gap-3 cursor-pointer rounded-lg focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2">
+              <a href={homeUrl} aria-label="Daviani.dev - Retour à l'accueil" className="flex items-center gap-3 cursor-pointer rounded-lg focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2">
                 <OwlLogo size={48} />
                 <span className="text-xl font-mono font-bold">
                   <span className="text-nord-3 dark:text-nord-4">&lt;</span>
