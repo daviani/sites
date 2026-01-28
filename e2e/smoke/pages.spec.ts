@@ -15,6 +15,7 @@ const pages = [
   { name: 'Legal', path: '/legal', expectedH1: true },
   { name: 'Help', path: '/help', expectedH1: true },
   { name: 'Sitemap', path: '/sitemap', expectedH1: true },
+  { name: 'RDV', path: '/rdv', expectedH1: true },
 ];
 
 test.describe('Smoke Tests - Pages Load', () => {
