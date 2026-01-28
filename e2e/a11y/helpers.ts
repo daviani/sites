@@ -10,6 +10,7 @@ export const PAGES = [
   { name: 'CV', path: '/cv' },
   { name: 'About', path: '/about' },
   { name: 'Photos', path: '/photos' },
+  { name: 'RDV', path: '/rdv' },
 ] as const;
 
 export type PageConfig = (typeof PAGES)[number];
