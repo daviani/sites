@@ -161,9 +161,9 @@ describe('content/blog', () => {
 
     it('skips articles with invalid metadata', () => {
       mockExistsSync.mockReturnValue(true);
-      mockReaddirSync.mockReturnValue(['valid.mdoc', 'invalid.mdoc']);
+      mockReaddirSync.mockReturnValue(['good.mdoc', 'broken.mdoc']);
       mockReadFileSync.mockImplementation((filePath: string) => {
-        if (filePath.includes('valid.mdoc')) {
+        if (filePath.includes('good.mdoc')) {
           return buildArticle();
         }
         // Missing all required fields (publishedAt, titleFr, titleEn are required with no default)
@@ -172,6 +172,7 @@ describe('content/blog', () => {
 
       const articles = getAllArticles();
       expect(articles).toHaveLength(1);
+      expect(articles[0].slug).toBe('good');
     });
 
     it('loads English content when available', () => {
