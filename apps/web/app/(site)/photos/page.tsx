@@ -1,7 +1,12 @@
+import type { Metadata } from 'next';
 import { Breadcrumb } from '@daviani/ui';
 import { PhotosPageContent } from '@/components/photos';
 import { getAllPhotos } from '@/lib/content/photos';
 import type { Tag } from '@/components/photos';
+
+export const metadata: Metadata = {
+  title: 'Photos',
+};
 
 // Extract unique tags from photos
 function getUniqueTags(photos: { tags: string[] }[]): Tag[] {
