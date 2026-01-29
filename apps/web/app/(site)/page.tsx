@@ -1,13 +1,10 @@
-'use client';
+import type { Metadata } from 'next';
+import HomePageClient from './HomePageClient';
 
-import { HeroSection } from '@/components/HeroSection';
+export const metadata: Metadata = {
+  title: 'Accueil',
+};
 
-export default function RootPage() {
-  return (
-    <div className="flex items-center justify-center py-12">
-      <div className="max-w-3xl mx-auto px-6">
-        <HeroSection />
-      </div>
-    </div>
-  );
+export default function HomePage() {
+  return <HomePageClient />;
 }
