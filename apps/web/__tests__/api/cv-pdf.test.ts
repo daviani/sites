@@ -124,8 +124,8 @@ describe('CV PDF API Route', () => {
 
   beforeEach(async () => {
     vi.resetModules();
-    const module = await import('@/app/api/cv/pdf/route');
-    GET = module.GET;
+    const routeModule = await import('@/app/api/cv/pdf/route');
+    GET = routeModule.GET;
   });
 
   describe('GET /api/cv/pdf', () => {

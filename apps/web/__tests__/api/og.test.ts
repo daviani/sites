@@ -69,8 +69,8 @@ describe('OG Image API Route', () => {
 
   beforeEach(async () => {
     vi.resetModules();
-    const module = await import('@/app/api/og/[slug]/route');
-    GET = module.GET;
+    const routeModule = await import('@/app/api/og/[slug]/route');
+    GET = routeModule.GET;
   });
 
   describe('GET /api/og/[slug]', () => {

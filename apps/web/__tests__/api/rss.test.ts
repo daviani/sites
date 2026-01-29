@@ -58,8 +58,8 @@ describe('RSS API Route', () => {
     vi.stubEnv('NEXT_PUBLIC_PROTOCOL', 'https');
     vi.stubEnv('NEXT_PUBLIC_DOMAIN', 'daviani.dev');
 
-    const module = await import('@/app/api/rss/route');
-    GET = module.GET;
+    const routeModule = await import('@/app/api/rss/route');
+    GET = routeModule.GET;
   });
 
   describe('GET /api/rss', () => {
