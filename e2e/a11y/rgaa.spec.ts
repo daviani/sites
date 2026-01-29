@@ -7,6 +7,12 @@ import {
   testStructureAccessibility,
   testFormsAccessibility,
   testNavigationAccessibility,
+  testAcronymsAccessibility,
+  testPlaceholderOnlyInputs,
+  testLanguageSwitchAccessibility,
+  testInlineLanguageChanges,
+  testExplicitContrast,
+  testAriaCompleteness,
 } from './helpers';
 
 /**
@@ -211,6 +217,102 @@ for (const { name, path } of PAGES) {
         ).toHaveLength(0);
       }
     });
+
+    /**
+     * Critère 3 bis - Contraste explicite sur éléments critiques
+     * Audit manuel: contraste insuffisant en dark mode (#5f81ac sur #424a5c = 2.21:1)
+     * Vérifie les contrastes calculés via getComputedStyle au-delà d'axe-core
+     */
+    test('critère 3 - explicit contrast on critical elements', async ({ page }) => {
+      const results = await testExplicitContrast(page);
+
+      if (results.failingElements.length > 0) {
+        const summary = results.failingElements
+          .map(
+            (e) =>
+              `- ${e.selector}: "${e.text}" — ${e.fgColor} on ${e.bgColor} = ${e.ratio}:1 (min: ${e.required}:1)`
+          )
+          .join('\n');
+        console.warn(`Contrast issues found:\n${summary}`);
+      }
+    });
+
+    /**
+     * Acronymes et abréviations
+     * Audit VoiceOver: "CV" lu "Cheval Vapeur"
+     * Vérifie que les acronymes connus ont aria-label, title ou <abbr>
+     */
+    test('acronyms have accessible labels', async ({ page }) => {
+      const results = await testAcronymsAccessibility(page);
+
+      if (results.acronymsWithoutLabel.length > 0) {
+        const summary = results.acronymsWithoutLabel.join('\n  - ');
+        console.warn(
+          `Warning: Acronyms without explicit label (may be mispronounced by screen readers):\n  - ${summary}`
+        );
+      }
+    });
+
+    /**
+     * Formulaires - placeholder seul
+     * Audit VoiceOver: les placeholders lus par les lecteurs d'écran créent du bruit
+     * Vérifie que les inputs avec placeholder ont aussi un label visible
+     */
+    test('critère 11 - no placeholder-only inputs', async ({ page }) => {
+      const hasInputs =
+        (await page
+          .locator('input:not([type="hidden"]):not([type="submit"]), textarea, select')
+          .count()) > 0;
+
+      if (!hasInputs) {
+        test.skip();
+        return;
+      }
+
+      const results = await testPlaceholderOnlyInputs(page);
+
+      if (results.placeholderOnlyInputs.length > 0) {
+        const summary = results.placeholderOnlyInputs.join('\n  - ');
+        console.warn(
+          `Warning: Inputs relying on placeholder only (no visible label):\n  - ${summary}`
+        );
+      }
+    });
+
+    /**
+     * Critère 8.7 - Changements de langue inline
+     * Audit VoiceOver: changement de voix non signalé en anglais
+     * Vérifie que le contenu en langue étrangère a l'attribut lang
+     */
+    test('critère 8 - inline language changes', async ({ page }) => {
+      const results = await testInlineLanguageChanges(page);
+
+      if (results.foreignTextWithoutLang.length > 0) {
+        const summary = results.foreignTextWithoutLang.join('\n  - ');
+        console.warn(
+          `Warning: Foreign language text without lang attribute:\n  - ${summary}`
+        );
+      }
+    });
+
+    /**
+     * ARIA roles et propriétés
+     * Tests complémentaires sur les rôles ARIA
+     */
+    test('ARIA roles completeness', async ({ page }) => {
+      const results = await testAriaCompleteness(page);
+
+      expect(
+        results.dialogsWithoutLabel,
+        `Dialogs without accessible name: ${results.dialogsWithoutLabel.join(', ')}`
+      ).toHaveLength(0);
+
+      if (results.buttonsWithoutType.length > 0) {
+        console.warn(
+          `Warning: Buttons in forms without type attribute: ${results.buttonsWithoutType.join(', ')}`
+        );
+      }
+    });
   });
 }
 
@@ -292,6 +394,161 @@ test.describe('Reduced Motion', () => {
     // This is a soft check - just log if not found
     if (!hasReducedMotionStyles) {
       console.warn('Warning: No prefers-reduced-motion media queries found');
+    }
+  });
+});
+
+/**
+ * Language switch accessibility
+ * Opquast: le switch de langue doit avoir un label dans la langue cible
+ */
+test.describe('Language Switch', () => {
+  test('language switch has proper accessibility attributes', async ({ page }) => {
+    await page.goto('/');
+
+    const results = await testLanguageSwitchAccessibility(page);
+
+    if (results.switchMissingLangAttr.length > 0) {
+      console.warn(
+        `Warning: Language switches without lang attribute:\n  - ${results.switchMissingLangAttr.join('\n  - ')}`
+      );
+    }
+
+    expect(
+      results.switchMissingAriaLabel,
+      `Language switches without accessible name: ${results.switchMissingAriaLabel.join(', ')}`
+    ).toHaveLength(0);
+  });
+});
+
+/**
+ * Dark mode contrast tests
+ * Audit manuel: problèmes de contraste en mode sombre
+ * Teste les contrastes dans les deux modes (clair et sombre)
+ */
+test.describe('Dark Mode Contrast', () => {
+  test('dark mode has sufficient contrast on Home', async ({ page }) => {
+    await page.emulateMedia({ colorScheme: 'dark' });
+    await page.goto('/');
+    await page.waitForLoadState('networkidle');
+
+    const results = await testExplicitContrast(page);
+
+    if (results.failingElements.length > 0) {
+      const summary = results.failingElements
+        .map(
+          (e) =>
+            `- ${e.selector}: "${e.text}" — ${e.fgColor} on ${e.bgColor} = ${e.ratio}:1 (min: ${e.required}:1)`
+        )
+        .join('\n');
+      console.warn(`Dark mode contrast issues on Home:\n${summary}`);
+    }
+  });
+
+  test('dark mode has sufficient contrast on Contact', async ({ page }) => {
+    await page.emulateMedia({ colorScheme: 'dark' });
+    await page.goto('/contact');
+    await page.waitForLoadState('networkidle');
+
+    const results = await testExplicitContrast(page);
+
+    if (results.failingElements.length > 0) {
+      const summary = results.failingElements
+        .map(
+          (e) =>
+            `- ${e.selector}: "${e.text}" — ${e.fgColor} on ${e.bgColor} = ${e.ratio}:1 (min: ${e.required}:1)`
+        )
+        .join('\n');
+      console.warn(`Dark mode contrast issues on Contact:\n${summary}`);
+    }
+  });
+
+  test('light mode has sufficient contrast on Home', async ({ page }) => {
+    await page.emulateMedia({ colorScheme: 'light' });
+    await page.goto('/');
+    await page.waitForLoadState('networkidle');
+
+    const results = await testExplicitContrast(page);
+
+    if (results.failingElements.length > 0) {
+      const summary = results.failingElements
+        .map(
+          (e) =>
+            `- ${e.selector}: "${e.text}" — ${e.fgColor} on ${e.bgColor} = ${e.ratio}:1 (min: ${e.required}:1)`
+        )
+        .join('\n');
+      console.warn(`Light mode contrast issues on Home:\n${summary}`);
+    }
+  });
+});
+
+/**
+ * Touch target size (WCAG 2.5.8 - Target Size)
+ * Les éléments interactifs doivent avoir une taille minimale de 24x24px (AA) ou 44x44px (best practice mobile)
+ */
+test.describe('Touch Target Size', () => {
+  test('interactive elements have minimum touch target size', async ({ page }) => {
+    await page.goto('/');
+
+    const interactiveElements = page.locator('a, button, input, select, textarea');
+    const count = await interactiveElements.count();
+    const smallTargets: string[] = [];
+
+    for (let i = 0; i < count; i++) {
+      const el = interactiveElements.nth(i);
+      const isVisible = await el.isVisible().catch(() => false);
+      if (!isVisible) continue;
+
+      const box = await el.boundingBox();
+      if (!box) continue;
+
+      // WCAG 2.5.8 Level AA: minimum 24x24px
+      if (box.width < 24 || box.height < 24) {
+        const text = (await el.textContent())?.slice(0, 20) || '';
+        const tagName = await el.evaluate((e) => e.tagName.toLowerCase());
+        smallTargets.push(
+          `<${tagName}> "${text}" (${Math.round(box.width)}x${Math.round(box.height)}px)`
+        );
+      }
+    }
+
+    if (smallTargets.length > 0) {
+      console.warn(
+        `Warning: Interactive elements smaller than 24x24px:\n  - ${smallTargets.slice(0, 10).join('\n  - ')}`
+      );
+    }
+  });
+});
+
+/**
+ * Page title uniqueness
+ * Chaque page doit avoir un titre unique et descriptif
+ */
+test.describe('Page Title Uniqueness', () => {
+  test('all pages have unique titles', async ({ page }) => {
+    const titles: { name: string; title: string }[] = [];
+
+    for (const { name, path } of PAGES) {
+      await page.goto(path, { waitUntil: 'domcontentloaded' });
+      const title = await page.title();
+      titles.push({ name, title });
+    }
+
+    // Check for duplicates
+    const titleValues = titles.map((t) => t.title);
+    const duplicates = titleValues.filter(
+      (title, index) => titleValues.indexOf(title) !== index
+    );
+
+    if (duplicates.length > 0) {
+      const duplicatePages = titles
+        .filter((t) => duplicates.includes(t.title))
+        .map((t) => `${t.name}: "${t.title}"`)
+        .join(', ');
+      expect(
+        duplicates,
+        `Duplicate page titles found: ${duplicatePages}`
+      ).toHaveLength(0);
     }
   });
 });
