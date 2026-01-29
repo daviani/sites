@@ -1,10 +1,12 @@
 import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
 import nextTypescript from "eslint-config-next/typescript";
 
-export default [
+const eslintConfig = [
   ...nextCoreWebVitals,
   ...nextTypescript,
   {
-    ignores: [".next/", "node_modules/", "jest.config.js", "jest.setup.js"],
+    ignores: [".next/", "node_modules/", "jest.config.js", "jest.setup.js", "**/coverage/**"],
   },
 ];
+
+export default eslintConfig;
