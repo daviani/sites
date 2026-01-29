@@ -16,7 +16,7 @@
     "test:smoke": "playwright test --project=smoke",
     "test:a11y": "playwright test --project=a11y",
     "test:all": "turbo run test && playwright test --project=smoke --project=a11y --project=e2e",
-    "clean": "turbo run clean && rm -rf node_modules .turbo"
+    "clean": "turbo run clean && rm -rf node_modules .turbo coverage **/coverage playwright-report test-results"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.0",
