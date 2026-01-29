@@ -67,7 +67,7 @@ export function CvSidebar({ cvData, skillsByCategory }: CvSidebarProps) {
           {personal.title}
         </div>
 
-        <div className="text-xs font-normal text-nord-4 opacity-70 md:text-[10px]">
+        <div className="text-xs font-normal text-nord-4 md:text-[10px]">
           {personal.experienceYears} {t('pages.cv.labels.yearsExperience')}
         </div>
       </div>
@@ -112,7 +112,7 @@ export function CvSidebar({ cvData, skillsByCategory }: CvSidebarProps) {
           if (categorySkills.length === 0) return null;
           return (
             <div key={category} className="mt-2.5">
-              <div className="mb-1.5 text-center text-[9px] font-semibold uppercase tracking-wide text-nord-4 opacity-60 md:text-left md:text-[8px]">
+              <div className="mb-1.5 text-center text-[9px] font-semibold uppercase tracking-wide text-nord-4 md:text-left md:text-[8px]">
                 {categoryLabels[category]?.[language as 'fr' | 'en'] || category}
               </div>
               <div className="flex flex-wrap justify-center gap-1.5 md:justify-start">
@@ -134,7 +134,7 @@ export function CvSidebar({ cvData, skillsByCategory }: CvSidebarProps) {
                   key={i}
                   className="my-1.5 flex items-center justify-between text-xs text-nord-4 md:text-[10px]"
                 >
-                  <span className="opacity-90">{lang.language}</span>
+                  <span>{lang.language}</span>
                   <span className="font-medium text-nord-8">{lang.level}</span>
                 </div>
               ))}
@@ -154,7 +154,7 @@ export function CvSidebar({ cvData, skillsByCategory }: CvSidebarProps) {
 function SectionTitle({ children, first }: { children: React.ReactNode; first?: boolean }) {
   return (
     <div
-      className={`text-center text-xs font-semibold uppercase tracking-wider text-nord-8 opacity-90 md:text-left md:text-[10px] ${first ? 'mb-3' : 'mb-3 mt-6'}`}
+      className={`text-center text-xs font-semibold uppercase tracking-wider text-nord-8 md:text-left md:text-[10px] ${first ? 'mb-3' : 'mb-3 mt-6'}`}
     >
       {children}
     </div>
@@ -173,12 +173,12 @@ function ContactItem({
       href={href}
       target={href.startsWith('mailto:') ? undefined : '_blank'}
       rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-      className="break-words text-nord-4 opacity-85 no-underline transition-all duration-200 hover:text-nord-8 hover:opacity-100"
+      className="break-words text-nord-4 no-underline transition-all duration-200 hover:text-nord-8"
     >
       {children}
     </a>
   ) : (
-    <span className="text-nord-4 opacity-85">{children}</span>
+    <span className="text-nord-4">{children}</span>
   );
 
   return (
@@ -191,7 +191,7 @@ function ContactItem({
 
 function ExpertiseItem({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative my-2.5 pl-3.5 text-xs font-normal leading-relaxed text-nord-4 opacity-90 md:text-[10px]">
+    <div className="relative my-2.5 pl-3.5 text-xs font-normal leading-relaxed text-nord-4 md:text-[10px]">
       <span className="absolute left-0 text-sm font-bold text-nord-8">•</span>
       {children}
     </div>
@@ -215,16 +215,16 @@ interface Contribution {
 function ContributionsSection({ contributions, title }: { contributions: Contribution[]; title: string }) {
   return (
     <div className="mt-6 rounded-xl border border-nord-14/15 bg-nord-14/10 p-4 md:p-3.5">
-      <div className="mb-3 text-center text-xs font-semibold uppercase tracking-wider text-nord-14 md:mb-2.5 md:text-left md:text-[10px]">
+      <div className="mb-3 text-center text-xs font-semibold uppercase tracking-wider text-nord-4 md:mb-2.5 md:text-left md:text-[10px]">
         {title}
       </div>
 
       {contributions.map((contrib, i) => (
         <div key={i} className={i < contributions.length - 1 ? 'mb-4 md:mb-3' : ''}>
-          <div className="mb-1.5 text-center text-[11px] font-semibold uppercase tracking-wide text-nord-14 md:mb-1 md:text-left md:text-[9px]">
+          <div className="mb-1.5 text-center text-[11px] font-semibold uppercase tracking-wide text-nord-4 md:mb-1 md:text-left md:text-[9px]">
             {contrib.type} • {contrib.date}
           </div>
-          <div className="text-center text-xs leading-relaxed text-nord-4 opacity-90 md:text-left md:text-[9.5px]">
+          <div className="text-center text-xs leading-relaxed text-nord-4 md:text-left md:text-[9.5px]">
             {contrib.description}
           </div>
         </div>
