@@ -66,7 +66,7 @@ export function Footer({
         <div className="hidden md:grid grid-cols-3 gap-4 text-sm text-center">
           {/* Column 1: Navigation */}
           <div className="flex flex-col items-center gap-1">
-            <h3 className={titleStyles}>{t('footer.navigation')}</h3>
+            <div className={titleStyles}>{t('footer.navigation')}</div>
             {sitemapUrl && (
               <a href={sitemapUrl} className={linkStyles}>
                 {t('nav.sitemap.title')}
@@ -81,7 +81,7 @@ export function Footer({
 
           {/* Column 2: Infos */}
           <div className="flex flex-col items-center gap-1">
-            <h3 className={titleStyles}>{t('footer.infos')}</h3>
+            <div className={titleStyles}>{t('footer.infos')}</div>
             <a href={legalUrl} className={linkStyles}>
               {t('footer.legalNotice')}
             </a>
@@ -92,7 +92,7 @@ export function Footer({
 
           {/* Column 3: Links */}
           <div className="flex flex-col items-center gap-1">
-            <h3 className={titleStyles}>{t('footer.links')}</h3>
+            <div className={titleStyles}>{t('footer.links')}</div>
             <a
               href={githubUrl}
               target="_blank"

@@ -478,6 +478,7 @@ function CvDocument({
         <View style={styles.sidebar}>
           <View style={styles.profileSection}>
             {photoUrl && (
+              // eslint-disable-next-line jsx-a11y/alt-text -- @react-pdf/renderer Image is PDF, not HTML
               <Image src={photoUrl} style={styles.profilePhoto} />
             )}
             <Text style={styles.profileName}>{cvData.personal.name}</Text>
