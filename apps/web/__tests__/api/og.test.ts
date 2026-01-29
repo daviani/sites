@@ -1,9 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import type { ReactNode } from 'react';
 
 // Mock article data
 const mockArticle = {
   slug: 'test-article',
   meta: {
+    slug: 'test-article',
+    featured: false,
     titleFr: 'Article de Test',
     titleEn: 'Test Article',
     excerptFr: 'Un extrait du test article',
@@ -24,6 +27,8 @@ vi.mock('@/lib/content/blog', () => ({
       return {
         slug: 'another-article',
         meta: {
+          slug: 'another-article',
+          featured: false,
           titleFr: 'Autre Article avec des caractères spéciaux: < > & "',
           titleEn: 'Another Article',
           excerptFr: 'Description avec émojis et accents: éèêë',
@@ -39,27 +44,31 @@ vi.mock('@/lib/content/blog', () => ({
 }));
 
 // Mock next/og ImageResponse
-vi.mock('next/og', () => ({
-  ImageResponse: class MockImageResponse {
-    constructor(
-      public element: JSX.Element,
-      public options?: {
-        width?: number;
-        height?: number;
-        headers?: Record<string, string>;
+vi.mock('next/og', () => {
+  return {
+    ImageResponse: class {
+      constructor(
+        _element: ReactNode,
+        options?: {
+          width?: number;
+          height?: number;
+          headers?: Record<string, string>;
+        }
+      ) {
+        // Return a mock Response-like object
+        const response = {
+          status: 200,
+          headers: new Headers({
+            'Content-Type': 'image/png',
+            'Cache-Control': options?.headers?.['Cache-Control'] || '',
+          }),
+          arrayBuffer: async () => new ArrayBuffer(0),
+        };
+        return response as unknown as Response;
       }
-    ) {
-      return {
-        status: 200,
-        headers: new Headers({
-          'Content-Type': 'image/png',
-          'Cache-Control': options?.headers?.['Cache-Control'] || '',
-        }),
-        arrayBuffer: async () => new ArrayBuffer(0),
-      };
-    }
-  },
-}));
+    },
+  };
+});
 
 describe('OG Image API Route', () => {
   let GET: (
@@ -141,6 +150,8 @@ describe('OG Image API Route', () => {
       vi.mocked(getArticleBySlug).mockReturnValueOnce({
         slug: 'article-2024',
         meta: {
+          slug: 'article-2024',
+          featured: false,
           titleFr: 'Article 2024',
           titleEn: 'Article 2024',
           excerptFr: 'Excerpt',
@@ -177,6 +188,8 @@ describe('OG Image API Route', () => {
       vi.mocked(getArticleBySlug).mockReturnValueOnce({
         slug: 'empty-excerpt',
         meta: {
+          slug: 'empty-excerpt',
+          featured: false,
           titleFr: 'Title',
           titleEn: 'Title',
           excerptFr: '',
@@ -201,6 +214,8 @@ describe('OG Image API Route', () => {
       vi.mocked(getArticleBySlug).mockReturnValueOnce({
         slug: 'long-title',
         meta: {
+          slug: 'long-title',
+          featured: false,
           titleFr: longTitle,
           titleEn: longTitle,
           excerptFr: 'Excerpt',
