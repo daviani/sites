@@ -1,8 +1,13 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllArticles, getAllTags, getFeaturedArticles } from '@/lib/content/blog';
 import { Breadcrumb } from '@daviani/ui';
 import { RssButton } from '@/components/blog/RssButton';
 import { FeaturedArticle } from '@/components/blog/FeaturedArticles';
+
+export const metadata: Metadata = {
+  title: 'Blog',
+};
 
 const PAGE_SIZE = 20;
 
