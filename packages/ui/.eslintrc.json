@@ -18,5 +18,5 @@
   "rules": {
     "no-unused-vars": "off"
   },
-  "ignorePatterns": ["node_modules/", "dist/", "*.d.ts"]
+  "ignorePatterns": ["node_modules/", "dist/", "*.d.ts", "__tests__/"]
 }
