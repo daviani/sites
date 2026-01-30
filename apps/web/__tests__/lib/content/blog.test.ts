@@ -46,11 +46,8 @@ function buildArticle(overrides: Record<string, string | boolean | string[]> = {
   return `---\n${lines.join('\n')}\n---\nArticle content here.`;
 }
 
-// Compute POSTS_DIR to match the source code logic
-const POSTS_DIR = path.join(
-  process.cwd(),
-  process.env.NODE_ENV === 'production' ? 'content/posts' : 'content/posts/local'
-);
+// POSTS_DIR matching the source code
+const POSTS_DIR = path.join(process.cwd(), 'content/posts');
 
 describe('content/blog', () => {
   beforeEach(() => {
