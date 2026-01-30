@@ -53,9 +53,17 @@ jobs:
       - name: Build
         run: pnpm build
         env:
+          TURBO_FORCE: true
           KEYSTATIC_GITHUB_CLIENT_ID: ${{ secrets.KEYSTATIC_GITHUB_CLIENT_ID }}
           KEYSTATIC_GITHUB_CLIENT_SECRET: ${{ secrets.KEYSTATIC_GITHUB_CLIENT_SECRET }}
           KEYSTATIC_SECRET: ${{ secrets.KEYSTATIC_SECRET }}
+
+      - name: Verify build output
+        run: |
+          echo "Listing apps/web directory:"
+          ls -la apps/web/
+          echo "Checking .next directory:"
+          ls -la apps/web/.next/ || echo ".next directory not found"
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
