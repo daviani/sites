@@ -2,6 +2,7 @@
 
 import { useTranslation } from '@daviani/ui';
 import { OwlLogo } from '@daviani/ui';
+import { getSubdomainUrl } from '@/lib/domains/config';
 
 export function HeroSection() {
   const { t } = useTranslation();
@@ -20,9 +21,24 @@ export function HeroSection() {
         {t('home.subtitle')}
       </p>
 
-      <p className="text-lg text-nord-0 dark:text-nord-4 max-w-2xl mx-auto">
+      <p className="text-lg text-nord-0 dark:text-nord-4 max-w-2xl mx-auto mb-8">
         {t('home.description')}
       </p>
+
+      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href={getSubdomainUrl('contact')}
+          className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg bg-nord-btn text-white hover:bg-nord-btn-hover transition-colors focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2"
+        >
+          {t('home.cta.contact')}
+        </a>
+        <a
+          href={getSubdomainUrl('cv')}
+          className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg border-2 border-nord-10 text-nord-10 dark:text-nord-8 hover:bg-nord-btn hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2"
+        >
+          {t('home.cta.cv')}
+        </a>
+      </div>
     </section>
   );
 }
