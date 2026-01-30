@@ -34,7 +34,7 @@ export function ExpertiseSection() {
                 {t(`home.expertise.${key}.title`)}
               </h3>
             </div>
-            <p className="text-sm text-nord-3 dark:text-nord-4 leading-relaxed">
+            <p className="text-sm text-nord-2 dark:text-nord-4 leading-relaxed">
               {t(`home.expertise.${key}.description`)}
             </p>
           </div>
