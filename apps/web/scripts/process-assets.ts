@@ -171,12 +171,10 @@ export async function processAllPhotos(
 }
 
 /**
- * Sync CV assets from content/cv to public/cv
- * - Development: content/cv/local/personal -> public/cv/personal
- * - Production: content/cv/personal -> public/cv/personal
+ * Sync CV assets from content/cv/personal to public/cv/personal
  */
-export function syncCvAssets(isProd = false): { synced: string[]; skipped: string[] } {
-  const cvContentDir = path.join(process.cwd(), isProd ? 'content/cv/personal' : 'content/cv/local/personal');
+export function syncCvAssets(): { synced: string[]; skipped: string[] } {
+  const cvContentDir = path.join(process.cwd(), 'content/cv/personal');
   const cvOutputDir = path.join(process.cwd(), 'public/cv/personal');
 
   const synced: string[] = [];
@@ -221,8 +219,7 @@ export function syncCvAssets(isProd = false): { synced: string[]; skipped: strin
 
 // CLI entry point
 async function main() {
-  const isProd = process.env.NODE_ENV === 'production';
-  const photosContentDir = path.join(process.cwd(), isProd ? 'content/photos' : 'content/photos/local');
+  const photosContentDir = path.join(process.cwd(), 'content/photos');
   const photosOutputDir = path.join(process.cwd(), 'public/photos');
 
   // Create output directory if it doesn't exist
@@ -255,7 +252,7 @@ async function main() {
 
   // Sync CV assets
   console.log('\nSyncing CV assets...');
-  const cvResults = syncCvAssets(isProd);
+  const cvResults = syncCvAssets();
 
   if (cvResults.synced.length > 0) {
     console.log(`  ✅ Synced: ${cvResults.synced.join(', ')}`);
