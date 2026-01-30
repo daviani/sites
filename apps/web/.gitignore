@@ -35,8 +35,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# photos (managed separately, not in git)
-/public/photos/
+# photos - only track generated WebP files
+/public/photos/*
+!/public/photos/*.webp
 
 # Note: local content directories are NOT ignored
 # They need to be visible to Keystatic's local storage mode
