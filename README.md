@@ -48,8 +48,9 @@ Portfolio professionnel démontrant une expertise Full-Stack et DevOps. Architec
 **Tooling**
 - Turborepo + pnpm workspaces
 - ESLint 9, Prettier
-- Jest + Testing Library
-- GitHub Actions
+- Vitest + Testing Library (unit tests)
+- Playwright + axe-core (E2E + accessibility)
+- GitHub Actions (5 parallel jobs)
 
 ---
 
@@ -121,8 +122,21 @@ pnpm start
 | `pnpm dev` | Serveur de développement |
 | `pnpm build` | Build production |
 | `pnpm lint` | Linting |
-| `pnpm test` | Tests unitaires |
 | `pnpm typecheck` | Vérification TypeScript |
+
+### Tests
+
+| Commande | Description |
+|----------|-------------|
+| `pnpm test` | Tests unitaires (Vitest) |
+| `pnpm test:watch` | Mode watch |
+| `pnpm test:coverage` | Avec rapport de couverture |
+| `pnpm test:ui` | Interface graphique Vitest |
+| `pnpm test:e2e` | Tests E2E (Playwright) |
+| `pnpm test:e2e:ui` | Interface graphique Playwright |
+| `pnpm test:e2e:headed` | Playwright avec navigateurs visibles |
+| `pnpm test:a11y` | Tests accessibilité WCAG AA |
+| `pnpm test:all` | Unit + E2E + A11y |
 
 ---
 
