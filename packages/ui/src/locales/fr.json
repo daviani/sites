@@ -30,6 +30,33 @@
     "cta": {
       "contact": "Me contacter",
       "cv": "Voir mon CV"
+    },
+    "expertise": {
+      "title": "Ce que je fais",
+      "fullstack": {
+        "title": "Développement Full-Stack",
+        "description": "Applications web modernes avec React, Next.js, .NET Core et Node.js"
+      },
+      "devops": {
+        "title": "DevOps & CI/CD",
+        "description": "Pipelines automatisés, déploiement continu, Docker et orchestration"
+      },
+      "infra": {
+        "title": "Infrastructure",
+        "description": "Administration serveurs Linux/Windows, cloud OVH et GCP"
+      },
+      "architecture": {
+        "title": "Architecture",
+        "description": "Conception d'applications scalables et maintenables"
+      },
+      "database": {
+        "title": "Bases de données",
+        "description": "PostgreSQL, MySQL, optimisation et migrations"
+      },
+      "accessibility": {
+        "title": "Accessibilité",
+        "description": "Applications conformes RGAA et WCAG"
+      }
     }
   },
   "nav": {

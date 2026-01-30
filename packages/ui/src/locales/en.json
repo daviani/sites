@@ -30,6 +30,33 @@
     "cta": {
       "contact": "Contact me",
       "cv": "View my resume"
+    },
+    "expertise": {
+      "title": "What I do",
+      "fullstack": {
+        "title": "Full-Stack Development",
+        "description": "Modern web applications with React, Next.js, .NET Core and Node.js"
+      },
+      "devops": {
+        "title": "DevOps & CI/CD",
+        "description": "Automated pipelines, continuous deployment, Docker and orchestration"
+      },
+      "infra": {
+        "title": "Infrastructure",
+        "description": "Linux/Windows server administration, OVH and GCP cloud"
+      },
+      "architecture": {
+        "title": "Architecture",
+        "description": "Scalable and maintainable application design"
+      },
+      "database": {
+        "title": "Databases",
+        "description": "PostgreSQL, MySQL, optimization and migrations"
+      },
+      "accessibility": {
+        "title": "Accessibility",
+        "description": "RGAA and WCAG compliant applications"
+      }
     }
   },
   "nav": {
