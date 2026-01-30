@@ -69,7 +69,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-output
-          path: apps/web/.next
+          path: ${{ github.workspace }}/apps/web/.next
           retention-days: 1
 
   # ═══════════════════════════════════════════════════════════
@@ -145,7 +145,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-output
-          path: apps/web/.next
+          path: ${{ github.workspace }}/apps/web/.next
 
       - name: Start server and run smoke tests
         run: |
@@ -205,7 +205,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-output
-          path: apps/web/.next
+          path: ${{ github.workspace }}/apps/web/.next
 
       - name: Start server and run E2E tests
         run: |
@@ -265,7 +265,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-output
-          path: apps/web/.next
+          path: ${{ github.workspace }}/apps/web/.next
 
       - name: Start server and run accessibility tests
         run: |
