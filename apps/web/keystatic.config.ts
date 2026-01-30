@@ -1,29 +1,21 @@
-import { config, collection, singleton, fields, LocalConfig, GitHubConfig } from '@keystatic/core';
-
-const isProd = process.env.NODE_ENV === 'production';
+import { config, collection, singleton, fields, GitHubConfig } from '@keystatic/core';
 
 /**
- * Storage configuration based on environment:
- * - Development: local storage (no auth needed, easy for contributors)
- * - Production: GitHub storage with OAuth (only repo owner can edit)
+ * Storage configuration: GitHub storage with OAuth
+ * Note: In local development, Keystatic UI won't work without GitHub OAuth.
+ * Use `pnpm dev` to preview content, and Keystatic UI in production for editing.
  */
-const storage: LocalConfig['storage'] | GitHubConfig['storage'] = isProd
-  ? {
-      kind: 'github',
-      repo: 'daviani/sites',
-    }
-  : { kind: 'local' };
+const storage: GitHubConfig['storage'] = {
+  kind: 'github',
+  repo: 'daviani/sites',
+};
 
 /**
- * Content paths based on environment:
- * - Development/Test: content/posts/local/* (local articles for testing)
- * - Production: apps/web/content/posts/* (real articles - path relative to repo root for GitHub storage)
+ * Content paths (relative to repo root for GitHub storage)
  */
-// Keystatic local mode uses git to find files
-// Paths are relative to the app directory (apps/web/) where Next.js runs
-const postsPath = isProd ? 'apps/web/content/posts/*' : 'content/posts/local/*';
-const photosPath = isProd ? 'apps/web/content/photos/*' : 'content/photos/local/*';
-const cvPath = isProd ? 'apps/web/content/cv/' : 'content/cv/local/';
+const postsPath = 'apps/web/content/posts/*';
+const photosPath = 'apps/web/content/photos/*';
+const cvPath = 'apps/web/content/cv/';
 
 export default config({
   storage,
@@ -52,7 +44,7 @@ export default config({
             website: fields.url({ label: 'Site web' }),
             photo: fields.image({
               label: 'Photo',
-              directory: isProd ? 'apps/web/content/cv' : 'content/cv/local',
+              directory: 'apps/web/content/cv',
               publicPath: '/cv/',
             }),
           },
@@ -307,7 +299,7 @@ export default config({
         // Image uploadée via Keystatic (HEIC, JPEG, etc.)
         image: fields.image({
           label: 'Photo',
-          directory: isProd ? 'apps/web/content/photos' : 'content/photos/local',
+          directory: 'apps/web/content/photos',
           publicPath: '/photos/',
         }),
 
