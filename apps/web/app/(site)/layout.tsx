@@ -17,7 +17,7 @@ export default function SiteLayout({
       <div className="min-h-screen flex flex-col">
         <main
           id="main-content"
-          className="flex-1 pt-[86px] md:pt-[150px] px-[10px] pb-[220px] md:pb-[200px]"
+          className="flex-1 pt-[86px] md:pt-[150px] px-[10px] pb-8"
         >
           {children}
         </main>
