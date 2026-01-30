@@ -31,16 +31,6 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
 
-      - name: Cache Next.js build
-        uses: actions/cache@v4
-        with:
-          path: |
-            apps/web/.next/cache
-          key: nextjs-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ hashFiles('apps/web/**/*.ts', 'apps/web/**/*.tsx') }}
-          restore-keys: |
-            nextjs-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
-            nextjs-${{ runner.os }}-
-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
@@ -57,13 +47,11 @@ jobs:
           KEYSTATIC_GITHUB_CLIENT_SECRET: ${{ secrets.KEYSTATIC_GITHUB_CLIENT_SECRET }}
           KEYSTATIC_SECRET: ${{ secrets.KEYSTATIC_SECRET }}
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+      - name: Cache build output
+        uses: actions/cache/save@v4
         with:
-          name: build-output
-          path: ${{ github.workspace }}/apps/web/.next
-          include-hidden-files: true
-          retention-days: 1
+          path: apps/web/.next
+          key: build-${{ github.sha }}
 
   # ═══════════════════════════════════════════════════════════
   # JOB 2: Unit Tests (Vitest) - runs in parallel with quality
@@ -97,7 +85,7 @@ jobs:
           fail_ci_if_error: false
 
   # ═══════════════════════════════════════════════════════════
-  # JOB 3: Smoke Tests (Playwright) - reuses build artifacts
+  # JOB 3: Smoke Tests (Playwright) - reuses build from cache
   # ═══════════════════════════════════════════════════════════
   smoke-tests:
     name: Smoke Tests
@@ -134,11 +122,12 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
+      - name: Restore build output
+        uses: actions/cache/restore@v4
         with:
-          name: build-output
-          path: ${{ github.workspace }}/apps/web/.next
+          path: apps/web/.next
+          key: build-${{ github.sha }}
+          fail-on-cache-miss: true
 
       - name: Start server and run smoke tests
         run: |
@@ -194,11 +183,12 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
+      - name: Restore build output
+        uses: actions/cache/restore@v4
         with:
-          name: build-output
-          path: ${{ github.workspace }}/apps/web/.next
+          path: apps/web/.next
+          key: build-${{ github.sha }}
+          fail-on-cache-miss: true
 
       - name: Start server and run E2E tests
         run: |
@@ -254,11 +244,12 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
+      - name: Restore build output
+        uses: actions/cache/restore@v4
         with:
-          name: build-output
-          path: ${{ github.workspace }}/apps/web/.next
+          path: apps/web/.next
+          key: build-${{ github.sha }}
+          fail-on-cache-miss: true
 
       - name: Start server and run accessibility tests
         run: |
