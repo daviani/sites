@@ -29,7 +29,7 @@ export const PhotoCard = memo(function PhotoCard({
         alt={photo.alt}
         fill
         sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-        className="object-cover transition-all duration-500 grayscale group-hover:grayscale-0 group-hover:scale-105"
+        className="object-cover transition-all duration-500 md:grayscale md:group-hover:grayscale-0 group-hover:scale-105"
       />
       {/* Color shift overlay on hover - purple/pink tint */}
       <div className="absolute inset-0 bg-gradient-to-br from-nord-15/30 via-nord-10/20 to-nord-15/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-color" />
