@@ -1,5 +1,10 @@
+import type { Metadata } from 'next';
 import { getLocalizedCvData, getCvSkillsByCategory } from '@/lib/content/cv-keystatic';
 import { CvPageContent } from '@/components/cv/CvPageContent';
+
+export const metadata: Metadata = {
+  title: 'CV',
+};
 
 export default function CvPage() {
   // Server-side: read CV data from Keystatic YAML

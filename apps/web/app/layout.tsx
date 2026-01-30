@@ -16,8 +16,16 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Daviani Fillatre",
+  title: {
+    template: '%s | Daviani Fillatre',
+    default: 'Daviani Fillatre - Développeur Full Stack',
+  },
   description: "Portfolio multi-domaines avec Next.js 16",
+  openGraph: {
+    title: 'Daviani Fillatre',
+    description: 'Portfolio multi-domaines avec Next.js 16',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({

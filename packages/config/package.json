@@ -10,10 +10,8 @@
     "eslint"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "clean": "rm -rf .turbo node_modules"
-  },
-  "devDependencies": {
-    "jest": "^30.2.0"
   }
 }

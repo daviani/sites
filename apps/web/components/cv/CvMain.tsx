@@ -81,7 +81,7 @@ function ExperienceCard({ experience }: { experience: Experience }) {
           <div className="mb-0.5 text-sm font-semibold leading-snug tracking-tight text-nord-0 md:text-[12.5px] dark:text-nord-6">
             {experience.role}
           </div>
-          <div className="text-xs font-medium text-nord-8 md:text-[11px]">
+          <div className="text-xs font-medium text-nord-3 md:text-[11px] dark:text-nord-8">
             {experience.company}
           </div>
         </div>
@@ -110,7 +110,7 @@ function ExperienceCard({ experience }: { experience: Experience }) {
         )}
 
         {experience.stack && experience.stack.length > 0 && (
-          <strong className="mt-1 block text-[11px] font-semibold text-nord-8 md:text-[10px]">
+          <strong className="mt-1 block text-[11px] font-semibold text-nord-3 md:text-[10px] dark:text-nord-8">
             {t('pages.cv.labels.stack')} : {experience.stack.join(', ')}
           </strong>
         )}
@@ -134,7 +134,7 @@ function EducationCard({ education }: { education: Education }) {
           <div className="mb-0.5 text-sm font-semibold leading-snug tracking-tight text-nord-0 md:text-[12.5px] dark:text-nord-6">
             {education.degree}
           </div>
-          <div className="text-xs font-medium text-nord-8 md:text-[11px]">
+          <div className="text-xs font-medium text-nord-3 md:text-[11px] dark:text-nord-8">
             {education.institution}
           </div>
         </div>
@@ -172,7 +172,7 @@ function ProjectCard({ project }: { project: Project }) {
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[11px] font-medium text-nord-8 hover:underline md:text-[10px]"
+              className="text-[11px] font-medium text-nord-3 hover:underline md:text-[10px] dark:text-nord-8"
             >
               {project.url.replace(/^https?:\/\//, '')}
             </a>
@@ -199,7 +199,7 @@ function ProjectCard({ project }: { project: Project }) {
         )}
 
         {project.stack && project.stack.length > 0 && (
-          <strong className="mt-1 block text-[11px] font-semibold text-nord-8 md:text-[10px]">
+          <strong className="mt-1 block text-[11px] font-semibold text-nord-3 md:text-[10px] dark:text-nord-8">
             {t('pages.cv.labels.stack')} : {project.stack.join(', ')}
           </strong>
         )}
