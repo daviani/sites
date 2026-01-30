@@ -129,13 +129,8 @@ jobs:
           key: build-${{ github.sha }}
           fail-on-cache-miss: true
 
-      - name: Start server and run smoke tests
-        run: |
-          pnpm --filter web start &
-          npx wait-on http://localhost:3000 --timeout 60000
-          pnpm test:smoke
-        env:
-          PLAYWRIGHT_BASE_URL: http://localhost:3000
+      - name: Run smoke tests
+        run: pnpm test:smoke
 
       - name: Upload Playwright report
         uses: actions/upload-artifact@v4
@@ -190,13 +185,8 @@ jobs:
           key: build-${{ github.sha }}
           fail-on-cache-miss: true
 
-      - name: Start server and run E2E tests
-        run: |
-          pnpm --filter web start &
-          npx wait-on http://localhost:3000 --timeout 60000
-          pnpm test:e2e
-        env:
-          PLAYWRIGHT_BASE_URL: http://localhost:3000
+      - name: Run E2E tests
+        run: pnpm test:e2e
 
       - name: Upload Playwright report
         uses: actions/upload-artifact@v4
@@ -251,13 +241,8 @@ jobs:
           key: build-${{ github.sha }}
           fail-on-cache-miss: true
 
-      - name: Start server and run accessibility tests
-        run: |
-          pnpm --filter web start &
-          npx wait-on http://localhost:3000 --timeout 60000
-          pnpm test:a11y
-        env:
-          PLAYWRIGHT_BASE_URL: http://localhost:3000
+      - name: Run accessibility tests
+        run: pnpm test:a11y
 
       - name: Upload a11y report
         uses: actions/upload-artifact@v4
