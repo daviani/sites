@@ -3,11 +3,21 @@ import { getSubdomain, getRewritePath } from '@/lib/domains/config';
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|icon.png|api|photos/.*\\.webp|images/.*|cv/.*|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.svg|.*\\.webp).*)',
+    '/((?!_next/static|_next/image|favicon.ico|icon.png|api).*)',
   ],
 };
 
+// Static file extensions that should not be rewritten
+const STATIC_FILE_EXTENSIONS = /\.(webp|png|jpg|jpeg|svg|gif|ico|woff|woff2|ttf|eot|css|js|map)$/i;
+
 export function proxy(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+
+  // Skip static files - don't rewrite them
+  if (STATIC_FILE_EXTENSIONS.test(pathname)) {
+    return NextResponse.next();
+  }
+
   const hostname = request.headers.get('host') || '';
   const subdomain = getSubdomain(hostname);
 
