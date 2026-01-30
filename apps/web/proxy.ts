@@ -3,7 +3,7 @@ import { getSubdomain, getRewritePath } from '@/lib/domains/config';
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|icon.png|api).*)',
+    '/((?!_next/static|_next/image|favicon.ico|icon.png|api|photos/.*\\.webp|images/.*|cv/.*|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.svg|.*\\.webp).*)',
   ],
 };
 
