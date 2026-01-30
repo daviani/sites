@@ -25,6 +25,9 @@ export function Footer({
   const linkStyles =
     'text-nord-3 dark:text-nord-4 hover:text-nord-0 dark:hover:text-nord-8 transition-colors rounded focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2';
 
+  const mobileLinkStyles =
+    'min-h-[44px] inline-flex items-center px-3 text-nord-3 dark:text-nord-4 hover:text-nord-0 dark:hover:text-nord-8 transition-colors rounded focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2';
+
   const titleStyles = 'font-semibold text-nord-0 dark:text-nord-6 mb-1';
 
   const separatorStyles = 'text-nord-3 dark:text-nord-4';
@@ -32,32 +35,30 @@ export function Footer({
   return (
     <footer className="mx-[10px] mb-[10px] shadow-lg backdrop-blur-md bg-white/40 dark:bg-nord-3/50 rounded-[2.5rem] py-3 md:py-4">
       <div className="container mx-auto px-4">
-        {/* Mobile: Compact single line */}
+        {/* Mobile: Touch-friendly links */}
         <div className="md:hidden">
-          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs">
-            <a href={legalUrl} className={linkStyles}>
+          <div className="flex flex-wrap items-center justify-center text-sm">
+            <a href={legalUrl} className={mobileLinkStyles}>
               {t('footer.legalNotice')}
             </a>
-            <span className={separatorStyles} aria-hidden="true">•</span>
             <a
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={linkStyles}
+              className={mobileLinkStyles}
             >
               {t('footer.github')}
             </a>
-            <span className={separatorStyles} aria-hidden="true">•</span>
             <a
               href={linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={linkStyles}
+              className={mobileLinkStyles}
             >
               {t('footer.linkedin')}
             </a>
           </div>
-          <div className="text-center text-xs text-nord-3 dark:text-nord-4 mt-2">
+          <div className="text-center text-xs text-nord-3 dark:text-nord-4">
             {t('footer.copyright').replace('{year}', currentYear.toString())}
           </div>
         </div>
