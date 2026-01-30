@@ -30,11 +30,8 @@ export interface Photo {
 
 /**
  * Default photos directory
- * - Development: content/photos/local (test photos)
- * - Production: content/photos (real photos from GitHub)
  */
-const isProd = process.env.NODE_ENV === 'production';
-const DEFAULT_PHOTOS_DIR = path.join(process.cwd(), isProd ? 'content/photos' : 'content/photos/local');
+const DEFAULT_PHOTOS_DIR = path.join(process.cwd(), 'content/photos');
 
 /**
  * Get all photos from the content directory
