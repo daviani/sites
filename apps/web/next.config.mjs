@@ -57,10 +57,10 @@ const nextConfig = {
             value: [
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://www.recaptcha.net https://va.vercel-scripts.com https://assets.calendly.com",
-              "style-src 'self' 'unsafe-inline'",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "img-src 'self' data: https: blob:",
-              "font-src 'self' data:",
-              "connect-src 'self' https://www.google.com https://vitals.vercel-insights.com https://va.vercel-scripts.com https://api.github.com",
+              "font-src 'self' data: https://fonts.gstatic.com",
+              "connect-src 'self' https://www.google.com https://vitals.vercel-insights.com https://va.vercel-scripts.com https://api.github.com https://raw.githubusercontent.com",
               "frame-src https://calendly.com https://giscus.app https://www.google.com https://www.recaptcha.net",
               "frame-ancestors 'self'",
               "base-uri 'self'",
