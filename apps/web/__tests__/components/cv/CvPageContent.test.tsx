@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { CvPageContent } from '@/components/cv/CvPageContent';
+import type { LocalizedCvData } from '@/lib/content/cv-keystatic';
 
 vi.mock('@daviani/ui', () => ({
   useTranslation: () => ({
@@ -35,27 +36,29 @@ vi.mock('@/components/cv/CvDownloadButton', () => ({
 
 describe('CvPageContent', () => {
   const mockCvDataFr = {
-    basics: {
+    personal: {
       name: 'John Doe',
-      label: 'Développeur',
+      title: 'Développeur',
+      birthYear: 1990,
+      age: 36,
+      experienceYears: 5,
+      location: 'Paris',
       email: 'john@example.com',
-      url: 'https://example.com',
-      location: { city: 'Paris', region: 'IDF' },
-      summary: 'Résumé en français',
-      profiles: [],
     },
-    work: [],
+    summary: 'Résumé en français',
+    experiences: [],
+    expertise: [],
+    contributions: [],
     education: [],
     skills: [],
     languages: [],
-    certificates: [],
     projects: [],
-  };
+  } as LocalizedCvData;
 
   const mockCvDataEn = {
     ...mockCvDataFr,
-    basics: { ...mockCvDataFr.basics, summary: 'Summary in English' },
-  };
+    summary: 'Summary in English',
+  } as LocalizedCvData;
 
   const mockSkillsByCategory = {
     Frontend: ['React', 'TypeScript'],
