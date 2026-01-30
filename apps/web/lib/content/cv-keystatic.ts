@@ -163,34 +163,22 @@ export interface LocalizedCvData {
   }[];
 }
 
-const isProd = process.env.NODE_ENV === 'production';
-
 /**
- * CV file path based on environment:
- * - Development: content/cv/local (test data)
- * - Production: content/cv (real data from GitHub)
+ * Get CV file path
  *
  * Note: In monorepo with Turborepo, process.cwd() can be either:
  * - /path/to/sites (monorepo root)
  * - /path/to/sites/apps/web (app root)
  */
 function getCvFilePath(): string {
-  const relativePath = isProd ? 'content/cv/index.yaml' : 'content/cv/local/index.yaml';
-
   // Try from apps/web first (when cwd is apps/web)
-  const fromAppRoot = path.join(process.cwd(), relativePath);
+  const fromAppRoot = path.join(process.cwd(), 'content/cv/index.yaml');
   if (fs.existsSync(fromAppRoot)) {
     return fromAppRoot;
   }
 
   // Fallback: try from monorepo root (when cwd is sites/)
-  const fromMonorepoRoot = path.join(process.cwd(), 'apps/web', relativePath);
-  if (fs.existsSync(fromMonorepoRoot)) {
-    return fromMonorepoRoot;
-  }
-
-  // Return the expected path for error message
-  return fromAppRoot;
+  return path.join(process.cwd(), 'apps/web/content/cv/index.yaml');
 }
 
 /**
