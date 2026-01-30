@@ -17,7 +17,7 @@ export function HeroSection() {
         {t('home.title')}
       </h1>
 
-      <p className="text-xl md:text-2xl text-nord-3 dark:text-nord-8 mb-4">
+      <p className="text-xl md:text-2xl text-nord-2 dark:text-nord-8 mb-4">
         {t('home.subtitle')}
       </p>
 
