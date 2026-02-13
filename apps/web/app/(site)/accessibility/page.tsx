@@ -1,7 +1,6 @@
 'use client';
 
 import { useTranslation, useLanguage, Breadcrumb } from '@daviani/ui';
-import { getSubdomainUrl } from '@/lib/domains/config';
 
 export default function AccessibilityPage() {
   const { t } = useTranslation();
@@ -40,7 +39,7 @@ export default function AccessibilityPage() {
         </div>
 
         <div className="bg-nord-5 dark:bg-nord-1 rounded-lg p-6 mb-8 border-l-4 border-nord-14">
-          <p className="text-lg font-semibold text-nord-14">
+          <p className="text-lg font-semibold text-nord-0 dark:text-nord-14">
             {t('pages.accessibility.status')}
           </p>
           <p className="text-nord-0 dark:text-nord-4 mt-2">
@@ -98,7 +97,7 @@ export default function AccessibilityPage() {
               {t('pages.accessibility.contactText')}
             </p>
             <a
-              href={getSubdomainUrl('contact')}
+              href="/contact"
               className="inline-block px-6 py-3 bg-nord-btn text-white rounded-lg hover:bg-nord-btn-hover transition-colors"
             >
               {t('nav.contact.title')}

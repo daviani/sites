@@ -1,10 +1,9 @@
 'use client';
 
 import { useTranslation, TranslationKey, Breadcrumb } from '@daviani/ui';
-import { getSubdomainUrl, getBaseUrl, ValidSubdomain } from '@/lib/domains/config';
 
 type PageLink = {
-  subdomain: ValidSubdomain;
+  href: string;
   titleKey: TranslationKey;
   descKey: TranslationKey;
 };
@@ -13,18 +12,18 @@ export default function SitemapPage() {
   const { t } = useTranslation();
 
   const mainPages: PageLink[] = [
-    { subdomain: 'about', titleKey: 'nav.about.title', descKey: 'nav.about.description' },
-    { subdomain: 'blog', titleKey: 'nav.blog.title', descKey: 'nav.blog.description' },
-    { subdomain: 'cv', titleKey: 'nav.cv.title', descKey: 'nav.cv.description' },
-    { subdomain: 'contact', titleKey: 'nav.contact.title', descKey: 'nav.contact.description' },
-    { subdomain: 'rdv', titleKey: 'nav.rdv.title', descKey: 'nav.rdv.description' },
+    { href: '/about', titleKey: 'nav.about.title', descKey: 'nav.about.description' },
+    { href: '/blog', titleKey: 'nav.blog.title', descKey: 'nav.blog.description' },
+    { href: '/cv', titleKey: 'nav.cv.title', descKey: 'nav.cv.description' },
+    { href: '/contact', titleKey: 'nav.contact.title', descKey: 'nav.contact.description' },
+    { href: '/rdv', titleKey: 'nav.rdv.title', descKey: 'nav.rdv.description' },
   ];
 
   const utilityPages: PageLink[] = [
-    { subdomain: 'legal', titleKey: 'nav.legal.title', descKey: 'nav.legal.description' },
-    { subdomain: 'accessibility', titleKey: 'nav.accessibility.title', descKey: 'nav.accessibility.description' },
-    { subdomain: 'help', titleKey: 'nav.help.title', descKey: 'nav.help.description' },
-    { subdomain: 'sitemap', titleKey: 'nav.sitemap.title', descKey: 'nav.sitemap.description' },
+    { href: '/legal', titleKey: 'nav.legal.title', descKey: 'nav.legal.description' },
+    { href: '/accessibility', titleKey: 'nav.accessibility.title', descKey: 'nav.accessibility.description' },
+    { href: '/help', titleKey: 'nav.help.title', descKey: 'nav.help.description' },
+    { href: '/sitemap', titleKey: 'nav.sitemap.title', descKey: 'nav.sitemap.description' },
   ];
 
   return (
@@ -50,7 +49,7 @@ export default function SitemapPage() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href={getBaseUrl()}
+                  href="/"
                   className="flex items-center text-nord-0 dark:text-nord-4 hover:text-nord-10 dark:hover:text-nord-8 transition-colors"
                 >
                   <span className="mr-2">→</span>
@@ -58,9 +57,9 @@ export default function SitemapPage() {
                 </a>
               </li>
               {mainPages.map((page) => (
-                <li key={page.subdomain}>
+                <li key={page.href}>
                   <a
-                    href={getSubdomainUrl(page.subdomain)}
+                    href={page.href}
                     className="flex items-center text-nord-0 dark:text-nord-4 hover:text-nord-10 dark:hover:text-nord-8 transition-colors"
                   >
                     <span className="mr-2">→</span>
@@ -80,9 +79,9 @@ export default function SitemapPage() {
             </h2>
             <ul className="space-y-3">
               {utilityPages.map((page) => (
-                <li key={page.subdomain}>
+                <li key={page.href}>
                   <a
-                    href={getSubdomainUrl(page.subdomain)}
+                    href={page.href}
                     className="flex items-center text-nord-0 dark:text-nord-4 hover:text-nord-10 dark:hover:text-nord-8 transition-colors"
                   >
                     <span className="mr-2">→</span>

@@ -6,7 +6,6 @@ import {
   ConsentGate,
   CalendlyEmbed,
 } from '@daviani/ui';
-import { getSubdomainUrl } from '@/lib/domains/config';
 
 export default function RdvPageClient() {
   const { t } = useTranslation();
@@ -40,7 +39,7 @@ export default function RdvPageClient() {
         <p className="text-center text-sm text-nord-3 dark:text-nord-4">
           {t('rdv.fallback')}{' '}
           <a
-            href={getSubdomainUrl('contact')}
+            href="/contact"
             className="text-nord-10 hover:underline"
           >
             {t('nav.contact.title')}

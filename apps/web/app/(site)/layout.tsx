@@ -2,7 +2,6 @@ import { Footer, SkipLink, ScrollToTop } from "@daviani/ui";
 import { Providers } from "@/components/Providers";
 import { HeaderNav } from "@/components/HeaderNav";
 import { SubHeaderNav } from "@/components/SubHeaderNav";
-import { getSubdomainUrl } from "@/lib/domains/config";
 
 export default function SiteLayout({
   children,
@@ -23,12 +22,12 @@ export default function SiteLayout({
         </main>
         <ScrollToTop />
         <Footer
-          legalUrl={getSubdomainUrl("legal")}
-          accessibilityUrl={getSubdomainUrl("accessibility")}
+          legalUrl="/legal"
+          accessibilityUrl="/accessibility"
           githubUrl="https://github.com/daviani"
           linkedinUrl="https://linkedin.com/in/daviani"
-          sitemapUrl={getSubdomainUrl("sitemap")}
-          helpUrl={getSubdomainUrl("help")}
+          sitemapUrl="/sitemap"
+          helpUrl="/help"
         />
       </div>
     </Providers>

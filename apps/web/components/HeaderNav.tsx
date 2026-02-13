@@ -1,36 +1,24 @@
-
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { Header } from '@daviani/ui';
-import { getSubdomainUrl, getBaseUrl, ValidSubdomain } from '@/lib/domains/config';
+import { Header, TranslationKey } from '@daviani/ui';
 
-const navItems: { subdomain: ValidSubdomain; labelKey: 'nav.about.title' | 'nav.blog.title' | 'nav.cv.title' | 'nav.contact.title' | 'nav.rdv.title' }[] = [
-  { subdomain: 'about', labelKey: 'nav.about.title' },
-  { subdomain: 'blog', labelKey: 'nav.blog.title' },
-  { subdomain: 'cv', labelKey: 'nav.cv.title' },
-  { subdomain: 'contact', labelKey: 'nav.contact.title' },
-  { subdomain: 'rdv', labelKey: 'nav.rdv.title' },
+const navItems: { href: string; labelKey: TranslationKey }[] = [
+  { href: '/about', labelKey: 'nav.about.title' },
+  { href: '/blog', labelKey: 'nav.blog.title' },
+  { href: '/cv', labelKey: 'nav.cv.title' },
+  { href: '/contact', labelKey: 'nav.contact.title' },
+  { href: '/rdv', labelKey: 'nav.rdv.title' },
 ];
 
-const secondaryNavItems: { subdomain: ValidSubdomain; labelKey: 'nav.accessibility.title' | 'nav.sitemap.title' | 'nav.help.title' }[] = [
-  { subdomain: 'accessibility', labelKey: 'nav.accessibility.title' },
-  { subdomain: 'sitemap', labelKey: 'nav.sitemap.title' },
-  { subdomain: 'help', labelKey: 'nav.help.title' },
+const secondaryNavItems: { href: string; labelKey: TranslationKey }[] = [
+  { href: '/accessibility', labelKey: 'nav.accessibility.title' },
+  { href: '/sitemap', labelKey: 'nav.sitemap.title' },
+  { href: '/help', labelKey: 'nav.help.title' },
 ];
 
 export function HeaderNav() {
   const pathname = usePathname();
 
-  const items = navItems.map((item) => ({
-    href: getSubdomainUrl(item.subdomain),
-    labelKey: item.labelKey,
-  }));
-
-  const secondaryItems = secondaryNavItems.map((item) => ({
-    href: getSubdomainUrl(item.subdomain),
-    labelKey: item.labelKey,
-  }));
-
-  return <Header homeUrl={getBaseUrl()} navItems={items} secondaryNavItems={secondaryItems} currentPath={pathname} />;
+  return <Header homeUrl="/" navItems={navItems} secondaryNavItems={secondaryNavItems} currentPath={pathname} />;
 }
