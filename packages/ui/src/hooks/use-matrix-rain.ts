@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useCallback } from 'react';
+import { NORD_14 } from '../constants/nord-colors';
 
 interface UseMatrixRainOptions {
   isActive: boolean;
@@ -17,7 +18,7 @@ export function useMatrixRain({
   isActive,
   canvasRef,
   fontSize = 14,
-  color = '#A3BE8C', // nord14 - green
+  color = NORD_14,
 }: UseMatrixRainOptions) {
   const animationRef = useRef<number | null>(null);
   const dropsRef = useRef<number[]>([]);

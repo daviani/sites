@@ -45,3 +45,11 @@ export { useMatrixRain } from './hooks/use-matrix-rain';
 export { Confetti } from './components/Confetti';
 
 export { MatrixRain } from './components/MatrixRain';
+
+export {
+  NORD_0, NORD_1, NORD_2, NORD_3,
+  NORD_4, NORD_5, NORD_6,
+  NORD_7, NORD_8, NORD_9, NORD_10,
+  NORD_11, NORD_12, NORD_13, NORD_14, NORD_15,
+  NORD, NORD_AURORA,
+} from './constants/nord-colors';
