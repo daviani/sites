@@ -36,7 +36,7 @@
     "zod": "^4.1.13"
   },
   "devDependencies": {
-    "@daviani/config": "workspace:*",
+    "@nordic-island/config": "workspace:*",
     "@eslint/eslintrc": "^3.3.3",
     "@tailwindcss/postcss": "^4.0.0",
     "@testing-library/jest-dom": "^6.9.1",

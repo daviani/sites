@@ -142,20 +142,20 @@ test.describe('Footer Navigation Journey', () => {
     // Scroll to footer
     await page.locator('footer').scrollIntoViewIfNeeded();
 
-    // Check legal page link (footer has desktop + mobile variants)
-    const legalLink = page.locator('footer a[href="/legal"]').first();
+    // Check legal page link (footer has desktop + mobile variants, target visible one)
+    const legalLink = page.locator('footer a[href="/legal"]').and(page.locator(':visible'));
     if ((await legalLink.count()) > 0) {
-      await legalLink.click();
+      await legalLink.first().click();
       await expect(page).toHaveURL(/\/legal/);
     }
 
     // Go back
     await page.goBack();
 
-    // Check accessibility page link (footer has desktop + mobile variants)
-    const a11yLink = page.locator('footer a[href="/accessibility"]').first();
+    // Check accessibility page link (only in desktop footer layout)
+    const a11yLink = page.locator('footer a[href="/accessibility"]').and(page.locator(':visible'));
     if ((await a11yLink.count()) > 0) {
-      await a11yLink.click();
+      await a11yLink.first().click();
       await expect(page).toHaveURL(/\/accessibility/);
     }
   });
