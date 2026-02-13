@@ -2,33 +2,32 @@
 
 import { useTheme } from '../hooks/use-theme';
 import { useTranslation } from '../hooks/use-translation';
+import { IconButton } from './IconButton';
 
 export function DarkModeToggle() {
   const { theme, toggleTheme, mounted } = useTheme();
   const { t } = useTranslation();
 
-  // Common button styles for consistency with LanguageSwitcher
-  const buttonStyles =
-    'p-2 rounded-full transition-all hover:scale-105 hover:bg-nord-5 dark:hover:bg-nord-2 focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2 dark:focus:ring-offset-nord-0 cursor-pointer';
-
   if (!mounted) {
     return (
-      <button
-        className="p-2 rounded-full text-nord-3 dark:text-nord-4 opacity-50"
+      <IconButton
+        className="text-nord-3 dark:text-nord-4"
         aria-label={t('darkMode.switchToDark')}
         disabled
       >
         <span className="w-6 h-6 block" />
-      </button>
+      </IconButton>
     );
   }
 
+  const label = theme === 'light' ? t('darkMode.switchToDark') : t('darkMode.switchToLight');
+
   return (
-    <button
+    <IconButton
       onClick={toggleTheme}
-      className={`${buttonStyles} text-nord-3 dark:text-nord-8`}
-      aria-label={theme === 'light' ? t('darkMode.switchToDark') : t('darkMode.switchToLight')}
-      title={theme === 'light' ? t('darkMode.switchToDark') : t('darkMode.switchToLight')}
+      className="text-nord-3 dark:text-nord-8"
+      aria-label={label}
+      title={label}
     >
       {theme === 'light' ? (
         // Moon icon for dark mode
@@ -65,6 +64,6 @@ export function DarkModeToggle() {
           />
         </svg>
       )}
-    </button>
+    </IconButton>
   );
 }
