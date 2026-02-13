@@ -7,6 +7,8 @@ export type { CardProps } from './components/Card';
 export { Header } from './components/Header';
 export type { HeaderProps } from './components/Header';
 
+export { IconButton } from './components/IconButton';
+
 export { DarkModeToggle } from './components/DarkModeToggle';
 
 export { LanguageSwitcher } from './components/LanguageSwitcher';
