@@ -21,7 +21,7 @@ export function SubHeader({ items, currentPath, showSeparators = false }: SubHea
   const inactiveStyles =
     'text-nord-3 dark:text-nord-4 hover:text-nord-0 dark:hover:text-nord-6 hover:bg-nord-5 dark:hover:bg-nord-2';
   const activeStyles =
-    'text-nord-0 dark:text-nord-6 bg-nord-5 dark:bg-nord-2';
+    'text-nord-0 dark:text-nord-8 bg-nord-5 dark:bg-nord-1 font-semibold';
 
   return (
     <nav

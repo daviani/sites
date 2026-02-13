@@ -20,10 +20,6 @@ vi.mock('@daviani/ui', () => ({
   ),
 }));
 
-vi.mock('@/lib/domains/config', () => ({
-  getSubdomainUrl: (subdomain: string) => `https://${subdomain}.daviani.dev`,
-}));
-
 describe('HeroSection', () => {
   it('renders the title', () => {
     render(<HeroSection />);
@@ -57,19 +53,19 @@ describe('HeroSection', () => {
     expect(logo).toHaveAttribute('height', '120');
   });
 
-  it('renders contact CTA button', () => {
+  it('renders contact CTA button with correct route', () => {
     render(<HeroSection />);
 
     const contactLink = screen.getByRole('link', { name: 'Me contacter' });
     expect(contactLink).toBeInTheDocument();
-    expect(contactLink).toHaveAttribute('href', 'https://contact.daviani.dev');
+    expect(contactLink).toHaveAttribute('href', '/contact');
   });
 
-  it('renders CV CTA button', () => {
+  it('renders CV CTA button with correct route', () => {
     render(<HeroSection />);
 
     const cvLink = screen.getByRole('link', { name: 'Voir mon CV' });
     expect(cvLink).toBeInTheDocument();
-    expect(cvLink).toHaveAttribute('href', 'https://cv.daviani.dev');
+    expect(cvLink).toHaveAttribute('href', '/cv');
   });
 });

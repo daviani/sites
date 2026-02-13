@@ -43,10 +43,6 @@ vi.mock('@daviani/ui', () => ({
   ),
 }));
 
-vi.mock('@/lib/domains/config', () => ({
-  getSubdomainUrl: (subdomain: string) => `https://${subdomain}.localhost`,
-}));
-
 describe('AboutPageClient', () => {
   it('renders page title', () => {
     render(<AboutPageClient />);
@@ -77,24 +73,24 @@ describe('AboutPageClient', () => {
     expect(screen.getByText('Prendre RDV')).toBeInTheDocument();
   });
 
-  it('contact link points to contact subdomain', () => {
+  it('contact link points to /contact route', () => {
     render(<AboutPageClient />);
 
     const contactLink = screen.getByText('Me contacter').closest('a');
-    expect(contactLink).toHaveAttribute('href', 'https://contact.localhost');
+    expect(contactLink).toHaveAttribute('href', '/contact');
   });
 
-  it('RDV link points to rdv subdomain', () => {
+  it('RDV link points to /rdv route', () => {
     render(<AboutPageClient />);
 
     const rdvLink = screen.getByText('Prendre RDV').closest('a');
-    expect(rdvLink).toHaveAttribute('href', 'https://rdv.localhost');
+    expect(rdvLink).toHaveAttribute('href', '/rdv');
   });
 
-  it('photos link is present in breathe section', () => {
+  it('photos link points to /photos route', () => {
     render(<AboutPageClient />);
 
     const photosLink = screen.getByText('photos');
-    expect(photosLink).toHaveAttribute('href', 'https://photos.localhost');
+    expect(photosLink).toHaveAttribute('href', '/photos');
   });
 });

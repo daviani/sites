@@ -1,32 +1,18 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { SubHeader } from '@daviani/ui';
-import { getSubdomainUrl, ValidSubdomain } from '@/lib/domains/config';
+import { SubHeader, TranslationKey } from '@daviani/ui';
 
-const navItems: {
-  subdomain: ValidSubdomain;
-  labelKey:
-    | 'nav.about.title'
-    | 'nav.blog.title'
-    | 'nav.cv.title'
-    | 'nav.contact.title'
-    | 'nav.rdv.title';
-}[] = [
-  { subdomain: 'about', labelKey: 'nav.about.title' },
-  { subdomain: 'blog', labelKey: 'nav.blog.title' },
-  { subdomain: 'cv', labelKey: 'nav.cv.title' },
-  { subdomain: 'contact', labelKey: 'nav.contact.title' },
-  { subdomain: 'rdv', labelKey: 'nav.rdv.title' },
+const navItems: { href: string; labelKey: TranslationKey }[] = [
+  { href: '/about', labelKey: 'nav.about.title' },
+  { href: '/blog', labelKey: 'nav.blog.title' },
+  { href: '/cv', labelKey: 'nav.cv.title' },
+  { href: '/contact', labelKey: 'nav.contact.title' },
+  { href: '/rdv', labelKey: 'nav.rdv.title' },
 ];
 
 export function SubHeaderNav() {
   const pathname = usePathname();
 
-  const items = navItems.map((item) => ({
-    href: getSubdomainUrl(item.subdomain),
-    labelKey: item.labelKey,
-  }));
-
-  return <SubHeader items={items} currentPath={pathname} showSeparators />;
+  return <SubHeader items={navItems} currentPath={pathname} showSeparators />;
 }
