@@ -132,7 +132,9 @@ describe('useTheme', () => {
   });
 
   it('reads stored theme from cookie on mount', async () => {
+    // Simulate the blocking script having already applied .dark
     document.cookie = 'theme=dark';
+    document.documentElement.classList.add('dark');
 
     const { result } = renderHook(() => useTheme(), { wrapper });
 
@@ -158,7 +160,10 @@ describe('useTheme', () => {
   });
 
   it('respects system preference when no cookie is set', async () => {
-    // Mock system preference as dark
+    // Simulate the blocking script having detected prefers-color-scheme: dark
+    // and already applied .dark to <html>
+    document.documentElement.classList.add('dark');
+
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
       value: vi.fn().mockImplementation((query: string) => ({
