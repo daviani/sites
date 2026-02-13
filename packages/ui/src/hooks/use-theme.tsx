@@ -1,7 +1,6 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState, ReactNode, useCallback } from 'react';
-import { getCookieDomain } from '../utils/cookies';
 
 export type Theme = 'light' | 'dark';
 
@@ -42,13 +41,8 @@ function getStoredTheme(): Theme | null {
 }
 
 function setThemeCookie(theme: Theme) {
-  const domain = getCookieDomain();
   const maxAge = 365 * 24 * 60 * 60; // 1 an
-  let cookieStr = `${THEME_COOKIE_NAME}=${theme}; path=/; max-age=${maxAge}; SameSite=Lax`;
-  if (domain) {
-    cookieStr += `; domain=${domain}`;
-  }
-  document.cookie = cookieStr;
+  document.cookie = `${THEME_COOKIE_NAME}=${theme}; path=/; max-age=${maxAge}; SameSite=Lax`;
 }
 
 function getInitialTheme(): Theme {

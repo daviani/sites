@@ -1,6 +1,7 @@
 'use client';
 
-import { useTranslation, Breadcrumb } from '@nordic-island/ui';
+import { Breadcrumb } from '@nordic-island/ui';
+import { useTranslation } from '@/hooks/use-translation';
 
 export default function AboutPageClient() {
   const { t } = useTranslation();
@@ -9,7 +10,7 @@ export default function AboutPageClient() {
     <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-4 pt-5 pb-16">
         <div className="mb-8">
-          <Breadcrumb items={[{ href: '/about', labelKey: 'nav.about.title' }]} />
+          <Breadcrumb items={[{ href: '/about', label: t('nav.about.title') }]} homeLabel={t('common.home')} ariaLabel={t('common.breadcrumb')} />
         </div>
 
         <div className="text-center mb-12">

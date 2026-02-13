@@ -1,18 +1,22 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { SubHeader, TranslationKey } from '@nordic-island/ui';
+import { SubHeader } from '@nordic-island/ui';
+import { useTranslation } from '@/hooks/use-translation';
 
-const navItems: { href: string; labelKey: TranslationKey }[] = [
-  { href: '/about', labelKey: 'nav.about.title' },
-  { href: '/blog', labelKey: 'nav.blog.title' },
-  { href: '/cv', labelKey: 'nav.cv.title' },
-  { href: '/contact', labelKey: 'nav.contact.title' },
-  { href: '/rdv', labelKey: 'nav.rdv.title' },
+const navKeys = [
+  { href: '/about', key: 'nav.about.title' as const },
+  { href: '/blog', key: 'nav.blog.title' as const },
+  { href: '/cv', key: 'nav.cv.title' as const },
+  { href: '/contact', key: 'nav.contact.title' as const },
+  { href: '/rdv', key: 'nav.rdv.title' as const },
 ];
 
 export function SubHeaderNav() {
   const pathname = usePathname();
+  const { t } = useTranslation();
 
-  return <SubHeader items={navItems} currentPath={pathname} showSeparators />;
+  const navItems = navKeys.map((item) => ({ href: item.href, label: t(item.key) }));
+
+  return <SubHeader items={navItems} currentPath={pathname} showSeparators ariaLabel={t('footer.navigation')} />;
 }

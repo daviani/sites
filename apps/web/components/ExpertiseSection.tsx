@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslation } from '@nordic-island/ui';
+import { useTranslation } from '@/hooks/use-translation';
 
 const expertiseItems = [
   { key: 'fullstack', icon: CodeIcon },

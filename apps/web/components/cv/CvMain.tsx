@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslation } from '@nordic-island/ui';
+import { useTranslation } from '@/hooks/use-translation';
 import type { LocalizedCvData } from '@/lib/content/cv-keystatic';
 
 interface CvMainProps {

@@ -3,6 +3,7 @@
 import { createContext, useContext, useState, useCallback, ReactNode, useMemo } from 'react';
 import { useKonamiCode, Confetti, MatrixRain } from '@nordic-island/ui';
 import { useConsoleMessage } from '@/hooks/use-console-message';
+import { useTranslation } from '@/hooks/use-translation';
 
 interface EasterEggContextType {
   triggerConfetti: () => void;
@@ -19,6 +20,7 @@ interface EasterEggProviderProps {
 }
 
 export function EasterEggProvider({ children, enabled = true }: EasterEggProviderProps) {
+  const { t } = useTranslation();
   const [isConfettiActive, setIsConfettiActive] = useState(false);
   const [isMatrixActive, setIsMatrixActive] = useState(false);
   const [konamiCount, setKonamiCount] = useState(0);
@@ -81,7 +83,7 @@ export function EasterEggProvider({ children, enabled = true }: EasterEggProvide
     <EasterEggContext.Provider value={value}>
       {children}
       <Confetti isActive={isConfettiActive} onComplete={handleConfettiComplete} />
-      <MatrixRain isActive={isMatrixActive} onClose={handleMatrixClose} />
+      <MatrixRain isActive={isMatrixActive} onClose={handleMatrixClose} closeHint={t('easterEggs.matrix.closeHint')} />
     </EasterEggContext.Provider>
   );
 }

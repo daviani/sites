@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { HeroSection } from '@/components/HeroSection';
 
-vi.mock('@nordic-island/ui', () => ({
+vi.mock('@/hooks/use-translation', () => ({
   useTranslation: () => ({
     t: (key: string) => {
       const translations: Record<string, string> = {
@@ -15,6 +15,9 @@ vi.mock('@nordic-island/ui', () => ({
       return translations[key] || key;
     },
   }),
+}));
+
+vi.mock('@nordic-island/ui', () => ({
   OwlLogo: ({ size }: { size: number }) => (
     <svg data-testid="owl-logo" width={size} height={size} />
   ),

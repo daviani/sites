@@ -1,29 +1,12 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { SubHeader } from '../../src/components/SubHeader';
 
-// Mock useTranslation hook
-vi.mock('../../src/hooks/use-translation', () => ({
-  useTranslation: () => ({
-    t: (key: string) => {
-      const translations: Record<string, string> = {
-        'footer.navigation': 'Navigation principale',
-        'nav.blog.title': 'Blog',
-        'nav.contact.title': 'Contact',
-        'nav.about.title': 'À propos',
-        'nav.cv.title': 'CV',
-      };
-      return translations[key] || key;
-    },
-  }),
-  TranslationKey: {},
-}));
-
 describe('SubHeader', () => {
   const defaultItems = [
-    { href: '/blog', labelKey: 'nav.blog.title' as const },
-    { href: '/contact', labelKey: 'nav.contact.title' as const },
-    { href: '/about', labelKey: 'nav.about.title' as const },
+    { href: '/blog', label: 'Blog' },
+    { href: '/contact', label: 'Contact' },
+    { href: '/about', label: 'À propos' },
   ];
 
   describe('rendering', () => {
@@ -34,7 +17,7 @@ describe('SubHeader', () => {
     });
 
     it('has correct aria-label', () => {
-      render(<SubHeader items={defaultItems} currentPath="/" />);
+      render(<SubHeader items={defaultItems} currentPath="/" ariaLabel="Navigation principale" />);
       const nav = screen.getByRole('navigation');
       expect(nav).toHaveAttribute('aria-label', 'Navigation principale');
     });

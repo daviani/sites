@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, ReactNode } from 'react';
-import { useRecaptcha, useTranslation } from '@nordic-island/ui';
+import { useRecaptcha } from '@nordic-island/ui';
+import { useTranslation } from '@/hooks/use-translation';
 
 interface ConsentGateProps {
   children: ReactNode;

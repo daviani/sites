@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslation } from '@nordic-island/ui';
+import { useTranslation } from '@/hooks/use-translation';
 import Image from 'next/image';
 import type { LocalizedCvData } from '@/lib/content/cv-keystatic';
 

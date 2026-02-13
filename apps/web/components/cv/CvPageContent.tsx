@@ -1,6 +1,7 @@
 'use client';
 
-import { useTranslation, Breadcrumb } from '@nordic-island/ui';
+import { Breadcrumb } from '@nordic-island/ui';
+import { useTranslation } from '@/hooks/use-translation';
 import { CvLayout } from './CvLayout';
 import { CvDownloadButton } from './CvDownloadButton';
 import type { LocalizedCvData } from '@/lib/content/cv-keystatic';
@@ -23,7 +24,7 @@ export function CvPageContent({ cvDataFr, cvDataEn, skillsByCategory }: CvPageCo
     <div className="min-h-screen">
       <div className="mx-auto max-w-5xl px-4 pb-16 pt-5">
         <div className="mb-8">
-          <Breadcrumb items={[{ href: '/cv', labelKey: 'nav.cv.title' }]} />
+          <Breadcrumb items={[{ href: '/cv', label: t('nav.cv.title') }]} homeLabel={t('common.home')} ariaLabel={t('common.breadcrumb')} />
         </div>
         <div className="mb-6 text-center">
           <h1 className="mb-3 text-4xl font-bold text-nord-0 md:text-5xl dark:text-nord-6">

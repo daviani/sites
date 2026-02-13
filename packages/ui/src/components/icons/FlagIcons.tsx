@@ -1,10 +1,12 @@
-import { SVGProps } from 'react';
+import { SVGProps, useId } from 'react';
 
 interface FlagProps extends SVGProps<SVGSVGElement> {
   size?: number;
 }
 
 export function FlagFR({ size = 24, className, ...props }: FlagProps) {
+  const clipId = useId();
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -16,12 +18,12 @@ export function FlagFR({ size = 24, className, ...props }: FlagProps) {
       {...props}
     >
       <defs>
-        <clipPath id="circle-fr">
+        <clipPath id={clipId}>
           <circle cx="100" cy="100" r="100" />
         </clipPath>
       </defs>
 
-      <g clipPath="url(#circle-fr)">
+      <g clipPath={`url(#${clipId})`}>
         {/* Blue - Nord Frost */}
         <rect x="0" y="0" width="67" height="200" fill="#5E81AC" />
         {/* White - Nord Snow */}
@@ -34,6 +36,8 @@ export function FlagFR({ size = 24, className, ...props }: FlagProps) {
 }
 
 export function FlagEN({ size = 24, className, ...props }: FlagProps) {
+  const clipId = useId();
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -45,12 +49,12 @@ export function FlagEN({ size = 24, className, ...props }: FlagProps) {
       {...props}
     >
       <defs>
-        <clipPath id="circle-uk">
+        <clipPath id={clipId}>
           <circle cx="100" cy="100" r="96" />
         </clipPath>
       </defs>
 
-      <g clipPath="url(#circle-uk)">
+      <g clipPath={`url(#${clipId})`}>
         {/* Blue background - Nord Frost (darker for visibility) */}
         <circle cx="100" cy="100" r="96" fill="#5E81AC" />
 

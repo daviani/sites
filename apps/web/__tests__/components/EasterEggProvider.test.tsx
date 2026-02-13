@@ -14,7 +14,13 @@ vi.mock('@nordic-island/ui', () => ({
   ),
 }));
 
-vi.mock('../../hooks/use-console-message', () => ({
+vi.mock('@/hooks/use-translation', () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
+
+vi.mock('@/hooks/use-console-message', () => ({
   useConsoleMessage: vi.fn(),
 }));
 
@@ -133,7 +139,7 @@ describe('EasterEggProvider', () => {
   describe('disabled state', () => {
     it('does not setup hooks when disabled', async () => {
       const { useKonamiCode } = await import('@nordic-island/ui');
-      const { useConsoleMessage } = await import('../../hooks/use-console-message');
+      const { useConsoleMessage } = await import('@/hooks/use-console-message');
 
       render(
         <EasterEggProvider enabled={false}>

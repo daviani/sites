@@ -3,11 +3,6 @@ import { renderHook, act, waitFor } from '@testing-library/react';
 import { ThemeProvider, useTheme } from '../../src/hooks/use-theme';
 import type { ReactNode } from 'react';
 
-// Mock getCookieDomain
-vi.mock('../../src/utils/cookies', () => ({
-  getCookieDomain: vi.fn(() => null),
-}));
-
 describe('useTheme', () => {
   const wrapper = ({ children }: { children: ReactNode }) => (
     <ThemeProvider>{children}</ThemeProvider>

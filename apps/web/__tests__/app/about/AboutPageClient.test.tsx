@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import AboutPageClient from '@/app/(site)/about/AboutPageClient';
 
-vi.mock('@nordic-island/ui', () => ({
+vi.mock('@/hooks/use-translation', () => ({
   useTranslation: () => ({
     t: (key: string) => {
       const translations: Record<string, string> = {
@@ -32,11 +32,14 @@ vi.mock('@nordic-island/ui', () => ({
       return translations[key] || key;
     },
   }),
-  Breadcrumb: ({ items }: { items: { href: string; labelKey: string }[] }) => (
+}));
+
+vi.mock('@nordic-island/ui', () => ({
+  Breadcrumb: ({ items }: { items: { href: string; label: string }[] }) => (
     <nav data-testid="breadcrumb">
       {items.map((item) => (
         <a key={item.href} href={item.href}>
-          {item.labelKey}
+          {item.label}
         </a>
       ))}
     </nav>
