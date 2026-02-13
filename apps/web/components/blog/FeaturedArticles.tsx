@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useTranslation, useLanguage } from '@daviani/ui';
+import { useTranslation, useLanguage } from '@nordic-island/ui';
 import type { Article } from '@/lib/content/blog';
 
 interface FeaturedArticleProps {

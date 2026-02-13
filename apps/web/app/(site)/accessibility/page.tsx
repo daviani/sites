@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslation, useLanguage, Breadcrumb } from '@daviani/ui';
+import { useTranslation, useLanguage, Breadcrumb } from '@nordic-island/ui';
 
 export default function AccessibilityPage() {
   const { t } = useTranslation();

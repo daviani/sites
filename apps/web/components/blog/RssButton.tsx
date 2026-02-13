@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslation } from '@daviani/ui';
+import { useTranslation } from '@nordic-island/ui';
 
 export function RssButton() {
   const { t } = useTranslation();

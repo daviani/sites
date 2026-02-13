@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { ArticleContent } from '@/components/blog/ArticleContent';
 
-vi.mock('@daviani/ui', () => ({
+vi.mock('@nordic-island/ui', () => ({
   useLanguage: () => ({
     language: 'fr',
     mounted: true,
@@ -83,7 +83,7 @@ describe('ArticleContent', () => {
 
 describe('ArticleContent - English', () => {
   beforeEach(() => {
-    vi.doMock('@daviani/ui', () => ({
+    vi.doMock('@nordic-island/ui', () => ({
       useLanguage: () => ({
         language: 'en',
         mounted: true,
@@ -92,6 +92,6 @@ describe('ArticleContent - English', () => {
   });
 
   afterEach(() => {
-    vi.doUnmock('@daviani/ui');
+    vi.doUnmock('@nordic-island/ui');
   });
 });

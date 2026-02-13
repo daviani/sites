@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
-import { useTranslation } from '@daviani/ui';
+import { useTranslation } from '@nordic-island/ui';
 import type { Photo } from './types';
 
 interface LightboxProps {

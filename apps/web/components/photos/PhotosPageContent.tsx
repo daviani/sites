@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect, useMemo } from 'react';
-import { useTranslation } from '@daviani/ui';
+import { useTranslation } from '@nordic-island/ui';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Lightbox } from './Lightbox';
 import { MasonryGrid } from './MasonryGrid';

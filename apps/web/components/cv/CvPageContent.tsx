@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslation, Breadcrumb } from '@daviani/ui';
+import { useTranslation, Breadcrumb } from '@nordic-island/ui';
 import { CvLayout } from './CvLayout';
 import { CvDownloadButton } from './CvDownloadButton';
 import type { LocalizedCvData } from '@/lib/content/cv-keystatic';

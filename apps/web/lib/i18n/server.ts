@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
-import fr from '@daviani/ui/locales/fr';
-import en from '@daviani/ui/locales/en';
+import fr from '@nordic-island/ui/locales/fr';
+import en from '@nordic-island/ui/locales/en';
 
 export type Language = 'fr' | 'en';
 

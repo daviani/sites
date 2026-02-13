@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import AboutPageClient from '@/app/(site)/about/AboutPageClient';
 
-vi.mock('@daviani/ui', () => ({
+vi.mock('@nordic-island/ui', () => ({
   useTranslation: () => ({
     t: (key: string) => {
       const translations: Record<string, string> = {

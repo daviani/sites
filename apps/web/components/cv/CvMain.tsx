@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslation } from '@daviani/ui';
+import { useTranslation } from '@nordic-island/ui';
 import type { LocalizedCvData } from '@/lib/content/cv-keystatic';
 
 interface CvMainProps {

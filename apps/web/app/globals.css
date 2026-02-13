@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@source "../node_modules/@daviani/ui";
+@source "../node_modules/@nordic-island/ui";
 
 /* Dark mode basé sur la classe .dark au lieu de prefers-color-scheme */
 @custom-variant dark (&:where(.dark, .dark *));

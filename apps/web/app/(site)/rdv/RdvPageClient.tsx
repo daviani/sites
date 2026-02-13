@@ -5,7 +5,7 @@ import {
   Breadcrumb,
   ConsentGate,
   CalendlyEmbed,
-} from '@daviani/ui';
+} from '@nordic-island/ui';
 
 export default function RdvPageClient() {
   const { t } = useTranslation();

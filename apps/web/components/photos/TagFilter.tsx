@@ -1,7 +1,7 @@
 'use client';
 
 import { memo } from 'react';
-import { useTranslation } from '@daviani/ui';
+import { useTranslation } from '@nordic-island/ui';
 import type { Tag } from './types';
 
 interface TagFilterProps {

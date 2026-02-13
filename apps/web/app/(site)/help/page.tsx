@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslation, TranslationKey, Breadcrumb } from '@daviani/ui';
+import { useTranslation, TranslationKey, Breadcrumb } from '@nordic-island/ui';
 
 export default function HelpPage() {
   const { t } = useTranslation();

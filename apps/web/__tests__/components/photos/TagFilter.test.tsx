@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { TagFilter } from '@/components/photos/TagFilter';
 
-vi.mock('@daviani/ui', () => ({
+vi.mock('@nordic-island/ui', () => ({
   useTranslation: () => ({
     t: (key: string) => {
       const translations: Record<string, string> = {

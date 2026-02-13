@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { CvPageContent } from '@/components/cv/CvPageContent';
 import type { LocalizedCvData } from '@/lib/content/cv-keystatic';
 
-vi.mock('@daviani/ui', () => ({
+vi.mock('@nordic-island/ui', () => ({
   useTranslation: () => ({
     t: (key: string) => {
       const translations: Record<string, string> = {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslation, Breadcrumb } from '@daviani/ui';
+import { useTranslation, Breadcrumb } from '@nordic-island/ui';
 
 const GITHUB_REPO_URL = 'https://github.com/daviani/daviani-dev';
 const LAST_UPDATE_DATE = '2025-12-05';

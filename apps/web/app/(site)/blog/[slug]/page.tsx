@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { getAllArticles, getArticleBySlug } from '@/lib/content/blog';
 import { Comments } from '@/components/blog/Comments';
 import { ArticleContent } from '@/components/blog/ArticleContent';
-import { Breadcrumb } from '@daviani/ui';
+import { Breadcrumb } from '@nordic-island/ui';
 import type { Metadata } from 'next';
 
 interface BlogPostProps {

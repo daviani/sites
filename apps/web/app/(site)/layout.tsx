@@ -1,4 +1,4 @@
-import { Footer, SkipLink, ScrollToTop } from "@daviani/ui";
+import { Footer, SkipLink, ScrollToTop } from "@nordic-island/ui";
 import { Providers } from "@/components/Providers";
 import { HeaderNav } from "@/components/HeaderNav";
 import { SubHeaderNav } from "@/components/SubHeaderNav";

@@ -1,7 +1,7 @@
 'use client';
 
-import { useTranslation } from '@daviani/ui';
-import { OwlLogo } from '@daviani/ui';
+import { useTranslation } from '@nordic-island/ui';
+import { OwlLogo } from '@nordic-island/ui';
 
 export function HeroSection() {
   const { t } = useTranslation();

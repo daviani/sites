@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useLanguage } from '@daviani/ui';
+import { useLanguage } from '@nordic-island/ui';
 import { MarkdocContent } from '@/lib/markdoc';
 import type { Article } from '@/lib/content/blog';
 

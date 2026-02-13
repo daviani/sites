@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect, useMemo } from 'react';
-import { useTranslation } from '@daviani/ui';
+import { useTranslation } from '@nordic-island/ui';
 
 export default function NotFound() {
   const { t } = useTranslation();
