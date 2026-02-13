@@ -51,20 +51,19 @@ function setThemeCookie(theme: Theme) {
   document.cookie = cookieStr;
 }
 
+function getInitialTheme(): Theme {
+  if (typeof document === 'undefined') return 'light';
+  // Sync with the blocking script that already applied .dark to <html>
+  return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+}
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>('light');
+  const [theme, setThemeState] = useState<Theme>(getInitialTheme);
   const [mounted, setMounted] = useState(false);
 
   // Initialize theme on mount
   useEffect(() => {
     setMounted(true);
-
-    const storedTheme = getStoredTheme();
-    const systemTheme = getSystemTheme();
-    const initialTheme = storedTheme || systemTheme;
-
-    setThemeState(initialTheme);
-    applyTheme(initialTheme);
   }, []);
 
   // Listen for system preference changes
