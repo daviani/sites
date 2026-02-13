@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { useTheme, useTranslation } from '@nordic-island/ui';
+import { useTheme } from '@nordic-island/ui';
+import { useTranslation } from '@/hooks/use-translation';
 
 const Giscus = dynamic(() => import('@giscus/react').then(mod => mod.default), {
   ssr: false,

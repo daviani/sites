@@ -67,8 +67,10 @@ export default async function BlogPost({ params }: BlogPostProps) {
         {/* Breadcrumb */}
         <div className="mb-8">
           <Breadcrumb
-            items={[{ href: '/blog', labelKey: 'nav.blog.title' }]}
+            items={[{ href: '/blog', label: 'Blog' }]}
             currentLabel={article.meta.titleFr}
+            homeLabel="Accueil"
+            ariaLabel="Fil d'Ariane"
           />
         </div>
 

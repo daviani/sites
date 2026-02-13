@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { CvPageContent } from '@/components/cv/CvPageContent';
 import type { LocalizedCvData } from '@/lib/content/cv-keystatic';
 
-vi.mock('@nordic-island/ui', () => ({
+vi.mock('@/hooks/use-translation', () => ({
   useTranslation: () => ({
     t: (key: string) => {
       const translations: Record<string, string> = {
@@ -15,11 +15,14 @@ vi.mock('@nordic-island/ui', () => ({
     },
     language: 'fr',
   }),
-  Breadcrumb: ({ items }: { items: { href: string; labelKey: string }[] }) => (
+}));
+
+vi.mock('@nordic-island/ui', () => ({
+  Breadcrumb: ({ items }: { items: { href: string; label: string }[] }) => (
     <nav data-testid="breadcrumb">
       {items.map((item) => (
         <a key={item.href} href={item.href}>
-          {item.labelKey}
+          {item.label}
         </a>
       ))}
     </nav>

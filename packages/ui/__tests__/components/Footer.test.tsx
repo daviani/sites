@@ -2,33 +2,26 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Footer } from '../../src/components/Footer';
 
-// Mock useTranslation hook
-vi.mock('../../src/hooks/use-translation', () => ({
-  useTranslation: () => ({
-    t: (key: string) => {
-      const translations: Record<string, string> = {
-        'footer.legalNotice': 'Mentions légales',
-        'footer.github': 'GitHub',
-        'footer.linkedin': 'LinkedIn',
-        'footer.navigation': 'Navigation',
-        'footer.infos': 'Informations',
-        'footer.links': 'Liens',
-        'footer.copyright': '© {year} Daviani. Tous droits réservés.',
-        'nav.sitemap.title': 'Plan du site',
-        'nav.help.title': 'Aide',
-        'nav.accessibility.title': 'Accessibilité',
-      };
-      return translations[key] || key;
-    },
-  }),
-}));
-
 describe('Footer', () => {
+  const defaultTranslations = {
+    legalNotice: 'Mentions légales',
+    github: 'GitHub',
+    linkedin: 'LinkedIn',
+    navigation: 'Navigation',
+    infos: 'Informations',
+    links: 'Liens',
+    copyright: '© {year} Daviani. Tous droits réservés.',
+    sitemap: 'Plan du site',
+    help: 'Aide',
+    accessibility: 'Accessibilité',
+  };
+
   const defaultProps = {
     legalUrl: '/legal',
     accessibilityUrl: '/accessibility',
     githubUrl: 'https://github.com/daviani',
     linkedinUrl: 'https://linkedin.com/in/daviani',
+    translations: defaultTranslations,
   };
 
   beforeEach(() => {
@@ -94,12 +87,18 @@ describe('Footer', () => {
 
     it('does not render sitemap link when not provided', () => {
       render(<Footer {...defaultProps} />);
-      expect(screen.queryByText('Plan du site')).not.toBeInTheDocument();
+      // sitemap text only appears if sitemapUrl is also provided
+      const sitemapLinks = screen.queryAllByText('Plan du site');
+      // Without sitemapUrl prop, the link should not render even if translation exists
+      const sitemapAnchors = sitemapLinks.filter(el => el.closest('a'));
+      expect(sitemapAnchors).toHaveLength(0);
     });
 
     it('does not render help link when not provided', () => {
       render(<Footer {...defaultProps} />);
-      expect(screen.queryByText('Aide')).not.toBeInTheDocument();
+      const helpLinks = screen.queryAllByText('Aide');
+      const helpAnchors = helpLinks.filter(el => el.closest('a'));
+      expect(helpAnchors).toHaveLength(0);
     });
   });
 

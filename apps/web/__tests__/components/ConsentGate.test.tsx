@@ -2,12 +2,9 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { ConsentGate } from '../../components/ConsentGate';
 
-// Mock @nordic-island/ui hooks
+// Mock hooks
 const mockExecute = vi.fn();
-vi.mock('@nordic-island/ui', () => ({
-  useRecaptcha: () => ({
-    execute: mockExecute,
-  }),
+vi.mock('@/hooks/use-translation', () => ({
   useTranslation: () => ({
     t: (key: string) => {
       const translations: Record<string, string> = {
@@ -17,6 +14,12 @@ vi.mock('@nordic-island/ui', () => ({
       };
       return translations[key] || key;
     },
+  }),
+}));
+
+vi.mock('@nordic-island/ui', () => ({
+  useRecaptcha: () => ({
+    execute: mockExecute,
   }),
 }));
 

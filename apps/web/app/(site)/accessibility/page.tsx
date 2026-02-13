@@ -1,6 +1,8 @@
 'use client';
 
-import { useTranslation, useLanguage, Breadcrumb } from '@nordic-island/ui';
+import { Breadcrumb } from '@nordic-island/ui';
+import { useTranslation } from '@/hooks/use-translation';
+import { useLanguage } from '@/hooks/use-language';
 
 export default function AccessibilityPage() {
   const { t } = useTranslation();
@@ -27,7 +29,7 @@ export default function AccessibilityPage() {
     <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-4 pt-5 pb-16">
         <div className="mb-8">
-          <Breadcrumb items={[{ href: '/accessibility', labelKey: 'nav.accessibility.title' }]} />
+          <Breadcrumb items={[{ href: '/accessibility', label: t('nav.accessibility.title') }]} homeLabel={t('common.home')} ariaLabel={t('common.breadcrumb')} />
         </div>
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-nord-0 dark:text-nord-6">

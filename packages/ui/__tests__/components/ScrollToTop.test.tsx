@@ -2,18 +2,6 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ScrollToTop } from '../../src/components/ScrollToTop';
 
-// Mock useTranslation hook
-vi.mock('../../src/hooks/use-translation', () => ({
-  useTranslation: () => ({
-    t: (key: string) => {
-      const translations: Record<string, string> = {
-        'common.scrollToTop': 'Retour en haut',
-      };
-      return translations[key] || key;
-    },
-  }),
-}));
-
 describe('ScrollToTop', () => {
   let mockScrollY = 0;
   const mockScrollTo = vi.fn();
@@ -44,14 +32,14 @@ describe('ScrollToTop', () => {
   describe('visibility', () => {
     it('is hidden when scroll position is below 300px', () => {
       mockScrollY = 100;
-      render(<ScrollToTop />);
+      render(<ScrollToTop ariaLabel="Retour en haut" />);
       const button = screen.getByRole('button');
       expect(button.className).toContain('opacity-0');
       expect(button.className).toContain('pointer-events-none');
     });
 
     it('becomes visible when scroll exceeds 300px', () => {
-      render(<ScrollToTop />);
+      render(<ScrollToTop ariaLabel="Retour en haut" />);
 
       // Simulate scroll
       mockScrollY = 400;
@@ -63,7 +51,7 @@ describe('ScrollToTop', () => {
     });
 
     it('hides again when scrolled back up', () => {
-      render(<ScrollToTop />);
+      render(<ScrollToTop ariaLabel="Retour en haut" />);
 
       // Scroll down
       mockScrollY = 500;
@@ -81,7 +69,7 @@ describe('ScrollToTop', () => {
   describe('click behavior', () => {
     it('scrolls to top with smooth behavior by default', () => {
       mockScrollY = 500;
-      render(<ScrollToTop />);
+      render(<ScrollToTop ariaLabel="Retour en haut" />);
       fireEvent.scroll(window);
 
       const button = screen.getByRole('button');
@@ -97,7 +85,7 @@ describe('ScrollToTop', () => {
       mockMatchMedia.mockReturnValue({ matches: true });
       mockScrollY = 500;
 
-      render(<ScrollToTop />);
+      render(<ScrollToTop ariaLabel="Retour en haut" />);
       fireEvent.scroll(window);
 
       const button = screen.getByRole('button');
@@ -112,20 +100,20 @@ describe('ScrollToTop', () => {
 
   describe('accessibility', () => {
     it('has correct aria-label', () => {
-      render(<ScrollToTop />);
+      render(<ScrollToTop ariaLabel="Retour en haut" />);
       const button = screen.getByRole('button');
       expect(button).toHaveAttribute('aria-label', 'Retour en haut');
     });
 
     it('has proper focus styles', () => {
-      render(<ScrollToTop />);
+      render(<ScrollToTop ariaLabel="Retour en haut" />);
       const button = screen.getByRole('button');
       expect(button.className).toContain('focus:outline-none');
       expect(button.className).toContain('focus:ring-4');
     });
 
     it('contains an arrow icon', () => {
-      render(<ScrollToTop />);
+      render(<ScrollToTop ariaLabel="Retour en haut" />);
       const button = screen.getByRole('button');
       const svg = button.querySelector('svg');
       expect(svg).toBeInTheDocument();
@@ -135,19 +123,19 @@ describe('ScrollToTop', () => {
 
   describe('styling', () => {
     it('has fixed positioning', () => {
-      render(<ScrollToTop />);
+      render(<ScrollToTop ariaLabel="Retour en haut" />);
       const button = screen.getByRole('button');
       expect(button.className).toContain('fixed');
     });
 
     it('has correct z-index', () => {
-      render(<ScrollToTop />);
+      render(<ScrollToTop ariaLabel="Retour en haut" />);
       const button = screen.getByRole('button');
       expect(button.className).toContain('z-50');
     });
 
     it('has hover scale effect', () => {
-      render(<ScrollToTop />);
+      render(<ScrollToTop ariaLabel="Retour en haut" />);
       const button = screen.getByRole('button');
       expect(button.className).toContain('hover:scale-110');
     });
@@ -156,7 +144,7 @@ describe('ScrollToTop', () => {
   describe('cleanup', () => {
     it('removes scroll listener on unmount', () => {
       const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener');
-      const { unmount } = render(<ScrollToTop />);
+      const { unmount } = render(<ScrollToTop ariaLabel="Retour en haut" />);
 
       unmount();
 

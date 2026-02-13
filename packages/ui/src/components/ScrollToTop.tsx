@@ -1,10 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTranslation } from '../hooks/use-translation';
 
-export function ScrollToTop() {
-  const { t } = useTranslation();
+interface ScrollToTopProps {
+  ariaLabel: string;
+}
+
+export function ScrollToTop({ ariaLabel }: ScrollToTopProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -27,7 +29,7 @@ export function ScrollToTop() {
   return (
     <button
       onClick={scrollToTop}
-      aria-label={t('common.scrollToTop')}
+      aria-label={ariaLabel}
       className={`
         fixed bottom-[175px] md:bottom-[165px] right-[20px] z-50
         p-4 rounded-full cursor-pointer

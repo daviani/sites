@@ -12,7 +12,7 @@ const mockTranslation = {
   language: 'fr',
 };
 
-vi.mock('@nordic-island/ui', () => ({
+vi.mock('@/hooks/use-translation', () => ({
   useTranslation: () => mockTranslation,
 }));
 

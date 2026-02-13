@@ -1,14 +1,20 @@
 'use client';
 
-import { useLanguage } from '../hooks/use-language';
-import { useTranslation } from '../hooks/use-translation';
+import type { Language } from '../hooks/use-language';
 import { FlagFR, FlagEN } from './icons/FlagIcons';
 import { IconButton } from './IconButton';
 
-export function LanguageSwitcher() {
-  const { language, setLanguage, mounted } = useLanguage();
-  const { t } = useTranslation();
+interface LanguageSwitcherProps {
+  language: Language;
+  mounted: boolean;
+  onToggle: () => void;
+  labels: {
+    switchToEnglish: string;
+    switchToFrench: string;
+  };
+}
 
+export function LanguageSwitcher({ language, mounted, onToggle, labels }: LanguageSwitcherProps) {
   if (!mounted) {
     return (
       <IconButton disabled aria-label="Loading...">
@@ -17,18 +23,14 @@ export function LanguageSwitcher() {
     );
   }
 
-  const handleToggle = () => {
-    setLanguage(language === 'fr' ? 'en' : 'fr');
-  };
-
   // Show the flag of the OTHER language (the one you can switch to)
   const Flag = language === 'fr' ? FlagEN : FlagFR;
   const ariaLabel =
-    language === 'fr' ? t('common.english') : t('common.french');
+    language === 'fr' ? labels.switchToEnglish : labels.switchToFrench;
 
   return (
     <IconButton
-      onClick={handleToggle}
+      onClick={onToggle}
       aria-label={ariaLabel}
       title={ariaLabel}
     >

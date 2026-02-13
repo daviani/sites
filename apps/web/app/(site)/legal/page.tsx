@@ -1,6 +1,7 @@
 'use client';
 
-import { useTranslation, Breadcrumb } from '@nordic-island/ui';
+import { Breadcrumb } from '@nordic-island/ui';
+import { useTranslation } from '@/hooks/use-translation';
 
 const GITHUB_REPO_URL = 'https://github.com/daviani/daviani-dev';
 const LAST_UPDATE_DATE = '2025-12-05';
@@ -26,7 +27,7 @@ export default function LegalPage() {
     <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-4 pt-5 pb-16">
         <div className="mb-8">
-          <Breadcrumb items={[{ href: '/legal', labelKey: 'nav.legal.title' }]} />
+          <Breadcrumb items={[{ href: '/legal', label: t('nav.legal.title') }]} homeLabel={t('common.home')} ariaLabel={t('common.breadcrumb')} />
         </div>
 
         <div className="text-center mb-12">

@@ -1,6 +1,7 @@
 'use client';
 
-import { useTranslation, Breadcrumb } from '@nordic-island/ui';
+import { Breadcrumb } from '@nordic-island/ui';
+import { useTranslation } from '@/hooks/use-translation';
 import { ContactForm } from '@/components/ContactForm';
 import { submitContactForm } from './actions';
 
@@ -11,7 +12,7 @@ export default function ContactPageClient() {
     <div className="min-h-screen">
       <div className="max-w-2xl mx-auto px-4 pt-5 pb-16">
         <div className="mb-8">
-          <Breadcrumb items={[{ href: '/contact', labelKey: 'nav.contact.title' }]} />
+          <Breadcrumb items={[{ href: '/contact', label: t('nav.contact.title') }]} homeLabel={t('common.home')} ariaLabel={t('common.breadcrumb')} />
         </div>
 
         <div className="text-center mb-12">

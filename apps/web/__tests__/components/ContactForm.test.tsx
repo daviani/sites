@@ -3,16 +3,10 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ContactForm } from '../../components/ContactForm';
 
-// Mock useRecaptcha hook
+// Mock hooks
 const mockExecute = vi.fn();
 const mockLoad = vi.fn();
-vi.mock('@nordic-island/ui', () => ({
-  useRecaptcha: () => ({
-    execute: mockExecute,
-    load: mockLoad,
-    isLoaded: true,
-    isLoading: false,
-  }),
+vi.mock('@/hooks/use-translation', () => ({
   useTranslation: () => ({
     t: (key: string) => {
       const translations: Record<string, string> = {
@@ -33,6 +27,15 @@ vi.mock('@nordic-island/ui', () => ({
       };
       return translations[key] || key;
     },
+  }),
+}));
+
+vi.mock('@nordic-island/ui', () => ({
+  useRecaptcha: () => ({
+    execute: mockExecute,
+    load: mockLoad,
+    isLoaded: true,
+    isLoading: false,
   }),
 }));
 

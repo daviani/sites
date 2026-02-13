@@ -1,96 +1,57 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Header } from '../../src/components/Header';
 
-// Mock hooks
-vi.mock('../../src/hooks/use-theme', () => ({
-  useTheme: () => ({
-    theme: 'light',
-    toggleTheme: vi.fn(),
-    mounted: true,
-    setTheme: vi.fn(),
-  }),
-}));
-
-vi.mock('../../src/hooks/use-language', () => ({
-  useLanguage: () => ({
-    language: 'fr',
-    setLanguage: vi.fn(),
-    mounted: true,
-  }),
-  Language: {},
-}));
-
-vi.mock('../../src/hooks/use-translation', () => ({
-  useTranslation: () => ({
-    t: (key: string) => {
-      const translations: Record<string, string> = {
-        'common.openMenu': 'Ouvrir le menu',
-        'common.closeMenu': 'Fermer le menu',
-        'nav.blog.title': 'Blog',
-        'nav.contact.title': 'Contact',
-        'nav.about.title': 'À propos',
-        'nav.help.title': 'Aide',
-      };
-      return translations[key] || key;
-    },
-  }),
-  TranslationKey: {},
-}));
-
-// Mock child components
-vi.mock('../../src/components/DarkModeToggle', () => ({
-  DarkModeToggle: () => <button data-testid="dark-mode-toggle">Theme</button>,
-}));
-
-vi.mock('../../src/components/LanguageSwitcher', () => ({
-  LanguageSwitcher: () => <button data-testid="language-switcher">Lang</button>,
-}));
-
+// Mock OwlLogo
 vi.mock('../../src/components/OwlLogo', () => ({
   OwlLogo: ({ size }: { size: number }) => <svg data-testid="owl-logo" width={size} />,
 }));
 
 describe('Header', () => {
+  const defaultMenuLabels = {
+    open: 'Ouvrir le menu',
+    close: 'Fermer le menu',
+  };
+
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
   describe('rendering', () => {
     it('renders header element', () => {
-      render(<Header />);
+      render(<Header menuLabels={defaultMenuLabels} />);
       const header = document.querySelector('header');
       expect(header).toBeInTheDocument();
     });
 
     it('renders default logo with home link', () => {
-      render(<Header />);
+      render(<Header menuLabels={defaultMenuLabels} />);
       const homeLink = screen.getByLabelText(/Retour à l'accueil/i);
       expect(homeLink).toHaveAttribute('href', '/');
     });
 
     it('renders custom logo when provided', () => {
-      render(<Header logo={<div data-testid="custom-logo">Custom</div>} />);
+      render(<Header logo={<div data-testid="custom-logo">Custom</div>} menuLabels={defaultMenuLabels} />);
       expect(screen.getByTestId('custom-logo')).toBeInTheDocument();
     });
 
     it('uses custom homeUrl when provided', () => {
-      render(<Header homeUrl="/custom" />);
+      render(<Header homeUrl="/custom" menuLabels={defaultMenuLabels} />);
       const homeLink = screen.getByLabelText(/Retour à l'accueil/i);
       expect(homeLink).toHaveAttribute('href', '/custom');
     });
 
     it('applies custom className', () => {
-      render(<Header className="my-header" />);
+      render(<Header className="my-header" menuLabels={defaultMenuLabels} />);
       const header = document.querySelector('header');
       expect(header?.className).toContain('my-header');
     });
   });
 
   describe('desktop view', () => {
-    it('renders language switcher and dark mode toggle', () => {
-      render(<Header />);
-      // Both are rendered in desktop AND mobile views, but hidden/shown with CSS
+    it('renders actions in desktop area', () => {
+      const actions = <button data-testid="dark-mode-toggle">Theme</button>;
+      render(<Header actions={actions} menuLabels={defaultMenuLabels} />);
       const toggles = screen.getAllByTestId('dark-mode-toggle');
       expect(toggles.length).toBeGreaterThan(0);
     });
@@ -98,13 +59,13 @@ describe('Header', () => {
 
   describe('mobile menu', () => {
     it('renders hamburger button', () => {
-      render(<Header />);
+      render(<Header menuLabels={defaultMenuLabels} />);
       const button = screen.getByLabelText('Ouvrir le menu');
       expect(button).toBeInTheDocument();
     });
 
     it('opens menu when hamburger is clicked', () => {
-      render(<Header />);
+      render(<Header menuLabels={defaultMenuLabels} />);
       const button = screen.getByLabelText('Ouvrir le menu');
       fireEvent.click(button);
 
@@ -112,7 +73,7 @@ describe('Header', () => {
     });
 
     it('closes menu when close button is clicked', () => {
-      render(<Header />);
+      render(<Header menuLabels={defaultMenuLabels} />);
       const openButton = screen.getByLabelText('Ouvrir le menu');
       fireEvent.click(openButton);
 
@@ -123,7 +84,7 @@ describe('Header', () => {
     });
 
     it('has correct aria-expanded attribute', () => {
-      render(<Header />);
+      render(<Header menuLabels={defaultMenuLabels} />);
       const button = screen.getByLabelText('Ouvrir le menu');
       expect(button).toHaveAttribute('aria-expanded', 'false');
 
@@ -132,7 +93,7 @@ describe('Header', () => {
     });
 
     it('has aria-controls pointing to mobile menu', () => {
-      render(<Header />);
+      render(<Header menuLabels={defaultMenuLabels} />);
       const button = screen.getByLabelText('Ouvrir le menu');
       expect(button).toHaveAttribute('aria-controls', 'mobile-menu');
     });
@@ -140,12 +101,12 @@ describe('Header', () => {
 
   describe('navigation items', () => {
     const navItems = [
-      { href: '/blog', labelKey: 'nav.blog.title' as const },
-      { href: '/contact', labelKey: 'nav.contact.title' as const },
+      { href: '/blog', label: 'Blog' },
+      { href: '/contact', label: 'Contact' },
     ];
 
     it('renders navigation items in mobile menu', () => {
-      render(<Header navItems={navItems} />);
+      render(<Header navItems={navItems} menuLabels={defaultMenuLabels} />);
 
       // Open mobile menu
       const button = screen.getByLabelText('Ouvrir le menu');
@@ -156,7 +117,7 @@ describe('Header', () => {
     });
 
     it('marks current page with aria-current', () => {
-      render(<Header navItems={navItems} currentPath="/blog" />);
+      render(<Header navItems={navItems} currentPath="/blog" menuLabels={defaultMenuLabels} />);
 
       const button = screen.getByLabelText('Ouvrir le menu');
       fireEvent.click(button);
@@ -166,7 +127,7 @@ describe('Header', () => {
     });
 
     it('applies active styles to current page', () => {
-      render(<Header navItems={navItems} currentPath="/blog" />);
+      render(<Header navItems={navItems} currentPath="/blog" menuLabels={defaultMenuLabels} />);
 
       const button = screen.getByLabelText('Ouvrir le menu');
       fireEvent.click(button);
@@ -176,7 +137,7 @@ describe('Header', () => {
     });
 
     it('closes menu when nav item is clicked', () => {
-      render(<Header navItems={navItems} />);
+      render(<Header navItems={navItems} menuLabels={defaultMenuLabels} />);
 
       const button = screen.getByLabelText('Ouvrir le menu');
       fireEvent.click(button);
@@ -191,11 +152,11 @@ describe('Header', () => {
 
   describe('secondary navigation items', () => {
     const secondaryNavItems = [
-      { href: '/help', labelKey: 'nav.help.title' as const },
+      { href: '/help', label: 'Aide' },
     ];
 
     it('renders secondary navigation items with separator', () => {
-      render(<Header secondaryNavItems={secondaryNavItems} />);
+      render(<Header secondaryNavItems={secondaryNavItems} menuLabels={defaultMenuLabels} />);
 
       const button = screen.getByLabelText('Ouvrir le menu');
       fireEvent.click(button);
@@ -208,7 +169,7 @@ describe('Header', () => {
     it('closes menu when clicking outside header', () => {
       render(
         <div>
-          <Header />
+          <Header menuLabels={defaultMenuLabels} />
           <div data-testid="outside">Outside</div>
         </div>
       );
@@ -224,7 +185,7 @@ describe('Header', () => {
     });
 
     it('does not close when clicking inside header', () => {
-      render(<Header />);
+      render(<Header menuLabels={defaultMenuLabels} />);
 
       // Open menu
       const button = screen.getByLabelText('Ouvrir le menu');
@@ -241,19 +202,19 @@ describe('Header', () => {
 
   describe('accessibility', () => {
     it('has fixed position for visibility', () => {
-      render(<Header />);
+      render(<Header menuLabels={defaultMenuLabels} />);
       const header = document.querySelector('header');
       expect(header?.className).toContain('fixed');
     });
 
     it('has proper z-index', () => {
-      render(<Header />);
+      render(<Header menuLabels={defaultMenuLabels} />);
       const header = document.querySelector('header');
       expect(header?.className).toContain('z-50');
     });
 
     it('hamburger button has focus styles', () => {
-      render(<Header />);
+      render(<Header menuLabels={defaultMenuLabels} />);
       const button = screen.getByLabelText('Ouvrir le menu');
       expect(button.className).toContain('focus:outline-none');
       expect(button.className).toContain('focus:ring-2');

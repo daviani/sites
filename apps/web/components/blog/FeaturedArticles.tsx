@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useTranslation, useLanguage } from '@nordic-island/ui';
+import { useTranslation } from '@/hooks/use-translation';
+import { useLanguage } from '@/hooks/use-language';
 import type { Article } from '@/lib/content/blog';
 
 interface FeaturedArticleProps {

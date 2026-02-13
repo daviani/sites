@@ -1,14 +1,11 @@
 'use client';
 
 import { ReactNode, useState, useEffect, useRef } from 'react';
-import { DarkModeToggle } from './DarkModeToggle';
-import { LanguageSwitcher } from './LanguageSwitcher';
 import { OwlLogo } from './OwlLogo';
-import { useTranslation, TranslationKey } from '../hooks/use-translation';
 
 interface NavItem {
   href: string;
-  labelKey: TranslationKey;
+  label: string;
 }
 
 export interface HeaderProps {
@@ -18,10 +15,23 @@ export interface HeaderProps {
   navItems?: NavItem[];
   secondaryNavItems?: NavItem[];
   currentPath?: string;
+  actions?: ReactNode;
+  menuLabels?: {
+    open: string;
+    close: string;
+  };
 }
 
-export function Header({ logo, className = '', homeUrl = '/', navItems = [], secondaryNavItems = [], currentPath = '' }: HeaderProps) {
-  const { t } = useTranslation();
+export function Header({
+  logo,
+  className = '',
+  homeUrl = '/',
+  navItems = [],
+  secondaryNavItems = [],
+  currentPath = '',
+  actions,
+  menuLabels = { open: 'Open menu', close: 'Close menu' },
+}: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
@@ -71,8 +81,7 @@ export function Header({ logo, className = '', homeUrl = '/', navItems = [], sec
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-4">
-            <LanguageSwitcher />
-            <DarkModeToggle />
+            {actions}
           </div>
 
           {/* Mobile Hamburger Button */}
@@ -82,7 +91,7 @@ export function Header({ logo, className = '', homeUrl = '/', navItems = [], sec
               className="p-3 rounded-lg text-nord-3 dark:text-nord-4 hover:bg-nord-5 dark:hover:bg-nord-2 focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2 transition-colors"
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
-              aria-label={isOpen ? t('common.closeMenu') : t('common.openMenu')}
+              aria-label={isOpen ? menuLabels.close : menuLabels.open}
             >
               {isOpen ? (
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -113,7 +122,7 @@ export function Header({ logo, className = '', homeUrl = '/', navItems = [], sec
                         aria-current={isActive ? 'page' : undefined}
                         onClick={() => setIsOpen(false)}
                       >
-                        {t(item.labelKey)}
+                        {item.label}
                       </a>
                     </li>
                   );
@@ -134,7 +143,7 @@ export function Header({ logo, className = '', homeUrl = '/', navItems = [], sec
                         aria-current={isActive ? 'page' : undefined}
                         onClick={() => setIsOpen(false)}
                       >
-                        {t(item.labelKey)}
+                        {item.label}
                       </a>
                     </li>
                   );
@@ -144,8 +153,7 @@ export function Header({ logo, className = '', homeUrl = '/', navItems = [], sec
 
             {/* Theme & Language toggles */}
             <div className="flex items-center justify-center gap-4 mt-2 pt-2 border-t border-nord-3/30 dark:border-nord-4/30">
-              <LanguageSwitcher />
-              <DarkModeToggle />
+              {actions}
             </div>
           </div>
         )}

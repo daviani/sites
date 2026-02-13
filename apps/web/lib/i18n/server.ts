@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
-import fr from '@nordic-island/ui/locales/fr';
-import en from '@nordic-island/ui/locales/en';
+import fr from '@/locales/fr.json';
+import en from '@/locales/en.json';
 
 export type Language = 'fr' | 'en';
 

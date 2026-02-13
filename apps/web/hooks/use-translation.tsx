@@ -1,8 +1,8 @@
 'use client';
 
 import { useLanguage, Language } from './use-language';
-import fr from '../locales/fr.json';
-import en from '../locales/en.json';
+import fr from '@/locales/fr.json';
+import en from '@/locales/en.json';
 
 type Translations = typeof fr;
 

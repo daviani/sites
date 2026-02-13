@@ -1,24 +1,52 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { Header, TranslationKey } from '@nordic-island/ui';
+import { Header, DarkModeToggle, LanguageSwitcher } from '@nordic-island/ui';
+import { useTranslation } from '@/hooks/use-translation';
+import { useLanguage } from '@/hooks/use-language';
 
-const navItems: { href: string; labelKey: TranslationKey }[] = [
-  { href: '/about', labelKey: 'nav.about.title' },
-  { href: '/blog', labelKey: 'nav.blog.title' },
-  { href: '/cv', labelKey: 'nav.cv.title' },
-  { href: '/contact', labelKey: 'nav.contact.title' },
-  { href: '/rdv', labelKey: 'nav.rdv.title' },
+const navKeys = [
+  { href: '/about', key: 'nav.about.title' as const },
+  { href: '/blog', key: 'nav.blog.title' as const },
+  { href: '/cv', key: 'nav.cv.title' as const },
+  { href: '/contact', key: 'nav.contact.title' as const },
+  { href: '/rdv', key: 'nav.rdv.title' as const },
 ];
 
-const secondaryNavItems: { href: string; labelKey: TranslationKey }[] = [
-  { href: '/accessibility', labelKey: 'nav.accessibility.title' },
-  { href: '/sitemap', labelKey: 'nav.sitemap.title' },
-  { href: '/help', labelKey: 'nav.help.title' },
+const secondaryNavKeys = [
+  { href: '/accessibility', key: 'nav.accessibility.title' as const },
+  { href: '/sitemap', key: 'nav.sitemap.title' as const },
+  { href: '/help', key: 'nav.help.title' as const },
 ];
 
 export function HeaderNav() {
   const pathname = usePathname();
+  const { t } = useTranslation();
+  const { language, mounted, toggleLanguage } = useLanguage();
 
-  return <Header homeUrl="/" navItems={navItems} secondaryNavItems={secondaryNavItems} currentPath={pathname} />;
+  const navItems = navKeys.map((item) => ({ href: item.href, label: t(item.key) }));
+  const secondaryNavItems = secondaryNavKeys.map((item) => ({ href: item.href, label: t(item.key) }));
+
+  const actions = (
+    <>
+      <LanguageSwitcher
+        language={language}
+        mounted={mounted}
+        onToggle={toggleLanguage}
+        labels={{ switchToEnglish: t('common.english'), switchToFrench: t('common.french') }}
+      />
+      <DarkModeToggle labels={{ switchToDark: t('darkMode.switchToDark'), switchToLight: t('darkMode.switchToLight') }} />
+    </>
+  );
+
+  return (
+    <Header
+      homeUrl="/"
+      navItems={navItems}
+      secondaryNavItems={secondaryNavItems}
+      currentPath={pathname}
+      actions={actions}
+      menuLabels={{ open: t('common.openMenu'), close: t('common.closeMenu') }}
+    />
+  );
 }

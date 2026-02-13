@@ -28,7 +28,7 @@ export default function PhotosPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-24">
         {/* Breadcrumb */}
         <div className="mb-8">
-          <Breadcrumb items={[{ href: '/photos', labelKey: 'nav.photos.title' }]} />
+          <Breadcrumb items={[{ href: '/photos', label: 'Photos' }]} homeLabel="Accueil" ariaLabel="Fil d'Ariane" />
         </div>
 
         <PhotosPageContent photos={photos} tags={tags} />

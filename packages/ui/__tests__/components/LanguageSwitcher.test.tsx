@@ -2,34 +2,6 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { LanguageSwitcher } from '../../src/components/LanguageSwitcher';
 
-// Mock state
-const mockSetLanguage = vi.fn();
-let mockLanguage = 'fr';
-let mockMounted = true;
-
-// Mock useLanguage hook
-vi.mock('../../src/hooks/use-language', () => ({
-  useLanguage: () => ({
-    language: mockLanguage,
-    setLanguage: mockSetLanguage,
-    mounted: mockMounted,
-  }),
-  Language: {},
-}));
-
-// Mock useTranslation hook
-vi.mock('../../src/hooks/use-translation', () => ({
-  useTranslation: () => ({
-    t: (key: string) => {
-      const translations: Record<string, string> = {
-        'common.english': 'English',
-        'common.french': 'Français',
-      };
-      return translations[key] || key;
-    },
-  }),
-}));
-
 // Mock FlagIcons
 vi.mock('../../src/components/icons/FlagIcons', () => ({
   FlagFR: ({ size }: { size: number }) => (
@@ -40,46 +12,63 @@ vi.mock('../../src/components/icons/FlagIcons', () => ({
   ),
 }));
 
+const defaultLabels = {
+  switchToEnglish: 'English',
+  switchToFrench: 'Français',
+};
+
 describe('LanguageSwitcher', () => {
+  const mockOnToggle = vi.fn();
+
   beforeEach(() => {
     vi.clearAllMocks();
-    mockLanguage = 'fr';
-    mockMounted = true;
   });
 
   describe('when mounted with French language', () => {
     it('renders the toggle button', () => {
-      render(<LanguageSwitcher />);
+      render(
+        <LanguageSwitcher language="fr" mounted={true} onToggle={mockOnToggle} labels={defaultLabels} />
+      );
       const button = screen.getByRole('button');
       expect(button).toBeInTheDocument();
     });
 
     it('shows English flag (switch to English)', () => {
-      render(<LanguageSwitcher />);
+      render(
+        <LanguageSwitcher language="fr" mounted={true} onToggle={mockOnToggle} labels={defaultLabels} />
+      );
       expect(screen.getByTestId('flag-en')).toBeInTheDocument();
     });
 
     it('has correct aria-label', () => {
-      render(<LanguageSwitcher />);
+      render(
+        <LanguageSwitcher language="fr" mounted={true} onToggle={mockOnToggle} labels={defaultLabels} />
+      );
       const button = screen.getByRole('button');
       expect(button).toHaveAttribute('aria-label', 'English');
     });
 
-    it('switches to English when clicked', () => {
-      render(<LanguageSwitcher />);
+    it('calls onToggle when clicked', () => {
+      render(
+        <LanguageSwitcher language="fr" mounted={true} onToggle={mockOnToggle} labels={defaultLabels} />
+      );
       const button = screen.getByRole('button');
       fireEvent.click(button);
-      expect(mockSetLanguage).toHaveBeenCalledWith('en');
+      expect(mockOnToggle).toHaveBeenCalledTimes(1);
     });
 
     it('has title attribute matching aria-label', () => {
-      render(<LanguageSwitcher />);
+      render(
+        <LanguageSwitcher language="fr" mounted={true} onToggle={mockOnToggle} labels={defaultLabels} />
+      );
       const button = screen.getByRole('button');
       expect(button).toHaveAttribute('title', 'English');
     });
 
     it('has proper focus styles', () => {
-      render(<LanguageSwitcher />);
+      render(
+        <LanguageSwitcher language="fr" mounted={true} onToggle={mockOnToggle} labels={defaultLabels} />
+      );
       const button = screen.getByRole('button');
       expect(button.className).toContain('focus:outline-none');
       expect(button.className).toContain('focus:ring-2');
@@ -87,54 +76,60 @@ describe('LanguageSwitcher', () => {
   });
 
   describe('when mounted with English language', () => {
-    beforeEach(() => {
-      mockLanguage = 'en';
-    });
-
     it('shows French flag (switch to French)', () => {
-      render(<LanguageSwitcher />);
+      render(
+        <LanguageSwitcher language="en" mounted={true} onToggle={mockOnToggle} labels={defaultLabels} />
+      );
       expect(screen.getByTestId('flag-fr')).toBeInTheDocument();
     });
 
     it('has correct aria-label for English mode', () => {
-      render(<LanguageSwitcher />);
+      render(
+        <LanguageSwitcher language="en" mounted={true} onToggle={mockOnToggle} labels={defaultLabels} />
+      );
       const button = screen.getByRole('button');
       expect(button).toHaveAttribute('aria-label', 'Français');
     });
 
-    it('switches to French when clicked', () => {
-      render(<LanguageSwitcher />);
+    it('calls onToggle when clicked', () => {
+      render(
+        <LanguageSwitcher language="en" mounted={true} onToggle={mockOnToggle} labels={defaultLabels} />
+      );
       const button = screen.getByRole('button');
       fireEvent.click(button);
-      expect(mockSetLanguage).toHaveBeenCalledWith('fr');
+      expect(mockOnToggle).toHaveBeenCalledTimes(1);
     });
 
     it('has title attribute for English mode', () => {
-      render(<LanguageSwitcher />);
+      render(
+        <LanguageSwitcher language="en" mounted={true} onToggle={mockOnToggle} labels={defaultLabels} />
+      );
       const button = screen.getByRole('button');
       expect(button).toHaveAttribute('title', 'Français');
     });
   });
 
   describe('when not mounted (SSR)', () => {
-    beforeEach(() => {
-      mockMounted = false;
-    });
-
     it('renders disabled placeholder button', () => {
-      render(<LanguageSwitcher />);
+      render(
+        <LanguageSwitcher language="fr" mounted={false} onToggle={mockOnToggle} labels={defaultLabels} />
+      );
       const button = screen.getByRole('button');
       expect(button).toBeDisabled();
       expect(button).toHaveClass('opacity-50');
     });
 
     it('shows French flag as placeholder', () => {
-      render(<LanguageSwitcher />);
+      render(
+        <LanguageSwitcher language="fr" mounted={false} onToggle={mockOnToggle} labels={defaultLabels} />
+      );
       expect(screen.getByTestId('flag-fr')).toBeInTheDocument();
     });
 
     it('has loading aria-label', () => {
-      render(<LanguageSwitcher />);
+      render(
+        <LanguageSwitcher language="fr" mounted={false} onToggle={mockOnToggle} labels={defaultLabels} />
+      );
       const button = screen.getByRole('button');
       expect(button).toHaveAttribute('aria-label', 'Loading...');
     });
@@ -142,14 +137,18 @@ describe('LanguageSwitcher', () => {
 
   describe('accessibility', () => {
     it('button is keyboard accessible', () => {
-      render(<LanguageSwitcher />);
+      render(
+        <LanguageSwitcher language="fr" mounted={true} onToggle={mockOnToggle} labels={defaultLabels} />
+      );
       const button = screen.getByRole('button');
       button.focus();
       expect(document.activeElement).toBe(button);
     });
 
     it('has hover scale effect', () => {
-      render(<LanguageSwitcher />);
+      render(
+        <LanguageSwitcher language="fr" mounted={true} onToggle={mockOnToggle} labels={defaultLabels} />
+      );
       const button = screen.getByRole('button');
       expect(button.className).toContain('hover:scale-105');
     });

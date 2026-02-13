@@ -2,17 +2,16 @@
 
 import { useRef, useEffect, useCallback } from 'react';
 import { useMatrixRain } from '../hooks/use-matrix-rain';
-import { useTranslation } from '../hooks/use-translation';
 
 interface MatrixRainProps {
   isActive: boolean;
   onClose?: () => void;
   duration?: number;
+  closeHint?: string;
 }
 
-export function MatrixRain({ isActive, onClose, duration = 10000 }: MatrixRainProps) {
+export function MatrixRain({ isActive, onClose, duration = 10000, closeHint = 'Click or press Escape to close' }: MatrixRainProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { t } = useTranslation();
 
   useMatrixRain({
     isActive,
@@ -55,11 +54,11 @@ export function MatrixRain({ isActive, onClose, duration = 10000 }: MatrixRainPr
       role="button"
       tabIndex={0}
       onKeyDown={(e) => e.key === 'Enter' && handleClose()}
-      aria-label={t('easterEggs.matrix.closeHint')}
+      aria-label={closeHint}
     >
       <canvas ref={canvasRef} className="w-full h-full" />
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-green-400 font-mono text-sm animate-pulse">
-        {t('easterEggs.matrix.closeHint')}
+        {closeHint}
       </div>
     </div>
   );

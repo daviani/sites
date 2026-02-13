@@ -1,6 +1,7 @@
 'use client';
 
-import { useTranslation, Breadcrumb, CalendlyEmbed } from '@nordic-island/ui';
+import { Breadcrumb, CalendlyEmbed } from '@nordic-island/ui';
+import { useTranslation } from '@/hooks/use-translation';
 import { ConsentGate } from '@/components/ConsentGate';
 
 export default function RdvPageClient() {
@@ -11,7 +12,7 @@ export default function RdvPageClient() {
     <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-4 pt-5 pb-16">
         <div className="mb-8">
-          <Breadcrumb items={[{ href: '/rdv', labelKey: 'nav.rdv.title' }]} />
+          <Breadcrumb items={[{ href: '/rdv', label: t('nav.rdv.title') }]} homeLabel={t('common.home')} ariaLabel={t('common.breadcrumb')} />
         </div>
 
         <div className="text-center mb-12">

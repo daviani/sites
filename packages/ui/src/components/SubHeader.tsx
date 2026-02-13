@@ -1,21 +1,18 @@
 'use client';
 
-import { useTranslation, TranslationKey } from '../hooks/use-translation';
-
 interface NavItem {
   href: string;
-  labelKey: TranslationKey;
+  label: string;
 }
 
 interface SubHeaderProps {
   items: NavItem[];
   currentPath: string;
   showSeparators?: boolean;
+  ariaLabel?: string;
 }
 
-export function SubHeader({ items, currentPath, showSeparators = false }: SubHeaderProps) {
-  const { t } = useTranslation();
-
+export function SubHeader({ items, currentPath, showSeparators = false, ariaLabel = 'Navigation' }: SubHeaderProps) {
   const baseStyles =
     'px-4 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2';
   const inactiveStyles =
@@ -26,7 +23,7 @@ export function SubHeader({ items, currentPath, showSeparators = false }: SubHea
   return (
     <nav
       className="hidden md:block fixed top-[var(--height-header-offset)] left-[var(--spacing-edge)] right-[var(--spacing-edge)] z-40 glass-card"
-      aria-label={t('footer.navigation')}
+      aria-label={ariaLabel}
     >
       <div className="container mx-auto px-4">
         <ul className="flex items-center justify-center gap-1 py-2">
@@ -40,7 +37,7 @@ export function SubHeader({ items, currentPath, showSeparators = false }: SubHea
                   className={`${baseStyles} ${isActive ? activeStyles : inactiveStyles}`}
                   aria-current={isActive ? 'page' : undefined}
                 >
-                  {t(item.labelKey)}
+                  {item.label}
                 </a>
                 {showSeparators && !isLast && (
                   <span className="mx-1 text-nord-3 dark:text-nord-4" aria-hidden="true">

@@ -2,10 +2,12 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { ArticleContent } from '@/components/blog/ArticleContent';
 
-vi.mock('@nordic-island/ui', () => ({
+vi.mock('@/hooks/use-language', () => ({
   useLanguage: () => ({
     language: 'fr',
     mounted: true,
+    setLanguage: vi.fn(),
+    toggleLanguage: vi.fn(),
   }),
 }));
 
@@ -83,15 +85,17 @@ describe('ArticleContent', () => {
 
 describe('ArticleContent - English', () => {
   beforeEach(() => {
-    vi.doMock('@nordic-island/ui', () => ({
+    vi.doMock('@/hooks/use-language', () => ({
       useLanguage: () => ({
         language: 'en',
         mounted: true,
+        setLanguage: vi.fn(),
+        toggleLanguage: vi.fn(),
       }),
     }));
   });
 
   afterEach(() => {
-    vi.doUnmock('@nordic-island/ui');
+    vi.doUnmock('@/hooks/use-language');
   });
 });

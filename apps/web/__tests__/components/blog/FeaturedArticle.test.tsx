@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { FeaturedArticle } from '@/components/blog/FeaturedArticles';
 
-vi.mock('@nordic-island/ui', () => ({
+vi.mock('@/hooks/use-translation', () => ({
   useTranslation: () => ({
     t: (key: string) => {
       const translations: Record<string, string> = {
@@ -12,9 +12,14 @@ vi.mock('@nordic-island/ui', () => ({
       return translations[key] || key;
     },
   }),
+}));
+
+vi.mock('@/hooks/use-language', () => ({
   useLanguage: () => ({
     language: 'fr',
     mounted: true,
+    setLanguage: vi.fn(),
+    toggleLanguage: vi.fn(),
   }),
 }));
 

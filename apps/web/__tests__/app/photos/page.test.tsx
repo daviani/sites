@@ -3,11 +3,11 @@ import { render, screen } from '@testing-library/react';
 import PhotosPage from '@/app/(site)/photos/page';
 
 vi.mock('@nordic-island/ui', () => ({
-  Breadcrumb: ({ items }: { items: { href: string; labelKey: string }[] }) => (
+  Breadcrumb: ({ items }: { items: { href: string; label: string }[] }) => (
     <nav data-testid="breadcrumb">
       {items.map((item) => (
         <a key={item.href} href={item.href}>
-          {item.labelKey}
+          {item.label}
         </a>
       ))}
     </nav>

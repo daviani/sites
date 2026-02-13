@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useTranslation, TranslationKey, Breadcrumb } from '@nordic-island/ui';
+import { Breadcrumb } from '@nordic-island/ui';
+import { useTranslation, type TranslationKey } from '@/hooks/use-translation';
 
 type PageLink = {
   href: string;
@@ -31,7 +32,7 @@ export default function SitemapPage() {
     <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-4 pt-5 pb-16">
         <div className="mb-8">
-          <Breadcrumb items={[{ href: '/sitemap', labelKey: 'nav.sitemap.title' }]} />
+          <Breadcrumb items={[{ href: '/sitemap', label: t('nav.sitemap.title') }]} homeLabel={t('common.home')} ariaLabel={t('common.breadcrumb')} />
         </div>
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-nord-0 dark:text-nord-6">

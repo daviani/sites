@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { ExpertiseSection } from '@/components/ExpertiseSection';
 
-vi.mock('@nordic-island/ui', () => ({
+vi.mock('@/hooks/use-translation', () => ({
   useTranslation: () => ({
     t: (key: string) => {
       const translations: Record<string, string> = {

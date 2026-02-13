@@ -1,18 +1,23 @@
 'use client';
 
 import { useTheme } from '../hooks/use-theme';
-import { useTranslation } from '../hooks/use-translation';
 import { IconButton } from './IconButton';
 
-export function DarkModeToggle() {
+interface DarkModeToggleProps {
+  labels: {
+    switchToDark: string;
+    switchToLight: string;
+  };
+}
+
+export function DarkModeToggle({ labels }: DarkModeToggleProps) {
   const { theme, toggleTheme, mounted } = useTheme();
-  const { t } = useTranslation();
 
   if (!mounted) {
     return (
       <IconButton
         className="text-nord-3 dark:text-nord-4"
-        aria-label={t('darkMode.switchToDark')}
+        aria-label={labels.switchToDark}
         disabled
       >
         <span className="w-6 h-6 block" />
@@ -20,7 +25,7 @@ export function DarkModeToggle() {
     );
   }
 
-  const label = theme === 'light' ? t('darkMode.switchToDark') : t('darkMode.switchToLight');
+  const label = theme === 'light' ? labels.switchToDark : labels.switchToLight;
 
   return (
     <IconButton

@@ -7,18 +7,6 @@ vi.mock('../../src/hooks/use-matrix-rain', () => ({
   useMatrixRain: vi.fn(),
 }));
 
-// Mock useTranslation hook
-vi.mock('../../src/hooks/use-translation', () => ({
-  useTranslation: () => ({
-    t: (key: string) => {
-      const translations: Record<string, string> = {
-        'easterEggs.matrix.closeHint': 'Cliquez pour fermer',
-      };
-      return translations[key] || key;
-    },
-  }),
-}));
-
 describe('MatrixRain', () => {
   beforeEach(() => {
     vi.useFakeTimers();
@@ -36,7 +24,7 @@ describe('MatrixRain', () => {
     });
 
     it('renders overlay when active', () => {
-      render(<MatrixRain isActive={true} />);
+      render(<MatrixRain isActive={true} closeHint="Cliquez pour fermer" />);
       expect(screen.getByText('Cliquez pour fermer')).toBeInTheDocument();
     });
 
@@ -134,7 +122,7 @@ describe('MatrixRain', () => {
 
   describe('accessibility', () => {
     it('has aria-label for close hint', () => {
-      const { container } = render(<MatrixRain isActive={true} />);
+      const { container } = render(<MatrixRain isActive={true} closeHint="Cliquez pour fermer" />);
       const overlay = container.firstChild as HTMLElement;
       expect(overlay).toHaveAttribute('aria-label', 'Cliquez pour fermer');
     });
