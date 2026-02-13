@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback, useMemo } from 'react';
+import { NORD_AURORA } from '../constants/nord-colors';
 
 interface ConfettiPiece {
   id: number;
@@ -10,18 +11,6 @@ interface ConfettiPiece {
   duration: number;
   size: number;
 }
-
-// Nord palette colors for confetti
-const CONFETTI_COLORS = [
-  '#88C0D0', // nord8
-  '#81A1C1', // nord9
-  '#5E81AC', // nord10
-  '#BF616A', // nord11
-  '#D08770', // nord12
-  '#EBCB8B', // nord13
-  '#A3BE8C', // nord14
-  '#B48EAD', // nord15
-];
 
 interface ConfettiProps {
   isActive: boolean;
@@ -42,7 +31,7 @@ export function Confetti({
     return Array.from({ length: pieceCount }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
-      color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+      color: NORD_AURORA[Math.floor(Math.random() * NORD_AURORA.length)],
       delay: Math.random() * 0.5,
       duration: 2 + Math.random() * 2,
       size: 6 + Math.random() * 8,

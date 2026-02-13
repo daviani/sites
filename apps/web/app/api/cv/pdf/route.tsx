@@ -10,6 +10,7 @@ import ReactPDF, {
   Font,
 } from '@react-pdf/renderer';
 import { getLocalizedCvData, getCvSkillsByCategory } from '@/lib/content/cv-keystatic';
+import { NORD } from '@nordic-island/ui';
 
 export const dynamic = 'force-dynamic';
 
@@ -24,29 +25,8 @@ Font.register({
   ],
 });
 
-// Nord theme colors (complete palette)
-const colors = {
-  // Polar Night
-  nord0: '#2E3440',
-  nord1: '#3B4252',
-  nord2: '#434C5E',
-  nord3: '#4C566A',
-  // Snow Storm
-  nord4: '#D8DEE9',
-  nord5: '#E5E9F0',
-  nord6: '#ECEFF4',
-  // Frost
-  nord7: '#8FBCBB',
-  nord8: '#88C0D0',
-  nord9: '#81A1C1',
-  nord10: '#5E81AC',
-  // Aurora
-  nord11: '#BF616A', // red
-  nord12: '#D08770', // orange
-  nord13: '#EBCB8B', // yellow
-  nord14: '#A3BE8C', // green
-  nord15: '#B48EAD', // purple
-};
+// Nord theme colors — imported from shared constants
+const colors = NORD;
 
 interface LocalizedCvData {
   personal: {

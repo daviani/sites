@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og';
 import { getArticleBySlug } from '@/lib/content/blog';
+import { NORD_0, NORD_4, NORD_6, NORD_8 } from '@nordic-island/ui';
 
 interface RouteParams {
   params: Promise<{ slug: string }>;
@@ -25,7 +26,7 @@ export async function GET(request: Request, { params }: RouteParams) {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#2E3440',
+          backgroundColor: NORD_0,
           padding: '40px 80px',
         }}
       >
@@ -44,7 +45,7 @@ export async function GET(request: Request, { params }: RouteParams) {
           style={{
             fontSize: 60,
             fontWeight: 'bold',
-            color: '#ECEFF4',
+            color: NORD_6,
             textAlign: 'center',
             marginBottom: '20px',
             lineHeight: 1.2,
@@ -57,7 +58,7 @@ export async function GET(request: Request, { params }: RouteParams) {
         <div
           style={{
             fontSize: 30,
-            color: '#D8DEE9',
+            color: NORD_4,
             textAlign: 'center',
             maxWidth: '900px',
           }}
@@ -71,7 +72,7 @@ export async function GET(request: Request, { params }: RouteParams) {
             position: 'absolute',
             bottom: '40px',
             fontSize: 24,
-            color: '#88C0D0',
+            color: NORD_8,
           }}
         >
           blog.daviani.dev
