@@ -23,7 +23,7 @@ export function ArticleContent({ article }: ArticleContentProps) {
   return (
     <>
       {/* Header */}
-      <header className="mb-10 p-8 bg-white/40 dark:bg-nord-3/50 backdrop-blur-md rounded-[2.5rem] shadow-lg">
+      <header className="mb-10 p-8 glass-card">
         <h1 className="text-3xl md:text-4xl font-bold mb-4 text-nord-0 dark:text-nord-6">
           {title}
         </h1>
@@ -53,7 +53,7 @@ export function ArticleContent({ article }: ArticleContentProps) {
       </header>
 
       {/* Content */}
-      <div className="mt-8 p-8 bg-white/40 dark:bg-nord-3/50 backdrop-blur-md rounded-[2.5rem] shadow-lg">
+      <div className="mt-8 p-8 glass-card">
         <div className="prose prose-nord dark:prose-invert max-w-none">
           <MarkdocContent content={articleContent} />
         </div>

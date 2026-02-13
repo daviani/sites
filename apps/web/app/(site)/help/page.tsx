@@ -47,7 +47,7 @@ export default function HelpPage() {
           {helpSections.map((section, index) => (
             <section
               key={index}
-              className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg"
+              className="glass-card p-6"
             >
               <h2 className="text-2xl font-bold mb-4 text-nord-10 flex items-center gap-3">
                 <span aria-hidden="true">{section.icon}</span>

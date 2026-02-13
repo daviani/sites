@@ -49,7 +49,7 @@ export function Header({ logo, className = '', homeUrl = '/', navItems = [], sec
   return (
     <header
       ref={headerRef}
-      className={`fixed top-[10px] left-[10px] right-[10px] z-50 shadow-lg backdrop-blur-md bg-white/40 dark:bg-nord-3/50 rounded-[2.5rem] transition-colors ${className}`}
+      className={`fixed top-[var(--spacing-edge)] left-[var(--spacing-edge)] right-[var(--spacing-edge)] z-50 glass-card transition-colors ${className}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">

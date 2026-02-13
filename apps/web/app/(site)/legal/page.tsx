@@ -40,7 +40,7 @@ export default function LegalPage() {
 
         <div className="space-y-8">
           {/* 1. Publisher section */}
-          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+          <section className="glass-card p-6">
             <h2 className="text-2xl font-bold mb-4 text-nord-10">
               {t('pages.legal.publisher.title')}
             </h2>
@@ -67,7 +67,7 @@ export default function LegalPage() {
           </section>
 
           {/* 2. Hosting section */}
-          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+          <section className="glass-card p-6">
             <h2 className="text-2xl font-bold mb-4 text-nord-10">
               {t('pages.legal.hosting.title')}
             </h2>
@@ -88,7 +88,7 @@ export default function LegalPage() {
           </section>
 
           {/* 3. Privacy Policy section */}
-          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+          <section className="glass-card p-6">
             <h2 className="text-2xl font-bold mb-4 text-nord-10">
               {t('pages.legal.privacy.title')}
             </h2>
@@ -189,7 +189,7 @@ export default function LegalPage() {
           </section>
 
           {/* 4. Third-party services section */}
-          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+          <section className="glass-card p-6">
             <h2 className="text-2xl font-bold mb-4 text-nord-10">
               {t('pages.legal.thirdParty.title')}
             </h2>
@@ -244,7 +244,7 @@ export default function LegalPage() {
           </section>
 
           {/* 5. Data transfers section */}
-          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+          <section className="glass-card p-6">
             <h2 className="text-2xl font-bold mb-4 text-nord-10">
               {t('pages.legal.dataTransfers.title')}
             </h2>
@@ -254,7 +254,7 @@ export default function LegalPage() {
           </section>
 
           {/* 6. Cookies section */}
-          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+          <section className="glass-card p-6">
             <h2 className="text-2xl font-bold mb-4 text-nord-10">
               {t('pages.legal.cookies.title')}
             </h2>
@@ -298,7 +298,7 @@ export default function LegalPage() {
           </section>
 
           {/* 7. Intellectual property section */}
-          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+          <section className="glass-card p-6">
             <h2 className="text-2xl font-bold mb-4 text-nord-10">
               {t('pages.legal.intellectual.title')}
             </h2>
@@ -319,7 +319,7 @@ export default function LegalPage() {
           </section>
 
           {/* 8. Contact section */}
-          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+          <section className="glass-card p-6">
             <h2 className="text-2xl font-bold mb-4 text-nord-10">
               {t('pages.legal.contact.title')}
             </h2>

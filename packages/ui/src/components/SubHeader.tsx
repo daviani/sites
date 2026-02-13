@@ -25,7 +25,7 @@ export function SubHeader({ items, currentPath, showSeparators = false }: SubHea
 
   return (
     <nav
-      className="hidden md:block fixed top-[86px] left-[10px] right-[10px] z-40 shadow-lg backdrop-blur-md bg-white/40 dark:bg-nord-3/50 rounded-[2.5rem]"
+      className="hidden md:block fixed top-[var(--height-header-offset)] left-[var(--spacing-edge)] right-[var(--spacing-edge)] z-40 glass-card"
       aria-label={t('footer.navigation')}
     >
       <div className="container mx-auto px-4">

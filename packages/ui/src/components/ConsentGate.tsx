@@ -38,7 +38,7 @@ export function ConsentGate({
   }
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 p-6 rounded-[2.5rem] backdrop-blur-md bg-white/40 dark:bg-nord-3/50 shadow-lg">
+    <div className="flex flex-col items-center justify-center gap-4 p-6 glass-card">
       <p className="text-nord-3 dark:text-nord-4 text-center max-w-md">
         {consentText || t('rdv.consent')}
       </p>

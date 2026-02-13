@@ -16,7 +16,7 @@ export default function SiteLayout({
       <div className="min-h-screen flex flex-col">
         <main
           id="main-content"
-          className="flex-1 pt-[86px] md:pt-[150px] px-[10px] pb-8"
+          className="flex-1 pt-[var(--height-header-offset)] md:pt-[var(--height-full-offset)] px-[var(--spacing-edge)] pb-8"
         >
           {children}
         </main>

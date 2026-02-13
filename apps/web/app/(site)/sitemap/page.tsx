@@ -42,7 +42,7 @@ export default function SitemapPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+          <section className="glass-card p-6">
             <h2 className="text-2xl font-bold mb-6 text-nord-10">
               {t('pages.sitemap.mainPages')}
             </h2>
@@ -73,7 +73,7 @@ export default function SitemapPage() {
             </ul>
           </section>
 
-          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+          <section className="glass-card p-6">
             <h2 className="text-2xl font-bold mb-6 text-nord-10">
               {t('pages.sitemap.utilities')}
             </h2>

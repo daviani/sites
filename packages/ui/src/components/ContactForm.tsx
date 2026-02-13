@@ -109,7 +109,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
   if (status === 'success') {
     return (
       <div
-        className="p-8 rounded-[2.5rem] backdrop-blur-md bg-white/40 dark:bg-nord-3/50 shadow-lg text-center"
+        className="p-8 glass-card text-center"
         role="alert"
         aria-live="polite"
       >
@@ -125,7 +125,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
     <form
       onSubmit={handleSubmit}
       onFocus={() => !isLoaded && load()}
-      className="p-8 rounded-[2.5rem] backdrop-blur-md bg-white/40 dark:bg-nord-3/50 shadow-lg space-y-6"
+      className="p-8 glass-card space-y-6"
       noValidate
     >
       {/* Honeypot field - hidden from users */}
