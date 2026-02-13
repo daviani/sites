@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useTranslation, TranslationKey, Breadcrumb } from '@nordic-island/ui';
 
 type PageLink = {
@@ -48,17 +49,17 @@ export default function SitemapPage() {
             </h2>
             <ul className="space-y-3">
               <li>
-                <a
+                <Link
                   href="/"
                   className="flex items-center text-nord-0 dark:text-nord-4 hover:text-nord-10 dark:hover:text-nord-8 transition-colors"
                 >
                   <span className="mr-2">→</span>
                   {t('home.title')}
-                </a>
+                </Link>
               </li>
               {mainPages.map((page) => (
                 <li key={page.href}>
-                  <a
+                  <Link
                     href={page.href}
                     className="flex items-center text-nord-0 dark:text-nord-4 hover:text-nord-10 dark:hover:text-nord-8 transition-colors"
                   >
@@ -67,7 +68,7 @@ export default function SitemapPage() {
                     <span className="ml-2 text-sm text-nord-3 dark:text-nord-3">
                       ({t(page.descKey)})
                     </span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -80,7 +81,7 @@ export default function SitemapPage() {
             <ul className="space-y-3">
               {utilityPages.map((page) => (
                 <li key={page.href}>
-                  <a
+                  <Link
                     href={page.href}
                     className="flex items-center text-nord-0 dark:text-nord-4 hover:text-nord-10 dark:hover:text-nord-8 transition-colors"
                   >
@@ -89,7 +90,7 @@ export default function SitemapPage() {
                     <span className="ml-2 text-sm text-nord-3 dark:text-nord-3">
                       ({t(page.descKey)})
                     </span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
