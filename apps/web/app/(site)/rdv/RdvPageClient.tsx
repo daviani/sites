@@ -1,11 +1,7 @@
 'use client';
 
-import {
-  useTranslation,
-  Breadcrumb,
-  ConsentGate,
-  CalendlyEmbed,
-} from '@nordic-island/ui';
+import { useTranslation, Breadcrumb, CalendlyEmbed } from '@nordic-island/ui';
+import { ConsentGate } from '@/components/ConsentGate';
 
 export default function RdvPageClient() {
   const { t } = useTranslation();

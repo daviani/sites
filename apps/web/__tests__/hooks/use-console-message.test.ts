@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { renderHook } from '@testing-library/react';
-import { useConsoleMessage } from '../../src/hooks/use-console-message';
+import { useConsoleMessage } from '../../hooks/use-console-message';
 
 describe('useConsoleMessage', () => {
   const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});

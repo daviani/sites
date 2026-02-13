@@ -1,10 +1,8 @@
 'use client';
 
 import { createContext, useContext, useState, useCallback, ReactNode, useMemo } from 'react';
-import { useKonamiCode } from '../hooks/use-konami-code';
-import { useConsoleMessage } from '../hooks/use-console-message';
-import { Confetti } from './Confetti';
-import { MatrixRain } from './MatrixRain';
+import { useKonamiCode, Confetti, MatrixRain } from '@nordic-island/ui';
+import { useConsoleMessage } from '@/hooks/use-console-message';
 
 interface EasterEggContextType {
   triggerConfetti: () => void;

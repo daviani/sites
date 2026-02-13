@@ -1,6 +1,7 @@
 'use client';
 
-import { useTranslation, Breadcrumb, ContactForm } from '@nordic-island/ui';
+import { useTranslation, Breadcrumb } from '@nordic-island/ui';
+import { ContactForm } from '@/components/ContactForm';
 import { submitContactForm } from './actions';
 
 export default function ContactPageClient() {

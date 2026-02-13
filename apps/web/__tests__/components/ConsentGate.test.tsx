@@ -1,17 +1,13 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { ConsentGate } from '../../src/components/ConsentGate';
+import { ConsentGate } from '../../components/ConsentGate';
 
-// Mock useRecaptcha hook
+// Mock @nordic-island/ui hooks
 const mockExecute = vi.fn();
-vi.mock('../../src/hooks/use-recaptcha', () => ({
+vi.mock('@nordic-island/ui', () => ({
   useRecaptcha: () => ({
     execute: mockExecute,
   }),
-}));
-
-// Mock useTranslation hook
-vi.mock('../../src/hooks/use-translation', () => ({
   useTranslation: () => ({
     t: (key: string) => {
       const translations: Record<string, string> = {

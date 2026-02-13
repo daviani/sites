@@ -30,9 +30,6 @@ export { ScrollToTop } from './components/ScrollToTop';
 
 export { CalendlyEmbed } from './components/CalendlyEmbed';
 
-export { ConsentGate } from './components/ConsentGate';
-
-export { ContactForm } from './components/ContactForm';
 
 export { useTheme, ThemeProvider } from './hooks/use-theme';
 export type { Theme } from './hooks/use-theme';
@@ -49,10 +46,6 @@ export { useKonamiCode } from './hooks/use-konami-code';
 
 export { useMatrixRain } from './hooks/use-matrix-rain';
 
-export { useConsoleMessage } from './hooks/use-console-message';
-
 export { Confetti } from './components/Confetti';
 
 export { MatrixRain } from './components/MatrixRain';
-
-export { EasterEggProvider, useEasterEggs } from './components/EasterEggProvider';
