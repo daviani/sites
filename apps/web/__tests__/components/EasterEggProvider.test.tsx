@@ -1,27 +1,21 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, act, renderHook } from '@testing-library/react';
-import { EasterEggProvider, useEasterEggs } from '../../src/components/EasterEggProvider';
+import { EasterEggProvider, useEasterEggs } from '../../components/EasterEggProvider';
 import { ReactNode } from 'react';
 
 // Mock dependencies
-vi.mock('../../src/hooks/use-konami-code', () => ({
+vi.mock('@nordic-island/ui', () => ({
   useKonamiCode: vi.fn(),
-}));
-
-vi.mock('../../src/hooks/use-console-message', () => ({
-  useConsoleMessage: vi.fn(),
-}));
-
-vi.mock('../../src/components/Confetti', () => ({
   Confetti: ({ isActive }: { isActive: boolean }) => (
     isActive ? <div data-testid="confetti">Confetti</div> : null
   ),
-}));
-
-vi.mock('../../src/components/MatrixRain', () => ({
   MatrixRain: ({ isActive }: { isActive: boolean }) => (
     isActive ? <div data-testid="matrix">Matrix</div> : null
   ),
+}));
+
+vi.mock('../../hooks/use-console-message', () => ({
+  useConsoleMessage: vi.fn(),
 }));
 
 describe('EasterEggProvider', () => {
@@ -138,8 +132,8 @@ describe('EasterEggProvider', () => {
 
   describe('disabled state', () => {
     it('does not setup hooks when disabled', async () => {
-      const { useKonamiCode } = await import('../../src/hooks/use-konami-code');
-      const { useConsoleMessage } = await import('../../src/hooks/use-console-message');
+      const { useKonamiCode } = await import('@nordic-island/ui');
+      const { useConsoleMessage } = await import('../../hooks/use-console-message');
 
       render(
         <EasterEggProvider enabled={false}>

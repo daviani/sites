@@ -1,6 +1,7 @@
 'use client';
 
-import { LanguageProvider, ThemeProvider, EasterEggProvider } from '@nordic-island/ui';
+import { LanguageProvider, ThemeProvider } from '@nordic-island/ui';
+import { EasterEggProvider } from '@/components/EasterEggProvider';
 import { ReactNode } from 'react';
 
 export function Providers({ children }: { children: ReactNode }) {

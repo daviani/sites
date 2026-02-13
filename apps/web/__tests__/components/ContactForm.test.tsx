@@ -1,22 +1,18 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ContactForm } from '../../src/components/ContactForm';
+import { ContactForm } from '../../components/ContactForm';
 
 // Mock useRecaptcha hook
 const mockExecute = vi.fn();
 const mockLoad = vi.fn();
-vi.mock('../../src/hooks/use-recaptcha', () => ({
+vi.mock('@nordic-island/ui', () => ({
   useRecaptcha: () => ({
     execute: mockExecute,
     load: mockLoad,
     isLoaded: true,
     isLoading: false,
   }),
-}));
-
-// Mock useTranslation hook
-vi.mock('../../src/hooks/use-translation', () => ({
   useTranslation: () => ({
     t: (key: string) => {
       const translations: Record<string, string> = {
