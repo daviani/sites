@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import PhotosPage from '@/app/(site)/photos/page';
 
-vi.mock('@daviani/ui', () => ({
+vi.mock('@nordic-island/ui', () => ({
   Breadcrumb: ({ items }: { items: { href: string; labelKey: string }[] }) => (
     <nav data-testid="breadcrumb">
       {items.map((item) => (

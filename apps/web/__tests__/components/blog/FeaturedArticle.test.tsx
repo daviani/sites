@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { FeaturedArticle } from '@/components/blog/FeaturedArticles';
 
-vi.mock('@daviani/ui', () => ({
+vi.mock('@nordic-island/ui', () => ({
   useTranslation: () => ({
     t: (key: string) => {
       const translations: Record<string, string> = {

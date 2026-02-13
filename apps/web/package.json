@@ -15,7 +15,7 @@
     "assets:watch": "tsx scripts/watch-assets.ts"
   },
   "dependencies": {
-    "@daviani/ui": "workspace:*",
+    "@nordic-island/ui": "workspace:*",
     "@giscus/react": "^3.1.0",
     "@keystatic/core": "^0.5.48",
     "@keystatic/next": "^5.0.4",

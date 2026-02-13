@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useTranslation } from '@daviani/ui';
+import { useTranslation } from '@nordic-island/ui';
 
 function DownloadIcon({ className }: { className?: string }) {
   return (

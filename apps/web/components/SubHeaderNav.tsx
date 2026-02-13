@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { SubHeader, TranslationKey } from '@daviani/ui';
+import { SubHeader, TranslationKey } from '@nordic-island/ui';
 
 const navItems: { href: string; labelKey: TranslationKey }[] = [
   { href: '/about', labelKey: 'nav.about.title' },

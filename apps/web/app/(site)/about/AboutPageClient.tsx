@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslation, Breadcrumb } from '@daviani/ui';
+import { useTranslation, Breadcrumb } from '@nordic-island/ui';
 
 export default function AboutPageClient() {
   const { t } = useTranslation();
