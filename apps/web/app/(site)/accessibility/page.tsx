@@ -48,7 +48,7 @@ export default function AccessibilityPage() {
         </div>
 
         <div className="space-y-8">
-          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+          <section className="glass-card p-6">
             <h2 className="text-2xl font-bold mb-4 text-nord-10">
               {t('pages.accessibility.commitment')}
             </h2>
@@ -57,7 +57,7 @@ export default function AccessibilityPage() {
             </p>
           </section>
 
-          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+          <section className="glass-card p-6">
             <h2 className="text-2xl font-bold mb-4 text-nord-10">
               {t('pages.accessibility.standards')}
             </h2>
@@ -66,7 +66,7 @@ export default function AccessibilityPage() {
             </p>
           </section>
 
-          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+          <section className="glass-card p-6">
             <h2 className="text-2xl font-bold mb-4 text-nord-10">
               {t('pages.accessibility.conformity')}
             </h2>
@@ -80,7 +80,7 @@ export default function AccessibilityPage() {
             </ul>
           </section>
 
-          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+          <section className="glass-card p-6">
             <h2 className="text-2xl font-bold mb-4 text-nord-10">
               {t('pages.accessibility.testing')}
             </h2>
@@ -89,7 +89,7 @@ export default function AccessibilityPage() {
             </p>
           </section>
 
-          <section className="bg-white/40 dark:bg-nord-3/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-lg">
+          <section className="glass-card p-6">
             <h2 className="text-2xl font-bold mb-4 text-nord-10">
               {t('pages.accessibility.contact')}
             </h2>

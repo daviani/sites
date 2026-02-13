@@ -33,7 +33,7 @@ export function Footer({
   const separatorStyles = 'text-nord-3 dark:text-nord-4';
 
   return (
-    <footer className="mx-[10px] mb-[10px] shadow-lg backdrop-blur-md bg-white/40 dark:bg-nord-3/50 rounded-[2.5rem] py-3 md:py-4">
+    <footer className="mx-[var(--spacing-edge)] mb-[var(--spacing-edge)] glass-card py-3 md:py-4">
       <div className="container mx-auto px-4">
         {/* Mobile: Touch-friendly links */}
         <div className="md:hidden">

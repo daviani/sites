@@ -20,7 +20,7 @@ export function Comments() {
 
   if (!hasConsent) {
     return (
-      <section className="mt-8 p-8 bg-white/40 dark:bg-nord-3/50 backdrop-blur-md rounded-[2.5rem] shadow-lg">
+      <section className="mt-8 p-8 glass-card">
         <h2 className="text-xl font-bold mb-4 text-nord-0 dark:text-nord-6">
           {t('comments.title')}
         </h2>

@@ -35,6 +35,28 @@
   /* Semantic aliases */
   --color-background: var(--color-nord-6);
   --color-foreground: var(--color-nord-0);
+
+  /* Design tokens — island layout */
+  --radius-island: 2.5rem;
+}
+
+/* Layout spacing tokens */
+:root {
+  --spacing-edge: 10px;
+  --height-header: 66px;
+  --height-header-offset: 86px;
+  --height-full-offset: 150px;
+}
+
+/* Glass card — frosted glass island effect */
+@utility glass-card {
+  border-radius: var(--radius-island);
+  backdrop-filter: blur(12px);
+  background: rgb(255 255 255 / 0.4);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  &:where(.dark, .dark *) {
+    background: rgb(76 86 106 / 0.5);
+  }
 }
 
 :root {
@@ -195,9 +217,9 @@ body {
   margin: 1.5em 0;
 }
 
-/* ReCAPTCHA badge positioning - above footer and scroll-to-top button */
+/* ReCAPTCHA badge positioning - below header + subheader */
 .grecaptcha-badge {
-  top: 150px !important;
+  top: var(--height-full-offset) !important;
 }
 
 /* Respect user preference for reduced motion (RGAA 13.8, WCAG 2.3.3) */

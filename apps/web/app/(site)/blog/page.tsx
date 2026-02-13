@@ -101,7 +101,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             {articles.map((article) => (
               <article
                 key={article.slug}
-                className="p-6 bg-white/40 dark:bg-nord-3/50 backdrop-blur-md rounded-[2.5rem] shadow-lg hover:shadow-xl transition-shadow"
+                className="p-6 glass-card hover:shadow-xl transition-shadow"
               >
                 <Link href={`/${article.slug}`} className="block cursor-pointer">
                   <h2 className="text-2xl font-bold mb-2 text-nord-0 dark:text-nord-6 hover:text-nord-10 dark:hover:text-nord-8 transition-colors">

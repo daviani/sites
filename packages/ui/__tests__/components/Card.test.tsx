@@ -13,7 +13,7 @@ describe('Card', () => {
     render(<Card data-testid="card">Content</Card>);
 
     const card = screen.getByTestId('card');
-    expect(card).toHaveClass('shadow-lg');
+    expect(card).toHaveClass('glass-card');
     expect(card).toHaveClass('hover:shadow-xl');
   });
 
@@ -86,9 +86,8 @@ describe('Card', () => {
     render(<Card data-testid="card">Content</Card>);
 
     const card = screen.getByTestId('card');
-    expect(card).toHaveClass('rounded-[2.5rem]');
+    expect(card).toHaveClass('glass-card');
     expect(card).toHaveClass('transition-all');
-    expect(card).toHaveClass('backdrop-blur-md');
   });
 
   it('merges custom className', () => {
@@ -100,7 +99,7 @@ describe('Card', () => {
 
     const card = screen.getByTestId('card');
     expect(card).toHaveClass('custom-class');
-    expect(card).toHaveClass('rounded-[2.5rem]'); // Still has base styles
+    expect(card).toHaveClass('glass-card'); // Still has base styles
   });
 
   it('forwards additional props', () => {
@@ -122,10 +121,10 @@ describe('Card', () => {
     expect(card.tagName).toBe('DIV');
   });
 
-  it('supports dark mode classes', () => {
+  it('applies glass-card utility for dark mode support', () => {
     render(<Card data-testid="card">Content</Card>);
 
     const card = screen.getByTestId('card');
-    expect(card.className).toContain('dark:');
+    expect(card).toHaveClass('glass-card');
   });
 });
