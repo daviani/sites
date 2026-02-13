@@ -1,6 +1,6 @@
 # daviani.dev
 
-> Portfolio multi-domaines avec Next.js 16, Turborepo et architecture sécurisée
+> Portfolio professionnel avec Next.js 16, Turborepo et le design system @nordic-island/ui
 
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
@@ -11,23 +11,23 @@
 
 ## Vue d'ensemble
 
-Portfolio professionnel démontrant une expertise Full-Stack et DevOps. Architecture monorepo multi-domaines avec Next.js 16, sécurité renforcée et performance optimale.
+Portfolio professionnel démontrant une expertise Full-Stack et DevOps. Architecture monorepo avec Next.js 16, design system découplé (`@nordic-island/ui`), i18n FR/EN, dark mode sans FOUC, sécurité renforcée et performance optimale.
 
-### Domaines
+### Routes
 
-| Domaine | Description |
-|---------|-------------|
-| `daviani.dev` | Homepage |
-| `about.daviani.dev` | À propos |
-| `blog.daviani.dev` | Articles techniques |
-| `contact.daviani.dev` | Formulaire de contact |
-| `rdv.daviani.dev` | Prise de rendez-vous |
-| `cv.daviani.dev` | CV interactif |
-| `photos.daviani.dev` | Galerie photo (accès discret) |
-| `legal.daviani.dev` | Mentions légales RGPD |
-| `accessibility.daviani.dev` | Déclaration d'accessibilité |
-| `sitemap.daviani.dev` | Plan du site |
-| `help.daviani.dev` | Aide à la navigation |
+| Route | Description |
+|-------|-------------|
+| `/` | Homepage |
+| `/about` | À propos |
+| `/blog` | Articles techniques (Markdoc) |
+| `/contact` | Formulaire de contact sécurisé |
+| `/rdv` | Prise de rendez-vous (Calendly) |
+| `/cv` | CV interactif + export PDF |
+| `/photos` | Galerie photo |
+| `/legal` | Mentions légales RGPD |
+| `/accessibility` | Déclaration d'accessibilité RGAA |
+| `/sitemap` | Plan du site |
+| `/help` | Aide à la navigation |
 
 ---
 
@@ -36,31 +36,38 @@ Portfolio professionnel démontrant une expertise Full-Stack et DevOps. Architec
 **Frontend**
 - Next.js 16 (App Router, React 19)
 - TypeScript 5 (strict)
-- Tailwind CSS 4
+- Tailwind CSS 4 (design tokens, glass-card utility)
 - Framer Motion
+
+**Design System — `@nordic-island/ui`**
+- Composants génériques : Header, Footer, SubHeader, Card, Button, IconButton, Breadcrumb, ScrollToTop, etc.
+- Palette Nord (nord-0 à nord-15) centralisée dans `constants/nord-colors.ts`
+- Dark mode (class-based, script bloquant anti-FOUC)
+- i18n découplé : le design system expose un `TranslationProvider` injectable, les traductions app restent dans `apps/web/locales/`
+- Easter eggs : Konami Code, Matrix Rain, Confetti
 
 **Backend & Infra**
 - Vercel (Edge + Serverless)
 - Cloudflare (DNS, WAF, CDN)
 - iCloud Custom Domain (email)
 - Vercel KV (rate limiting)
+- Resend (transactional emails)
 
 **Tooling**
 - Turborepo + pnpm workspaces
 - ESLint 9, Prettier
-- Vitest + Testing Library (unit tests)
+- Vitest + Testing Library (579 tests)
 - Playwright + axe-core (E2E + accessibility)
-- GitHub Actions (5 parallel jobs)
+- GitHub Actions CI (Unit Tests, Lint/Type/Build, E2E, Accessibility, Smoke, Deploy)
 
 ---
 
 ## Structure
 
 ```
-daviani-dev/
-├── .doc/                   # Documentation technique
+sites/
 ├── apps/
-│   └── web/                # Next.js App Router
+│   └── web/                    # Next.js App Router
 │       ├── app/
 │       │   ├── about/
 │       │   ├── blog/
@@ -72,12 +79,19 @@ daviani-dev/
 │       │   ├── accessibility/
 │       │   ├── sitemap/
 │       │   └── help/
-│       ├── components/
-│       ├── lib/
-│       └── middleware.ts   # Routing multi-domaines
+│       ├── components/         # Composants métier (OwlLogo, ContactForm, ConsentGate...)
+│       ├── hooks/              # Hooks app (useLanguage, useConsoleMessage...)
+│       ├── locales/            # Traductions FR/EN (app-specific)
+│       └── lib/
 ├── packages/
-│   ├── ui/                 # Design system (Nord Theme)
-│   └── config/             # Config ESLint, TS
+│   ├── ui/                     # @nordic-island/ui — Design system découplé
+│   │   ├── src/
+│   │   │   ├── components/     # Composants génériques
+│   │   │   ├── hooks/          # useTheme, useTranslation, useMatrixRain...
+│   │   │   ├── constants/      # Nord color constants (NORD_0-15, NORD_AURORA)
+│   │   │   └── locales/        # Traductions par défaut (UI-only)
+│   │   └── __tests__/
+│   └── config/                 # @nordic-island/config — ESLint, TypeScript
 ├── turbo.json
 └── pnpm-workspace.yaml
 ```
@@ -144,10 +158,11 @@ pnpm start
 
 - Skip-link pour navigation clavier
 - Conformité RGAA 4.1 / WCAG 2.1 AA
-- Support i18n (FR/EN)
-- Mode sombre (Nord Theme)
+- Support i18n (FR/EN) avec cookies
+- Mode sombre (Nord Theme, sans flash)
 - Déclaration d'accessibilité
 - Page d'aide à la navigation
+- 88 tests axe-core automatisés en CI
 
 ---
 
@@ -170,6 +185,7 @@ pnpm start
 - Code splitting automatique
 - Cloudflare CDN + cache
 - Compression Brotli
+- Dark mode sans FOUC (script bloquant)
 
 ---
 
@@ -181,4 +197,3 @@ MIT - Voir [LICENSE](./LICENSE)
 
 **Auteur** : Daviani Fillatre
 **Contact** : hello@daviani.dev
-**Status** : En développement
