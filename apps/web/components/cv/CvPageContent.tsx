@@ -36,7 +36,7 @@ export function CvPageContent({ cvDataFr, cvDataEn, skillsByCategory }: CvPageCo
           <CvDownloadButton />
         </div>
         <CvLayout cvData={cvData} skillsByCategory={skillsByCategory} />
-        <div className="mt-8 flex justify-center">
+        <div className="mt-6 flex justify-center">
           <CvDownloadButton />
         </div>
       </div>

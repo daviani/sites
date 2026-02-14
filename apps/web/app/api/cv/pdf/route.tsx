@@ -25,8 +25,7 @@ Font.register({
   ],
 });
 
-// Nord theme colors — imported from shared constants
-const colors = NORD;
+const c = NORD;
 
 interface LocalizedCvData {
   personal: {
@@ -44,6 +43,7 @@ interface LocalizedCvData {
     photo?: string;
   };
   summary: string;
+  subtitle?: string;
   experiences: {
     start: string;
     end?: string;
@@ -61,6 +61,7 @@ interface LocalizedCvData {
     end: string;
     institution: string;
     degree: string;
+    description?: string;
   }[];
   languages: {
     language: string;
@@ -88,324 +89,358 @@ interface LocalizedCvData {
 
 type SkillsByCategory = Record<string, string[]>;
 
-// Styles - Compact for single page A4
-const styles = StyleSheet.create({
+// =============================================================
+// Styles — Nordic Island layout, A4, light mode only
+// =============================================================
+const s = StyleSheet.create({
+  // --- Page ---
   page: {
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: c.nord6,
     fontFamily: 'Inter',
-    fontSize: 7,
-    padding: 8,
-    gap: 8,
+    fontSize: 9.5,
+    paddingTop: 40,
+    paddingHorizontal: 34,
+    paddingBottom: 28,
   },
-  // === SIDEBAR (unchanged) ===
-  sidebar: {
-    width: '32%',
-    backgroundColor: colors.nord1,
-    borderRadius: 6,
-    overflow: 'hidden',
+
+  // --- Island (header sombre) ---
+  island: {
+    backgroundColor: c.nord0,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: c.nord1,
+    paddingTop: 14,
+    paddingHorizontal: 12,
+    paddingBottom: 12,
+    marginBottom: 9,
   },
-  profileSection: {
-    alignItems: 'center',
-    padding: '10 8 8',
-  },
-  profilePhoto: {
-    width: 55,
-    height: 55,
-    borderRadius: 27,
-    marginBottom: 6,
-    objectFit: 'cover',
-    borderWidth: 3,
-    borderColor: colors.nord8,
-  },
-  profileName: {
-    fontSize: 11,
-    fontWeight: 600,
-    color: colors.nord6,
-    marginBottom: 2,
-  },
-  profileTitle: {
-    fontSize: 8,
-    fontWeight: 500,
-    color: colors.nord8,
-    marginBottom: 2,
+  islandTitle: {
     textAlign: 'center',
+    fontSize: 11,
+    fontWeight: 700,
+    color: c.nord8,
+    letterSpacing: -0.3,
+    lineHeight: 1.3,
+    paddingBottom: 7,
+    marginBottom: 7,
   },
-  profileExperience: {
+  islandGrid: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 7,
+  },
+  islandCol: {
+    flex: 1,
+  },
+  islandColLeft: {
+    alignItems: 'flex-end',
+  },
+  islandColRight: {
+    alignItems: 'flex-start',
+  },
+  islandText: {
+    fontSize: 7.5,
+    color: c.nord4,
+    lineHeight: 1.6,
+  },
+  islandTextBold: {
+    fontSize: 7.5,
+    fontWeight: 500,
+    color: c.nord4,
+    lineHeight: 1.6,
+  },
+  islandSubtitle: {
+    fontSize: 7.5,
+    fontWeight: 500,
+    color: 'rgba(216,222,233,0.85)',
+    letterSpacing: 0.5,
+    lineHeight: 1.6,
+  },
+  islandEmail: {
+    fontSize: 7.5,
+    color: '#FFFFFF',
+    lineHeight: 1.6,
+    textDecoration: 'none',
+  },
+  islandLink: {
+    fontSize: 7.5,
+    color: c.nord4,
+    lineHeight: 1.6,
+    textDecoration: 'none',
+  },
+  islandCity: {
+    fontSize: 7.5,
+    color: 'rgba(216,222,233,0.75)',
+    lineHeight: 1.6,
+  },
+  islandPhone: {
+    fontSize: 7.5,
+    color: 'rgba(216,222,233,0.75)',
+    lineHeight: 1.6,
+  },
+  // Photo — borderRadius appliqué directement sur l'Image (react-pdf ne clip pas via View overflow)
+  photoZone: {
+    width: 54,
+    height: 54,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  photoImg: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    borderWidth: 2,
+    borderColor: c.nord8,
+  },
+  // Skills row
+  skillsRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    rowGap: 2,
+    columnGap: 6,
+    paddingTop: 7,
+    marginTop: 7,
+    borderTopWidth: 0.5,
+    borderTopColor: c.nord1,
+    fontSize: 6.5,
+    lineHeight: 1.5,
+  },
+  skillGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 2,
+  },
+  skillLabel: {
+    fontWeight: 600,
+    color: c.nord8,
+  },
+  skillItems: {
+    color: c.nord4,
+  },
+  skillSep: {
+    color: c.nord3,
+    marginLeft: 2,
+    marginRight: 2,
+  },
+
+  // --- Body zone ---
+  bodyZone: {
+    paddingHorizontal: 2,
+  },
+
+  // --- Contributions ---
+  highlightsTitle: {
     fontSize: 7,
-    color: colors.nord4,
-    opacity: 0.7,
+    fontWeight: 700,
+    letterSpacing: 1.5,
+    color: c.nord14,
+    marginBottom: 3,
+    paddingBottom: 2,
+    borderBottomWidth: 1,
+    borderBottomColor: c.nord5,
   },
-  sidebarContent: {
-    padding: '0 10 10',
+  highlightsCard: {
+    flexDirection: 'row',
+    gap: 12,
+    marginBottom: 5,
+    paddingVertical: 4,
+    paddingHorizontal: 7,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: c.nord5,
+    borderLeftWidth: 2,
+    borderLeftColor: c.nord14,
+    borderRightWidth: 2,
+    borderRightColor: c.nord14,
+  },
+  highlightItem: {
+    flex: 1,
+  },
+  highlightType: {
+    fontSize: 6.5,
+    fontWeight: 600,
+    color: c.nord14,
+  },
+  highlightDesc: {
+    fontSize: 6.5,
+    color: c.nord2,
+    lineHeight: 1.4,
+  },
+
+  // --- Sections ---
+  section: {
+    marginBottom: 5,
   },
   sectionTitle: {
     fontSize: 7,
-    fontWeight: 600,
-    textTransform: 'uppercase',
-    letterSpacing: 0.8,
-    color: colors.nord8,
-    marginTop: 10,
-    marginBottom: 5,
-  },
-  contactItem: {
-    marginVertical: 1.5,
-    paddingLeft: 8,
-    fontSize: 6.5,
-    color: colors.nord4,
-    position: 'relative',
-  },
-  contactBullet: {
-    position: 'absolute',
-    left: 0,
-    color: colors.nord8,
     fontWeight: 700,
-    fontSize: 8,
-  },
-  contactLink: {
-    color: colors.nord4,
-    textDecoration: 'none',
-  },
-  expertiseItem: {
-    marginVertical: 1,
-    paddingLeft: 8,
-    fontSize: 6.5,
-    color: colors.nord4,
-  },
-  skillsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 2,
-    marginTop: 2,
-  },
-  skillCategory: {
-    marginTop: 4,
-  },
-  skillCategoryLabel: {
-    fontSize: 5.5,
-    fontWeight: 600,
-    color: colors.nord4,
-    opacity: 0.7,
-    marginBottom: 2,
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-  },
-  skillTag: {
-    backgroundColor: colors.nord10,
-    color: 'white',
-    padding: '1.5 3',
-    borderRadius: 2,
-    fontSize: 5.5,
-    fontWeight: 500,
-  },
-  languageItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginVertical: 1,
-    fontSize: 6.5,
-    color: colors.nord4,
-  },
-  languageLevel: {
-    color: colors.nord8,
-    fontWeight: 500,
-  },
-  contributionsBox: {
-    marginTop: 8,
-    padding: 6,
-    backgroundColor: '#454E58',
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: '#4B555B',
-  },
-  contributionsTitle: {
-    fontSize: 7,
-    fontWeight: 600,
-    textTransform: 'uppercase',
-    letterSpacing: 0.8,
-    color: colors.nord14,
-    marginBottom: 4,
-  },
-  contributionItem: {
-    marginBottom: 4,
-  },
-  contribType: {
-    fontSize: 6,
-    fontWeight: 600,
-    textTransform: 'uppercase',
-    letterSpacing: 0.3,
-    color: colors.nord14,
-    marginBottom: 1,
-  },
-  contribDesc: {
-    fontSize: 6,
-    lineHeight: 1.3,
-    color: colors.nord4,
-  },
-  // === MAIN CONTENT (compact) ===
-  main: {
-    width: '68%',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 6,
-    padding: '8 10',
-  },
-  mainSectionTitle: {
-    fontSize: 9,
-    fontWeight: 600,
-    color: colors.nord0,
-    marginBottom: 4,
-  },
-  mainSectionTitleNotFirst: {
-    fontSize: 9,
-    fontWeight: 600,
-    color: colors.nord0,
-    marginTop: 5,
-    marginBottom: 4,
-  },
-  experienceCard: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: colors.nord5,
-    borderRadius: 4,
-    padding: '3 5',
+    letterSpacing: 1.5,
+    color: c.nord10,
     marginBottom: 3,
+    paddingBottom: 2,
+    borderBottomWidth: 1,
+    borderBottomColor: c.nord5,
+  },
+
+  // --- Experience cards ---
+  expCard: {
+    marginBottom: 4,
+    paddingTop: 4,
+    paddingHorizontal: 6,
+    paddingBottom: 3,
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: c.nord5,
+    borderRadius: 4,
   },
   expHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    gap: 6,
-    marginBottom: 2,
+    alignItems: 'center',
+    marginBottom: 1,
   },
   expRole: {
-    fontSize: 7,
+    fontSize: 7.5,
     fontWeight: 600,
-    color: colors.nord0,
-    marginBottom: 1,
-  },
-  expCompany: {
-    fontSize: 6,
-    fontWeight: 500,
-    color: colors.nord8,
+    color: c.nord0,
   },
   expDate: {
-    fontSize: 5.5,
+    fontSize: 6,
     fontWeight: 500,
-    color: colors.nord3,
-    padding: '1 4',
-    borderRadius: 2,
-    backgroundColor: '#E8F4F8',
+    color: c.nord10,
+    backgroundColor: c.nord6,
+    paddingVertical: 1,
+    paddingHorizontal: 5,
+    borderRadius: 10,
+    borderWidth: 0.5,
+    borderColor: c.nord5,
   },
-  expContent: {
-    fontSize: 6,
-    lineHeight: 1.3,
-    color: colors.nord3,
-  },
-  expHighlights: {
-    marginVertical: 1,
-    marginLeft: 4,
-  },
-  expHighlightItem: {
-    marginVertical: 0.5,
-    paddingLeft: 7,
-    fontSize: 6,
-    color: colors.nord3,
-  },
-  expArrow: {
-    position: 'absolute',
-    left: 0,
-    color: colors.nord8,
-    fontWeight: 600,
-    fontSize: 6,
-  },
-  expStack: {
-    marginTop: 1,
-    fontSize: 5.5,
-    color: colors.nord8,
-  },
-  educationCard: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: colors.nord5,
-    borderRadius: 4,
-    padding: '3 5',
-    marginBottom: 3,
-  },
-  eduHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    gap: 6,
-  },
-  eduDegree: {
-    fontSize: 7,
-    fontWeight: 600,
-    color: colors.nord0,
+  expCompany: {
+    fontSize: 6.5,
+    fontWeight: 500,
+    color: c.nord10,
     marginBottom: 1,
   },
-  eduInstitution: {
+  expDesc: {
+    fontSize: 6.5,
+    color: c.nord2,
+    lineHeight: 1.5,
+    marginBottom: 1,
+  },
+  expBullets: {
+    marginVertical: 1,
+  },
+  expBulletItem: {
+    flexDirection: 'row',
+    marginBottom: 0.5,
+    paddingLeft: 1,
+  },
+  expBulletArrow: {
+    color: c.nord8,
+    fontWeight: 700,
+    fontSize: 7.5,
+    width: 7,
+  },
+  expBulletText: {
+    fontSize: 6.5,
+    color: c.nord2,
+    lineHeight: 1.45,
+    flex: 1,
+  },
+  expStack: {
     fontSize: 6,
-    fontWeight: 500,
-    color: colors.nord8,
+    color: c.nord3,
+    marginTop: 2,
   },
-  eduDate: {
-    fontSize: 5.5,
-    fontWeight: 500,
-    color: colors.nord3,
-    padding: '1 4',
-    borderRadius: 2,
-    backgroundColor: '#E8F4F8',
-  },
-  projectCard: {
+
+  // --- Projects ---
+  projCard: {
+    marginBottom: 4,
+    paddingTop: 4,
+    paddingHorizontal: 6,
+    paddingBottom: 3,
     backgroundColor: '#FFFFFF',
     borderWidth: 1,
-    borderColor: colors.nord5,
+    borderColor: c.nord5,
     borderRadius: 4,
-    padding: '3 5',
-    marginBottom: 3,
   },
   projHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    gap: 6,
-    marginBottom: 2,
+    alignItems: 'center',
   },
-  projTitle: {
+  projName: {
     fontSize: 7,
     fontWeight: 600,
-    color: colors.nord0,
-    marginBottom: 1,
-  },
-  projUrl: {
-    fontSize: 5.5,
-    fontWeight: 500,
-    color: colors.nord8,
-    textDecoration: 'none',
+    color: c.nord0,
   },
   projDate: {
-    fontSize: 5.5,
-    fontWeight: 500,
-    color: colors.nord3,
-    padding: '1 4',
-    borderRadius: 2,
-    backgroundColor: 'rgba(136, 192, 208, 0.15)',
-  },
-  projContent: {
     fontSize: 6,
-    lineHeight: 1.3,
-    color: colors.nord3,
+    fontWeight: 500,
+    color: c.nord10,
+    backgroundColor: c.nord6,
+    paddingVertical: 1,
+    paddingHorizontal: 5,
+    borderRadius: 10,
+    borderWidth: 0.5,
+    borderColor: c.nord5,
   },
   projDesc: {
-    marginBottom: 1,
+    fontSize: 6.5,
+    color: c.nord2,
+    lineHeight: 1.5,
+    marginTop: 1,
   },
   projStack: {
+    fontSize: 6,
+    color: c.nord3,
     marginTop: 1,
-    fontSize: 5.5,
-    color: colors.nord8,
+  },
+
+  // --- Formation ---
+  formationCard: {
+    paddingVertical: 4,
+    paddingHorizontal: 6,
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: c.nord5,
+    borderRadius: 4,
+  },
+  formationEntry: {
+    fontSize: 6.5,
+    color: c.nord2,
+    lineHeight: 1.6,
+    marginBottom: 1,
+  },
+  formationDegree: {
+    fontWeight: 600,
+    color: c.nord0,
+  },
+  formationYear: {
+    color: c.nord3,
+    fontSize: 6,
   },
 });
 
-// CV Document Component
+// =============================================================
+// Skill groups config (same logic as CvIsland web component)
+// =============================================================
+const categoryLabels: Record<string, { fr: string; en: string }> = {
+  frontend: { fr: 'Front', en: 'Front' },
+  backend: { fr: 'Back', en: 'Back' },
+  cicd: { fr: 'CI/CD', en: 'CI/CD' },
+  infra: { fr: 'Infra', en: 'Infra' },
+  databases: { fr: 'BDD', en: 'DB' },
+  shell: { fr: 'Shell', en: 'Shell' },
+  testing: { fr: 'Tests', en: 'Tests' },
+};
+const displayOrder = ['frontend', 'backend', 'cicd', 'infra', 'databases', 'shell', 'testing'];
+
+// =============================================================
+// CV Document Component — Nordic Island Layout
+// =============================================================
 function CvDocument({
   cvData,
   skillsByCategory,
@@ -419,254 +454,222 @@ function CvDocument({
 
   const t = {
     yearsExperience: isFr ? "ans d'expérience" : 'years of experience',
-    yearsOld: isFr ? 'ans' : 'years old',
-    contact: isFr ? 'Contact' : 'Contact',
-    expertise: isFr ? "Domaines d'expertise" : 'Areas of Expertise',
-    skills: isFr ? 'Compétences' : 'Skills',
-    languages: isFr ? 'Langues' : 'Languages',
     contributions: isFr ? 'Contributions' : 'Contributions',
     experience: isFr ? 'Expériences Professionnelles' : 'Professional Experience',
-    education: isFr ? 'Formation' : 'Education',
     projects: isFr ? 'Projets Personnels' : 'Personal Projects',
-    current: isFr ? "Aujourd'hui" : 'Present',
-    stack: isFr ? 'Stack' : 'Stack',
+    education: isFr ? 'Formation' : 'Education',
+    languages: isFr ? 'Langues' : 'Languages',
   };
 
-  const categoryLabels: Record<string, { fr: string; en: string }> = {
-    frontend: { fr: 'Front-end', en: 'Front-end' },
-    backend: { fr: 'Back-end', en: 'Back-end' },
-    databases: { fr: 'BDD', en: 'Databases' },
-    cicd: { fr: 'CI/CD', en: 'CI/CD' },
-    os: { fr: 'Systèmes', en: 'Systems' },
-    cloud: { fr: 'Cloud', en: 'Cloud' },
-    testing: { fr: 'Testing', en: 'Testing' },
-    tools: { fr: 'Outils', en: 'Tools' },
+  // Merge os + cloud → infra (same logic as web)
+  const mergedSkills: Record<string, string[]> = {
+    ...skillsByCategory,
+    infra: [
+      ...(skillsByCategory.os || []),
+      ...(skillsByCategory.cloud || []),
+    ],
   };
 
-  const categoryOrder = ['frontend', 'backend', 'databases', 'cicd', 'os', 'cloud', 'testing', 'tools'];
+  // Build skill groups (non-empty only)
+  const skillGroups = displayOrder
+    .map((key) => ({
+      key,
+      label: categoryLabels[key]?.[lang] || key,
+      items: mergedSkills[key] || [],
+    }))
+    .filter((g) => g.items.length > 0);
 
+  // Languages entry for skills row
+  const langEntry = cvData.languages.length > 0
+    ? cvData.languages.map((l) => `${l.language} ${l.level.toLowerCase()}`).join(', ')
+    : null;
+
+  // Photo URL
   const photoUrl = cvData.personal.photo
     ? cvData.personal.photo.startsWith('/')
       ? `${process.env.NEXT_PUBLIC_SITE_URL || 'https://daviani.dev'}${cvData.personal.photo}`
       : cvData.personal.photo
     : null;
 
+  // Links display
+  const links = [
+    cvData.personal.website?.replace('https://', ''),
+    cvData.personal.github?.replace('https://', ''),
+    cvData.personal.linkedin ? 'LinkedIn' : null,
+  ].filter(Boolean).join(' · ');
+
   return (
     <Document>
-      <Page size="A4" style={styles.page}>
-        {/* Sidebar */}
-        <View style={styles.sidebar}>
-          <View style={styles.profileSection}>
-            {photoUrl && (
-              // eslint-disable-next-line jsx-a11y/alt-text -- @react-pdf/renderer Image is PDF, not HTML
-              <Image src={photoUrl} style={styles.profilePhoto} />
-            )}
-            <Text style={styles.profileName}>{cvData.personal.name}</Text>
-            <Text style={styles.profileTitle}>{cvData.personal.title}</Text>
-            <Text style={styles.profileExperience}>
-              {cvData.personal.experienceYears} {t.yearsExperience}
-            </Text>
-          </View>
+      <Page size="A4" style={s.page}>
+        {/* ============ ISLAND ============ */}
+        <View style={s.island}>
+          {/* Title */}
+          <Text style={s.islandTitle}>
+            {cvData.personal.name} · {cvData.personal.title}
+          </Text>
 
-          <View style={styles.sidebarContent}>
-            <Text style={styles.sectionTitle}>{t.contact}</Text>
-            <View style={styles.contactItem}>
-              <Text style={styles.contactBullet}>•</Text>
-              <Text>
-                {cvData.personal.location}, {cvData.personal.age} {t.yearsOld}
+          {/* 3-column grid: info | photo | contact */}
+          <View style={s.islandGrid}>
+            {/* Left column */}
+            <View style={[s.islandCol, s.islandColLeft]}>
+              <Text style={s.islandTextBold}>
+                {cvData.personal.experienceYears} {t.yearsExperience}
               </Text>
+              {cvData.subtitle && (
+                <Text style={s.islandSubtitle}>{cvData.subtitle}</Text>
+              )}
+              <Text style={s.islandCity}>{cvData.personal.location}</Text>
             </View>
-            {cvData.personal.phone && (
-              <View style={styles.contactItem}>
-                <Text style={styles.contactBullet}>•</Text>
-                <Text>{cvData.personal.phone}</Text>
+
+            {/* Photo */}
+            {photoUrl ? (
+              <View style={s.photoZone}>
+                {/* eslint-disable-next-line jsx-a11y/alt-text -- @react-pdf/renderer Image is PDF, not HTML */}
+                <Image src={photoUrl} style={s.photoImg} />
+              </View>
+            ) : (
+              <View style={[s.photoZone, { alignItems: 'center', justifyContent: 'center', backgroundColor: c.nord0 }]}>
+                <Text style={{ color: c.nord3, fontSize: 5 }}>PHOTO</Text>
               </View>
             )}
-            <View style={styles.contactItem}>
-              <Text style={styles.contactBullet}>•</Text>
-              <Link src={`mailto:${cvData.personal.email}`} style={styles.contactLink}>
+
+            {/* Right column */}
+            <View style={[s.islandCol, s.islandColRight]}>
+              <Link src={`mailto:${cvData.personal.email}`} style={s.islandEmail}>
                 {cvData.personal.email}
               </Link>
+              <Text style={s.islandLink}>{links}</Text>
+              {cvData.personal.phone && (
+                <Text style={s.islandPhone}>{cvData.personal.phone}</Text>
+              )}
             </View>
-            {cvData.personal.linkedin && (
-              <View style={styles.contactItem}>
-                <Text style={styles.contactBullet}>•</Text>
-                <Link src={cvData.personal.linkedin} style={styles.contactLink}>
-                  {cvData.personal.linkedin.replace('https://', '')}
-                </Link>
-              </View>
-            )}
-            {cvData.personal.github && (
-              <View style={styles.contactItem}>
-                <Text style={styles.contactBullet}>•</Text>
-                <Link src={cvData.personal.github} style={styles.contactLink}>
-                  {cvData.personal.github.replace('https://', '')}
-                </Link>
-              </View>
-            )}
-            {cvData.personal.website && (
-              <View style={styles.contactItem}>
-                <Text style={styles.contactBullet}>•</Text>
-                <Link src={cvData.personal.website} style={styles.contactLink}>
-                  {cvData.personal.website.replace('https://', '')}
-                </Link>
-              </View>
-            )}
+          </View>
 
-            <Text style={styles.sectionTitle}>{t.expertise}</Text>
-            {cvData.expertise.map((exp, i) => (
-              <View key={i} style={styles.expertiseItem}>
-                <Text style={styles.contactBullet}>•</Text>
-                <Text>{exp.title}</Text>
+          {/* Skills row */}
+          <View style={s.skillsRow}>
+            {skillGroups.map((group, i) => (
+              <View key={group.key} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                {i > 0 && <Text style={s.skillSep}>|</Text>}
+                <View style={s.skillGroup}>
+                  <Text style={s.skillLabel}>{group.label} :</Text>
+                  <Text style={s.skillItems}>{group.items.join(', ')}</Text>
+                </View>
               </View>
             ))}
-
-            <Text style={styles.sectionTitle}>{t.skills}</Text>
-            {categoryOrder.map((category) => {
-              const categorySkills = skillsByCategory[category] || [];
-              if (categorySkills.length === 0) return null;
-              return (
-                <View key={category} style={styles.skillCategory}>
-                  <Text style={styles.skillCategoryLabel}>
-                    {categoryLabels[category]?.[lang] || category}
-                  </Text>
-                  <View style={styles.skillsContainer}>
-                    {categorySkills.map((skill, i) => (
-                      <Text key={i} style={styles.skillTag}>
-                        {skill}
-                      </Text>
-                    ))}
-                  </View>
+            {langEntry && (
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Text style={s.skillSep}>|</Text>
+                <View style={s.skillGroup}>
+                  <Text style={s.skillLabel}>{t.languages} :</Text>
+                  <Text style={s.skillItems}>{langEntry}</Text>
                 </View>
-              );
-            })}
-
-            {cvData.languages && cvData.languages.length > 0 && (
-              <>
-                <Text style={styles.sectionTitle}>{t.languages}</Text>
-                {cvData.languages.map((lng, i) => (
-                  <View key={i} style={styles.languageItem}>
-                    <Text>{lng.language}</Text>
-                    <Text style={styles.languageLevel}>{lng.level}</Text>
-                  </View>
-                ))}
-              </>
-            )}
-
-            {cvData.contributions && cvData.contributions.length > 0 && (
-              <View style={styles.contributionsBox}>
-                <Text style={styles.contributionsTitle}>{t.contributions}</Text>
-                {cvData.contributions.map((contrib, i) => (
-                  <View key={i} style={styles.contributionItem}>
-                    <Text style={styles.contribType}>
-                      {contrib.type} • {contrib.date}
-                    </Text>
-                    <Text style={styles.contribDesc}>{contrib.description}</Text>
-                  </View>
-                ))}
               </View>
             )}
           </View>
         </View>
 
-        {/* Main Content */}
-        <View style={styles.main}>
-          <Text style={styles.mainSectionTitle}>{t.experience}</Text>
-          {cvData.experiences.map((exp, i) => (
-            <View key={i} style={styles.experienceCard}>
-              <View style={styles.expHeader}>
-                <View>
-                  <Text style={styles.expRole}>{exp.role}</Text>
-                  <Text style={styles.expCompany}>{exp.company}</Text>
-                </View>
-                <Text style={styles.expDate}>
-                  {exp.start} - {exp.current ? t.current : exp.end}
-                </Text>
+        {/* ============ BODY ============ */}
+        <View style={s.bodyZone}>
+          {/* --- Contributions --- */}
+          {cvData.contributions && cvData.contributions.length > 0 && (
+            <>
+              <Text style={s.highlightsTitle}>{t.contributions.toUpperCase()}</Text>
+              <View style={s.highlightsCard}>
+                {cvData.contributions.map((contrib, i) => (
+                  <View key={i} style={s.highlightItem}>
+                    <Text style={s.highlightType}>
+                      {contrib.type} · {contrib.date}
+                    </Text>
+                    <Text style={s.highlightDesc}>{contrib.description}</Text>
+                  </View>
+                ))}
               </View>
-              <View style={styles.expContent}>
-                {exp.summary && (
-                  <Text style={{ marginBottom: exp.highlights?.length > 0 ? 4 : 0 }}>
-                    {exp.summary}
+            </>
+          )}
+
+          {/* --- Expériences --- */}
+          <View style={s.section}>
+            <Text style={s.sectionTitle}>{t.experience.toUpperCase()}</Text>
+            {cvData.experiences.map((exp, i) => (
+              <View key={i} style={s.expCard}>
+                <View style={s.expHeader}>
+                  <Text style={s.expRole}>{exp.role}</Text>
+                  <Text style={s.expDate}>
+                    {exp.start} – {exp.current ? (isFr ? "Aujourd'hui" : 'Present') : exp.end}
                   </Text>
+                </View>
+                {exp.summary && (
+                  <Text style={s.expCompany}>{exp.summary}</Text>
+                )}
+                {!exp.summary && exp.company && (
+                  <Text style={s.expCompany}>{exp.company}</Text>
                 )}
                 {exp.highlights && exp.highlights.length > 0 && (
-                  <View style={styles.expHighlights}>
+                  <View style={s.expBullets}>
                     {exp.highlights.map((h, j) => (
-                      <View key={j} style={styles.expHighlightItem}>
-                        <Text style={styles.expArrow}>→</Text>
-                        <Text>{h}</Text>
+                      <View key={j} style={s.expBulletItem}>
+                        <Text style={s.expBulletArrow}>›</Text>
+                        <Text style={s.expBulletText}>{h}</Text>
                       </View>
                     ))}
                   </View>
                 )}
+                {!exp.highlights?.length && !exp.summary && exp.company && null}
+                {exp.compact && exp.company !== exp.role && (
+                  <Text style={s.expDesc}>{exp.summary || ''}</Text>
+                )}
                 {exp.stack && exp.stack.length > 0 && (
-                  <Text style={styles.expStack}>
-                    <Text style={{ fontWeight: 600 }}>{t.stack} : </Text>
-                    {exp.stack.join(', ')}
-                  </Text>
+                  <Text style={s.expStack}>{exp.stack.join(' · ')}</Text>
                 )}
               </View>
-            </View>
-          ))}
+            ))}
+          </View>
 
-          <Text style={styles.mainSectionTitleNotFirst}>{t.education}</Text>
-          {cvData.education.map((edu, i) => (
-            <View key={i} style={styles.educationCard}>
-              <View style={styles.eduHeader}>
-                <View>
-                  <Text style={styles.eduDegree}>{edu.degree}</Text>
-                  <Text style={styles.eduInstitution}>{edu.institution}</Text>
-                </View>
-                <Text style={styles.eduDate}>
-                  {edu.start === edu.end ? edu.start : `${edu.start} - ${edu.end}`}
-                </Text>
-              </View>
-            </View>
-          ))}
-
+          {/* --- Projets --- */}
           {cvData.projects && cvData.projects.length > 0 && (
-            <>
-              <Text style={styles.mainSectionTitleNotFirst}>{t.projects}</Text>
+            <View style={s.section}>
+              <Text style={s.sectionTitle}>{t.projects.toUpperCase()}</Text>
               {cvData.projects.map((proj, i) => (
-                <View key={i} style={styles.projectCard}>
-                  <View style={styles.projHeader}>
-                    <View>
-                      <Text style={styles.projTitle}>{proj.title}</Text>
-                      {proj.url && (
-                        <Link src={proj.url} style={styles.projUrl}>
-                          {proj.url.replace(/^https?:\/\//, '')}
-                        </Link>
-                      )}
-                    </View>
-                    <Text style={styles.projDate}>
-                      {proj.start} - {proj.end}
+                <View key={i} style={s.projCard}>
+                  <View style={s.projHeader}>
+                    <Text style={s.projName}>{proj.title}</Text>
+                    <Text style={s.projDate}>
+                      {proj.start} – {proj.end}
                     </Text>
                   </View>
-                  <View style={styles.projContent}>
-                    {proj.description && (
-                      <Text style={styles.projDesc}>{proj.description}</Text>
-                    )}
-                    {proj.highlights && proj.highlights.length > 0 && (
-                      <View style={styles.expHighlights}>
-                        {proj.highlights.map((h, j) => (
-                          <View key={j} style={styles.expHighlightItem}>
-                            <Text style={styles.expArrow}>→</Text>
-                            <Text>{h}</Text>
-                          </View>
-                        ))}
-                      </View>
-                    )}
-                    {proj.stack && proj.stack.length > 0 && (
-                      <Text style={styles.projStack}>
-                        <Text style={{ fontWeight: 600 }}>{t.stack} : </Text>
-                        {proj.stack.join(', ')}
-                      </Text>
-                    )}
-                  </View>
+                  {proj.description && (
+                    <Text style={s.projDesc}>{proj.description}</Text>
+                  )}
+                  {proj.stack && proj.stack.length > 0 && (
+                    <Text style={s.projStack}>{proj.stack.join(' · ')}</Text>
+                  )}
                 </View>
               ))}
-            </>
+            </View>
           )}
+
+          {/* --- Formation --- */}
+          <View style={s.section}>
+            <Text style={s.sectionTitle}>{t.education.toUpperCase()}</Text>
+            <View style={s.formationCard}>
+              {cvData.education.map((edu, i) => (
+                <View key={i} style={s.formationEntry}>
+                  <Text>
+                    <Text style={s.formationDegree}>{edu.degree}</Text>
+                    {' — '}{edu.institution}{' '}
+                    <Text style={s.formationYear}>
+                      · {edu.start === edu.end ? edu.start : `${edu.start} – ${edu.end}`}
+                    </Text>
+                  </Text>
+                  {edu.description && (
+                    <Text style={{ fontSize: 6, color: c.nord3, marginTop: 1 }}>
+                      {edu.description}
+                    </Text>
+                  )}
+                </View>
+              ))}
+            </View>
+          </View>
         </View>
       </Page>
     </Document>
@@ -674,16 +677,14 @@ function CvDocument({
 }
 
 /**
- * Generate PDF CV with options:
- * - lang: 'fr' | 'en' (default: 'fr')
- * - action: 'download' | 'print' (default: 'download')
+ * Generate PDF CV — Nordic Island layout
+ * Options: ?lang=fr|en &action=download|print
  */
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const lang = (searchParams.get('lang') as 'fr' | 'en') || 'fr';
   const action = (searchParams.get('action') as 'download' | 'print') || 'download';
 
-  // Get CV data
   const cvData = getLocalizedCvData(lang);
   const skillsByCategory = getCvSkillsByCategory();
 
@@ -692,23 +693,19 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // Generate PDF with React-PDF
     const pdfStream = await ReactPDF.renderToStream(
       <CvDocument cvData={cvData} skillsByCategory={skillsByCategory} lang={lang} />
     );
 
-    // Convert stream to buffer
     const chunks: Buffer[] = [];
     for await (const chunk of pdfStream) {
       chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
     }
     const pdfBuffer = Buffer.concat(chunks);
 
-    // Determine filename based on language
     const filename =
       lang === 'fr' ? 'Daviani-Fillatre-CV.pdf' : 'Daviani-Fillatre-Resume.pdf';
 
-    // Return PDF
     const headers: HeadersInit = {
       'Content-Type': 'application/pdf',
     };

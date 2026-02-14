@@ -44,6 +44,8 @@ function buildCvData(overrides: Partial<CvData> = {}): CvData {
     },
     summaryFr: 'Résumé en français',
     summaryEn: 'English summary',
+    subtitleFr: 'Qualité · Automatisation · Transmission',
+    subtitleEn: 'Quality · Automation · Knowledge sharing',
     experiences: [
       {
         start: '2020-01',
@@ -70,6 +72,8 @@ function buildCvData(overrides: Partial<CvData> = {}): CvData {
         institutionEn: 'University of Paris',
         degreeFr: 'Master Informatique',
         degreeEn: 'MSc Computer Science',
+        descriptionFr: 'Reconversion professionnelle',
+        descriptionEn: 'Career change',
       },
     ],
     skills: [
@@ -192,6 +196,27 @@ describe('content/cv-keystatic', () => {
       expect(data!.summary).toBe('English summary');
     });
 
+    it('localizes subtitle', () => {
+      mockExistsSync.mockReturnValue(true);
+      mockReadFileSync.mockReturnValue('yaml');
+      mockYamlParse.mockReturnValue(buildCvData());
+
+      const fr = getLocalizedCvData('fr')!;
+      expect(fr.subtitle).toBe('Qualité · Automatisation · Transmission');
+
+      const en = getLocalizedCvData('en')!;
+      expect(en.subtitle).toBe('Quality · Automation · Knowledge sharing');
+    });
+
+    it('handles missing subtitle gracefully', () => {
+      mockExistsSync.mockReturnValue(true);
+      mockReadFileSync.mockReturnValue('yaml');
+      mockYamlParse.mockReturnValue(buildCvData({ subtitleFr: undefined, subtitleEn: undefined }));
+
+      const data = getLocalizedCvData('fr')!;
+      expect(data.subtitle).toBeUndefined();
+    });
+
     it('localizes experiences', () => {
       mockExistsSync.mockReturnValue(true);
       mockReadFileSync.mockReturnValue('yaml');
@@ -216,10 +241,12 @@ describe('content/cv-keystatic', () => {
       const fr = getLocalizedCvData('fr')!;
       expect(fr.education[0].institution).toBe('Université de Paris');
       expect(fr.education[0].degree).toBe('Master Informatique');
+      expect(fr.education[0].description).toBe('Reconversion professionnelle');
 
       const en = getLocalizedCvData('en')!;
       expect(en.education[0].institution).toBe('University of Paris');
       expect(en.education[0].degree).toBe('MSc Computer Science');
+      expect(en.education[0].description).toBe('Career change');
     });
 
     it('localizes languages', () => {
