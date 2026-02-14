@@ -1,6 +1,6 @@
 'use client';
 
-import { CvSidebar } from './CvSidebar';
+import { CvIsland } from './CvIsland';
 import { CvMain } from './CvMain';
 import type { LocalizedCvData } from '@/lib/content/cv-keystatic';
 
@@ -13,12 +13,11 @@ interface CvLayoutProps {
 
 export function CvLayout({ cvData, skillsByCategory }: CvLayoutProps) {
   return (
-    <div
-      className="mx-auto flex flex-col gap-2.5 overflow-hidden rounded-xl bg-white p-2.5 shadow-xl md:flex-row md:gap-2.5 md:p-2.5 dark:bg-nord-0"
-      style={{ maxWidth: '210mm' }}
-    >
-      <CvSidebar cvData={cvData} skillsByCategory={skillsByCategory} />
-      <CvMain cvData={cvData} />
+    <div className="mx-auto max-w-5xl rounded-2xl border border-nord-5 bg-white p-4 dark:border-nord-3 dark:bg-nord-1">
+      <CvIsland cvData={cvData} skillsByCategory={skillsByCategory} />
+      <div className="px-1 pt-4.5">
+        <CvMain cvData={cvData} />
+      </div>
     </div>
   );
 }
