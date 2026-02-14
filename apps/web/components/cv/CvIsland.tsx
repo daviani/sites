@@ -64,9 +64,9 @@ export function CvIsland({ cvData, skillsByCategory }: CvIslandProps) {
     >
       {/* Title row — centered */}
       <div className="pb-3.5 text-center">
-        <h1 className="text-base font-bold leading-snug tracking-tight text-nord-8 md:text-[16px]">
+        <p className="text-base font-bold leading-snug tracking-tight text-nord-8 md:text-[16px]">
           {personal.name} · {personal.title}
-        </h1>
+        </p>
       </div>
 
       {/* 3-column grid: info | photo | contact */}
