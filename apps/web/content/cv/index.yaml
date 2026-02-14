@@ -1,8 +1,8 @@
 personal:
   nameFr: Daviani FILLATRE
   nameEn: Daviani FILLATRE
-  titleFr: Développeur Full-Stack & DevOps
-  titleEn: Full-Stack & DevOps Developer
+  titleFr: Développeur Full-Stack JS et DevOps
+  titleEn: Full-Stack JS & DevOps Developer
   birthDate: 1989-05-05
   experienceStart: 2020-01-01
   location: Villeurbanne
@@ -12,62 +12,84 @@ personal:
   github: https://github.com/daviani
   website: https://daviani.dev
   photo: https://daviani.dev/images/profile/photo.jpg
-summaryFr: Développeur Full-Stack et DevOps avec 6 ans d'expérience
-summaryEn: Full-Stack and DevOps Developer with 6 years of experience
+summaryFr: Développeur Full-Stack JS et DevOps avec 6 ans d'expérience
+summaryEn: Full-Stack JS & DevOps Developer with 6 years of experience
+subtitleFr: Qualité · Automatisation · Transmission
+subtitleEn: Quality · Automation · Knowledge sharing
 experiences:
   - start: 10/2023
-    current: true
+    end: 03/2026
+    current: false
     compact: false
     companyFr: ATIPY
     companyEn: ATIPY
-    roleFr: Développeur Full-Stack & DevOps
-    roleEn: Full-Stack & DevOps Developer
+    roleFr: Développeur Senior Full-Stack et DevOps
+    roleEn: Senior Full-Stack & DevOps Developer
     locationFr: Lyon
     locationEn: Lyon, France
     summaryFr: >-
-      Développeur unique depuis mars 2025. Gestion de 6 applications (site
-      vitrine, outils internes, projets clients) et maintenance du parc
-      serveurs.
+      ATIPY — Seul développeur depuis mars 2025, 6 applications (internes,
+      clients, site vitrine), 11 serveurs
     summaryEn: >-
-      Sole developer since March 2025. Management of 6 applications (showcase
-      website, internal tools, client projects) and maintenance of the server
-      farm.
+      ATIPY — Sole developer since March 2025, 6 applications (internal,
+      client, showcase website), 11 servers
     highlightsFr:
       - >-
-        Développement et maintenance d'applications conformes RGAA (Angular,
-        Next.js, .NET Core)
+        Mise en place complète de la chaîne CI/CD (GitLab CI, Jenkins,
+        Docker) : pipelines, review apps, rollback automatique, création des
+        environnements de preprod — avant : déploiements manuels directement en
+        production
       - >-
-        Conception et optimisation de pipelines CI/CD : GitLab CI, Jenkins,
-        Docker, stratégie blue-green deployment, review apps
+        Architecture multi-tenant .NET : gestion DNS sous-domaines par client,
+        certificats SSL/TLS, bindings IIS
       - >-
-        Administration système multi-environnements : Windows Server, Linux
-        (OVH, GCP), IIS, Apache, SSL/TLS
+        Migration Entity Framework : 3 000+ lignes sur 2 applications, validées
+        sans régression
       - >-
-        Gestion de bases de données PostgreSQL : migrations Entity Framework
-        Core, optimisation de requêtes
-      - Monitoring et gestion des incidents en autonomie complète
+        Automatisation des opérations DB : dump prod passé de 1h manuelle à
+        5 min via scripts sécurisés
+      - >-
+        Fiabilisation de l'infra : résolution pannes récurrentes, rotation
+        backups, monitoring/alerting, détection d'intrusions SSH, sécurisation
+        des accès serveurs
+      - >-
+        Corrections d'accessibilité RGAA sur le site vitrine et applications
+        clients : implémentation des recommandations d'audit externe (landmarks,
+        ARIA, focus clavier, formulaires) et adaptation du CMS headless pour
+        garantir la conformité des contenus éditoriaux
     highlightsEn:
       - >-
-        Development and maintenance of RGAA-compliant applications (Angular,
-        Next.js, .NET Core)
+        Complete CI/CD pipeline setup (GitLab CI, Jenkins, Docker): pipelines,
+        review apps, automatic rollback, preprod environment creation — before:
+        manual deployments directly to production
       - >-
-        Design and optimization of CI/CD pipelines: GitLab CI, Jenkins, Docker,
-        blue-green deployment strategy, review apps
+        Multi-tenant .NET architecture: per-client DNS subdomain management,
+        SSL/TLS certificates, IIS bindings
       - >-
-        Multi-environment system administration: Windows Server, Linux (OVH,
-        GCP), IIS, Apache, SSL/TLS
+        Entity Framework migration: 3,000+ lines across 2 applications,
+        validated without regression
       - >-
-        PostgreSQL database management: Entity Framework Core migrations, query
-        optimization
-      - Monitoring and incident management with complete autonomy
+        DB operations automation: prod dump reduced from 1h manual to 5 min
+        via secured scripts
+      - >-
+        Infrastructure hardening: recurring outage resolution, backup rotation,
+        monitoring/alerting, SSH intrusion detection, server access security
+      - >-
+        RGAA accessibility fixes on showcase website and client applications:
+        implementation of external audit recommendations (landmarks, ARIA,
+        keyboard focus, forms) and headless CMS adaptation for editorial
+        content compliance
     stack:
-      - Angular
+      - React
       - Next.js
+      - Angular
       - .NET Core
       - PostgreSQL
       - GitLab CI/CD
       - Jenkins
       - Docker
+      - Bash
+      - PowerShell
   - start: 12/2022
     end: 08/2023
     current: false
@@ -79,40 +101,39 @@ experiences:
     locationFr: Lyon
     locationEn: Lyon, France
     summaryFr: >-
-      Développement d'outils d'automatisation pour optimiser les workflows
-      internes. Extension Chrome pour intégration CRM/Gmail avec automatisation
-      de processus métier et intégration API tierces.
+      Extension Chrome pour extraction automatique de données Gmail vers le CRM
+      interne, déployée pour l'équipe commerciale.
     summaryEn: >-
-      Development of automation tools to optimize internal workflows. Chrome
-      extension for CRM/Gmail integration with business process automation and
-      third-party API integration.
+      Chrome extension for automatic Gmail data extraction to the internal CRM,
+      deployed for the sales team.
     highlightsFr: []
     highlightsEn: []
     stack:
       - JavaScript
       - Chrome Extension API
       - Node.js
-      - intégration CRM
   - start: 02/2022
     end: 08/2022
     current: false
-    compact: true
-    companyFr: Anikop
-    companyEn: Anikop
+    compact: false
+    companyFr: Anikop (groupe LDLC)
+    companyEn: Anikop (LDLC group)
     roleFr: Analyste Développeur
     roleEn: Developer Analyst
     locationFr: Lyon
     locationEn: Lyon, France
     summaryFr: >-
-      Conception et développement d'applications web et mobile JavaScript, APIs
-      Node.js jusqu'au déploiement production. Méthodologie Agile (SCRUM).
+      Application de vérification de titres restaurant (web React, mobile React
+      Native, API Node.js). Déploiements iOS/Android, développement de features
+      pour terminaux à douchette intégrée. 70% de couverture de tests.
     summaryEn: >-
-      Design and development of JavaScript web and mobile applications, Node.js
-      APIs through to production deployment. Agile methodology (SCRUM).
+      Restaurant voucher verification app (React web, React Native mobile,
+      Node.js API). iOS/Android deployments, feature development for integrated
+      barcode scanner terminals. 70% test coverage.
     highlightsFr: []
     highlightsEn: []
     stack:
-      - React.js
+      - React
       - React Native
       - Nest.js
       - MariaDB
@@ -120,105 +141,33 @@ experiences:
       - Jest
       - Cypress
       - Docker
-  - start: 07/2021
-    end: 12/2021
+  - start: '2019'
+    end: '2022'
     current: false
     compact: true
-    companyFr: Méphistophélès Pub
-    companyEn: Méphistophélès Pub
-    roleFr: Développeur Web
-    roleEn: Web Developer
+    companyFr: Missions indépendantes
+    companyEn: Independent missions
+    roleFr: Développeur Web — Missions indépendantes
+    roleEn: Web Developer — Independent Missions
     locationFr: Lyon
     locationEn: Lyon, France
     summaryFr: >-
-      Création site vitrine multilingue (fr/en) avec CMS headless DatoCMS.
-      Gestion de la production avec Vercel.
+      Sites vitrines multilingues, application de vote dématérialisé, app
+      coaching sportif, intégration front-end sur application santé. CRM
+      full-stack personnel (Symfony, ApiPlatform, React).
     summaryEn: >-
-      Creation of multilingual showcase website (FR/EN) with DatoCMS headless
-      CMS. Production management with Vercel.
+      Multilingual showcase websites, digital voting application, sports
+      coaching app, front-end integration on healthcare application. Personal
+      full-stack CRM (Symfony, ApiPlatform, React).
     highlightsFr: []
     highlightsEn: []
     stack:
+      - React
       - Next.js
-      - Tailwind CSS
-      - DatoCMS
-      - Vercel
-  - start: 04/2021
-    end: 06/2021
-    current: false
-    compact: true
-    companyFr: Majelice
-    companyEn: Majelice
-    roleFr: Développeur Front-End React
-    roleEn: Front-End React Developer
-    locationFr: Lyon
-    locationEn: Lyon, France
-    summaryFr: >-
-      Refonte front-end application d'assemblée générale et votes
-      dématérialisés. Focus UX et sécurité.
-    summaryEn: >-
-      Front-end redesign of general assembly and digital voting application.
-      Focus on UX and security.
-    highlightsFr: []
-    highlightsEn: []
-    stack: []
-  - start: 09/2020
-    end: 04/2021
-    current: false
-    compact: true
-    companyFr: Brightceps
-    companyEn: Brightceps
-    roleFr: Développeur Web
-    roleEn: Web Developer
-    locationFr: Lyon
-    locationEn: Lyon, France
-    summaryFr: >-
-      Application de coaching sportif en React. Organisation et gestion de
-      projet.
-    summaryEn: Sports coaching application in React. Organization and project management.
-    highlightsFr: []
-    highlightsEn: []
-    stack: []
-  - start: 09/2020
-    end: 12/2020
-    current: false
-    compact: true
-    companyFr: Silico
-    companyEn: Silico
-    roleFr: Développeur Front-End Vue.js
-    roleEn: Front-End Vue.js Developer
-    locationFr: Lyon
-    locationEn: Lyon, France
-    summaryFr: >-
-      Intégration maquettes et développement front-end sur une application santé
-      (API Symfony existante).
-    summaryEn: >-
-      Mockup integration and front-end development on a healthcare application
-      (existing Symfony API).
-    highlightsFr: []
-    highlightsEn: []
-    stack:
       - Vue.js
       - Symfony
-  - start: 09/2019
-    end: 11/2019
-    current: false
-    compact: true
-    companyFr: Aristys-web (Clermont-Ferrand)
-    companyEn: Aristys-web (Clermont-Ferrand)
-    roleFr: Développeur Web (Stage)
-    roleEn: Web Developer (Internship)
-    locationFr: Clermont-Ferrand
-    locationEn: Clermont-Ferrand, France
-    summaryFr: Développement web avec approche éco-conception.
-    summaryEn: Web development with eco-design approach.
-    highlightsFr: []
-    highlightsEn: []
-    stack:
-      - Symfony
-      - Twig
-      - JavaScript
-      - CSS
+      - Tailwind CSS
+      - Vercel
 education:
   - start: '2019'
     end: '2019'
@@ -230,34 +179,26 @@ education:
     end: '2018'
     institutionFr: OpenClassrooms
     institutionEn: OpenClassrooms
-    degreeFr: Développeur d'application front-end
-    degreeEn: Front-end Application Developer
+    degreeFr: Développeur d'Application Front-End
+    degreeEn: Front-End Application Developer
+    descriptionFr: Reconversion professionnelle — ancien soudeur industriel
+    descriptionEn: Career change — former industrial welder
 skills:
-  - name: Angular
-    category: frontend
   - name: React
     category: frontend
   - name: Next.js
     category: frontend
-  - name: .NET Core
-    category: backend
   - name: Node.js
     category: backend
   - name: TypeScript
     category: backend
-  - name: PHP
-    category: backend
-  - name: Symfony
-    category: backend
-  - name: PostgreSQL
-    category: databases
-  - name: MySQL
-    category: databases
   - name: Docker
     category: cicd
   - name: GitLab CI/CD
     category: cicd
   - name: Jenkins
+    category: cicd
+  - name: GitHub Actions
     category: cicd
   - name: Linux
     category: os
@@ -267,20 +208,18 @@ skills:
     category: cloud
   - name: GCP
     category: cloud
+  - name: PostgreSQL
+    category: databases
+  - name: MySQL
+    category: databases
+  - name: Bash
+    category: shell
+  - name: PowerShell
+    category: shell
   - name: Jest
     category: testing
   - name: Cypress
     category: testing
-  - name: Git
-    category: tools
-  - name: Rider
-    category: tools
-  - name: WebStorm
-    category: tools
-  - name: PgAdmin
-    category: tools
-  - name: Postman
-    category: tools
 languages:
   - languageFr: Français
     languageEn: French
@@ -288,8 +227,8 @@ languages:
     levelEn: Native
   - languageFr: Anglais
     languageEn: English
-    levelFr: Professionnel
-    levelEn: Professional
+    levelFr: Technique
+    levelEn: Technical
 expertise:
   - titleFr: Développement Full-Stack
     titleEn: Full-Stack Development
@@ -319,105 +258,63 @@ contributions:
   - date: 2024/2025
     typeFr: Mentorat
     typeEn: Mentoring
-    descriptionFr: Accompagnement de 2 développeurs juniors, aujourd'hui en poste
-    descriptionEn: Mentoring of 2 junior developers, now employed
+    descriptionFr: 2 développeurs juniors accompagnés, aujourd'hui en poste
+    descriptionEn: 2 junior developers mentored, now employed
   - date: Mars 2023
     typeFr: Speaker
     typeEn: Speaker
-    descriptionFr: 'ApéroWeb Lyon : Introduction au CMS headless avec DatoCMS & NextJS'
-    descriptionEn: 'ApéroWeb Lyon: Introduction to headless CMS with DatoCMS & NextJS'
+    descriptionFr: ApéroWeb Lyon — CMS headless DatoCMS et Next.js
+    descriptionEn: ApéroWeb Lyon — Headless CMS DatoCMS and Next.js
 projects:
-  - titleFr: daviani.dev — Portfolio multi-domaines
-    titleEn: daviani.dev — Multi-domain Portfolio
-    start: '2025'
-    end: En cours
+  - titleFr: daviani.dev — Portfolio professionnel
+    titleEn: daviani.dev — Professional Portfolio
+    start: 01/2026
+    end: 02/2026
     descriptionFr: >-
-      Architecture monorepo multi-domaines pour portfolio professionnel. Focus
-      sur la performance, la sécurité et l'accessibilité.
+      Portfolio propulsé par Next.js 16 et React 19, Keystatic comme CMS
+      headless (blog, photos, CV). Design system découplé
+      (@nordic-island/ui) : composants, i18n FR/EN, tests d'accessibilité
+      automatisés (axe-core, WCAG AA) en CI. Sécurité renforcée (CSP, HSTS,
+      rate limiting), Cloudflare WAF/CDN, CI/CD GitHub Actions. Lighthouse
+      ≥ 95.
     descriptionEn: >-
-      Multi-domain monorepo architecture for professional portfolio. Focus on
-      performance, security and accessibility.
-    highlightsFr:
-      - Architecture multi-domaines avec middleware de routing personnalisé
-      - >-
-        Sécurité renforcée : CSP strict, HSTS, rate limiting (Vercel KV),
-        ReCaptcha v3
-      - >-
-        Infrastructure : Vercel Edge Functions, Cloudflare WAF/CDN, conformité
-        RGPD
-      - 'CI/CD : GitHub Actions, tests automatisés, déploiement continu'
-      - Objectif Lighthouse >= 95 (Performance, Accessibilité, SEO)
-    highlightsEn:
-      - Multi-domain architecture with custom routing middleware
-      - >-
-        Enhanced security: strict CSP, HSTS, rate limiting (Vercel KV),
-        ReCaptcha v3
-      - >-
-        Infrastructure: Vercel Edge Functions, Cloudflare WAF/CDN, GDPR
-        compliance
-      - 'CI/CD: GitHub Actions, automated tests, continuous deployment'
-      - Lighthouse target >= 95 (Performance, Accessibility, SEO)
+      Portfolio powered by Next.js 16 and React 19, Keystatic as headless CMS
+      (blog, photos, CV). Decoupled design system (@nordic-island/ui):
+      components, FR/EN i18n, automated accessibility testing (axe-core, WCAG
+      AA) in CI. Enhanced security (CSP, HSTS, rate limiting), Cloudflare
+      WAF/CDN, CI/CD GitHub Actions. Lighthouse score ≥ 95.
+    highlightsFr: []
+    highlightsEn: []
     stack:
       - Next.js 16
       - TypeScript
       - Turborepo
       - Tailwind CSS
+      - Keystatic
       - Vercel
       - Cloudflare
     url: https://daviani.dev
-  - titleFr: Stack IA Locale — Agents & Workflows
-    titleEn: Local AI Stack — Agents & Workflows
+  - titleFr: Stack IA locale — 7 agents spécialisés
+    titleEn: Local AI Stack — 7 Specialized Agents
     start: '2025'
     end: En cours
     descriptionFr: >-
-      Infrastructure complète pour le développement assisté par IA, 100% locale
-      et gratuite. Modèle Qwen3-Coder:30B avec 262K tokens de contexte.
+      Infrastructure de développement assisté par IA, locale ou cloud au choix.
+      7 agents spécialisés (Git, code review, audit sécurité, SQL/PostgreSQL,
+      refactoring, debugging). Base vectorielle Qdrant pour mémoire persistante
+      cross-outils, orchestration via MCP et proxy LiteLLM.
     descriptionEn: >-
-      Complete infrastructure for AI-assisted development, 100% local and free.
-      Qwen3-Coder:30B model with 262K token context.
-    highlightsFr:
-      - >-
-        7 agents spécialisés : Git, sécurité (OWASP), SQL/PostgreSQL, code
-        review, refactoring, debugging
-      - Intégration MCP (Model Context Protocol) avec proxy LiteLLM
-      - Configuration Aider pour édition de code avec IA + Continue.dev pour IDE
-      - 'Scripts Fish shell : fonctions, alias, bootstrap automatisé'
-      - Alternative gratuite aux solutions cloud
-    highlightsEn:
-      - >-
-        7 specialized agents: Git, security (OWASP), SQL/PostgreSQL, code
-        review, refactoring, debugging
-      - MCP (Model Context Protocol) integration with LiteLLM proxy
-      - Aider configuration for AI code editing + Continue.dev for IDE
-      - 'Fish shell scripts: functions, aliases, automated bootstrap'
-      - Free alternative to cloud solutions
+      AI-assisted development infrastructure, local or cloud. 7 specialized
+      agents (Git, code review, security audit, SQL/PostgreSQL, refactoring,
+      debugging). Qdrant vector database for persistent cross-tool memory,
+      orchestration via MCP and LiteLLM proxy.
+    highlightsFr: []
+    highlightsEn: []
     stack:
+      - Bash
+      - Fish Shell
       - Ollama
-      - Qwen3-Coder
+      - Qdrant
       - MCP
       - LiteLLM
-      - Aider
-      - Fish Shell
-      - Bash
     url: https://github.com/daviani/ia
-  - titleFr: CRM Full-Stack
-    titleEn: Full-Stack CRM
-    start: 11/2019
-    end: 09/2020
-    descriptionFr: >-
-      Conception d'un CRM complet démontrant la maîtrise d'une architecture API
-      REST moderne.
-    descriptionEn: Complete CRM design demonstrating mastery of modern REST API architecture.
-    highlightsFr:
-      - 'Backend : API REST avec Symfony et ApiPlatform'
-      - 'Authentification : JWT Token'
-      - 'Frontend : Application React'
-    highlightsEn:
-      - 'Backend: REST API with Symfony and ApiPlatform'
-      - 'Authentication: JWT Token'
-      - 'Frontend: React application'
-    stack:
-      - Symfony
-      - ApiPlatform
-      - React
-      - JWT

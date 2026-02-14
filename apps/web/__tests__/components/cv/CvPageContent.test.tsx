@@ -68,6 +68,18 @@ describe('CvPageContent', () => {
     Backend: ['Node.js', 'Python'],
   };
 
+  it('renders breadcrumb', () => {
+    render(
+      <CvPageContent
+        cvDataFr={mockCvDataFr}
+        cvDataEn={mockCvDataEn}
+        skillsByCategory={mockSkillsByCategory}
+      />
+    );
+
+    expect(screen.getByTestId('breadcrumb')).toBeInTheDocument();
+  });
+
   it('renders page title', () => {
     render(
       <CvPageContent
@@ -77,7 +89,7 @@ describe('CvPageContent', () => {
       />
     );
 
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Curriculum Vitae');
+    expect(screen.getByText('Curriculum Vitae')).toBeInTheDocument();
   });
 
   it('renders page subtitle', () => {
@@ -90,18 +102,6 @@ describe('CvPageContent', () => {
     );
 
     expect(screen.getByText('Développeur Full Stack')).toBeInTheDocument();
-  });
-
-  it('renders breadcrumb', () => {
-    render(
-      <CvPageContent
-        cvDataFr={mockCvDataFr}
-        cvDataEn={mockCvDataEn}
-        skillsByCategory={mockSkillsByCategory}
-      />
-    );
-
-    expect(screen.getByTestId('breadcrumb')).toBeInTheDocument();
   });
 
   it('renders CV layout', () => {

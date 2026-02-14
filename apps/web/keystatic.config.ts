@@ -1,10 +1,6 @@
 import { config, collection, singleton, fields, GitHubConfig } from '@keystatic/core';
 
-/**
- * Storage configuration: GitHub storage with OAuth
- * Note: In local development, Keystatic UI won't work without GitHub OAuth.
- * Use `pnpm dev` to preview content, and Keystatic UI in production for editing.
- */
+/** Storage: GitHub with OAuth (requires KEYSTATIC_GITHUB_CLIENT_ID/SECRET + KEYSTATIC_SECRET) */
 const storage: GitHubConfig['storage'] = {
   kind: 'github',
   repo: 'daviani/sites',
@@ -64,6 +60,17 @@ export default config({
         }),
 
         // ==========================================
+        // Sous-titre (valeurs clés / baseline)
+        // ==========================================
+        subtitleFr: fields.text({
+          label: 'Sous-titre (FR)',
+          description: 'Ex: Qualité · Automatisation · Transmission',
+        }),
+        subtitleEn: fields.text({
+          label: 'Subtitle (EN)',
+        }),
+
+        // ==========================================
         // Expériences professionnelles
         // ==========================================
         experiences: fields.array(
@@ -110,6 +117,8 @@ export default config({
             institutionEn: fields.text({ label: 'Institution (EN)', validation: { isRequired: true } }),
             degreeFr: fields.text({ label: 'Diplôme (FR)', validation: { isRequired: true } }),
             degreeEn: fields.text({ label: 'Degree (EN)', validation: { isRequired: true } }),
+            descriptionFr: fields.text({ label: 'Description (FR)', multiline: true }),
+            descriptionEn: fields.text({ label: 'Description (EN)', multiline: true }),
           }),
           {
             label: 'Formation',
@@ -132,6 +141,7 @@ export default config({
                 { label: 'CI/CD', value: 'cicd' },
                 { label: 'Systèmes (OS)', value: 'os' },
                 { label: 'Cloud', value: 'cloud' },
+                { label: 'Shell', value: 'shell' },
                 { label: 'Testing', value: 'testing' },
                 { label: 'Outils', value: 'tools' },
               ],

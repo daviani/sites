@@ -38,9 +38,3 @@ next-env.d.ts
 # photos - only track generated WebP files
 /public/photos/*
 !/public/photos/*.webp
-
-# Note: local content directories are NOT ignored
-# They need to be visible to Keystatic's local storage mode
-# /content/posts/local/
-# /content/photos/local/
-# /content/cv/local/

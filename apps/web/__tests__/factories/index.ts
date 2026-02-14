@@ -39,6 +39,7 @@ export function createLocalizedCvData(overrides: Partial<LocalizedCvData> = {}):
       ...overrides.personal,
     },
     summary: 'Experienced developer with expertise in modern web technologies.',
+    subtitle: 'Quality · Automation · Knowledge sharing',
     experiences: overrides.experiences ?? [
       {
         start: '2020',
@@ -71,6 +72,7 @@ export function createLocalizedCvData(overrides: Partial<LocalizedCvData> = {}):
         end: '2014',
         institution: 'University of Technology',
         degree: 'Master in Computer Science',
+        description: 'Career change — former industrial welder',
       },
     ],
     skills: overrides.skills ?? [
@@ -128,6 +130,8 @@ export function createCvData(overrides: Partial<CvData> = {}): CvData {
     },
     summaryFr: 'Développeur expérimenté avec expertise en technologies web modernes.',
     summaryEn: 'Experienced developer with expertise in modern web technologies.',
+    subtitleFr: 'Qualité · Automatisation · Transmission',
+    subtitleEn: 'Quality · Automation · Knowledge sharing',
     experiences: overrides.experiences ?? [
       {
         start: '2020',
@@ -155,6 +159,8 @@ export function createCvData(overrides: Partial<CvData> = {}): CvData {
         institutionEn: 'University of Technology',
         degreeFr: 'Master en Informatique',
         degreeEn: 'Master in Computer Science',
+        descriptionFr: 'Reconversion professionnelle — ancien soudeur industriel',
+        descriptionEn: 'Career change — former industrial welder',
       },
     ],
     skills: overrides.skills ?? [
