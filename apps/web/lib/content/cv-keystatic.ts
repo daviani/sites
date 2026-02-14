@@ -46,11 +46,13 @@ export interface CvEducation {
   institutionEn: string;
   degreeFr: string;
   degreeEn: string;
+  descriptionFr?: string;
+  descriptionEn?: string;
 }
 
 export interface CvSkill {
   name: string;
-  category: 'frontend' | 'backend' | 'databases' | 'cicd' | 'os' | 'cloud' | 'testing' | 'tools';
+  category: 'frontend' | 'backend' | 'databases' | 'cicd' | 'os' | 'cloud' | 'shell' | 'testing' | 'tools';
 }
 
 export interface CvLanguage {
@@ -92,6 +94,8 @@ export interface CvData {
   personal: CvPersonal;
   summaryFr: string;
   summaryEn: string;
+  subtitleFr?: string;
+  subtitleEn?: string;
   experiences: CvExperience[];
   education: CvEducation[];
   skills: CvSkill[];
@@ -120,6 +124,7 @@ export interface LocalizedCvData {
     photo?: string;
   };
   summary: string;
+  subtitle?: string;
   experiences: {
     start: string;
     end?: string;
@@ -137,6 +142,7 @@ export interface LocalizedCvData {
     end: string;
     institution: string;
     degree: string;
+    description?: string;
   }[];
   skills: CvSkill[];
   languages: {
@@ -243,6 +249,7 @@ export function getLocalizedCvData(locale: 'fr' | 'en' = 'fr'): LocalizedCvData 
       photo: data.personal.photo,
     },
     summary: isFr ? data.summaryFr : data.summaryEn,
+    subtitle: isFr ? data.subtitleFr : data.subtitleEn,
     experiences: data.experiences.map((exp) => ({
       start: exp.start,
       end: exp.end,
@@ -260,6 +267,7 @@ export function getLocalizedCvData(locale: 'fr' | 'en' = 'fr'): LocalizedCvData 
       end: edu.end,
       institution: isFr ? edu.institutionFr : edu.institutionEn,
       degree: isFr ? edu.degreeFr : edu.degreeEn,
+      description: isFr ? edu.descriptionFr : edu.descriptionEn,
     })),
     skills: data.skills,
     languages: data.languages.map((lang) => ({
@@ -310,6 +318,7 @@ export function getCvSkillsByCategory(): Record<string, string[]> {
     cicd: [],
     os: [],
     cloud: [],
+    shell: [],
     testing: [],
     tools: [],
   };
