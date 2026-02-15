@@ -217,6 +217,7 @@
         "current": "Aujourd'hui",
         "stack": "Stack",
         "download": "Télécharger le CV",
+        "downloading": "Génération du PDF en cours…",
         "yearsOld": "ans",
         "yearsExperience": "ans d'expérience",
         "contact": "Contact"

@@ -64,8 +64,11 @@ export function CvIsland({ cvData, skillsByCategory }: CvIslandProps) {
     >
       {/* Title row — centered */}
       <div className="pb-3.5 text-center">
-        <p className="text-base font-bold leading-snug tracking-tight text-nord-8 md:text-[16px]">
-          {personal.name} · {personal.title}
+        <h2 className="text-base font-bold leading-snug tracking-tight text-nord-8 md:text-[16px]">
+          {personal.name}
+        </h2>
+        <p className="mt-1 text-[12px] font-semibold tracking-wide text-nord-9">
+          {personal.title}
         </p>
       </div>
 
@@ -85,7 +88,7 @@ export function CvIsland({ cvData, skillsByCategory }: CvIslandProps) {
         </div>
 
         {/* Center — photo */}
-        <div className="order-first flex justify-center md:order-none">
+        <div className="hidden md:flex justify-center">
           {personal.photo ? (
             <div className="relative h-20 w-20 overflow-hidden rounded-full border-[2.5px] border-nord-8">
               <Image
@@ -110,7 +113,8 @@ export function CvIsland({ cvData, skillsByCategory }: CvIslandProps) {
         <div className="flex flex-col items-center gap-1 text-[10.5px] leading-relaxed text-nord-4 md:items-start md:text-left">
           <a
             href={`mailto:${personal.email}`}
-            className="text-white no-underline transition-colors hover:text-nord-8"
+            aria-label={`Envoyer un email à ${personal.email}`}
+            className="rounded px-1.5 py-1 text-white no-underline transition-colors hover:text-nord-8 focus:outline-none focus:ring-2 focus:ring-nord-10"
           >
             {personal.email}
           </a>
@@ -120,7 +124,8 @@ export function CvIsland({ cvData, skillsByCategory }: CvIslandProps) {
                 href={personal.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-nord-4 no-underline transition-colors hover:text-nord-8"
+                aria-label={`Site web ${personal.website.replace('https://', '')} (nouvelle fenêtre)`}
+                className="rounded px-1.5 py-1 text-nord-4 no-underline transition-colors hover:text-nord-8 focus:outline-none focus:ring-2 focus:ring-nord-10"
               >
                 {personal.website.replace('https://', '')}
               </a>
@@ -132,7 +137,8 @@ export function CvIsland({ cvData, skillsByCategory }: CvIslandProps) {
                   href={personal.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-nord-4 no-underline transition-colors hover:text-nord-8"
+                  aria-label="Profil GitHub (nouvelle fenêtre)"
+                  className="rounded px-1.5 py-1 text-nord-4 no-underline transition-colors hover:text-nord-8 focus:outline-none focus:ring-2 focus:ring-nord-10"
                 >
                   {personal.github.replace('https://', '')}
                 </a>
@@ -145,7 +151,8 @@ export function CvIsland({ cvData, skillsByCategory }: CvIslandProps) {
                   href={personal.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-nord-4 no-underline transition-colors hover:text-nord-8"
+                  aria-label="Profil LinkedIn (nouvelle fenêtre)"
+                  className="rounded px-1.5 py-1 text-nord-4 no-underline transition-colors hover:text-nord-8 focus:outline-none focus:ring-2 focus:ring-nord-10"
                 >
                   LinkedIn
                 </a>

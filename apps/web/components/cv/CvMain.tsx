@@ -20,13 +20,16 @@ export function CvMain({ cvData }: CvMainProps) {
           <SectionTitle color="green" first>
             {t('pages.cv.sections.contributions')}
           </SectionTitle>
-          <div className="mb-3 flex flex-col gap-6 rounded-xl border border-nord-5 border-l-[3px] border-r-[3px] border-l-nord-14 border-r-nord-14 bg-nord-6 px-4 py-2.5 md:flex-row md:gap-8 dark:border-nord-3 dark:border-l-nord-14 dark:border-r-nord-14 dark:bg-nord-2">
+          <div className="mb-2 rounded-xl border border-nord-5 bg-nord-6 px-3 py-2.5 dark:border-nord-3 dark:bg-nord-2">
             {contributions.map((c, i) => (
-              <div key={i} className="flex-1">
-                <div className="text-[10px] font-semibold text-nord-14">
-                  {c.type} · {c.date}
+              <div key={i} className={i < contributions.length - 1 ? 'mb-2' : ''}>
+                <div className="mb-1 flex flex-col items-center gap-1 md:flex-row md:items-center md:justify-between">
+                  <span className="text-[11px] font-semibold text-nord-0 dark:text-nord-6">
+                    {c.type}
+                  </span>
+                  <DateBadge>{c.date}</DateBadge>
                 </div>
-                <div className="text-[10px] leading-snug text-nord-2 dark:text-nord-4">
+                <div className="text-[9.5px] leading-snug text-nord-2 dark:text-nord-4">
                   {c.description}
                 </div>
               </div>
@@ -75,13 +78,13 @@ function SectionTitle({
   first?: boolean;
   color?: 'green';
 }) {
-  const colorClass = color === 'green' ? 'text-nord-14' : 'text-nord-10 dark:text-nord-9';
+  const colorClass = 'text-nord-3 dark:text-nord-10';
   return (
-    <h2
+    <h3
       className={`text-[10px] font-bold uppercase tracking-[1.5px] ${colorClass} border-b-[1.5px] border-nord-5 pb-1 dark:border-nord-3 ${first ? 'mb-2' : 'mb-2 mt-4'}`}
     >
       {children}
-    </h2>
+    </h3>
   );
 }
 
@@ -120,11 +123,11 @@ function ExperienceCard({ experience }: { experience: Experience }) {
 
       {/* Company / summary */}
       {experience.summary ? (
-        <div className="mb-1 text-[9.5px] font-medium text-nord-10 dark:text-nord-8">
+        <div className="mb-1 text-[9.5px] font-medium text-nord-1 dark:text-nord-4">
           {experience.summary}
         </div>
       ) : (
-        <div className="mb-1 text-[9.5px] font-medium text-nord-10 dark:text-nord-8">
+        <div className="mb-1 text-[9.5px] font-medium text-nord-1 dark:text-nord-4">
           {experience.company}
         </div>
       )}
@@ -137,7 +140,7 @@ function ExperienceCard({ experience }: { experience: Experience }) {
               key={i}
               className="relative mb-0.5 pl-2.5 text-[9.5px] leading-snug text-nord-2 dark:text-nord-4"
             >
-              <span className="absolute left-0 text-[11px] font-bold text-nord-8">›</span>
+              <span className="absolute left-0 text-[11px] font-bold text-nord-3 dark:text-nord-4">›</span>
               {h}
             </li>
           ))}
@@ -239,7 +242,7 @@ function EducationEntry({ education, isLast }: { education: Education; isLast: b
 
 function DateBadge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="w-fit shrink-0 whitespace-nowrap rounded-full border border-nord-5 bg-nord-6 px-2 py-0.5 text-[8.5px] font-medium text-nord-10 dark:border-nord-3 dark:bg-nord-1 dark:text-nord-4">
+    <span className="w-fit shrink-0 whitespace-nowrap rounded-full border border-nord-5 bg-nord-6 px-2 py-0.5 text-[8.5px] font-medium text-nord-2 dark:border-nord-3 dark:bg-nord-1 dark:text-nord-4">
       {children}
     </span>
   );
