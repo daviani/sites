@@ -114,13 +114,21 @@ const s = StyleSheet.create({
     paddingBottom: 12,
     marginBottom: 9,
   },
-  islandTitle: {
+  islandName: {
     textAlign: 'center',
     fontSize: 11,
     fontWeight: 700,
     color: c.nord8,
     letterSpacing: -0.3,
     lineHeight: 1.3,
+  },
+  islandJobTitle: {
+    textAlign: 'center',
+    fontSize: 8.5,
+    fontWeight: 600,
+    color: c.nord9,
+    letterSpacing: 0.5,
+    marginTop: 2,
     paddingBottom: 7,
     marginBottom: 7,
   },
@@ -234,34 +242,34 @@ const s = StyleSheet.create({
     fontSize: 7,
     fontWeight: 700,
     letterSpacing: 1.5,
-    color: c.nord14,
+    color: c.nord3,
     marginBottom: 3,
     paddingBottom: 2,
     borderBottomWidth: 1,
     borderBottomColor: c.nord5,
   },
   highlightsCard: {
-    flexDirection: 'row',
-    gap: 12,
     marginBottom: 5,
     paddingVertical: 4,
-    paddingHorizontal: 7,
+    paddingHorizontal: 6,
     backgroundColor: '#FFFFFF',
     borderRadius: 4,
     borderWidth: 1,
     borderColor: c.nord5,
-    borderLeftWidth: 2,
-    borderLeftColor: c.nord14,
-    borderRightWidth: 2,
-    borderRightColor: c.nord14,
   },
   highlightItem: {
-    flex: 1,
+    marginBottom: 3,
+  },
+  highlightHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 1,
   },
   highlightType: {
-    fontSize: 6.5,
+    fontSize: 7.5,
     fontWeight: 600,
-    color: c.nord14,
+    color: c.nord0,
   },
   highlightDesc: {
     fontSize: 6.5,
@@ -277,7 +285,7 @@ const s = StyleSheet.create({
     fontSize: 7,
     fontWeight: 700,
     letterSpacing: 1.5,
-    color: c.nord10,
+    color: c.nord3,
     marginBottom: 3,
     paddingBottom: 2,
     borderBottomWidth: 1,
@@ -309,7 +317,7 @@ const s = StyleSheet.create({
   expDate: {
     fontSize: 6,
     fontWeight: 500,
-    color: c.nord10,
+    color: c.nord2,
     backgroundColor: c.nord6,
     paddingVertical: 1,
     paddingHorizontal: 5,
@@ -320,7 +328,7 @@ const s = StyleSheet.create({
   expCompany: {
     fontSize: 6.5,
     fontWeight: 500,
-    color: c.nord10,
+    color: c.nord1,
     marginBottom: 1,
   },
   expDesc: {
@@ -338,7 +346,7 @@ const s = StyleSheet.create({
     paddingLeft: 1,
   },
   expBulletArrow: {
-    color: c.nord8,
+    color: c.nord3,
     fontWeight: 700,
     fontSize: 7.5,
     width: 7,
@@ -379,7 +387,7 @@ const s = StyleSheet.create({
   projDate: {
     fontSize: 6,
     fontWeight: 500,
-    color: c.nord10,
+    color: c.nord2,
     backgroundColor: c.nord6,
     paddingVertical: 1,
     paddingHorizontal: 5,
@@ -504,9 +512,8 @@ function CvDocument({
         {/* ============ ISLAND ============ */}
         <View style={s.island}>
           {/* Title */}
-          <Text style={s.islandTitle}>
-            {cvData.personal.name} · {cvData.personal.title}
-          </Text>
+          <Text style={s.islandName}>{cvData.personal.name}</Text>
+          <Text style={s.islandJobTitle}>{cvData.personal.title}</Text>
 
           {/* 3-column grid: info | photo | contact */}
           <View style={s.islandGrid}>
@@ -552,7 +559,7 @@ function CvDocument({
                 {i > 0 && <Text style={s.skillSep}>|</Text>}
                 <View style={s.skillGroup}>
                   <Text style={s.skillLabel}>{group.label} :</Text>
-                  <Text style={s.skillItems}>{group.items.join(', ')}</Text>
+                  <Text style={s.skillItems}>{group.items.join(' · ')}</Text>
                 </View>
               </View>
             ))}
@@ -577,9 +584,10 @@ function CvDocument({
               <View style={s.highlightsCard}>
                 {cvData.contributions.map((contrib, i) => (
                   <View key={i} style={s.highlightItem}>
-                    <Text style={s.highlightType}>
-                      {contrib.type} · {contrib.date}
-                    </Text>
+                    <View style={s.highlightHeader}>
+                      <Text style={s.highlightType}>{contrib.type}</Text>
+                      <Text style={s.expDate}>{contrib.date}</Text>
+                    </View>
                     <Text style={s.highlightDesc}>{contrib.description}</Text>
                   </View>
                 ))}

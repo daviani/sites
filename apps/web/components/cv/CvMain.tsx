@@ -17,7 +17,7 @@ export function CvMain({ cvData }: CvMainProps) {
       {/* Contributions Section */}
       {contributions && contributions.length > 0 && (
         <>
-          <SectionTitle color="green" first>
+          <SectionTitle first>
             {t('pages.cv.sections.contributions')}
           </SectionTitle>
           <div className="mb-2 rounded-xl border border-nord-5 bg-nord-6 px-3 py-2.5 dark:border-nord-3 dark:bg-nord-2">
@@ -72,16 +72,14 @@ export function CvMain({ cvData }: CvMainProps) {
 function SectionTitle({
   children,
   first,
-  color,
 }: {
   children: React.ReactNode;
   first?: boolean;
-  color?: 'green';
 }) {
   const colorClass = 'text-nord-3 dark:text-nord-10';
   return (
     <h3
-      className={`text-[10px] font-bold uppercase tracking-[1.5px] ${colorClass} border-b-[1.5px] border-nord-5 pb-1 dark:border-nord-3 ${first ? 'mb-2' : 'mb-2 mt-4'}`}
+      className={`text-center md:text-left text-[10px] font-bold uppercase tracking-[1.5px] ${colorClass} border-b-[1.5px] border-nord-5 pb-1 dark:border-nord-3 ${first ? 'mb-2' : 'mb-2 mt-4'}`}
     >
       {children}
     </h3>
