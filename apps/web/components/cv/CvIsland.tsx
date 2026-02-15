@@ -64,8 +64,11 @@ export function CvIsland({ cvData, skillsByCategory }: CvIslandProps) {
     >
       {/* Title row — centered */}
       <div className="pb-3.5 text-center">
-        <p className="text-base font-bold leading-snug tracking-tight text-nord-8 md:text-[16px]">
-          {personal.name} · {personal.title}
+        <h2 className="text-base font-bold leading-snug tracking-tight text-nord-8 md:text-[16px]">
+          {personal.name}
+        </h2>
+        <p className="mt-1 text-[12px] font-semibold tracking-wide text-nord-9">
+          {personal.title}
         </p>
       </div>
 
@@ -73,19 +76,24 @@ export function CvIsland({ cvData, skillsByCategory }: CvIslandProps) {
       <div className="grid grid-cols-1 items-center gap-3 md:grid-cols-[1fr_auto_1fr] md:gap-x-3.5">
         {/* Left column — info */}
         <div className="flex flex-col items-center gap-1 text-[10.5px] leading-relaxed text-nord-4 md:items-end md:text-right">
-          <span className="font-medium">
+          <span className="rounded px-1.5 py-1 font-medium">
             {personal.experienceYears} {t('pages.cv.labels.yearsExperience')}
           </span>
           {subtitle && (
             <span className="font-medium tracking-wide opacity-85">
-              {subtitle}
+              {subtitle.split(' · ').map((word, i) => (
+                <span key={i}>
+                  {i > 0 && ' · '}
+                  <span className="rounded px-1.5 py-1">{word}</span>
+                </span>
+              ))}
             </span>
           )}
-          <span className="opacity-75">{personal.location}</span>
+          <span className="rounded px-1.5 py-1 opacity-75">{personal.location}</span>
         </div>
 
         {/* Center — photo */}
-        <div className="order-first flex justify-center md:order-none">
+        <div className="hidden md:flex justify-center">
           {personal.photo ? (
             <div className="relative h-20 w-20 overflow-hidden rounded-full border-[2.5px] border-nord-8">
               <Image
@@ -110,17 +118,19 @@ export function CvIsland({ cvData, skillsByCategory }: CvIslandProps) {
         <div className="flex flex-col items-center gap-1 text-[10.5px] leading-relaxed text-nord-4 md:items-start md:text-left">
           <a
             href={`mailto:${personal.email}`}
-            className="text-white no-underline transition-colors hover:text-nord-8"
+            aria-label={`Envoyer un email à ${personal.email}`}
+            className="rounded px-1.5 py-1 text-white no-underline transition-colors hover:text-nord-8 focus:outline-none focus:ring-2 focus:ring-nord-10"
           >
             {personal.email}
           </a>
-          <span>
+          <span className="px-1.5 py-1">
             {personal.website && (
               <a
                 href={personal.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-nord-4 no-underline transition-colors hover:text-nord-8"
+                aria-label={`Site web ${personal.website.replace('https://', '')} (nouvelle fenêtre)`}
+                className="rounded px-1.5 py-1 text-nord-4 no-underline transition-colors hover:text-nord-8 focus:outline-none focus:ring-2 focus:ring-nord-10"
               >
                 {personal.website.replace('https://', '')}
               </a>
@@ -132,7 +142,8 @@ export function CvIsland({ cvData, skillsByCategory }: CvIslandProps) {
                   href={personal.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-nord-4 no-underline transition-colors hover:text-nord-8"
+                  aria-label="Profil GitHub (nouvelle fenêtre)"
+                  className="rounded px-1.5 py-1 text-nord-4 no-underline transition-colors hover:text-nord-8 focus:outline-none focus:ring-2 focus:ring-nord-10"
                 >
                   {personal.github.replace('https://', '')}
                 </a>
@@ -145,7 +156,8 @@ export function CvIsland({ cvData, skillsByCategory }: CvIslandProps) {
                   href={personal.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-nord-4 no-underline transition-colors hover:text-nord-8"
+                  aria-label="Profil LinkedIn (nouvelle fenêtre)"
+                  className="rounded px-1.5 py-1 text-nord-4 no-underline transition-colors hover:text-nord-8 focus:outline-none focus:ring-2 focus:ring-nord-10"
                 >
                   LinkedIn
                 </a>
@@ -153,7 +165,7 @@ export function CvIsland({ cvData, skillsByCategory }: CvIslandProps) {
             )}
           </span>
           {personal.phone && (
-            <span className="opacity-75">{personal.phone}</span>
+            <span className="px-1.5 py-1 opacity-75">{personal.phone}</span>
           )}
         </div>
       </div>
@@ -164,7 +176,7 @@ export function CvIsland({ cvData, skillsByCategory }: CvIslandProps) {
           <span key={group.key} className="flex items-center gap-1">
             {i > 0 && <span className="mr-1.5 text-nord-3">|</span>}
             <span className="font-semibold text-nord-8">{group.label} :</span>
-            <span className="text-nord-4">{group.items.join(', ')}</span>
+            <span className="text-nord-4">{group.items.join(' · ')}</span>
           </span>
         ))}
         {langEntry && (

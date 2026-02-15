@@ -217,6 +217,7 @@
         "current": "Present",
         "stack": "Stack",
         "download": "Download Resume",
+        "downloading": "Generating PDF…",
         "yearsOld": "years old",
         "yearsExperience": "years of experience",
         "contact": "Contact"
