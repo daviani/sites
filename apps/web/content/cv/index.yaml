@@ -11,14 +11,13 @@ personal:
   linkedin: https://linkedin.com/in/daviani-fillatre
   github: https://github.com/daviani
   website: https://daviani.dev
-  photo: /cv/personal/photo.jpg
 summaryFr: Développeur Full-Stack JS et DevOps avec 6 ans d'expérience
 summaryEn: Full-Stack JS & DevOps Developer with 6 years of experience
 subtitleFr: Qualité · Automatisation · Transmission
 subtitleEn: Quality · Automation · Knowledge sharing
 experiences:
   - start: 10/2023
-    end: 03/2026
+    end: 02/2026
     current: false
     compact: false
     companyFr: ATIPY
@@ -31,12 +30,12 @@ experiences:
       ATIPY — Seul développeur depuis mars 2025, 6 applications (internes,
       clients, site vitrine), 11 serveurs
     summaryEn: >-
-      ATIPY — Sole developer since March 2025, 6 applications (internal,
-      client, showcase website), 11 servers
+      ATIPY — Sole developer since March 2025, 6 applications (internal, client,
+      showcase website), 11 servers
     highlightsFr:
       - >-
-        Mise en place complète de la chaîne CI/CD (GitLab CI, Jenkins,
-        Docker) : pipelines, review apps, rollback automatique, création des
+        Mise en place complète de la chaîne CI/CD (GitLab CI, Jenkins, Docker) :
+        pipelines, review apps, rollback automatique, création des
         environnements de preprod — avant : déploiements manuels directement en
         production
       - >-
@@ -46,8 +45,8 @@ experiences:
         Migration Entity Framework : 3 000+ lignes sur 2 applications, validées
         sans régression
       - >-
-        Automatisation des opérations DB : dump prod passé de 1h manuelle à
-        5 min via scripts sécurisés
+        Automatisation des opérations DB : dump prod passé de 1h manuelle à 5
+        min via scripts sécurisés
       - >-
         Fiabilisation de l'infra : résolution pannes récurrentes, rotation
         backups, monitoring/alerting, détection d'intrusions SSH, sécurisation
@@ -69,16 +68,16 @@ experiences:
         Entity Framework migration: 3,000+ lines across 2 applications,
         validated without regression
       - >-
-        DB operations automation: prod dump reduced from 1h manual to 5 min
-        via secured scripts
+        DB operations automation: prod dump reduced from 1h manual to 5 min via
+        secured scripts
       - >-
         Infrastructure hardening: recurring outage resolution, backup rotation,
         monitoring/alerting, SSH intrusion detection, server access security
       - >-
         RGAA accessibility fixes on showcase website and client applications:
         implementation of external audit recommendations (landmarks, ARIA,
-        keyboard focus, forms) and headless CMS adaptation for editorial
-        content compliance
+        keyboard focus, forms) and headless CMS adaptation for editorial content
+        compliance
     stack:
       - React
       - Next.js
@@ -272,11 +271,10 @@ projects:
     end: 02/2026
     descriptionFr: >-
       Portfolio propulsé par Next.js 16 et React 19, Keystatic comme CMS
-      headless (blog, photos, CV). Design system découplé
-      (@nordic-island/ui) : composants, i18n FR/EN, tests d'accessibilité
-      automatisés (axe-core, WCAG AA) en CI. Sécurité renforcée (CSP, HSTS,
-      rate limiting), Cloudflare WAF/CDN, CI/CD GitHub Actions. Lighthouse
-      ≥ 95.
+      headless (blog, photos, CV). Design system découplé (@nordic-island/ui) :
+      composants, i18n FR/EN, tests d'accessibilité automatisés (axe-core, WCAG
+      AA) en CI. Sécurité renforcée (CSP, HSTS, rate limiting), Cloudflare
+      WAF/CDN, CI/CD GitHub Actions. Lighthouse ≥ 95.
     descriptionEn: >-
       Portfolio powered by Next.js 16 and React 19, Keystatic as headless CMS
       (blog, photos, CV). Decoupled design system (@nordic-island/ui):
