@@ -40,7 +40,7 @@ export default config({
             website: fields.url({ label: 'Site web' }),
             photo: fields.image({
               label: 'Photo',
-              directory: 'apps/web/content/cv',
+              directory: 'apps/web/public/cv',
               publicPath: '/cv/',
             }),
           },
