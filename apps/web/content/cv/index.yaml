@@ -11,7 +11,7 @@ personal:
   linkedin: https://linkedin.com/in/daviani-fillatre
   github: https://github.com/daviani
   website: https://daviani.dev
-  photo: https://daviani.dev/images/profile/photo.jpg
+  photo: /cv/personal/photo.jpg
 summaryFr: Développeur Full-Stack JS et DevOps avec 6 ans d'expérience
 summaryEn: Full-Stack JS & DevOps Developer with 6 years of experience
 subtitleFr: Qualité · Automatisation · Transmission
