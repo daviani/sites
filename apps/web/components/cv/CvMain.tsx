@@ -94,6 +94,7 @@ interface Experience {
   current: boolean;
   compact: boolean;
   company: string;
+  companyDesc?: string;
   role: string;
   location: string;
   summary?: string;
@@ -119,14 +120,21 @@ function ExperienceCard({ experience }: { experience: Experience }) {
         </DateBadge>
       </div>
 
-      {/* Company / summary */}
-      {experience.summary ? (
+      {/* Company + location */}
+      <div className="mb-0.5 text-[9.5px] text-nord-1 dark:text-nord-4">
+        <span className="font-semibold">{experience.company}</span>
+        {experience.location && (
+          <span className="font-normal"> · {experience.location}</span>
+        )}
+        {experience.companyDesc && (
+          <span className="font-normal italic"> — {experience.companyDesc}</span>
+        )}
+      </div>
+
+      {/* Summary */}
+      {experience.summary && (
         <div className="mb-1 text-[9.5px] font-medium text-nord-1 dark:text-nord-4">
           {experience.summary}
-        </div>
-      ) : (
-        <div className="mb-1 text-[9.5px] font-medium text-nord-1 dark:text-nord-4">
-          {experience.company}
         </div>
       )}
 
