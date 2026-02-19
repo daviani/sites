@@ -28,6 +28,8 @@ export interface CvExperience {
   compact: boolean;
   companyFr: string;
   companyEn: string;
+  companyDescFr?: string;
+  companyDescEn?: string;
   roleFr: string;
   roleEn: string;
   locationFr: string;
@@ -131,6 +133,7 @@ export interface LocalizedCvData {
     current: boolean;
     compact: boolean;
     company: string;
+    companyDesc?: string;
     role: string;
     location: string;
     summary?: string;
@@ -256,6 +259,7 @@ export function getLocalizedCvData(locale: 'fr' | 'en' = 'fr'): LocalizedCvData 
       current: exp.current,
       compact: exp.compact,
       company: isFr ? exp.companyFr : exp.companyEn,
+      companyDesc: isFr ? exp.companyDescFr : exp.companyDescEn,
       role: isFr ? exp.roleFr : exp.roleEn,
       location: isFr ? exp.locationFr : exp.locationEn,
       summary: isFr ? exp.summaryFr : exp.summaryEn,
