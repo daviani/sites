@@ -23,15 +23,17 @@ experiences:
     compact: false
     companyFr: ATIPY
     companyEn: ATIPY
+    companyDescFr: Agence spécialisée en accessibilité numérique et design universel
+    companyDescEn: Agency specializing in digital accessibility and universal design
     roleFr: Développeur Senior Full-Stack et DevOps
     roleEn: Senior Full-Stack & DevOps Developer
     locationFr: Lyon
     locationEn: Lyon, France
     summaryFr: >-
-      ATIPY — Seul développeur depuis mars 2025, 6 applications (internes,
+      Seul développeur depuis mars 2025, 6 applications (internes,
       clients, site vitrine), 11 serveurs
     summaryEn: >-
-      ATIPY — Sole developer since March 2025, 6 applications (internal, client,
+      Sole developer since March 2025, 6 applications (internal, client,
       showcase website), 11 servers
     highlightsFr:
       - >-
@@ -96,6 +98,8 @@ experiences:
     compact: false
     companyFr: Web-Atrio
     companyEn: Web-Atrio
+    companyDescFr: ESN spécialisée en développement d'applications web sur mesure
+    companyDescEn: Digital services company specializing in custom web application development
     roleFr: Consultant en Développement
     roleEn: Development Consultant
     locationFr: Lyon
@@ -118,10 +122,12 @@ experiences:
     compact: false
     companyFr: Anikop (groupe LDLC)
     companyEn: Anikop (LDLC group)
+    companyDescFr: Filiale éditrice de logiciels du Groupe LDLC
+    companyDescEn: Software publishing subsidiary of the LDLC Group
     roleFr: Analyste Développeur
     roleEn: Developer Analyst
-    locationFr: Lyon
-    locationEn: Lyon, France
+    locationFr: Limonest
+    locationEn: Limonest, France
     summaryFr: >-
       Application de vérification de titres restaurant (web React, mobile React
       Native, API Node.js). Déploiements iOS/Android, développement de features
