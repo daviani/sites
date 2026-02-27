@@ -50,6 +50,7 @@ interface LocalizedCvData {
     current: boolean;
     compact: boolean;
     company: string;
+    companyDesc?: string;
     role: string;
     location: string;
     summary?: string;
@@ -606,11 +607,15 @@ function CvDocument({
                     {exp.start} – {exp.current ? (isFr ? "Aujourd'hui" : 'Present') : exp.end}
                   </Text>
                 </View>
+                {/* Company + location + description — always shown */}
+                <Text style={s.expCompany}>
+                  {exp.company}
+                  {exp.location ? ` · ${exp.location}` : ''}
+                  {exp.companyDesc ? ` — ${exp.companyDesc}` : ''}
+                </Text>
+                {/* Summary — separate line below company */}
                 {exp.summary && (
-                  <Text style={s.expCompany}>{exp.summary}</Text>
-                )}
-                {!exp.summary && exp.company && (
-                  <Text style={s.expCompany}>{exp.company}</Text>
+                  <Text style={s.expDesc}>{exp.summary}</Text>
                 )}
                 {exp.highlights && exp.highlights.length > 0 && (
                   <View style={s.expBullets}>
@@ -621,10 +626,6 @@ function CvDocument({
                       </View>
                     ))}
                   </View>
-                )}
-                {!exp.highlights?.length && !exp.summary && exp.company && null}
-                {exp.compact && exp.company !== exp.role && (
-                  <Text style={s.expDesc}>{exp.summary || ''}</Text>
                 )}
                 {exp.stack && exp.stack.length > 0 && (
                   <Text style={s.expStack}>{exp.stack.join(' · ')}</Text>
