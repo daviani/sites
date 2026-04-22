@@ -381,7 +381,7 @@ projects:
       Outillage perso IA-first pensé en DDD : éléments globaux partagés
       (Qdrant vectoriel natif via launchd, Ollama + nomic-embed-text en local,
       Claude Code/Desktop) et outils spécialisés par domaine. Serveur MCP
-      custom en Python (~940 LOC) partageant une mémoire persistante entre
+      custom en Python partageant une mémoire persistante entre
       Claude Desktop et Claude Code via 5 collections Qdrant. 18 serveurs MCP
       connectés, 10 hooks shell (protect-main, block-ai-mention, auto-recall
       contexte Qdrant), 9 skills et 7 plugins configurés.
@@ -389,7 +389,7 @@ projects:
       AI-first personal tooling designed with a DDD mindset: shared global
       layer (native Qdrant via launchd, Ollama + nomic-embed-text running
       locally, Claude Code/Desktop) and domain-specific tools on top. Custom
-      MCP server in Python (~940 LOC) sharing persistent memory between
+      MCP server in Python sharing persistent memory between
       Claude Desktop and Claude Code across 5 Qdrant collections. 18 connected
       MCP servers, 10 shell hooks (protect-main, block-ai-mention,
       Qdrant-context auto-recall), 9 skills and 7 plugins.
