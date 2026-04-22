@@ -99,7 +99,7 @@ const s = StyleSheet.create({
     backgroundColor: c.nord6,
     fontFamily: 'Inter',
     fontSize: 8.5,
-    paddingTop: 4,
+    paddingTop: 6,
     paddingHorizontal: 8,
     paddingBottom: 0,
   },
@@ -250,7 +250,7 @@ const s = StyleSheet.create({
     borderBottomColor: c.nord5,
   },
   highlightsCard: {
-    marginBottom: 3,
+    marginBottom: 4,
     paddingVertical: 4,
     paddingHorizontal: 6,
     backgroundColor: '#FFFFFF',
@@ -280,7 +280,7 @@ const s = StyleSheet.create({
 
   // --- Sections ---
   section: {
-    marginBottom: 3,
+    marginBottom: 4,
   },
   sectionTitle: {
     fontSize: 6.5,
@@ -295,7 +295,7 @@ const s = StyleSheet.create({
 
   // --- Experience cards ---
   expCard: {
-    marginBottom: 3,
+    marginBottom: 3.5,
     paddingTop: 3,
     paddingHorizontal: 6,
     paddingBottom: 2,
@@ -366,7 +366,7 @@ const s = StyleSheet.create({
 
   // --- Projects ---
   projCard: {
-    marginBottom: 4,
+    marginBottom: 5,
     paddingTop: 4,
     paddingHorizontal: 6,
     paddingBottom: 3,
@@ -585,15 +585,41 @@ function CvDocument({
             <>
               <Text style={s.highlightsTitle}>{t.contributions.toUpperCase()}</Text>
               <View style={s.highlightsCard}>
-                {cvData.contributions.map((contrib, i) => (
-                  <View key={i} style={s.highlightItem}>
-                    <View style={s.highlightHeader}>
-                      <Text style={s.highlightType}>{contrib.type}</Text>
-                      <Text style={s.expDate}>{contrib.date}</Text>
+                {cvData.contributions.map((contrib, i) => {
+                  const isLast = i === cvData.contributions.length - 1;
+                  const nextIsContinuation =
+                    !isLast && !cvData.contributions[i + 1].type;
+                  const marginBottom = isLast ? 0 : nextIsContinuation ? 1 : 3;
+                  return (
+                    <View key={i} style={{ marginBottom }}>
+                      {contrib.type ? (
+                        <Text
+                          style={{
+                            fontSize: 7,
+                            fontWeight: 600,
+                            color: c.nord0,
+                            marginBottom: 1,
+                          }}
+                        >
+                          {contrib.type}
+                        </Text>
+                      ) : null}
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          gap: 4,
+                          justifyContent: 'space-between',
+                        }}
+                      >
+                        <Text style={[s.highlightDesc, { flex: 1 }]}>
+                          {contrib.description}
+                        </Text>
+                        <Text style={s.expDate}>{contrib.date}</Text>
+                      </View>
                     </View>
-                    <Text style={s.highlightDesc}>{contrib.description}</Text>
-                  </View>
-                ))}
+                  );
+                })}
               </View>
             </>
           )}

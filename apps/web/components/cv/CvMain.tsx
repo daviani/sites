@@ -21,19 +21,26 @@ export function CvMain({ cvData }: CvMainProps) {
             {t('pages.cv.sections.contributions')}
           </SectionTitle>
           <div className="mb-2 rounded-xl border border-nord-5 bg-nord-6 px-3 py-2.5 dark:border-nord-3 dark:bg-nord-2">
-            {contributions.map((c, i) => (
-              <div key={i} className={i < contributions.length - 1 ? 'mb-2' : ''}>
-                <div className="mb-1 flex flex-col items-center gap-1 md:flex-row md:items-center md:justify-between">
-                  <span className="text-[11px] font-semibold text-nord-0 dark:text-nord-6">
-                    {c.type}
-                  </span>
-                  <DateBadge>{c.date}</DateBadge>
+            {contributions.map((c, i) => {
+              const isLast = i === contributions.length - 1;
+              const nextIsContinuation = !isLast && !contributions[i + 1].type;
+              const mbClass = isLast ? '' : nextIsContinuation ? 'mb-0.5' : 'mb-2';
+              return (
+                <div key={i} className={mbClass}>
+                  {c.type && (
+                    <div className="mb-0.5 text-[11px] font-semibold text-nord-0 dark:text-nord-6">
+                      {c.type}
+                    </div>
+                  )}
+                  <div className="flex flex-col items-center gap-1 md:flex-row md:items-center md:justify-between md:gap-2">
+                    <div className="text-[9.5px] leading-snug text-nord-2 dark:text-nord-4 md:flex-1">
+                      {c.description}
+                    </div>
+                    <DateBadge>{c.date}</DateBadge>
+                  </div>
                 </div>
-                <div className="text-[9.5px] leading-snug text-nord-2 dark:text-nord-4">
-                  {c.description}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </>
       )}
