@@ -98,10 +98,10 @@ const s = StyleSheet.create({
   page: {
     backgroundColor: c.nord6,
     fontFamily: 'Inter',
-    fontSize: 9.5,
-    paddingTop: 40,
-    paddingHorizontal: 34,
-    paddingBottom: 28,
+    fontSize: 8.5,
+    paddingTop: 4,
+    paddingHorizontal: 8,
+    paddingBottom: 0,
   },
 
   // --- Island (header sombre) ---
@@ -110,14 +110,14 @@ const s = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: c.nord1,
-    paddingTop: 14,
-    paddingHorizontal: 12,
-    paddingBottom: 12,
-    marginBottom: 9,
+    paddingTop: 10,
+    paddingHorizontal: 8,
+    paddingBottom: 8,
+    marginBottom: 3,
   },
   islandName: {
     textAlign: 'center',
-    fontSize: 11,
+    fontSize: 9.5,
     fontWeight: 700,
     color: c.nord8,
     letterSpacing: -0.3,
@@ -125,13 +125,13 @@ const s = StyleSheet.create({
   },
   islandJobTitle: {
     textAlign: 'center',
-    fontSize: 8.5,
+    fontSize: 7,
     fontWeight: 600,
     color: c.nord9,
     letterSpacing: 0.5,
-    marginTop: 2,
-    paddingBottom: 7,
-    marginBottom: 7,
+    marginTop: 1,
+    paddingBottom: 4,
+    marginBottom: 4,
   },
   islandGrid: {
     flexDirection: 'row',
@@ -148,56 +148,56 @@ const s = StyleSheet.create({
     alignItems: 'flex-start',
   },
   islandText: {
-    fontSize: 7.5,
+    fontSize: 6.5,
     color: c.nord4,
     lineHeight: 1.6,
   },
   islandTextBold: {
-    fontSize: 7.5,
+    fontSize: 6.5,
     fontWeight: 500,
     color: c.nord4,
     lineHeight: 1.6,
   },
   islandSubtitle: {
-    fontSize: 7.5,
+    fontSize: 6.5,
     fontWeight: 500,
     color: 'rgba(216,222,233,0.85)',
     letterSpacing: 0.5,
     lineHeight: 1.6,
   },
   islandEmail: {
-    fontSize: 7.5,
+    fontSize: 6.5,
     color: '#FFFFFF',
     lineHeight: 1.6,
     textDecoration: 'none',
   },
   islandLink: {
-    fontSize: 7.5,
+    fontSize: 6.5,
     color: c.nord4,
     lineHeight: 1.6,
     textDecoration: 'none',
   },
   islandCity: {
-    fontSize: 7.5,
+    fontSize: 6.5,
     color: 'rgba(216,222,233,0.75)',
     lineHeight: 1.6,
   },
   islandPhone: {
-    fontSize: 7.5,
+    fontSize: 6.5,
     color: 'rgba(216,222,233,0.75)',
     lineHeight: 1.6,
   },
   // Photo — borderRadius appliqué directement sur l'Image (react-pdf ne clip pas via View overflow)
   photoZone: {
-    width: 54,
-    height: 54,
+    width: 46,
+    height: 46,
     alignItems: 'center',
     justifyContent: 'center',
   },
   photoImg: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 42,
+    height: 42,
+    borderRadius: 21,
     borderWidth: 2,
     borderColor: c.nord8,
   },
@@ -208,8 +208,8 @@ const s = StyleSheet.create({
     justifyContent: 'center',
     rowGap: 2,
     columnGap: 6,
-    paddingTop: 7,
-    marginTop: 7,
+    paddingTop: 4,
+    marginTop: 4,
     borderTopWidth: 0.5,
     borderTopColor: c.nord1,
     fontSize: 6.5,
@@ -235,12 +235,12 @@ const s = StyleSheet.create({
 
   // --- Body zone ---
   bodyZone: {
-    paddingHorizontal: 2,
+    paddingHorizontal: 0,
   },
 
   // --- Contributions ---
   highlightsTitle: {
-    fontSize: 7,
+    fontSize: 6.5,
     fontWeight: 700,
     letterSpacing: 1.5,
     color: c.nord3,
@@ -250,7 +250,7 @@ const s = StyleSheet.create({
     borderBottomColor: c.nord5,
   },
   highlightsCard: {
-    marginBottom: 5,
+    marginBottom: 3,
     paddingVertical: 4,
     paddingHorizontal: 6,
     backgroundColor: '#FFFFFF',
@@ -268,7 +268,7 @@ const s = StyleSheet.create({
     marginBottom: 1,
   },
   highlightType: {
-    fontSize: 7.5,
+    fontSize: 6.5,
     fontWeight: 600,
     color: c.nord0,
   },
@@ -280,10 +280,10 @@ const s = StyleSheet.create({
 
   // --- Sections ---
   section: {
-    marginBottom: 5,
+    marginBottom: 3,
   },
   sectionTitle: {
-    fontSize: 7,
+    fontSize: 6.5,
     fontWeight: 700,
     letterSpacing: 1.5,
     color: c.nord3,
@@ -295,10 +295,10 @@ const s = StyleSheet.create({
 
   // --- Experience cards ---
   expCard: {
-    marginBottom: 4,
-    paddingTop: 4,
+    marginBottom: 3,
+    paddingTop: 3,
     paddingHorizontal: 6,
-    paddingBottom: 3,
+    paddingBottom: 2,
     backgroundColor: '#FFFFFF',
     borderWidth: 1,
     borderColor: c.nord5,
@@ -311,12 +311,12 @@ const s = StyleSheet.create({
     marginBottom: 1,
   },
   expRole: {
-    fontSize: 7.5,
+    fontSize: 6.5,
     fontWeight: 600,
     color: c.nord0,
   },
   expDate: {
-    fontSize: 6,
+    fontSize: 5.5,
     fontWeight: 500,
     color: c.nord2,
     backgroundColor: c.nord6,
@@ -349,7 +349,7 @@ const s = StyleSheet.create({
   expBulletArrow: {
     color: c.nord3,
     fontWeight: 700,
-    fontSize: 7.5,
+    fontSize: 6.5,
     width: 7,
   },
   expBulletText: {
@@ -359,7 +359,7 @@ const s = StyleSheet.create({
     flex: 1,
   },
   expStack: {
-    fontSize: 6,
+    fontSize: 5.5,
     color: c.nord3,
     marginTop: 2,
   },
@@ -381,12 +381,12 @@ const s = StyleSheet.create({
     alignItems: 'center',
   },
   projName: {
-    fontSize: 7,
+    fontSize: 6.5,
     fontWeight: 600,
     color: c.nord0,
   },
   projDate: {
-    fontSize: 6,
+    fontSize: 5.5,
     fontWeight: 500,
     color: c.nord2,
     backgroundColor: c.nord6,
@@ -403,14 +403,14 @@ const s = StyleSheet.create({
     marginTop: 1,
   },
   projStack: {
-    fontSize: 6,
+    fontSize: 5.5,
     color: c.nord3,
     marginTop: 1,
   },
 
   // --- Formation ---
   formationCard: {
-    paddingVertical: 4,
+    paddingVertical: 3,
     paddingHorizontal: 6,
     backgroundColor: '#FFFFFF',
     borderWidth: 1,
@@ -418,9 +418,9 @@ const s = StyleSheet.create({
     borderRadius: 4,
   },
   formationEntry: {
-    fontSize: 6.5,
+    fontSize: 5.5,
     color: c.nord2,
-    lineHeight: 1.6,
+    lineHeight: 1.5,
     marginBottom: 1,
   },
   formationDegree: {
@@ -429,7 +429,7 @@ const s = StyleSheet.create({
   },
   formationYear: {
     color: c.nord3,
-    fontSize: 6,
+    fontSize: 5.5,
   },
 });
 
@@ -437,15 +437,17 @@ const s = StyleSheet.create({
 // Skill groups config (same logic as CvIsland web component)
 // =============================================================
 const categoryLabels: Record<string, { fr: string; en: string }> = {
+  ai: { fr: 'IA', en: 'AI' },
   frontend: { fr: 'Front', en: 'Front' },
   backend: { fr: 'Back', en: 'Back' },
   cicd: { fr: 'CI/CD', en: 'CI/CD' },
   infra: { fr: 'Infra', en: 'Infra' },
   databases: { fr: 'BDD', en: 'DB' },
   shell: { fr: 'Shell', en: 'Shell' },
+  tools: { fr: 'Outils', en: 'Tools' },
   testing: { fr: 'Tests', en: 'Tests' },
 };
-const displayOrder = ['frontend', 'backend', 'cicd', 'infra', 'databases', 'shell', 'testing'];
+const displayOrder = ['ai', 'backend', 'frontend', 'cicd', 'infra', 'databases', 'shell', 'tools', 'testing'];
 
 // =============================================================
 // CV Document Component — Nordic Island Layout

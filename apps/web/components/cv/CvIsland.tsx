@@ -13,20 +13,22 @@ interface CvIslandProps {
 
 /**
  * Mapping category keys → compact display labels per language.
- * Merged: os + cloud → "Infra", tools excluded (shown in PDF only).
+ * Merged: os + cloud → "Infra".
  */
 const categoryLabels: Record<string, { fr: string; en: string }> = {
+  ai: { fr: 'IA', en: 'AI' },
   frontend: { fr: 'Front', en: 'Front' },
   backend: { fr: 'Back', en: 'Back' },
   cicd: { fr: 'CI/CD', en: 'CI/CD' },
   infra: { fr: 'Infra', en: 'Infra' },
   databases: { fr: 'BDD', en: 'DB' },
   shell: { fr: 'Shell', en: 'Shell' },
+  tools: { fr: 'Outils', en: 'Tools' },
   testing: { fr: 'Tests', en: 'Tests' },
 };
 
 /** Order of skill groups displayed in the island */
-const displayOrder = ['frontend', 'backend', 'cicd', 'infra', 'databases', 'shell', 'testing'];
+const displayOrder = ['ai', 'backend', 'frontend', 'cicd', 'infra', 'databases', 'shell', 'tools', 'testing'];
 
 export function CvIsland({ cvData, skillsByCategory }: CvIslandProps) {
   const { t, language } = useTranslation();
