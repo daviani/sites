@@ -306,16 +306,16 @@ contributions:
     typeEn: Speaker
     descriptionFr: ApéroWeb Lyon — Tests d'accessibilité automatisés et leurs limites
     descriptionEn: ApéroWeb Lyon — Tests d'accessibilité automatisés et leurs limites
+  - date: Mars 2023
+    typeFr: ''
+    typeEn: ''
+    descriptionFr: ApéroWeb Lyon — CMS headless DatoCMS et Next.js
+    descriptionEn: ApéroWeb Lyon — Headless CMS DatoCMS and Next.js
   - date: 2024/2025
     typeFr: Mentorat
     typeEn: Mentoring
     descriptionFr: 2 développeurs juniors accompagnés, aujourd'hui en poste
     descriptionEn: 2 junior developers mentored, now employed
-  - date: Mars 2023
-    typeFr: Speaker
-    typeEn: Speaker
-    descriptionFr: ApéroWeb Lyon — CMS headless DatoCMS et Next.js
-    descriptionEn: ApéroWeb Lyon — Headless CMS DatoCMS and Next.js
 projects:
   - titleFr: Rodd — App iOS d'entraînement rameur
     titleEn: Rodd — Rowing Training iOS App
@@ -326,17 +326,18 @@ projects:
       connecté via Bluetooth FTMS, avec mode sans capteur. Architecture DDD
       stricte (5 Bounded Contexts, 4 couches, zéro import croisé), design
       system maison (25 composants, palette Nord, zéro framework UI externe).
-      Workflow IA-first : maquette React → SwiftUI via composants iso-nommés
-      et tokens partagés, piloté par Claude Code. Dogfood quotidien depuis
-      avril 2026, cible App Store.
+      Workflow IA-first : 38 écrans de maquettes fonctionnelles React
+      pilotant le portage SwiftUI via composants iso-nommés et tokens
+      partagés, sous Claude Code. Dogfood quotidien depuis avril 2026,
+      cible App Store.
     descriptionEn: >-
       Native iOS app (SwiftUI, iOS 18+, Swift 6) for rowing training on
       Bluetooth FTMS connected rowers, with a sensor-less mode. Strict DDD
       architecture (5 Bounded Contexts, 4 layers, zero cross-context imports),
       in-house design system (25 components, Nord palette, no external UI
-      framework). AI-first workflow: React prototype → SwiftUI via mirror-named
-      components and shared tokens, driven by Claude Code. Daily dogfood since
-      April 2026, App Store-bound.
+      framework). AI-first workflow: 38 functional React mockups driving the
+      SwiftUI port via mirror-named components and shared tokens, under
+      Claude Code. Daily dogfood since April 2026, App Store-bound.
     highlightsFr: []
     highlightsEn: []
     stack:
