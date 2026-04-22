@@ -54,7 +54,7 @@ export interface CvEducation {
 
 export interface CvSkill {
   name: string;
-  category: 'frontend' | 'backend' | 'databases' | 'cicd' | 'os' | 'cloud' | 'shell' | 'testing' | 'tools';
+  category: 'frontend' | 'backend' | 'databases' | 'cicd' | 'os' | 'cloud' | 'shell' | 'testing' | 'tools' | 'ai';
 }
 
 export interface CvLanguage {
@@ -325,6 +325,7 @@ export function getCvSkillsByCategory(): Record<string, string[]> {
     shell: [],
     testing: [],
     tools: [],
+    ai: [],
   };
 
   for (const skill of data.skills) {
