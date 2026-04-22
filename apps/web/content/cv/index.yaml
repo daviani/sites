@@ -325,18 +325,18 @@ projects:
       App iOS native (SwiftUI, iOS 18+, Swift 6) d'entraînement sur rameur
       connecté via Bluetooth FTMS, avec mode sans capteur. Architecture DDD
       stricte (5 Bounded Contexts, 4 couches, zéro import croisé), design
-      system maison (25 composants, palette Nord, zéro framework UI externe).
-      Workflow IA-first : 38 écrans de maquettes fonctionnelles React
-      pilotant le portage SwiftUI via composants iso-nommés et tokens
+      system Aurora (25 composants maison, palette Nord, zéro framework UI
+      externe). Workflow IA-first : 38 écrans de maquettes fonctionnelles
+      React pilotant le portage SwiftUI via composants iso-nommés et tokens
       partagés, sous Claude Code. Dogfood quotidien depuis avril 2026,
       cible App Store.
     descriptionEn: >-
       Native iOS app (SwiftUI, iOS 18+, Swift 6) for rowing training on
       Bluetooth FTMS connected rowers, with a sensor-less mode. Strict DDD
       architecture (5 Bounded Contexts, 4 layers, zero cross-context imports),
-      in-house design system (25 components, Nord palette, no external UI
-      framework). AI-first workflow: 38 functional React mockups driving the
-      SwiftUI port via mirror-named components and shared tokens, under
+      Aurora design system (25 in-house components, Nord palette, no external
+      UI framework). AI-first workflow: 38 functional React mockups driving
+      the SwiftUI port via mirror-named components and shared tokens, under
       Claude Code. Daily dogfood since April 2026, App Store-bound.
     highlightsFr: []
     highlightsEn: []
