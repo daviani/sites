@@ -63,7 +63,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         {allTags.length > 0 && (
           <div className="mb-8 flex flex-wrap gap-2">
             <Link
-              href="/"
+              href="/blog"
               className={`px-3 py-1 rounded-full text-sm transition-colors cursor-pointer ${
                 !tag
                   ? 'bg-nord-btn text-white'
@@ -75,7 +75,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             {allTags.map((t) => (
               <Link
                 key={t}
-                href={`/?tag=${t}`}
+                href={`/blog?tag=${t}`}
                 className={`px-3 py-1 rounded-full text-sm transition-colors cursor-pointer ${
                   tag === t
                     ? 'bg-nord-btn text-white'
@@ -103,7 +103,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 key={article.slug}
                 className="p-6 glass-card hover:shadow-xl transition-shadow"
               >
-                <Link href={`/${article.slug}`} className="block cursor-pointer">
+                <Link href={`/blog/${article.slug}`} className="block cursor-pointer">
                   <h2 className="text-2xl font-bold mb-2 text-nord-0 dark:text-nord-6 hover:text-nord-10 dark:hover:text-nord-8 transition-colors">
                     {article.meta.titleFr}
                   </h2>
@@ -142,7 +142,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           <nav className="mt-12 flex justify-center gap-2">
             {page > 1 && (
               <Link
-                href={`/?page=${page - 1}${tag ? `&tag=${tag}` : ''}`}
+                href={`/blog?page=${page - 1}${tag ? `&tag=${tag}` : ''}`}
                 className="px-4 py-2 bg-nord-5 dark:bg-nord-2 rounded hover:bg-nord-4 dark:hover:bg-nord-3 transition-colors cursor-pointer"
               >
                 ← Précédent
@@ -153,7 +153,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             </span>
             {page < totalPages && (
               <Link
-                href={`/?page=${page + 1}${tag ? `&tag=${tag}` : ''}`}
+                href={`/blog?page=${page + 1}${tag ? `&tag=${tag}` : ''}`}
                 className="px-4 py-2 bg-nord-5 dark:bg-nord-2 rounded hover:bg-nord-4 dark:hover:bg-nord-3 transition-colors cursor-pointer"
               >
                 Suivant →

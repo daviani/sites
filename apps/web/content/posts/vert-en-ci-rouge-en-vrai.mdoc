@@ -1,0 +1,109 @@
+---
+slug: vert-en-ci-rouge-en-vrai
+publishedAt: '2026-06-04'
+featured: false
+titleFr: "Vert en CI, rouge en vrai : les limites des tests d'accessibilité automatisés"
+excerptFr: "Ma CI testait l'accessibilité de daviani.dev et tout restait au vert. Un audit humain au lecteur d'écran a révélé ce que l'automatisation ignore."
+titleEn: "Green in CI, Red in Reality: The Limits of Automated Accessibility Testing"
+excerptEn: "My CI tested daviani.dev for accessibility and everything stayed green. A human screen-reader audit revealed what automation never sees."
+tags:
+  - accessibilite
+  - ci-cd
+  - tests
+  - rgaa
+---
+
+Mon site daviani.dev exécute une batterie de tests d'accessibilité à chaque commit. Un jour, tout est passé au vert. Quelques semaines plus tard, un audit mené au lecteur d'écran a démontré que plusieurs pages restaient inutilisables. Voici l'écart entre « les tests passent » et « c'est réellement accessible ».
+
+## Pourquoi un garde-fou dans la CI
+
+Après avoir rendu plusieurs applications accessibles en entreprise, j'ai voulu appliquer la même rigueur à mon site personnel. L'objectif n'était pas d'obtenir un score, mais de me prémunir contre mes propres régressions : empêcher un déploiement de casser l'accessibilité sans que je m'en aperçoive.
+
+L'accessibilité est donc devenue une étape **bloquante** de mon pipeline : lint et types → build → tests unitaires → tests end-to-end → tests d'accessibilité → déploiement. Si l'étape d'accessibilité échoue, rien n'est déployé.
+
+```yaml
+# quality.yml — GitHub Actions
+jobs:
+  accessibility-tests:
+    name: Accessibility Tests (RGAA/WCAG)
+    needs: quality
+    steps:
+      - run: pnpm test:a11y
+      - uses: actions/upload-artifact@v4
+        if: always() # Le rapport est conservé même en cas d'échec
+        with:
+          name: accessibility-report
+```
+
+## Ce que la CI vérifie réellement
+
+Le premier filet est **axe-core**, qui scanne chaque page selon les critères WCAG 2.1 niveau AA. Je filtre les résultats sur les impacts `critical` et `serious` pour éviter de noyer le signal sous le bruit.
+
+```ts
+test('axe-core WCAG 2.1 AA scan', async ({ page }) => {
+  const results = await new AxeBuilder({ page })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+    .analyze();
+
+  const violations = results.violations.filter(
+    (v) => v.impact === 'critical' || v.impact === 'serious'
+  );
+
+  expect(violations).toHaveLength(0);
+});
+```
+
+À cela s'ajoutent des tests dérivés du RGAA, écrits à la main : présence et pertinence des alternatives textuelles, attributs obligatoires (`lang`, `title`, `viewport`), structure du document (un seul `h1`, hiérarchie des titres, landmarks). Puis des vérifications que la plupart des scanners n'intègrent pas : absence de piège au clavier, respect de `prefers-reduced-motion`, taille minimale des cibles tactiles.
+
+Le jour où l'ensemble est passé au vert, j'ai cru le travail terminé.
+
+## Vert partout, et pourtant
+
+Gabriel, spécialiste de l'accessibilité, a testé le site avec VoiceOver — un vrai lecteur d'écran, manipulé comme le ferait un utilisateur réel. Le résultat a été instructif :
+
+- « CV » était prononcé « Cheval Vapeur » ;
+- en thème sombre, un texte affichait un contraste de 2,21:1 au lieu des 4,5:1 requis ;
+- des champs de formulaire utilisaient le placeholder en guise de libellé, générant du bruit à la lecture ;
+- la navigation au clavier devenait incohérente dans certaines sections.
+
+Aucun de ces défauts n'avait été détecté par ma CI. Tous dégradaient pourtant l'expérience, voire la rendaient impraticable.
+
+## Le fossé entre présence et sens
+
+La raison est simple : les outils automatiques vérifient la présence et la conformité syntaxique, pas la signification. Un attribut `alt="image"` satisfait la règle « toute image a une alternative textuelle », mais n'apporte aucune information à la personne qui l'écoute. La machine valide une règle ; elle ne juge ni le contexte, ni la pertinence, ni le parcours réel.
+
+Toute la distinction est là :
+
+- les tests automatisés couvrent la **présence, la syntaxe, les règles** ;
+- l'audit humain couvre le **sens, le contexte, l'usage**.
+
+Les deux ne se remplacent pas. Ils se complètent.
+
+## Refermer la boucle
+
+Plutôt que d'opposer les deux approches, je les ai chaînées. Chaque anomalie remontée par l'audit est devenue un nouveau test automatisé :
+
+```ts
+// « CV » → aria-label explicite pour les lecteurs d'écran
+test('acronyms have accessible labels', async ({ page }) => {
+  const results = await testAcronymsAccessibility(page);
+  expect(results.acronymsWithoutLabel).toHaveLength(0);
+});
+
+// Contraste en thème sombre, calculé via getComputedStyle
+test('dark mode contrast', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'dark' });
+  const results = await testExplicitContrast(page);
+  expect(results.insufficient).toHaveLength(0);
+});
+```
+
+J'ai également enrichi la suite : vérification des changements de langue inline (critère RGAA 8.7), interdiction des champs reposant uniquement sur un placeholder, contrôle du libellé du sélecteur de langue. L'idée directrice : un humain identifie un problème une fois ; l'automatisation garantit qu'il ne réapparaîtra jamais.
+
+## Ce que j'en retiens
+
+« Vert en CI » n'est pas une preuve d'accessibilité. C'est une assurance contre la régression — précieuse, mais limitée. La barrière que l'automatisation ne franchit pas, c'est le jugement : déterminer si un contenu a du sens pour la personne qui le perçoit.
+
+Le bon dispositif n'est donc pas « machine ou humain », mais « machine **et** humain » : l'audit humain pour découvrir ce qui compte, l'automatisation pour ne plus jamais le perdre. Ce raisonnement dépasse largement l'accessibilité — il vaut pour tout système où l'on accorde sa confiance à un voyant vert.
+
+J'ai présenté ce retour d'expérience à l'ApéroWeb Lyon, en mars 2026.

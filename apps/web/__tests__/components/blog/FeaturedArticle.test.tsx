@@ -75,7 +75,7 @@ describe('FeaturedArticle', () => {
     render(<FeaturedArticle article={mockArticle} />);
 
     const link = screen.getByRole('link');
-    expect(link).toHaveAttribute('href', '/featured-article');
+    expect(link).toHaveAttribute('href', '/blog/featured-article');
   });
 
   it('renders read more text', () => {

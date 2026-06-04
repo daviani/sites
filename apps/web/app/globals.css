@@ -143,7 +143,7 @@ body {
 
 .prose-nord code {
   background: var(--color-nord-5);
-  color: var(--color-nord-10);
+  color: var(--color-nord-3);
   padding: 0.2em 0.4em;
   border-radius: 0.375rem;
   font-size: 0.9em;
@@ -162,6 +162,7 @@ body {
   border-radius: 1rem;
   overflow-x: auto;
   margin: 1.5em 0;
+  tab-size: 2;
 }
 
 .prose-nord pre code {
@@ -169,6 +170,13 @@ body {
   color: inherit;
   padding: 0;
   font-size: 0.875rem;
+}
+
+/* Dark mode: the inline-code background rule (.dark .prose-nord code) wins on
+   specificity over the reset above and would paint per-line bands behind the
+   Shiki code (the <code> is display:inline). Override it explicitly. */
+.dark .prose-nord pre code {
+  background: transparent;
 }
 
 .prose-nord blockquote {

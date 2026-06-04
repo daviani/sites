@@ -7,6 +7,7 @@ export const PAGES = [
   { name: 'Home', path: '/' },
   { name: 'Contact', path: '/contact' },
   { name: 'Blog', path: '/blog' },
+  { name: 'Article', path: '/blog/vert-en-ci-rouge-en-vrai' },
   { name: 'CV', path: '/cv' },
   { name: 'About', path: '/about' },
   { name: 'Photos', path: '/photos' },
@@ -465,9 +466,8 @@ export async function testInlineLanguageChanges(page: Page) {
   const htmlLang = await page.locator('html').getAttribute('lang');
   const pageLang = htmlLang?.slice(0, 2) || 'fr';
 
-  // Look for common English words/phrases in a French page (or vice versa)
+  // Only French pages are checked for un-tagged English content.
   if (pageLang === 'fr') {
-    // Check for English content without lang="en"
     const englishPatterns = [
       'Read more',
       'Learn more',
@@ -477,31 +477,32 @@ export async function testInlineLanguageChanges(page: Page) {
       'Back to top',
     ];
 
-    for (const pattern of englishPatterns) {
-      const elements = page.locator(`*:has-text("${pattern}"):not([lang="en"])`);
-      const count = await elements.count();
+    // Single DOM pass: fast and robust. The previous implementation used a
+    // `*:has-text("...")` locator, which matches every ancestor (html, body,
+    // main, …) and made Playwright auto-wait on each match — timing out on
+    // content-heavy pages such as articles.
+    results.foreignTextWithoutLang = await page.evaluate((patterns) => {
+      const hits: string[] = [];
+      for (const el of Array.from(document.body.querySelectorAll('*'))) {
+        if (el.children.length > 0) continue; // leaf elements only
+        const text = (el.textContent || '').trim();
+        if (!text || !patterns.some((p) => text.includes(p))) continue;
 
-      for (let i = 0; i < count; i++) {
-        const el = elements.nth(i);
-        const text = await el.textContent();
-        const tagName = await el.evaluate((e) => e.tagName.toLowerCase());
-
-        // Only flag leaf elements (not containers that happen to contain the text)
-        const isLeaf = await el.evaluate(
-          (e) => e.children.length === 0 || e.childNodes.length === 1
-        );
-        if (isLeaf && text?.includes(pattern)) {
-          // Check if any ancestor has lang="en"
-          const hasLangAncestor =
-            (await el.locator('xpath=ancestor-or-self::*[@lang="en"]').count()) > 0;
-          if (!hasLangAncestor) {
-            results.foreignTextWithoutLang.push(
-              `<${tagName}>: "${text?.slice(0, 50)}" (expected lang="en")`
-            );
+        let node: Element | null = el;
+        let taggedEn = false;
+        while (node) {
+          if (node.getAttribute('lang') === 'en') {
+            taggedEn = true;
+            break;
           }
+          node = node.parentElement;
+        }
+        if (!taggedEn) {
+          hits.push(`<${el.tagName.toLowerCase()}>: "${text.slice(0, 50)}" (expected lang="en")`);
         }
       }
-    }
+      return hits;
+    }, englishPatterns);
   }
 
   return results;
