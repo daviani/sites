@@ -20,7 +20,7 @@ export function FeaturedArticle({ article }: FeaturedArticleProps) {
 
   return (
     <section className="mb-12">
-      <Link href={`/${article.slug}`} className="block group">
+      <Link href={`/blog/${article.slug}`} className="block group">
         <article className="p-8 md:p-10 bg-gradient-to-br from-nord-10/10 via-transparent to-nord-9/5 dark:from-nord-10/20 dark:via-nord-3/50 dark:to-nord-9/10 backdrop-blur-md rounded-[var(--radius-island)] border-l-4 border-nord-10 shadow-lg hover:shadow-xl transition-all duration-300">
           <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-nord-btn text-white rounded-full text-xs font-medium">
             <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
