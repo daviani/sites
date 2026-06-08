@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useCallback } from 'react';
-import { NORD_14 } from '../constants/nord-colors';
+import { TULI_MATRIX } from '../constants/tuli-colors';
 
 interface UseMatrixRainOptions {
   isActive: boolean;
@@ -18,7 +18,7 @@ export function useMatrixRain({
   isActive,
   canvasRef,
   fontSize = 14,
-  color = NORD_14,
+  color = TULI_MATRIX,
 }: UseMatrixRainOptions) {
   const animationRef = useRef<number | null>(null);
   const dropsRef = useRef<number[]>([]);

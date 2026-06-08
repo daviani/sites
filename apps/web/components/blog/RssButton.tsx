@@ -10,7 +10,7 @@ export function RssButton() {
       href="/api/rss"
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-2 px-4 py-2 bg-nord-12/10 dark:bg-nord-12/20 text-nord-12 rounded-full text-sm font-medium hover:bg-nord-12/20 dark:hover:bg-nord-12/30 transition-colors"
+      className="inline-flex items-center gap-2 px-4 py-2 bg-warn/10 dark:bg-warn/20 text-warn rounded-full text-sm font-medium hover:bg-warn/20 dark:hover:bg-warn/30 transition-colors"
       title={t('rss.title')}
     >
       <svg

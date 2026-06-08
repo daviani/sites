@@ -6,7 +6,7 @@
  * - Inline styles (OG images, PDF generation)
  * - SVG attributes
  *
- * For Tailwind CSS, use the class-based tokens (e.g. `bg-nord-0`, `text-nord-8`).
+ * For Tailwind CSS, use the class-based tokens (e.g. `bg-bg`, `text-accent`).
  */
 
 // Polar Night — dark backgrounds

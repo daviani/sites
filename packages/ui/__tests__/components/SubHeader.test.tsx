@@ -46,7 +46,7 @@ describe('SubHeader', () => {
     it('applies active styles to current page', () => {
       render(<SubHeader items={defaultItems} currentPath="/blog" />);
       const blogLink = screen.getByText('Blog').closest('a');
-      expect(blogLink?.className).toContain('bg-nord-5');
+      expect(blogLink?.className).toContain('bg-surface-hi');
     });
 
     it('marks nested routes as active', () => {
@@ -64,7 +64,7 @@ describe('SubHeader', () => {
     it('applies inactive styles to non-current pages', () => {
       render(<SubHeader items={defaultItems} currentPath="/blog" />);
       const contactLink = screen.getByText('Contact').closest('a');
-      expect(contactLink?.className).toContain('hover:text-nord-0');
+      expect(contactLink?.className).toContain('hover:text-fg');
     });
   });
 

@@ -63,7 +63,7 @@ describe('TagFilter', () => {
     );
 
     const activeButton = screen.getByText('nature');
-    expect(activeButton).toHaveClass('bg-nord-3');
+    expect(activeButton).toHaveClass('bg-accent');
   });
 
   it('highlights "all" button when no tag is active', () => {
@@ -72,7 +72,7 @@ describe('TagFilter', () => {
     );
 
     const allButton = screen.getByText('Toutes');
-    expect(allButton).toHaveClass('bg-nord-3');
+    expect(allButton).toHaveClass('bg-accent');
   });
 
   it('renders empty tag list', () => {

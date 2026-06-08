@@ -114,7 +114,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
         aria-live="polite"
       >
         <div className="text-4xl mb-4">✓</div>
-        <p className="text-lg font-semibold text-nord-14">
+        <p className="text-lg font-semibold text-ok">
           {t('contact.form.success')}
         </p>
       </div>
@@ -146,7 +146,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
       <div>
         <label
           htmlFor="name"
-          className="block text-sm font-medium text-nord-0 dark:text-nord-6 mb-2"
+          className="block text-sm font-medium text-fg mb-2"
         >
           {t('contact.form.name')}
         </label>
@@ -162,12 +162,12 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
           disabled={status === 'loading'}
           aria-invalid={!!fieldErrors.name}
           aria-describedby={fieldErrors.name ? 'name-error' : undefined}
-          className="w-full px-4 py-3 rounded-xl bg-white dark:bg-nord-1 border border-nord-4 dark:border-nord-2 text-nord-0 dark:text-nord-6 placeholder:text-nord-3 dark:placeholder:text-nord-4 focus:outline-none focus:ring-2 focus:ring-nord-10 focus:border-transparent transition-all disabled:opacity-50"
+          className="w-full px-4 py-3 rounded-xl bg-surface border border-surface-hi text-fg placeholder:text-fg-subtle focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all disabled:opacity-50"
         />
         {fieldErrors.name && (
           <p
             id="name-error"
-            className="mt-1 text-sm text-nord-11"
+            className="mt-1 text-sm text-err"
             role="alert"
           >
             {fieldErrors.name[0]}
@@ -179,7 +179,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
       <div>
         <label
           htmlFor="email"
-          className="block text-sm font-medium text-nord-0 dark:text-nord-6 mb-2"
+          className="block text-sm font-medium text-fg mb-2"
         >
           {t('contact.form.email')}
         </label>
@@ -194,12 +194,12 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
           disabled={status === 'loading'}
           aria-invalid={!!fieldErrors.email}
           aria-describedby={fieldErrors.email ? 'email-error' : undefined}
-          className="w-full px-4 py-3 rounded-xl bg-white dark:bg-nord-1 border border-nord-4 dark:border-nord-2 text-nord-0 dark:text-nord-6 placeholder:text-nord-3 dark:placeholder:text-nord-4 focus:outline-none focus:ring-2 focus:ring-nord-10 focus:border-transparent transition-all disabled:opacity-50"
+          className="w-full px-4 py-3 rounded-xl bg-surface border border-surface-hi text-fg placeholder:text-fg-subtle focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all disabled:opacity-50"
         />
         {fieldErrors.email && (
           <p
             id="email-error"
-            className="mt-1 text-sm text-nord-11"
+            className="mt-1 text-sm text-err"
             role="alert"
           >
             {fieldErrors.email[0]}
@@ -211,7 +211,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
       <div>
         <label
           htmlFor="message"
-          className="block text-sm font-medium text-nord-0 dark:text-nord-6 mb-2"
+          className="block text-sm font-medium text-fg mb-2"
         >
           {t('contact.form.message')}
         </label>
@@ -228,12 +228,12 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
           disabled={status === 'loading'}
           aria-invalid={!!fieldErrors.message}
           aria-describedby={fieldErrors.message ? 'message-error' : undefined}
-          className="w-full px-4 py-3 rounded-xl bg-white dark:bg-nord-1 border border-nord-4 dark:border-nord-2 text-nord-0 dark:text-nord-6 placeholder:text-nord-3 dark:placeholder:text-nord-4 focus:outline-none focus:ring-2 focus:ring-nord-10 focus:border-transparent transition-all resize-none disabled:opacity-50"
+          className="w-full px-4 py-3 rounded-xl bg-surface border border-surface-hi text-fg placeholder:text-fg-subtle focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all resize-none disabled:opacity-50"
         />
         {fieldErrors.message && (
           <p
             id="message-error"
-            className="mt-1 text-sm text-nord-11"
+            className="mt-1 text-sm text-err"
             role="alert"
           >
             {fieldErrors.message[0]}
@@ -244,7 +244,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
       {/* Error message */}
       {status === 'error' && errorMessage && (
         <div
-          className="p-4 rounded-xl bg-nord-11/10 border border-nord-11/20 text-nord-11"
+          className="p-4 rounded-xl bg-err/10 border border-err/20 text-err"
           role="alert"
           aria-live="assertive"
         >
@@ -256,7 +256,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="w-full px-6 py-3 rounded-full font-semibold bg-nord-btn text-white hover:bg-nord-btn-hover hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-nord-8 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-200 cursor-pointer"
+        className="w-full px-6 py-3 rounded-full font-semibold bg-accent text-on-accent hover:opacity-90 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-accent focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-200 cursor-pointer"
       >
         {status === 'loading'
           ? t('contact.form.sending')

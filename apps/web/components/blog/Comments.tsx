@@ -9,7 +9,7 @@ const Giscus = dynamic(() => import('@giscus/react').then(mod => mod.default), {
   ssr: false,
   loading: () => (
     <div className="flex justify-center py-8">
-      <div className="animate-pulse text-nord-3 dark:text-nord-4">Chargement des commentaires...</div>
+      <div className="animate-pulse text-fg-muted">Chargement des commentaires...</div>
     </div>
   ),
 });
@@ -22,18 +22,18 @@ export function Comments() {
   if (!hasConsent) {
     return (
       <section className="mt-8 p-8 glass-card">
-        <h2 className="text-xl font-bold mb-4 text-nord-0 dark:text-nord-6">
+        <h2 className="text-xl font-bold mb-4 text-fg">
           {t('comments.title')}
         </h2>
-        <p className="text-nord-3 dark:text-nord-4 mb-4">
+        <p className="text-fg-muted mb-4">
           {t('comments.consentText')}
         </p>
-        <p className="text-sm text-nord-3 dark:text-nord-4 mb-6">
+        <p className="text-sm text-fg-muted mb-6">
           {t('comments.privacyNote')}
         </p>
         <button
           onClick={() => setHasConsent(true)}
-          className="px-6 py-3 bg-nord-btn text-white rounded-full font-semibold hover:bg-nord-btn-hover hover:scale-105 transition-all cursor-pointer"
+          className="px-6 py-3 bg-accent text-on-accent rounded-full font-semibold hover:bg-accent hover:scale-105 transition-all cursor-pointer"
         >
           {t('comments.acceptButton')}
         </button>

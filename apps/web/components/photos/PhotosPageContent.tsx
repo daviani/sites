@@ -64,10 +64,10 @@ export function PhotosPageContent({ photos, tags }: PhotosPageContentProps) {
     <>
       {/* Header */}
       <div className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-nord-0 dark:text-nord-6">
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-fg">
           {t('pages.photos.title')}
         </h1>
-        <p className="text-lg text-nord-3 dark:text-nord-4 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-lg text-fg-muted max-w-2xl mx-auto leading-relaxed">
           {t('pages.photos.subtitle')}
         </p>
       </div>
@@ -105,7 +105,7 @@ export function PhotosPageContent({ photos, tags }: PhotosPageContentProps) {
             animate={{ opacity: 1 }}
             className="text-center py-16"
           >
-            <p className="text-nord-3 dark:text-nord-4">
+            <p className="text-fg-muted">
               {t('pages.photos.noPhotos')}
             </p>
           </motion.div>

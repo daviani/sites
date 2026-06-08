@@ -16,7 +16,7 @@ export function ExpertiseSection() {
 
   return (
     <section className="mt-16">
-      <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 text-nord-0 dark:text-nord-6">
+      <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 text-fg">
         {t('home.expertise.title')}
       </h2>
 
@@ -24,17 +24,17 @@ export function ExpertiseSection() {
         {expertiseItems.map(({ key, icon: Icon }) => (
           <div
             key={key}
-            className="p-6 rounded-lg bg-nord-6 dark:bg-nord-1 border border-nord-4 dark:border-nord-2 transition-colors hover:border-nord-10 dark:hover:border-nord-10"
+            className="p-6 rounded-lg bg-surface/70 backdrop-blur-sm border border-surface-hi transition-colors hover:border-accent"
           >
             <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 rounded-md bg-nord-10/10 text-nord-10">
+              <div className="p-2 rounded-md bg-accent/10 text-accent">
                 <Icon className="w-5 h-5" />
               </div>
-              <h3 className="font-semibold text-nord-0 dark:text-nord-6">
+              <h3 className="font-semibold text-fg">
                 {t(`home.expertise.${key}.title`)}
               </h3>
             </div>
-            <p className="text-sm text-nord-2 dark:text-nord-4 leading-relaxed">
+            <p className="text-sm text-fg-muted leading-relaxed">
               {t(`home.expertise.${key}.description`)}
             </p>
           </div>

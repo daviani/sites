@@ -49,8 +49,8 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           <Breadcrumb items={[{ href: '/blog', label: 'Blog' }]} homeLabel="Accueil" ariaLabel="Fil d'Ariane" />
         </div>
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-nord-0 dark:text-nord-6">Blog</h1>
-          <p className="text-xl text-nord-3 dark:text-nord-4 mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-fg">Blog</h1>
+          <p className="text-xl text-fg-muted mb-6">
             Articles sur le développement web, DevOps et plus encore.
           </p>
           <RssButton />
@@ -66,8 +66,8 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               href="/"
               className={`px-3 py-1 rounded-full text-sm transition-colors cursor-pointer ${
                 !tag
-                  ? 'bg-nord-btn text-white'
-                  : 'bg-nord-5 dark:bg-nord-2 text-nord-0 dark:text-nord-4 hover:bg-nord-4 dark:hover:bg-nord-3'
+                  ? 'bg-accent text-on-accent'
+                  : 'bg-surface-hi text-fg dark:text-fg-muted hover:bg-surface-hi'
               }`}
             >
               Tous
@@ -78,8 +78,8 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 href={`/?tag=${t}`}
                 className={`px-3 py-1 rounded-full text-sm transition-colors cursor-pointer ${
                   tag === t
-                    ? 'bg-nord-btn text-white'
-                    : 'bg-nord-5 dark:bg-nord-2 text-nord-0 dark:text-nord-4 hover:bg-nord-4 dark:hover:bg-nord-3'
+                    ? 'bg-accent text-on-accent'
+                    : 'bg-surface-hi text-fg dark:text-fg-muted hover:bg-surface-hi'
                 }`}
               >
                 {t}
@@ -90,12 +90,12 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
         {/* Articles list */}
         {showFeatured && articles.length > 0 && (
-          <h2 className="text-sm font-semibold text-nord-3 dark:text-nord-4 uppercase tracking-wider mb-6">
+          <h2 className="text-sm font-semibold text-fg-muted uppercase tracking-wider mb-6">
             Tous les articles
           </h2>
         )}
         {articles.length === 0 ? (
-          <p className="text-nord-0 dark:text-nord-4">Aucun article trouvé.</p>
+          <p className="text-fg dark:text-fg-muted">Aucun article trouvé.</p>
         ) : (
           <div className="space-y-8">
             {articles.map((article) => (
@@ -104,13 +104,13 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 className="p-6 glass-card hover:shadow-xl transition-shadow"
               >
                 <Link href={`/${article.slug}`} className="block cursor-pointer">
-                  <h2 className="text-2xl font-bold mb-2 text-nord-0 dark:text-nord-6 hover:text-nord-10 dark:hover:text-nord-8 transition-colors">
+                  <h2 className="text-2xl font-bold mb-2 text-fg hover:text-accent transition-colors">
                     {article.meta.titleFr}
                   </h2>
-                  <p className="text-nord-0 dark:text-nord-4 mb-4">
+                  <p className="text-fg dark:text-fg-muted mb-4">
                     {article.meta.excerptFr}
                   </p>
-                  <div className="flex items-center gap-4 text-sm text-nord-0 dark:text-nord-4">
+                  <div className="flex items-center gap-4 text-sm text-fg dark:text-fg-muted">
                     <time dateTime={article.meta.publishedAt}>
                       {new Date(article.meta.publishedAt).toLocaleDateString('fr-FR', {
                         year: 'numeric',
@@ -124,7 +124,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                       {article.meta.tags.map((t) => (
                         <span
                           key={t}
-                          className="px-2 py-1 bg-nord-5 dark:bg-nord-2 text-nord-0 dark:text-nord-4 rounded text-xs"
+                          className="px-2 py-1 bg-surface-hi text-fg dark:text-fg-muted rounded text-xs"
                         >
                           {t}
                         </span>
@@ -143,18 +143,18 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             {page > 1 && (
               <Link
                 href={`/?page=${page - 1}${tag ? `&tag=${tag}` : ''}`}
-                className="px-4 py-2 bg-nord-5 dark:bg-nord-2 rounded hover:bg-nord-4 dark:hover:bg-nord-3 transition-colors cursor-pointer"
+                className="px-4 py-2 bg-surface-hi rounded hover:bg-surface-hi transition-colors cursor-pointer"
               >
                 ← Précédent
               </Link>
             )}
-            <span className="px-4 py-2 text-nord-0 dark:text-nord-4">
+            <span className="px-4 py-2 text-fg dark:text-fg-muted">
               Page {page} / {totalPages}
             </span>
             {page < totalPages && (
               <Link
                 href={`/?page=${page + 1}${tag ? `&tag=${tag}` : ''}`}
-                className="px-4 py-2 bg-nord-5 dark:bg-nord-2 rounded hover:bg-nord-4 dark:hover:bg-nord-3 transition-colors cursor-pointer"
+                className="px-4 py-2 bg-surface-hi rounded hover:bg-surface-hi transition-colors cursor-pointer"
               >
                 Suivant →
               </Link>

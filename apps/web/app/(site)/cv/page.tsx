@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function CvPage() {
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <p className="text-nord-4">CV — bientôt disponible en PDF.</p>
+      <p className="text-fg-muted">CV — bientôt disponible en PDF.</p>
     </div>
   );
 }

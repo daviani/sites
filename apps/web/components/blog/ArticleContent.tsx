@@ -24,11 +24,11 @@ export function ArticleContent({ article }: ArticleContentProps) {
     <>
       {/* Header */}
       <header className="mb-10 p-8 glass-card">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4 text-nord-0 dark:text-nord-6">
+        <h1 className="text-3xl md:text-4xl font-bold mb-4 text-fg">
           {title}
         </h1>
-        <p className="text-lg text-nord-3 dark:text-nord-4 mb-6 leading-relaxed">{excerpt}</p>
-        <div className="flex items-center gap-4 text-sm text-nord-3 dark:text-nord-4">
+        <p className="text-lg text-fg-muted mb-6 leading-relaxed">{excerpt}</p>
+        <div className="flex items-center gap-4 text-sm text-fg-muted">
           <time dateTime={meta.publishedAt}>
             {new Date(meta.publishedAt).toLocaleDateString(dateLocale, {
               year: 'numeric',
@@ -43,7 +43,7 @@ export function ArticleContent({ article }: ArticleContentProps) {
               <Link
                 key={tag}
                 href={`/?tag=${tag}`}
-                className="px-4 py-1.5 bg-nord-10/10 dark:bg-nord-8/10 text-nord-10 dark:text-nord-8 rounded-full text-sm font-medium hover:bg-nord-10/20 dark:hover:bg-nord-8/20 transition-colors cursor-pointer"
+                className="px-4 py-1.5 bg-accent/10 text-accent rounded-full text-sm font-medium hover:bg-accent/20 transition-colors cursor-pointer"
               >
                 #{tag}
               </Link>
@@ -54,7 +54,7 @@ export function ArticleContent({ article }: ArticleContentProps) {
 
       {/* Content */}
       <div className="mt-8 p-8 glass-card">
-        <div className="prose prose-nord dark:prose-invert max-w-none">
+        <div className="prose prose-tuli max-w-none">
           <MarkdocContent content={articleContent} />
         </div>
       </div>

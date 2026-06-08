@@ -14,69 +14,69 @@ export default function AboutPageClient() {
         </div>
 
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-nord-0 dark:text-nord-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-fg">
             {t('pages.about.title')}
           </h1>
         </div>
 
         <article className="prose prose-lg dark:prose-invert max-w-none">
           <section className="mb-12">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-nord-0 dark:text-nord-6">
+            <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-fg">
               {t('pages.about.crossroad.title')}
             </h2>
-            <p className="text-nord-3 dark:text-nord-4 mb-4 leading-relaxed">
+            <p className="text-fg-muted mb-4 leading-relaxed">
               {t('pages.about.crossroad.p1')}
             </p>
-            <p className="text-nord-3 dark:text-nord-4 mb-4 leading-relaxed">
+            <p className="text-fg-muted mb-4 leading-relaxed">
               {t('pages.about.crossroad.p2')}
             </p>
-            <p className="text-nord-3 dark:text-nord-4 leading-relaxed">
+            <p className="text-fg-muted leading-relaxed">
               {t('pages.about.crossroad.p3')}
             </p>
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-nord-0 dark:text-nord-6">
+            <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-fg">
               {t('pages.about.building.title')}
             </h2>
-            <p className="text-nord-3 dark:text-nord-4 mb-4 leading-relaxed">
+            <p className="text-fg-muted mb-4 leading-relaxed">
               {t('pages.about.building.p1')}
             </p>
-            <p className="text-nord-3 dark:text-nord-4 mb-4 leading-relaxed">
+            <p className="text-fg-muted mb-4 leading-relaxed">
               {t('pages.about.building.p2')}
             </p>
-            <p className="text-nord-3 dark:text-nord-4 mb-4 leading-relaxed">
+            <p className="text-fg-muted mb-4 leading-relaxed">
               {t('pages.about.building.p3')}
             </p>
-            <p className="text-nord-3 dark:text-nord-4 leading-relaxed">
+            <p className="text-fg-muted leading-relaxed">
               {t('pages.about.building.p4')}
             </p>
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-nord-0 dark:text-nord-6">
+            <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-fg">
               {t('pages.about.transmit.title')}
             </h2>
-            <p className="text-nord-3 dark:text-nord-4 mb-4 leading-relaxed">
+            <p className="text-fg-muted mb-4 leading-relaxed">
               {t('pages.about.transmit.p1')}
             </p>
-            <p className="text-nord-3 dark:text-nord-4 leading-relaxed">
+            <p className="text-fg-muted leading-relaxed">
               {t('pages.about.transmit.p2')}
             </p>
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-nord-0 dark:text-nord-6">
+            <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-fg">
               {t('pages.about.breathe.title')}
             </h2>
-            <p className="text-nord-3 dark:text-nord-4 mb-4 leading-relaxed">
+            <p className="text-fg-muted mb-4 leading-relaxed">
               {t('pages.about.breathe.p1')}
             </p>
-            <p className="text-nord-3 dark:text-nord-4 leading-relaxed">
+            <p className="text-fg-muted leading-relaxed">
               {t('pages.about.breathe.p2Start')}
               <a
                 href="/photos"
-                className="text-nord-10 hover:text-nord-9 underline underline-offset-2 transition-colors"
+                className="text-accent hover:text-accent underline underline-offset-2 transition-colors"
               >
                 {t('pages.about.breathe.p2Link')}
               </a>
@@ -85,10 +85,10 @@ export default function AboutPageClient() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-nord-0 dark:text-nord-6">
+            <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-fg">
               {t('pages.about.next.title')}
             </h2>
-            <p className="text-nord-3 dark:text-nord-4 leading-relaxed">
+            <p className="text-fg-muted leading-relaxed">
               {t('pages.about.next.p1')}
             </p>
           </section>
@@ -96,7 +96,7 @@ export default function AboutPageClient() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
             <a
               href="/contact"
-              className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg bg-nord-btn text-white hover:bg-nord-btn-hover transition-colors focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2"
+              className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg bg-accent text-on-accent hover:bg-accent transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
             >
               {t('pages.about.cta.contact')}
             </a>

@@ -25,7 +25,7 @@ export function Breadcrumb({ items, homeLabel = 'Home', currentLabel, ariaLabel 
             <li key={item.href} className="flex items-center gap-2">
               {index > 0 && (
                 <span
-                  className="text-nord-3 dark:text-nord-4"
+                  className="text-fg-muted"
                   aria-hidden="true"
                 >
                   ›
@@ -33,7 +33,7 @@ export function Breadcrumb({ items, homeLabel = 'Home', currentLabel, ariaLabel 
               )}
               {isLast ? (
                 <span
-                  className="text-nord-0 dark:text-nord-6 font-semibold"
+                  className="text-fg font-semibold"
                   aria-current="page"
                 >
                   {item.label}
@@ -41,7 +41,7 @@ export function Breadcrumb({ items, homeLabel = 'Home', currentLabel, ariaLabel 
               ) : (
                 <a
                   href={item.href}
-                  className="text-nord-3 dark:text-nord-4 hover:text-nord-10 dark:hover:text-nord-8 hover:underline underline-offset-4 transition-all focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2 rounded px-1 -mx-1"
+                  className="text-fg-muted hover:text-accent hover:underline underline-offset-4 transition-all focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded px-1 -mx-1"
                 >
                   {item.label}
                 </a>
@@ -52,13 +52,13 @@ export function Breadcrumb({ items, homeLabel = 'Home', currentLabel, ariaLabel 
         {currentLabel && (
           <li className="flex items-center gap-2">
             <span
-              className="text-nord-3 dark:text-nord-4"
+              className="text-fg-muted"
               aria-hidden="true"
             >
               ›
             </span>
             <span
-              className="text-nord-0 dark:text-nord-6 font-semibold"
+              className="text-fg font-semibold"
               aria-current="page"
             >
               {currentLabel}

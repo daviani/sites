@@ -35,12 +35,12 @@ export function Footer({
   const currentYear = new Date().getFullYear();
 
   const linkStyles =
-    'text-nord-3 dark:text-nord-4 hover:text-nord-0 dark:hover:text-nord-8 transition-colors rounded focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2';
+    'text-fg-muted hover:text-fg dark:hover:text-accent transition-colors rounded focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2';
 
   const mobileLinkStyles =
-    'min-h-[44px] inline-flex items-center px-3 text-nord-3 dark:text-nord-4 hover:text-nord-0 dark:hover:text-nord-8 transition-colors rounded focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2';
+    'min-h-[44px] inline-flex items-center px-3 text-fg-muted hover:text-fg dark:hover:text-accent transition-colors rounded focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2';
 
-  const titleStyles = 'font-semibold text-nord-0 dark:text-nord-6 mb-1';
+  const titleStyles = 'font-semibold text-fg mb-1';
 
   return (
     <footer className="mx-[var(--spacing-edge)] mb-[var(--spacing-edge)] glass-card py-3 md:py-4">
@@ -68,7 +68,7 @@ export function Footer({
               {t.linkedin}
             </a>
           </div>
-          <div className="text-center text-xs text-nord-3 dark:text-nord-4">
+          <div className="text-center text-xs text-fg-muted">
             {t.copyright.replace('{year}', currentYear.toString())}
           </div>
         </div>
@@ -124,7 +124,7 @@ export function Footer({
         </div>
 
         {/* Desktop Copyright */}
-        <div className="hidden md:block text-center text-xs text-nord-3 dark:text-nord-4 mt-3 pt-3 border-t border-nord-3 dark:border-nord-4">
+        <div className="hidden md:block text-center text-xs text-fg-muted mt-3 pt-3 border-t border-surface-hi">
           {t.copyright.replace('{year}', currentYear.toString())}
         </div>
       </div>

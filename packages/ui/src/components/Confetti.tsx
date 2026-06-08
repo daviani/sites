@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback, useMemo } from 'react';
-import { NORD_AURORA } from '../constants/nord-colors';
+import { TULI_AURORA } from '../constants/tuli-colors';
 
 interface ConfettiPiece {
   id: number;
@@ -31,7 +31,7 @@ export function Confetti({
     return Array.from({ length: pieceCount }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
-      color: NORD_AURORA[Math.floor(Math.random() * NORD_AURORA.length)],
+      color: TULI_AURORA[Math.floor(Math.random() * TULI_AURORA.length)],
       delay: Math.random() * 0.5,
       duration: 2 + Math.random() * 2,
       size: 6 + Math.random() * 8,

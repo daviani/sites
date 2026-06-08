@@ -32,50 +32,50 @@ export default function AccessibilityPage() {
           <Breadcrumb items={[{ href: '/accessibility', label: t('nav.accessibility.title') }]} homeLabel={t('common.home')} ariaLabel={t('common.breadcrumb')} />
         </div>
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-nord-0 dark:text-nord-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-fg">
             {t('pages.accessibility.title')}
           </h1>
-          <p className="text-xl text-nord-0 dark:text-nord-4">
+          <p className="text-xl text-fg dark:text-fg-muted">
             {t('pages.accessibility.subtitle')}
           </p>
         </div>
 
-        <div className="bg-nord-5 dark:bg-nord-1 rounded-lg p-6 mb-8 border-l-4 border-nord-14">
-          <p className="text-lg font-semibold text-nord-0 dark:text-nord-14">
+        <div className="bg-surface-hi dark:bg-surface rounded-lg p-6 mb-8 border-l-4 border-ok">
+          <p className="text-lg font-semibold text-fg dark:text-ok">
             {t('pages.accessibility.status')}
           </p>
-          <p className="text-nord-0 dark:text-nord-4 mt-2">
+          <p className="text-fg dark:text-fg-muted mt-2">
             {t('pages.accessibility.statusDetail')}
           </p>
         </div>
 
         <div className="space-y-8">
           <section className="glass-card p-6">
-            <h2 className="text-2xl font-bold mb-4 text-nord-10">
+            <h2 className="text-2xl font-bold mb-4 text-accent">
               {t('pages.accessibility.commitment')}
             </h2>
-            <p className="text-nord-0 dark:text-nord-4">
+            <p className="text-fg dark:text-fg-muted">
               {t('pages.accessibility.commitmentText')}
             </p>
           </section>
 
           <section className="glass-card p-6">
-            <h2 className="text-2xl font-bold mb-4 text-nord-10">
+            <h2 className="text-2xl font-bold mb-4 text-accent">
               {t('pages.accessibility.standards')}
             </h2>
-            <p className="text-nord-0 dark:text-nord-4">
+            <p className="text-fg dark:text-fg-muted">
               {t('pages.accessibility.standardsText')}
             </p>
           </section>
 
           <section className="glass-card p-6">
-            <h2 className="text-2xl font-bold mb-4 text-nord-10">
+            <h2 className="text-2xl font-bold mb-4 text-accent">
               {t('pages.accessibility.conformity')}
             </h2>
             <ul className="space-y-2">
               {conformityItems.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-nord-0 dark:text-nord-4">
-                  <span className="text-nord-14 mt-1">✓</span>
+                <li key={item} className="flex items-start gap-3 text-fg dark:text-fg-muted">
+                  <span className="text-ok mt-1">✓</span>
                   <span>{t(`pages.accessibility.conformityItems.${item}`)}</span>
                 </li>
               ))}
@@ -83,30 +83,30 @@ export default function AccessibilityPage() {
           </section>
 
           <section className="glass-card p-6">
-            <h2 className="text-2xl font-bold mb-4 text-nord-10">
+            <h2 className="text-2xl font-bold mb-4 text-accent">
               {t('pages.accessibility.testing')}
             </h2>
-            <p className="text-nord-0 dark:text-nord-4">
+            <p className="text-fg dark:text-fg-muted">
               {t('pages.accessibility.testingText')}
             </p>
           </section>
 
           <section className="glass-card p-6">
-            <h2 className="text-2xl font-bold mb-4 text-nord-10">
+            <h2 className="text-2xl font-bold mb-4 text-accent">
               {t('pages.accessibility.contact')}
             </h2>
-            <p className="text-nord-0 dark:text-nord-4 mb-4">
+            <p className="text-fg dark:text-fg-muted mb-4">
               {t('pages.accessibility.contactText')}
             </p>
             <a
               href="/contact"
-              className="inline-block px-6 py-3 bg-nord-btn text-white rounded-lg hover:bg-nord-btn-hover transition-colors"
+              className="inline-block px-6 py-3 bg-accent text-on-accent rounded-lg hover:bg-accent transition-colors"
             >
               {t('nav.contact.title')}
             </a>
           </section>
 
-          <div className="text-sm text-nord-0 dark:text-nord-4 text-center mt-8">
+          <div className="text-sm text-fg dark:text-fg-muted text-center mt-8">
             <p>
               {t('pages.accessibility.declarationDate')}: {currentDate}
             </p>

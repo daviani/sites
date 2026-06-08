@@ -33,13 +33,13 @@ export function ScrollToTop({ ariaLabel }: ScrollToTopProps) {
       className={`
         fixed bottom-[175px] md:bottom-[165px] right-[20px] z-50
         p-4 rounded-full cursor-pointer
-        bg-nord-10/90 dark:bg-nord-10/90 backdrop-blur-sm
-        text-white dark:text-white
+        bg-accent/90 backdrop-blur-sm
+        text-white
         shadow-[0_0_20px_rgba(94,129,172,0.5)] dark:shadow-[0_0_25px_rgba(136,192,208,0.4)]
-        hover:bg-nord-10 dark:hover:bg-nord-10
+        hover:bg-accent
         hover:shadow-[0_0_30px_rgba(94,129,172,0.7)] dark:hover:shadow-[0_0_35px_rgba(136,192,208,0.6)]
         hover:scale-110
-        focus:outline-none focus:ring-4 focus:ring-nord-8 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-nord-0
+        focus:outline-none focus:ring-4 focus:ring-accent focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-bg
         transition-all duration-300 ease-out
         ${isVisible
           ? 'opacity-100 translate-y-0 pointer-events-auto'

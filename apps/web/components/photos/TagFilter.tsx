@@ -23,8 +23,8 @@ export const TagFilter = memo(function TagFilter({
         onClick={() => onTagChange(null)}
         className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
           ${activeTag === null
-            ? 'bg-nord-3 text-nord-6'
-            : 'bg-nord-5 dark:bg-nord-2 text-nord-3 dark:text-nord-4 hover:bg-nord-4 dark:hover:bg-nord-3'
+            ? 'bg-accent text-on-accent'
+            : 'bg-surface-hi/60 text-fg-muted hover:bg-surface-hi hover:text-fg'
           }`}
       >
         {t('pages.photos.tags.all')}
@@ -35,8 +35,8 @@ export const TagFilter = memo(function TagFilter({
           onClick={() => onTagChange(tag)}
           className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 capitalize
             ${activeTag === tag
-              ? 'bg-nord-3 text-nord-6'
-              : 'bg-nord-5 dark:bg-nord-2 text-nord-3 dark:text-nord-4 hover:bg-nord-4 dark:hover:bg-nord-3'
+              ? 'bg-accent text-on-accent'
+              : 'bg-surface-hi/60 text-fg-muted hover:bg-surface-hi hover:text-fg'
             }`}
         >
           {tag}

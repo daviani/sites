@@ -36,7 +36,7 @@ describe('IconButton', () => {
 
     const btn = screen.getByTestId('btn');
     expect(btn).toHaveClass('hover:scale-105');
-    expect(btn).toHaveClass('hover:bg-nord-5');
+    expect(btn).toHaveClass('hover:bg-surface-hi');
   });
 
   it('applies disabled styles when disabled', () => {
@@ -98,7 +98,7 @@ describe('IconButton', () => {
     const btn = screen.getByTestId('btn');
     expect(btn).toHaveClass('focus:outline-none');
     expect(btn).toHaveClass('focus:ring-2');
-    expect(btn).toHaveClass('focus:ring-nord-10');
+    expect(btn).toHaveClass('focus:ring-accent');
   });
 
   it('is keyboard accessible', () => {

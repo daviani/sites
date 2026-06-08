@@ -16,12 +16,12 @@ export const PhotoCard = memo(function PhotoCard({
   return (
     <button
       onClick={onClick}
-      className="photo-card group relative w-full h-full overflow-hidden rounded-xl bg-nord-5 dark:bg-nord-1
+      className="photo-card group relative w-full h-full overflow-hidden rounded-xl bg-surface-hi dark:bg-surface
         cursor-pointer
-        focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-4
-        dark:focus:ring-offset-nord-0
+        focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-4
+        dark:focus:ring-offset-bg
         transition-shadow duration-300 ease-out
-        hover:shadow-2xl hover:shadow-nord-0/30 dark:hover:shadow-nord-0/50"
+        hover:shadow-2xl hover:shadow-black/30 dark:hover:shadow-black/50"
       aria-label={photo.alt}
     >
       <Image
@@ -32,12 +32,12 @@ export const PhotoCard = memo(function PhotoCard({
         className="object-cover transition-all duration-500 md:grayscale md:group-hover:grayscale-0 group-hover:scale-105"
       />
       {/* Color shift overlay on hover - purple/pink tint */}
-      <div className="absolute inset-0 bg-gradient-to-br from-nord-15/30 via-nord-10/20 to-nord-15/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-color" />
+      <div className="absolute inset-0 bg-gradient-to-br from-accent-3/30 via-accent/20 to-accent-3/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-color" />
       {/* Subtle gradient overlay on hover */}
-      <div className="absolute inset-0 bg-gradient-to-t from-nord-0/50 via-transparent to-nord-0/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-gradient-to-t from-bg/50 via-transparent to-bg/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       {/* Title on hover */}
       <div className="absolute top-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <h3 className="text-sm font-semibold text-nord-6 drop-shadow-lg truncate">
+        <h3 className="text-sm font-semibold text-fg drop-shadow-lg truncate">
           {photo.title}
         </h3>
       </div>
@@ -46,7 +46,7 @@ export const PhotoCard = memo(function PhotoCard({
         {photo.tags.map((tag) => (
           <span
             key={tag}
-            className="px-2 py-1 text-xs font-medium bg-nord-6/90 dark:bg-nord-0/90 text-nord-0 dark:text-nord-6 rounded-md backdrop-blur-sm"
+            className="px-2 py-1 text-xs font-medium bg-surface/90 dark:bg-bg/90 text-fg rounded-md backdrop-blur-sm"
           >
             {tag}
           </span>

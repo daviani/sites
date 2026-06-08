@@ -16,7 +16,7 @@ export function DarkModeToggle({ labels }: DarkModeToggleProps) {
   if (!mounted) {
     return (
       <IconButton
-        className="text-nord-3 dark:text-nord-4"
+        className="text-fg-muted"
         aria-label={labels.switchToDark}
         disabled
       >
@@ -30,7 +30,7 @@ export function DarkModeToggle({ labels }: DarkModeToggleProps) {
   return (
     <IconButton
       onClick={toggleTheme}
-      className="text-nord-3 dark:text-nord-8"
+      className="text-fg-muted dark:text-accent"
       aria-label={label}
       title={label}
     >
