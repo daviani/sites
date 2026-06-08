@@ -1,15 +1,28 @@
 'use client';
 
-import { OwlLogo } from '@nordic-island/ui';
+import { useTheme } from '@tulikettu/ui';
 import { useTranslation } from '@/hooks/use-translation';
 
 export function HeroSection() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
+  const logoSrc =
+    theme === 'dark'
+      ? '/brand/tulikettu-full-ondark-512.png'
+      : '/brand/tulikettu-full-onlight-512.png';
 
   return (
     <section className="text-center mb-12">
       <div className="flex justify-center mb-6">
-        <OwlLogo size={120} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={logoSrc}
+          alt=""
+          width={512}
+          height={512}
+          data-testid="hero-logo"
+          suppressHydrationWarning
+        />
       </div>
 
       <h1 className="text-5xl md:text-6xl font-bold mb-4 text-nord-0 dark:text-nord-6">

@@ -1,6 +1,6 @@
 'use client';
 
-import { Footer, SkipLink, ScrollToTop } from "@nordic-island/ui";
+import { Footer, SkipLink, ScrollToTop } from "@tulikettu/ui";
 import { Providers } from "@/components/Providers";
 import { HeaderNav } from "@/components/HeaderNav";
 import { SubHeaderNav } from "@/components/SubHeaderNav";

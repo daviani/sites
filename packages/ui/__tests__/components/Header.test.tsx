@@ -2,9 +2,9 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Header } from '../../src/components/Header';
 
-// Mock OwlLogo
-vi.mock('../../src/components/OwlLogo', () => ({
-  OwlLogo: ({ size }: { size: number }) => <svg data-testid="owl-logo" width={size} />,
+// Mock FoxLogo
+vi.mock('../../src/components/FoxLogo', () => ({
+  FoxLogo: ({ size }: { size: number }) => <svg data-testid="fox-logo" width={size} />,
 }));
 
 describe('Header', () => {

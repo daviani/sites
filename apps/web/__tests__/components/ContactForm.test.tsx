@@ -30,7 +30,7 @@ vi.mock('@/hooks/use-translation', () => ({
   }),
 }));
 
-vi.mock('@nordic-island/ui', () => ({
+vi.mock('@tulikettu/ui', () => ({
   useRecaptcha: () => ({
     execute: mockExecute,
     load: mockLoad,

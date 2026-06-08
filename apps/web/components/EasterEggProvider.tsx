@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useCallback, ReactNode, useMemo } from 'react';
-import { useKonamiCode, Confetti, MatrixRain } from '@nordic-island/ui';
+import { useKonamiCode, Confetti, MatrixRain } from '@tulikettu/ui';
 import { useConsoleMessage } from '@/hooks/use-console-message';
 import { useTranslation } from '@/hooks/use-translation';
 

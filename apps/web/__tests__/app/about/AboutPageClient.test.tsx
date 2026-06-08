@@ -34,7 +34,7 @@ vi.mock('@/hooks/use-translation', () => ({
   }),
 }));
 
-vi.mock('@nordic-island/ui', () => ({
+vi.mock('@tulikettu/ui', () => ({
   Breadcrumb: ({ items }: { items: { href: string; label: string }[] }) => (
     <nav data-testid="breadcrumb">
       {items.map((item) => (

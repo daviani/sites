@@ -13,7 +13,7 @@ export { DarkModeToggle } from './components/DarkModeToggle';
 
 export { LanguageSwitcher } from './components/LanguageSwitcher';
 
-export { OwlLogo } from './components/OwlLogo';
+export { FoxLogo } from './components/FoxLogo';
 
 export { FlagFR, FlagEN } from './components/icons/FlagIcons';
 

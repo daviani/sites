@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { SubHeader } from '@nordic-island/ui';
+import { SubHeader } from '@tulikettu/ui';
 import { useTranslation } from '@/hooks/use-translation';
 
 const navKeys = [

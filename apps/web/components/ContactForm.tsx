@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
-import { useRecaptcha } from '@nordic-island/ui';
+import { useRecaptcha } from '@tulikettu/ui';
 import { useTranslation } from '@/hooks/use-translation';
 
 type FormStatus = 'idle' | 'loading' | 'success' | 'error';

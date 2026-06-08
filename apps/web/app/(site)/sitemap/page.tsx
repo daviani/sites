@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Breadcrumb } from '@nordic-island/ui';
+import { Breadcrumb } from '@tulikettu/ui';
 import { useTranslation, type TranslationKey } from '@/hooks/use-translation';
 
 type PageLink = {

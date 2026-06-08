@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { Header, DarkModeToggle, LanguageSwitcher } from '@nordic-island/ui';
+import { Header, DarkModeToggle, LanguageSwitcher } from '@tulikettu/ui';
 import { useTranslation } from '@/hooks/use-translation';
 import { useLanguage } from '@/hooks/use-language';
 

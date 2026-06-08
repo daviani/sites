@@ -1,6 +1,6 @@
 'use client';
 
-import { Breadcrumb } from '@nordic-island/ui';
+import { Breadcrumb } from '@tulikettu/ui';
 import { useTranslation } from '@/hooks/use-translation';
 import { useLanguage } from '@/hooks/use-language';
 
