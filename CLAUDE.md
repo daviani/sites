@@ -101,11 +101,13 @@ pnpm typecheck    # Vérifier les types TypeScript
 
 ## Design et inspiration
 
-### Référence principale : nordtheme.com
-- S'inspirer du design du site https://www.nordtheme.com pour les composants UI
-- Utiliser la palette de couleurs Nord (nord0-nord15)
+### Design system : Tulikettu (maison)
+- DS propriétaire de Dav — palette froide boréale, renard de feu (« tulikettu »)
+- Source de vérité des tokens : `Design System/Tulikettu final/styles.css` (préfixe `--tuli-*`)
+- Modes : **Päivä** (clair) / **Kaamos** (sombre). Accent par défaut : **cyan** (`#0E7490` clair / `#5BB8D4` sombre)
 - Focus sur la simplicité et l'élégance minimaliste
-- Toggle dark/light mode inspiré du design nordtheme.com
+- Toggle dark/light via classe `.dark` + `useTheme` de `@tulikettu/ui`
+- Tulikettu destiné à l'open-source + npm (affiché « coming soon » côté Contributions)
 
 ## UX/UI - Règles de design
 
