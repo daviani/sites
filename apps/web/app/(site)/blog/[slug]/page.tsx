@@ -63,7 +63,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
 
   return (
     <div className="min-h-screen">
-      <article className="max-w-3xl mx-auto px-4 pt-5 pb-16">
+      <article className="w-[var(--content-width)] mx-auto px-4 pt-5 pb-16">
         {/* Breadcrumb */}
         <div className="mb-8">
           <Breadcrumb

@@ -29,11 +29,11 @@ export function FeaturedArticle({ article }: FeaturedArticleProps) {
             {t('blog.featured')}
           </span>
 
-          <h2 className="text-3xl md:text-4xl font-bold mt-5 mb-4 text-fg group-hover:text-accent transition-colors max-w-[65ch]">
+          <h2 className="text-3xl md:text-4xl font-bold mt-5 mb-4 text-fg group-hover:text-accent transition-colors">
             {title}
           </h2>
 
-          <p className="text-lg text-fg-muted mb-6 max-w-[65ch]">{excerpt}</p>
+          <p className="text-lg text-fg-muted mb-6">{excerpt}</p>
 
           <div className="flex flex-wrap items-center gap-4 text-sm text-fg-muted">
             <time dateTime={article.meta.publishedAt}>

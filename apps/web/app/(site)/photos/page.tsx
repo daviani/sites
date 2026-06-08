@@ -25,7 +25,7 @@ export default function PhotosPage() {
 
   return (
     <div className="min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-24">
+      <div className="w-[var(--content-width)] mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-24">
         {/* Breadcrumb */}
         <div className="mb-8">
           <Breadcrumb items={[{ href: '/photos', label: 'Photos' }]} homeLabel="Accueil" ariaLabel="Fil d'Ariane" />

@@ -8,7 +8,7 @@ export default function AboutPageClient() {
 
   return (
     <div className="min-h-screen">
-      <div className="max-w-[65ch] mx-auto px-4 pt-5 pb-16">
+      <div className="w-[var(--content-width)] mx-auto px-4 pt-5 pb-16">
         <div className="mb-8">
           <Breadcrumb items={[{ href: '/about', label: t('nav.about.title') }]} homeLabel={t('common.home')} ariaLabel={t('common.breadcrumb')} />
         </div>

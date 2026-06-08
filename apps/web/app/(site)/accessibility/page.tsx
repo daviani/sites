@@ -27,7 +27,7 @@ export default function AccessibilityPage() {
 
   return (
     <div className="min-h-screen">
-      <div className="max-w-4xl mx-auto px-4 pt-5 pb-16">
+      <div className="w-[var(--content-width)] mx-auto px-4 pt-5 pb-16">
         <div className="mb-8">
           <Breadcrumb items={[{ href: '/accessibility', label: t('nav.accessibility.title') }]} homeLabel={t('common.home')} ariaLabel={t('common.breadcrumb')} />
         </div>

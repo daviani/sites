@@ -33,7 +33,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen">
-      <div className="max-w-3xl mx-auto px-4 pt-5 pb-16">
+      <div className="w-[var(--content-width)] mx-auto px-4 pt-5 pb-16">
         <div className="mb-8">
           <Breadcrumb
             items={[
@@ -98,7 +98,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         )}
 
         {project.bodyFr.length > 0 && (
-          <div className="prose prose-tuli max-w-[65ch] mx-auto glass-card p-8">
+          <div className="prose prose-tuli mx-auto glass-card p-8">
             <MarkdocContent content={project.bodyFr} />
           </div>
         )}
