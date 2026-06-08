@@ -133,7 +133,7 @@ describe('Header', () => {
       fireEvent.click(button);
 
       const blogLink = screen.getByText('Blog').closest('a');
-      expect(blogLink?.className).toContain('bg-nord-5');
+      expect(blogLink?.className).toContain('bg-surface-hi');
     });
 
     it('closes menu when nav item is clicked', () => {

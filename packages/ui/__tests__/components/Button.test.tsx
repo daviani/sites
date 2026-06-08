@@ -13,14 +13,14 @@ describe('Button', () => {
     render(<Button>Primary</Button>);
 
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('bg-nord10');
+    expect(button).toHaveClass('bg-accent');
   });
 
   it('applies secondary variant', () => {
     render(<Button variant="secondary">Secondary</Button>);
 
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('bg-nord8');
+    expect(button).toHaveClass('bg-accent-2');
   });
 
   it('applies outline variant', () => {
@@ -28,15 +28,15 @@ describe('Button', () => {
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass('border-2');
-    expect(button).toHaveClass('border-nord10');
+    expect(button).toHaveClass('border-accent');
   });
 
   it('applies ghost variant', () => {
     render(<Button variant="ghost">Ghost</Button>);
 
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('text-nord10');
-    expect(button).not.toHaveClass('bg-nord10');
+    expect(button).toHaveClass('text-accent');
+    expect(button).not.toHaveClass('bg-accent');
     expect(button).not.toHaveClass('border-2');
   });
 
@@ -112,7 +112,7 @@ describe('Button', () => {
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass('custom-class');
-    expect(button).toHaveClass('bg-nord10'); // Still has default styles
+    expect(button).toHaveClass('bg-accent'); // Still has default styles
   });
 
   it('has focus styles', () => {
@@ -127,6 +127,6 @@ describe('Button', () => {
     render(<Button>Hoverable</Button>);
 
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('hover:bg-nord9');
+    expect(button).toHaveClass('hover:opacity-90');
   });
 });

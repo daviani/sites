@@ -113,8 +113,8 @@ export function Lightbox({
         whileTap={prefersReducedMotion ? undefined : { scale: 0.9 }}
         transition={prefersReducedMotion ? instantTransition : { delay: 0.1 }}
         onClick={onClose}
-        className="absolute top-6 right-6 p-3 text-nord-4 hover:text-nord-6 transition-colors z-10 cursor-pointer
-          focus:outline-none focus:ring-2 focus:ring-nord-6 rounded-full hover:bg-nord-3/20"
+        className="absolute top-6 right-6 p-3 text-fg-muted hover:text-fg transition-colors z-10 cursor-pointer
+          focus:outline-none focus:ring-2 focus:ring-surface rounded-full hover:bg-surface-hi/20"
         aria-label={t('pages.photos.lightbox.close')}
       >
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -129,8 +129,8 @@ export function Lightbox({
         whileTap={prefersReducedMotion ? undefined : { x: -8 }}
         transition={prefersReducedMotion ? instantTransition : { delay: 0.15 }}
         onClick={handlePrev}
-        className="absolute left-6 p-3 text-nord-4 hover:text-nord-6 transition-colors cursor-pointer
-          focus:outline-none focus:ring-2 focus:ring-nord-6 rounded-full hover:bg-nord-3/20
+        className="absolute left-6 p-3 text-fg-muted hover:text-fg transition-colors cursor-pointer
+          focus:outline-none focus:ring-2 focus:ring-surface rounded-full hover:bg-surface-hi/20
           hidden md:block"
         aria-label={t('pages.photos.lightbox.previousPhoto')}
       >
@@ -145,8 +145,8 @@ export function Lightbox({
         whileTap={prefersReducedMotion ? undefined : { x: 8 }}
         transition={prefersReducedMotion ? instantTransition : { delay: 0.15 }}
         onClick={handleNext}
-        className="absolute right-6 p-3 text-nord-4 hover:text-nord-6 transition-colors cursor-pointer
-          focus:outline-none focus:ring-2 focus:ring-nord-6 rounded-full hover:bg-nord-3/20
+        className="absolute right-6 p-3 text-fg-muted hover:text-fg transition-colors cursor-pointer
+          focus:outline-none focus:ring-2 focus:ring-surface rounded-full hover:bg-surface-hi/20
           hidden md:block"
         aria-label={t('pages.photos.lightbox.nextPhoto')}
       >
@@ -182,10 +182,10 @@ export function Lightbox({
         transition={prefersReducedMotion ? instantTransition : { delay: 0.2 }}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center"
       >
-        <div className="text-nord-4 text-sm font-medium tracking-wider">
+        <div className="text-fg-muted text-sm font-medium tracking-wider">
           {currentIndex + 1} / {total}
         </div>
-        <div className="text-nord-5 text-xs mt-1 max-w-[60vw] truncate">
+        <div className="text-fg-muted text-xs mt-1 max-w-[60vw] truncate">
           {photo.title}
         </div>
       </motion.div>

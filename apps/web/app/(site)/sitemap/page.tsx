@@ -34,24 +34,24 @@ export default function SitemapPage() {
           <Breadcrumb items={[{ href: '/sitemap', label: t('nav.sitemap.title') }]} homeLabel={t('common.home')} ariaLabel={t('common.breadcrumb')} />
         </div>
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-nord-0 dark:text-nord-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-fg">
             {t('pages.sitemap.title')}
           </h1>
-          <p className="text-xl text-nord-0 dark:text-nord-4">
+          <p className="text-xl text-fg dark:text-fg-muted">
             {t('pages.sitemap.subtitle')}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <section className="glass-card p-6">
-            <h2 className="text-2xl font-bold mb-6 text-nord-10">
+            <h2 className="text-2xl font-bold mb-6 text-accent">
               {t('pages.sitemap.mainPages')}
             </h2>
             <ul className="space-y-3">
               <li>
                 <Link
                   href="/"
-                  className="flex items-center text-nord-0 dark:text-nord-4 hover:text-nord-10 dark:hover:text-nord-8 transition-colors"
+                  className="flex items-center text-fg dark:text-fg-muted hover:text-accent transition-colors"
                 >
                   <span className="mr-2">→</span>
                   {t('home.title')}
@@ -61,11 +61,11 @@ export default function SitemapPage() {
                 <li key={page.href}>
                   <Link
                     href={page.href}
-                    className="flex items-center text-nord-0 dark:text-nord-4 hover:text-nord-10 dark:hover:text-nord-8 transition-colors"
+                    className="flex items-center text-fg dark:text-fg-muted hover:text-accent transition-colors"
                   >
                     <span className="mr-2">→</span>
                     {t(page.titleKey)}
-                    <span className="ml-2 text-sm text-nord-3 dark:text-nord-3">
+                    <span className="ml-2 text-sm text-fg-muted">
                       ({t(page.descKey)})
                     </span>
                   </Link>
@@ -75,7 +75,7 @@ export default function SitemapPage() {
           </section>
 
           <section className="glass-card p-6">
-            <h2 className="text-2xl font-bold mb-6 text-nord-10">
+            <h2 className="text-2xl font-bold mb-6 text-accent">
               {t('pages.sitemap.utilities')}
             </h2>
             <ul className="space-y-3">
@@ -83,11 +83,11 @@ export default function SitemapPage() {
                 <li key={page.href}>
                   <Link
                     href={page.href}
-                    className="flex items-center text-nord-0 dark:text-nord-4 hover:text-nord-10 dark:hover:text-nord-8 transition-colors"
+                    className="flex items-center text-fg dark:text-fg-muted hover:text-accent transition-colors"
                   >
                     <span className="mr-2">→</span>
                     {t(page.titleKey)}
-                    <span className="ml-2 text-sm text-nord-3 dark:text-nord-3">
+                    <span className="ml-2 text-sm text-fg-muted">
                       ({t(page.descKey)})
                     </span>
                   </Link>

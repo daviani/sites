@@ -16,17 +16,17 @@ export default function ContactPageClient() {
         </div>
 
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-nord-0 dark:text-nord-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-fg">
             {t('pages.contact.title')}
           </h1>
-          <p className="text-xl text-nord-3 dark:text-nord-4">
+          <p className="text-xl text-fg-muted">
             {t('contact.intro')}
           </p>
         </div>
 
         <ContactForm onSubmit={submitContactForm} />
 
-        <p className="text-center text-sm text-nord-3 dark:text-nord-4 mt-8">
+        <p className="text-center text-sm text-fg-muted mt-8">
           {t('contact.fallback')}
         </p>
       </div>

@@ -8,9 +8,9 @@ interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export function IconButton({ children, className = '', disabled, ...props }: IconButtonProps) {
   const baseStyles =
-    'p-2 rounded-full transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2 dark:focus:ring-offset-nord-0';
+    'p-2 rounded-full transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 dark:focus:ring-offset-bg';
 
-  const interactiveStyles = 'hover:scale-105 hover:bg-nord-5 dark:hover:bg-nord-2';
+  const interactiveStyles = 'hover:scale-105 hover:bg-surface-hi';
   const disabledStyles = 'opacity-50 cursor-default';
 
   return (

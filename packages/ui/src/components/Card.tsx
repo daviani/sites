@@ -18,7 +18,7 @@ export function Card({
   const variants = {
     default: 'hover:shadow-xl',
     elevated: 'shadow-xl hover:shadow-2xl',
-    outlined: 'border-2 border-nord-4 dark:border-nord-3 hover:border-nord-10 dark:hover:border-nord-8'
+    outlined: 'border-2 border-surface-hi hover:border-accent'
   };
 
   const paddings = {

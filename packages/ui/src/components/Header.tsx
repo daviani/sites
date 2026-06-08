@@ -50,11 +50,11 @@ export function Header({
   }, [isOpen]);
 
   const baseStyles =
-    'px-4 py-2 text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2';
+    'px-4 py-2 text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2';
   const inactiveStyles =
-    'text-nord-3 dark:text-nord-4 hover:text-nord-0 dark:hover:text-nord-6 hover:bg-nord-5 dark:hover:bg-nord-2';
+    'text-fg-muted hover:text-fg hover:bg-surface-hi';
   const activeStyles =
-    'text-nord-0 dark:text-nord-6 bg-nord-5 dark:bg-nord-2';
+    'text-fg bg-surface-hi';
 
   return (
     <header
@@ -66,14 +66,14 @@ export function Header({
           {/* Logo / Branding */}
           <div className="flex-shrink-0">
             {logo || (
-              <a href={homeUrl} aria-label="Daviani.dev - Retour à l'accueil" className="flex items-center gap-3 cursor-pointer rounded-lg focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2">
+              <a href={homeUrl} aria-label="Daviani.dev - Retour à l'accueil" className="flex items-center gap-3 cursor-pointer rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2">
                 <FoxLogo size={48} />
                 <span className="text-xl font-mono font-bold">
-                  <span className="text-nord-3 dark:text-nord-4">&lt;</span>
-                  <span className="text-nord-10 dark:text-nord-8">Daviani</span>
-                  <span className="text-nord-3 dark:text-nord-4">.</span>
-                  <span className="text-nord-9 dark:text-nord-7">dev</span>
-                  <span className="text-nord-3 dark:text-nord-4">/&gt;</span>
+                  <span className="text-fg-subtle">&lt;</span>
+                  <span className="text-accent">Daviani</span>
+                  <span className="text-fg-subtle">.</span>
+                  <span className="text-accent-2">dev</span>
+                  <span className="text-fg-subtle">/&gt;</span>
                 </span>
               </a>
             )}
@@ -88,7 +88,7 @@ export function Header({
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-3 rounded-lg text-nord-3 dark:text-nord-4 hover:bg-nord-5 dark:hover:bg-nord-2 focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2 transition-colors"
+              className="p-3 rounded-lg text-fg-muted hover:bg-surface-hi focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 transition-colors"
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
               aria-label={isOpen ? menuLabels.close : menuLabels.open}
@@ -132,7 +132,7 @@ export function Header({
 
             {/* Secondary Navigation Links (Accessibility, Sitemap, Help) */}
             {secondaryNavItems.length > 0 && (
-              <ul className="flex flex-col items-center gap-1 mt-2 pt-2 border-t border-nord-3/30 dark:border-nord-4/30">
+              <ul className="flex flex-col items-center gap-1 mt-2 pt-2 border-t border-fg-subtle/30">
                 {secondaryNavItems.map((item) => {
                   const isActive = currentPath === item.href || currentPath.startsWith(`${item.href}/`);
                   return (
@@ -152,7 +152,7 @@ export function Header({
             )}
 
             {/* Theme & Language toggles */}
-            <div className="flex items-center justify-center gap-4 mt-2 pt-2 border-t border-nord-3/30 dark:border-nord-4/30">
+            <div className="flex items-center justify-center gap-4 mt-2 pt-2 border-t border-fg-subtle/30">
               {actions}
             </div>
           </div>
