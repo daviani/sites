@@ -18,9 +18,7 @@ vi.mock('@/hooks/use-translation', () => ({
 }));
 
 vi.mock('@tulikettu/ui', () => ({
-  OwlLogo: ({ size }: { size: number }) => (
-    <svg data-testid="owl-logo" width={size} height={size} />
-  ),
+  useTheme: () => ({ theme: 'light', mounted: true }),
 }));
 
 describe('HeroSection', () => {
@@ -42,18 +40,18 @@ describe('HeroSection', () => {
     expect(screen.getByText('Description du développeur')).toBeInTheDocument();
   });
 
-  it('renders the owl logo', () => {
+  it('renders the logo', () => {
     render(<HeroSection />);
 
-    expect(screen.getByTestId('owl-logo')).toBeInTheDocument();
+    expect(screen.getByTestId('hero-logo')).toBeInTheDocument();
   });
 
-  it('owl logo has correct size', () => {
+  it('logo has correct size', () => {
     render(<HeroSection />);
 
-    const logo = screen.getByTestId('owl-logo');
-    expect(logo).toHaveAttribute('width', '120');
-    expect(logo).toHaveAttribute('height', '120');
+    const logo = screen.getByTestId('hero-logo');
+    expect(logo).toHaveAttribute('width', '512');
+    expect(logo).toHaveAttribute('height', '512');
   });
 
   it('renders contact CTA button with correct route', () => {
