@@ -437,5 +437,12 @@
         "photoCounter": "Photo {current} sur {total}"
       }
     }
+  },
+  "cv": {
+    "title": "Curriculum Vitae",
+    "subtitle": "Mon parcours, mes compétences et mes expériences.",
+    "download": "Télécharger le CV",
+    "downloadLight": "Télécharger la version claire",
+    "downloadDark": "Télécharger la version foncée"
   }
 }

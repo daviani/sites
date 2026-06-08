@@ -437,5 +437,12 @@
         "photoCounter": "Photo {current} of {total}"
       }
     }
+  },
+  "cv": {
+    "title": "Resume",
+    "subtitle": "My background, skills and experience.",
+    "download": "Download CV",
+    "downloadLight": "Download the light version",
+    "downloadDark": "Download the dark version"
   }
 }
