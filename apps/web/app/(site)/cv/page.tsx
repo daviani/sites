@@ -1,15 +1,10 @@
 import type { Metadata } from 'next';
+import CvPageClient from './CvPageClient';
 
 export const metadata: Metadata = {
   title: 'CV',
 };
 
-// Placeholder — la vraie page (visionneuse PDF conditionnelle au thème + téléchargement)
-// est construite en Phase 4. Le CMS Keystatic du CV a été retiré (Phase 1).
 export default function CvPage() {
-  return (
-    <div className="min-h-screen flex items-center justify-center">
-      <p className="text-fg-muted">CV — bientôt disponible en PDF.</p>
-    </div>
-  );
+  return <CvPageClient />;
 }
