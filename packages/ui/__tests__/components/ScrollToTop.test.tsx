@@ -30,7 +30,7 @@ describe('ScrollToTop', () => {
   });
 
   describe('visibility', () => {
-    it('is hidden when scroll position is below 300px', () => {
+    it('is hidden when scroll position is below 600px', () => {
       mockScrollY = 100;
       render(<ScrollToTop ariaLabel="Retour en haut" />);
       const button = screen.getByRole('button');
@@ -38,11 +38,11 @@ describe('ScrollToTop', () => {
       expect(button.className).toContain('pointer-events-none');
     });
 
-    it('becomes visible when scroll exceeds 300px', () => {
+    it('becomes visible when scroll exceeds 600px', () => {
       render(<ScrollToTop ariaLabel="Retour en haut" />);
 
       // Simulate scroll
-      mockScrollY = 400;
+      mockScrollY = 700;
       fireEvent.scroll(window);
 
       const button = screen.getByRole('button');
@@ -54,7 +54,7 @@ describe('ScrollToTop', () => {
       render(<ScrollToTop ariaLabel="Retour en haut" />);
 
       // Scroll down
-      mockScrollY = 500;
+      mockScrollY = 700;
       fireEvent.scroll(window);
 
       // Scroll back up
@@ -68,7 +68,7 @@ describe('ScrollToTop', () => {
 
   describe('click behavior', () => {
     it('scrolls to top with smooth behavior by default', () => {
-      mockScrollY = 500;
+      mockScrollY = 700;
       render(<ScrollToTop ariaLabel="Retour en haut" />);
       fireEvent.scroll(window);
 
@@ -83,7 +83,7 @@ describe('ScrollToTop', () => {
 
     it('scrolls to top with auto behavior when reduced motion is preferred', () => {
       mockMatchMedia.mockReturnValue({ matches: true });
-      mockScrollY = 500;
+      mockScrollY = 700;
 
       render(<ScrollToTop ariaLabel="Retour en haut" />);
       fireEvent.scroll(window);
