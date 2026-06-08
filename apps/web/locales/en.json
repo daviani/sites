@@ -99,6 +99,10 @@
     "photos": {
       "title": "Photos",
       "description": "Photo gallery"
+    },
+    "projects": {
+      "title": "Projects",
+      "description": "My projects and contributions"
     }
   },
   "comments": {
@@ -444,5 +448,19 @@
     "download": "Download CV",
     "downloadLight": "Download the light version",
     "downloadDark": "Download the dark version"
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "What I build — products, labs and contributions.",
+    "contributionsTitle": "Contributions",
+    "viewProject": "View project",
+    "linkedArticles": "Related articles",
+    "relatedProject": "Related project",
+    "status": {
+      "live": "Live",
+      "private": "Private",
+      "lab": "Lab",
+      "coming-soon": "Coming soon"
+    }
   }
 }

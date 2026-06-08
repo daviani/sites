@@ -14,6 +14,7 @@ const metaSchema = z.object({
   excerptFr: z.string().default(''),
   excerptEn: z.string().default(''),
   tags: z.array(z.string()).default([]),
+  project: z.string().nullable().optional(),
 });
 
 export type ArticleMeta = z.infer<typeof metaSchema>;
