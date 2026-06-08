@@ -6,7 +6,8 @@
     "legalNotice": "Mentions légales",
     "github": "GitHub",
     "linkedin": "LinkedIn",
-    "copyright": "© {year} Daviani.dev · Tous droits réservés · Design inspiré par Nord Theme"
+    "copyright": "© {year} Daviani.dev · Tous droits réservés",
+    "designCredit": "Design system Tulikettu"
   },
   "common": {
     "languageSelection": "Sélection de la langue",

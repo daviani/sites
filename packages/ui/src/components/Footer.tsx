@@ -11,6 +11,7 @@ interface FooterTranslations {
   sitemap?: string;
   help?: string;
   accessibility?: string;
+  designCredit?: string;
 }
 
 interface FooterProps {
@@ -20,6 +21,7 @@ interface FooterProps {
   linkedinUrl: string;
   sitemapUrl?: string;
   helpUrl?: string;
+  projectsUrl?: string;
   translations: FooterTranslations;
 }
 
@@ -30,9 +32,25 @@ export function Footer({
   linkedinUrl,
   sitemapUrl,
   helpUrl,
+  projectsUrl,
   translations: t,
 }: FooterProps) {
   const currentYear = new Date().getFullYear();
+
+  // Crédit design : « Design system Tulikettu » → /projets (la carte Tulikettu y vit).
+  // Lien de contenu → reste cyan (accent), pas l'orange feu réservé aux CTA.
+  const designCredit =
+    projectsUrl && t.designCredit ? (
+      <>
+        {' · '}
+        <a
+          href={projectsUrl}
+          className="text-accent hover:opacity-80 transition-opacity rounded focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+        >
+          {t.designCredit}
+        </a>
+      </>
+    ) : null;
 
   const linkStyles =
     'text-fg-muted hover:text-fg dark:hover:text-accent transition-colors rounded focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2';
@@ -70,6 +88,7 @@ export function Footer({
           </div>
           <div className="text-center text-xs text-fg-muted">
             {t.copyright.replace('{year}', currentYear.toString())}
+            {designCredit}
           </div>
         </div>
 
@@ -126,6 +145,7 @@ export function Footer({
         {/* Desktop Copyright */}
         <div className="hidden md:block text-center text-xs text-fg-muted mt-3 pt-3 border-t border-surface-hi">
           {t.copyright.replace('{year}', currentYear.toString())}
+          {designCredit}
         </div>
       </div>
     </footer>

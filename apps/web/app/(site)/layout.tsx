@@ -39,6 +39,7 @@ function SiteLayoutContent({ children }: { children: React.ReactNode }) {
           linkedinUrl="https://linkedin.com/in/daviani"
           sitemapUrl="/sitemap"
           helpUrl="/help"
+          projectsUrl="/projets"
           translations={{
             legalNotice: t('footer.legalNotice'),
             github: t('footer.github'),
@@ -50,6 +51,7 @@ function SiteLayoutContent({ children }: { children: React.ReactNode }) {
             sitemap: t('nav.sitemap.title'),
             help: t('nav.help.title'),
             accessibility: t('nav.accessibility.title'),
+            designCredit: t('footer.designCredit'),
           }}
         />
       </div>
