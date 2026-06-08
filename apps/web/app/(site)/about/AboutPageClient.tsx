@@ -8,13 +8,13 @@ export default function AboutPageClient() {
 
   return (
     <div className="min-h-screen">
-      <div className="max-w-4xl mx-auto px-4 pt-5 pb-16">
+      <div className="max-w-[65ch] mx-auto px-4 pt-5 pb-16">
         <div className="mb-8">
           <Breadcrumb items={[{ href: '/about', label: t('nav.about.title') }]} homeLabel={t('common.home')} ariaLabel={t('common.breadcrumb')} />
         </div>
 
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-fg">
+        <div className="mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-fg">
             {t('pages.about.title')}
           </h1>
         </div>

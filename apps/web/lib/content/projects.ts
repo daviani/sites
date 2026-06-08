@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { parse as parseYaml } from 'yaml';
 import { z } from 'zod';
+import type { StatusBadgeVariant } from '@tulikettu/ui';
 
 const PROJECTS_DIR = path.join(process.cwd(), 'content/projects');
 const CONTRIBUTIONS_DIR = path.join(process.cwd(), 'content/contributions');
@@ -12,6 +13,14 @@ const linkSchema = z.object({ label: z.string(), url: z.string() });
 
 export const PROJECT_STATUSES = ['live', 'private', 'lab', 'coming-soon'] as const;
 export type ProjectStatus = (typeof PROJECT_STATUSES)[number];
+
+/** Statut projet → variante sémantique du StatusBadge (tokens DS, pas de couleur isolée). */
+export const STATUS_VARIANT: Record<ProjectStatus, StatusBadgeVariant> = {
+  live: 'success',
+  private: 'neutral',
+  lab: 'accent',
+  'coming-soon': 'warn',
+};
 
 const projectSchema = z.object({
   slug: z.string(),

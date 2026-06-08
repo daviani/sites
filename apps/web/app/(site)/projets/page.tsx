@@ -1,23 +1,16 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Breadcrumb } from '@tulikettu/ui';
+import { Breadcrumb, StatusBadge } from '@tulikettu/ui';
 import { getServerTranslations } from '@/lib/i18n/server';
 import {
   getAllProjects,
   getAllContributions,
+  STATUS_VARIANT,
   type Project,
-  type ProjectStatus,
 } from '@/lib/content/projects';
 
 export const metadata: Metadata = {
   title: 'Projets',
-};
-
-const STATUS_CLASS: Record<ProjectStatus, string> = {
-  live: 'bg-ok/15 text-ok',
-  private: 'bg-surface-hi text-fg-muted',
-  lab: 'bg-accent-3/15 text-accent-3',
-  'coming-soon': 'bg-warn/15 text-warn',
 };
 
 export default async function ProjetsPage() {
@@ -67,13 +60,11 @@ export default async function ProjetsPage() {
                 return (
                   <li
                     key={c.slug}
-                    className="p-5 rounded-2xl bg-surface/70 backdrop-blur-sm border border-surface-hi"
+                    className="p-4 rounded-2xl bg-surface/70 backdrop-blur-sm border border-surface-hi"
                   >
-                    <div className="flex items-baseline justify-between gap-3">
-                      <h3 className="font-semibold text-fg">{pick(c.titleFr, c.titleEn)}</h3>
-                      {c.date && <span className="text-xs text-fg-subtle shrink-0">{c.date}</span>}
-                    </div>
-                    {desc && <p className="text-fg-muted text-sm mt-1 leading-relaxed">{desc}</p>}
+                    <h3 className="font-semibold text-fg leading-tight">{pick(c.titleFr, c.titleEn)}</h3>
+                    {c.date && <p className="text-xs text-fg-subtle mt-0.5">{c.date}</p>}
+                    {desc && <p className="text-fg-muted text-sm mt-1.5 leading-relaxed">{desc}</p>}
                     {c.link &&
                       (isExternal ? (
                         <a
@@ -117,18 +108,20 @@ function ProjectCard({
   viewLabel: string;
 }) {
   return (
-    <article className="p-6 glass-card flex flex-col gap-3">
+    <article
+      className={`p-6 glass-card flex flex-col gap-3 ${
+        project.featured ? 'ring-1 ring-fire/40 shadow-[0_0_28px_-8px_var(--tuli-fire)]' : ''
+      }`}
+    >
       <div className="flex items-start justify-between gap-3">
-        <h2 className="text-xl font-bold text-fg">{project.name}</h2>
-        <span
-          className={`px-2.5 py-1 rounded-full text-xs font-medium shrink-0 ${STATUS_CLASS[project.status]}`}
-        >
-          {statusLabel}
+        <h2 className="text-2xl font-bold text-fg leading-tight">{project.name}</h2>
+        <span className="shrink-0">
+          <StatusBadge variant={STATUS_VARIANT[project.status]}>{statusLabel}</StatusBadge>
         </span>
       </div>
 
-      <p className="text-accent font-medium">{tagline}</p>
-      {summary && <p className="text-fg-muted text-sm leading-relaxed">{summary}</p>}
+      <p className="text-sm font-medium text-fg-muted">{tagline}</p>
+      {summary && <p className="text-sm text-fg-subtle leading-relaxed">{summary}</p>}
 
       {project.stack.length > 0 && (
         <div className="flex flex-wrap gap-2 mt-1">
@@ -147,7 +140,7 @@ function ProjectCard({
               href={`/projets/${project.slug}`}
               className="text-accent font-medium hover:opacity-80 transition-opacity"
             >
-              {viewLabel} →
+              {viewLabel} <span className="text-fire" aria-hidden="true">→</span>
             </Link>
           )}
           {project.links.map((l) => (

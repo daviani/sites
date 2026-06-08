@@ -1,18 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Breadcrumb } from '@tulikettu/ui';
+import { Breadcrumb, StatusBadge } from '@tulikettu/ui';
 import { MarkdocContent } from '@/lib/markdoc';
 import { getServerTranslations } from '@/lib/i18n/server';
-import { getProjectBySlug, getProjectSlugs, type ProjectStatus } from '@/lib/content/projects';
+import { getProjectBySlug, getProjectSlugs, STATUS_VARIANT } from '@/lib/content/projects';
 import { getAllArticles } from '@/lib/content/blog';
-
-const STATUS_CLASS: Record<ProjectStatus, string> = {
-  live: 'bg-ok/15 text-ok',
-  private: 'bg-surface-hi text-fg-muted',
-  lab: 'bg-accent-3/15 text-accent-3',
-  'coming-soon': 'bg-warn/15 text-warn',
-};
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -53,16 +46,14 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         </div>
 
         <header className="mb-8">
-          <div className="flex items-center gap-3 mb-3">
-            <h1 className="text-4xl md:text-5xl font-bold text-fg">{project.name}</h1>
-            <span
-              className={`px-2.5 py-1 rounded-full text-xs font-medium ${STATUS_CLASS[project.status]}`}
-            >
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-3">
+            <StatusBadge variant={STATUS_VARIANT[project.status]}>
               {t(`projects.status.${project.status}`)}
-            </span>
+            </StatusBadge>
+            {project.role && <span className="text-sm text-fg-subtle">{project.role}</span>}
           </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-fg mb-3">{project.name}</h1>
           <p className="text-xl text-accent font-medium">{pick(project.taglineFr, project.taglineEn)}</p>
-          {project.role && <p className="text-fg-muted mt-2">{project.role}</p>}
         </header>
 
         {project.stack.length > 0 && (
@@ -107,7 +98,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         )}
 
         {project.bodyFr.length > 0 && (
-          <div className="prose prose-tuli max-w-none glass-card p-8">
+          <div className="prose prose-tuli max-w-[65ch] mx-auto glass-card p-8">
             <MarkdocContent content={project.bodyFr} />
           </div>
         )}
