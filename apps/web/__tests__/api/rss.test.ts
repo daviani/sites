@@ -112,7 +112,7 @@ describe('RSS API Route', () => {
       const xml = await response.text();
 
       expect(xml).toContain('<image>');
-      expect(xml).toContain('<url>https://daviani.dev/owl-logo.png</url>');
+      expect(xml).toContain('<url>https://daviani.dev/brand/tulikettu-full-onlight-512.png</url>');
       expect(xml).toContain('</image>');
     });
 

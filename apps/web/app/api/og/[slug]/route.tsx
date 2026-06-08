@@ -1,10 +1,17 @@
 import { ImageResponse } from 'next/og';
 import { getArticleBySlug } from '@/lib/content/blog';
-import { NORD_0, NORD_4, NORD_6, NORD_8 } from '@tulikettu/ui';
 
 interface RouteParams {
   params: Promise<{ slug: string }>;
 }
+
+// Tokens Tulikettu — mode Kaamos (sombre). L'OG card est un rendu figé,
+// jamais thème-aware → on fige les valeurs sombres en dur.
+// Source : Design System/Tulikettu final/styles.css ([data-tuli-mode="dark"]).
+const TULI_BG = '#0B1120'; // --tuli-bg
+const TULI_TEXT_1 = '#E2E8F0'; // --tuli-text-1 (titre)
+const TULI_TEXT_2 = '#94A3B8'; // --tuli-text-2 (excerpt)
+const TULI_ACCENT = '#5BB8D4'; // --tuli-accent (cyan)
 
 export async function GET(request: Request, { params }: RouteParams) {
   const { slug } = await params;
@@ -26,14 +33,14 @@ export async function GET(request: Request, { params }: RouteParams) {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: NORD_0,
+          backgroundColor: TULI_BG,
           padding: '40px 80px',
         }}
       >
-        {/* Logo owl */}
-{/* eslint-disable-next-line @next/next/no-img-element */}
+        {/* Logo Tulikettu — renard de feu (variante ivoire sur fond sombre) */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`${new URL(request.url).origin}/owl-logo.png`}
+          src={`${new URL(request.url).origin}/brand/tulikettu-full-ondark-512.png`}
           alt=""
           width="120"
           height="120"
@@ -45,7 +52,7 @@ export async function GET(request: Request, { params }: RouteParams) {
           style={{
             fontSize: 60,
             fontWeight: 'bold',
-            color: NORD_6,
+            color: TULI_TEXT_1,
             textAlign: 'center',
             marginBottom: '20px',
             lineHeight: 1.2,
@@ -58,7 +65,7 @@ export async function GET(request: Request, { params }: RouteParams) {
         <div
           style={{
             fontSize: 30,
-            color: NORD_4,
+            color: TULI_TEXT_2,
             textAlign: 'center',
             maxWidth: '900px',
           }}
@@ -72,7 +79,7 @@ export async function GET(request: Request, { params }: RouteParams) {
             position: 'absolute',
             bottom: '40px',
             fontSize: 24,
-            color: NORD_8,
+            color: TULI_ACCENT,
           }}
         >
           blog.daviani.dev
