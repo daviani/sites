@@ -1,34 +1,24 @@
-'use client';
+import type { HTMLAttributes } from 'react';
 
-import { useTheme } from '../hooks/use-theme';
-
-interface FoxLogoProps {
+interface FoxLogoProps extends HTMLAttributes<HTMLDivElement> {
   size?: number;
-  className?: string;
 }
 
 /**
- * Tulikettu — renard de feu + traînée d'aurore. Logo complet raster, theme-aware.
- * Une seule <img> dont la source suit le thème (JS) : variante navy (onlight) en
- * clair, ivoire (ondark) en sombre. Pas de toggle CSS display → fiable cross-browser
- * (évite le bug de cascade :where() côté Safari).
+ * Tulikettu — renard de feu. Logo theme-aware SANS JavaScript : la variante est
+ * choisie par CSS via `.dark .fox-logo` (background-image), à spécificité normale.
+ * La classe `.dark` est posée sur <html> AVANT le paint par le script bloquant →
+ * bonne variante dès la première frame, donc pas de flash blanc au refresh et un
+ * rendu fiable cross-browser (Safari inclus, là où le toggle JS/`dark:` échouait).
+ * Décoratif → aria-hidden. Voir `.fox-logo` dans globals.css.
  */
-export function FoxLogo({ size = 32, className = '' }: FoxLogoProps) {
-  const { theme } = useTheme();
-  const src =
-    theme === 'dark'
-      ? '/brand/tulikettu-full-ondark-512.png'
-      : '/brand/tulikettu-full-onlight-512.png';
-
+export function FoxLogo({ size = 32, className = '', style, ...rest }: FoxLogoProps) {
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={src}
-      alt=""
-      width={size}
-      height={size}
-      className={className}
-      suppressHydrationWarning
+    <div
+      aria-hidden="true"
+      className={`fox-logo ${className}`.trim()}
+      style={{ width: size, height: size, ...style }}
+      {...rest}
     />
   );
 }

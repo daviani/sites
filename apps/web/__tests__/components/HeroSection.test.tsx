@@ -18,7 +18,10 @@ vi.mock('@/hooks/use-translation', () => ({
 }));
 
 vi.mock('@tulikettu/ui', () => ({
-  useTheme: () => ({ theme: 'light', mounted: true }),
+  // FoxLogo est maintenant un composant CSS (div) ; on stubbe en exposant la taille.
+  FoxLogo: ({ size, ...rest }: { size?: number } & Record<string, unknown>) => (
+    <div data-size={size} {...rest} />
+  ),
 }));
 
 describe('HeroSection', () => {
@@ -50,8 +53,7 @@ describe('HeroSection', () => {
     render(<HeroSection />);
 
     const logo = screen.getByTestId('hero-logo');
-    expect(logo).toHaveAttribute('width', '512');
-    expect(logo).toHaveAttribute('height', '512');
+    expect(logo).toHaveAttribute('data-size', '512');
   });
 
   it('renders contact CTA button with correct route', () => {
