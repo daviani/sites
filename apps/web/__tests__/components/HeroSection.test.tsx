@@ -17,7 +17,7 @@ vi.mock('@/hooks/use-translation', () => ({
   }),
 }));
 
-vi.mock('@nordic-island/ui', () => ({
+vi.mock('@tulikettu/ui', () => ({
   OwlLogo: ({ size }: { size: number }) => (
     <svg data-testid="owl-logo" width={size} height={size} />
   ),

@@ -1,6 +1,6 @@
 'use client';
 
-import { OwlLogo } from '@nordic-island/ui';
+import { OwlLogo } from '@tulikettu/ui';
 import { useTranslation } from '@/hooks/use-translation';
 
 export function HeroSection() {

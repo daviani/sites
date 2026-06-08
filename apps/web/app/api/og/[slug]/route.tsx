@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 import { getArticleBySlug } from '@/lib/content/blog';
-import { NORD_0, NORD_4, NORD_6, NORD_8 } from '@nordic-island/ui';
+import { NORD_0, NORD_4, NORD_6, NORD_8 } from '@tulikettu/ui';
 
 interface RouteParams {
   params: Promise<{ slug: string }>;

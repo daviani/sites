@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Breadcrumb } from '@nordic-island/ui';
+import { Breadcrumb } from '@tulikettu/ui';
 import { PhotosPageContent } from '@/components/photos';
 import { getAllPhotos } from '@/lib/content/photos';
 import type { Tag } from '@/components/photos';

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { useTheme } from '@nordic-island/ui';
+import { useTheme } from '@tulikettu/ui';
 import { useTranslation } from '@/hooks/use-translation';
 
 const Giscus = dynamic(() => import('@giscus/react').then(mod => mod.default), {

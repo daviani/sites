@@ -1,6 +1,6 @@
 'use client';
 
-import { Breadcrumb } from '@nordic-island/ui';
+import { Breadcrumb } from '@tulikettu/ui';
 import { useTranslation, type TranslationKey } from '@/hooks/use-translation';
 
 export default function HelpPage() {

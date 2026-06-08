@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllArticles, getAllTags, getFeaturedArticles } from '@/lib/content/blog';
-import { Breadcrumb } from '@nordic-island/ui';
+import { Breadcrumb } from '@tulikettu/ui';
 import { RssButton } from '@/components/blog/RssButton';
 import { FeaturedArticle } from '@/components/blog/FeaturedArticles';
 

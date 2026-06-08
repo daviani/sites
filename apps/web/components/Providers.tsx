@@ -1,6 +1,6 @@
 'use client';
 
-import { ThemeProvider } from '@nordic-island/ui';
+import { ThemeProvider } from '@tulikettu/ui';
 import { LanguageProvider } from '@/hooks/use-language';
 import { EasterEggProvider } from '@/components/EasterEggProvider';
 import { ReactNode } from 'react';

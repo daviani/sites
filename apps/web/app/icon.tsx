@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og';
-import { NORD_1, NORD_6 } from '@nordic-island/ui';
+import { NORD_1, NORD_6 } from '@tulikettu/ui';
 
 export const size = {
   width: 32,

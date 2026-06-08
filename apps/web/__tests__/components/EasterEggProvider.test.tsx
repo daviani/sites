@@ -4,7 +4,7 @@ import { EasterEggProvider, useEasterEggs } from '../../components/EasterEggProv
 import { ReactNode } from 'react';
 
 // Mock dependencies
-vi.mock('@nordic-island/ui', () => ({
+vi.mock('@tulikettu/ui', () => ({
   useKonamiCode: vi.fn(),
   Confetti: ({ isActive }: { isActive: boolean }) => (
     isActive ? <div data-testid="confetti">Confetti</div> : null
@@ -138,7 +138,7 @@ describe('EasterEggProvider', () => {
 
   describe('disabled state', () => {
     it('does not setup hooks when disabled', async () => {
-      const { useKonamiCode } = await import('@nordic-island/ui');
+      const { useKonamiCode } = await import('@tulikettu/ui');
       const { useConsoleMessage } = await import('@/hooks/use-console-message');
 
       render(
