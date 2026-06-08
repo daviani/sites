@@ -73,7 +73,6 @@ describe('AboutPageClient', () => {
     render(<AboutPageClient />);
 
     expect(screen.getByText('Me contacter')).toBeInTheDocument();
-    expect(screen.getByText('Prendre RDV')).toBeInTheDocument();
   });
 
   it('contact link points to /contact route', () => {
@@ -81,13 +80,6 @@ describe('AboutPageClient', () => {
 
     const contactLink = screen.getByText('Me contacter').closest('a');
     expect(contactLink).toHaveAttribute('href', '/contact');
-  });
-
-  it('RDV link points to /rdv route', () => {
-    render(<AboutPageClient />);
-
-    const rdvLink = screen.getByText('Prendre RDV').closest('a');
-    expect(rdvLink).toHaveAttribute('href', '/rdv');
   });
 
   it('photos link points to /photos route', () => {

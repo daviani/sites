@@ -10,7 +10,6 @@ const navKeys = [
   { href: '/blog', key: 'nav.blog.title' as const },
   { href: '/cv', key: 'nav.cv.title' as const },
   { href: '/contact', key: 'nav.contact.title' as const },
-  { href: '/rdv', key: 'nav.rdv.title' as const },
 ];
 
 const secondaryNavKeys = [

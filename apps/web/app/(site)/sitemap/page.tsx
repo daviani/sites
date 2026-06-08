@@ -18,7 +18,6 @@ export default function SitemapPage() {
     { href: '/blog', titleKey: 'nav.blog.title', descKey: 'nav.blog.description' },
     { href: '/cv', titleKey: 'nav.cv.title', descKey: 'nav.cv.description' },
     { href: '/contact', titleKey: 'nav.contact.title', descKey: 'nav.contact.description' },
-    { href: '/rdv', titleKey: 'nav.rdv.title', descKey: 'nav.rdv.description' },
   ];
 
   const utilityPages: PageLink[] = [
