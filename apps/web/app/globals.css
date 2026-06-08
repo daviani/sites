@@ -26,6 +26,9 @@
   --tuli-accent: #0E7490;
   --tuli-accent-2: #047857;
   --tuli-accent-3: #6D28D9;
+  /* Accent chaud « feu » (tension chaud/froid, héritée du logo + RØDD).
+     Usage parcimonieux : flèches de CTA, soulignement d'un mot-clé hero. */
+  --tuli-fire: #FF6E07;
   --tuli-on-accent: #FFFFFF;
   --tuli-ok: #15803D;
   --tuli-warn: #B45309;
@@ -54,6 +57,8 @@
   --tuli-accent: #5BB8D4;
   --tuli-accent-2: #67D4A8;
   --tuli-accent-3: #C084FC;
+  /* Légèrement éclairci pour rester lisible sur fond navy. */
+  --tuli-fire: #FF8534;
   --tuli-on-accent: #060C17;
   --tuli-ok: #4ADE80;
   --tuli-warn: #F0B86E;
@@ -83,6 +88,7 @@
   --color-accent: var(--tuli-accent);
   --color-accent-2: var(--tuli-accent-2);
   --color-accent-3: var(--tuli-accent-3);
+  --color-fire: var(--tuli-fire);
   --color-on-accent: var(--tuli-on-accent);
   --color-ok: var(--tuli-ok);
   --color-warn: var(--tuli-warn);
@@ -95,8 +101,10 @@
 :root {
   --spacing-edge: 10px;
   --height-header: 66px;
-  --height-header-offset: 86px;
-  --height-full-offset: 150px;
+  /* Décalage du contenu sous l'îlot header en extended, tout sur une ligne (mesuré :
+     ~102px mobile logo 64, 140px desktop logo 128, + le gap haut de 10px). */
+  --height-header-offset: 116px;
+  --height-full-offset: 156px;
 }
 
 /* Glass card — frosted glass island effect */

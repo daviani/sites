@@ -15,6 +15,8 @@ export { LanguageSwitcher } from './components/LanguageSwitcher';
 
 export { FoxLogo } from './components/FoxLogo';
 
+export { FoxMark } from './components/FoxMark';
+
 export { FlagFR, FlagEN } from './components/icons/FlagIcons';
 
 export { Footer } from './components/Footer';
@@ -27,6 +29,9 @@ export { Breadcrumb } from './components/Breadcrumb';
 export type { BreadcrumbProps, BreadcrumbItem } from './components/Breadcrumb';
 
 export { ScrollToTop } from './components/ScrollToTop';
+
+export { StatusBadge } from './components/StatusBadge';
+export type { StatusBadgeProps, StatusBadgeVariant } from './components/StatusBadge';
 
 
 export { useTheme, ThemeProvider } from './hooks/use-theme';

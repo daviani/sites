@@ -7,6 +7,9 @@ const nextConfig = {
   compress: true,
   pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
 
+  // Masque l'indicateur de dev Next.js (le bouton « N » en bas-gauche).
+  devIndicators: false,
+
   // Configuration des images externes
   images: {
     remotePatterns: [
