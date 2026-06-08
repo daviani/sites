@@ -1,0 +1,28 @@
+---
+slug: maasto
+name: maasto
+featured: false
+order: 4
+status: lab
+taglineFr: "Conditions neige & rando d'un point GPS, en un rapport HTML"
+taglineEn: "Snow & hiking conditions for a GPS point, as an HTML report"
+summaryFr: "Outil CLI (Python) qui croise météo, image satellite, sorties communautaires (Camptocamp) et bulletin avalanche pour un point GPS. Le signal terrain sert de garde-fou quand le modèle météo se plante — d'où le nom."
+summaryEn: "Python CLI that cross-references weather, satellite imagery, community outings (Camptocamp) and avalanche bulletins for a GPS point. The field signal is a guardrail when the weather model gets it wrong — hence the name."
+role: "Lab personnel"
+stack:
+  - Python
+  - Rasterio
+  - Météo & géospatial
+screenshots:
+  - /projects/maasto-report.webp
+---
+
+*Maasto*, en finnois, c'est **le terrain**. L'outil vérifie en une commande les conditions neige/rando d'un point GPS et génère un rapport HTML autonome.
+
+## L'idée
+
+Les modèles météo se trompent en montagne. *maasto* croise plusieurs sources — météo, image satellite, **sorties Camptocamp récentes**, bulletin avalanche — et utilise le signal terrain (ce que les gens font vraiment) comme garde-fou.
+
+## Sortie
+
+Un rapport HTML sombre et lisible : profil neige multi-altitudes, isotherme 0 °C, fenêtres horaires, le tout pour un point et une date donnés.

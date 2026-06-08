@@ -99,6 +99,10 @@
     "photos": {
       "title": "Photos",
       "description": "Galerie photos"
+    },
+    "projects": {
+      "title": "Projets",
+      "description": "Mes projets et contributions"
     }
   },
   "comments": {
@@ -444,5 +448,19 @@
     "download": "Télécharger le CV",
     "downloadLight": "Télécharger la version claire",
     "downloadDark": "Télécharger la version foncée"
+  },
+  "projects": {
+    "title": "Projets",
+    "subtitle": "Ce que je construis — produits, labs et contributions.",
+    "contributionsTitle": "Contributions",
+    "viewProject": "Voir le projet",
+    "linkedArticles": "Articles liés",
+    "relatedProject": "Projet lié",
+    "status": {
+      "live": "En ligne",
+      "private": "Privé",
+      "lab": "Lab",
+      "coming-soon": "Bientôt"
+    }
   }
 }

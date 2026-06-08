@@ -2,6 +2,7 @@
 
 import { ReactNode, useState, useEffect, useRef } from 'react';
 import { FoxLogo } from './FoxLogo';
+import { FoxMark } from './FoxMark';
 
 interface NavItem {
   href: string;
@@ -22,6 +23,21 @@ export interface HeaderProps {
   };
 }
 
+/**
+ * Header = îlot flottant translucide (glass-card), détaché des bords.
+ *
+ * Deux formats pilotés par le SCROLL, avec transition animée (CSS pur) :
+ * - extended (sommet)   : logo PNG complet (aurore, comme l'accueil) + wordmark + actions
+ *                         sur la 1ʳᵉ ligne, nav desktop sur une 2ᵉ ligne ;
+ * - compacted (défilé)  : signet SVG + wordmark + nav inline + actions sur une seule ligne.
+ *
+ * Animation : le logo PNG↔SVG fait un cross-fade dans un conteneur qui transitionne sa
+ * taille (48↔34) ; la nav ligne 2 se replie (max-height + opacity) tandis que la nav inline
+ * apparaît en fondu dans un créneau flex-1 déjà réservé (aucun reflow). `aria-hidden` bascule
+ * pour n'exposer qu'une seule nav à la fois (a11y + pas de double landmark).
+ *
+ * `<Daviani.dev/>` est TOUJOURS affiché. Le « . » est en orange feu.
+ */
 export function Header({
   logo,
   className = '',
@@ -33,9 +49,18 @@ export function Header({
   menuLabels = { open: 'Open menu', close: 'Close menu' },
 }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
-  // Close menu when clicking outside
+  // extended au sommet, compacted dès qu'on défile (seuil bas, déclenchement franc).
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll(); // état initial si la page est déjà défilée (refresh, ancre).
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Ferme le menu mobile au clic extérieur.
   useEffect(() => {
     if (!isOpen) return;
 
@@ -49,42 +74,94 @@ export function Header({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
-  const baseStyles =
-    'px-4 py-2 text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2';
-  const inactiveStyles =
-    'text-fg-muted hover:text-fg hover:bg-surface-hi';
-  const activeStyles =
-    'text-fg bg-surface-hi';
+  const isActive = (href: string) =>
+    currentPath === href || currentPath.startsWith(`${href}/`);
+
+  const linkBase =
+    'relative px-3 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2';
+  const linkInactive = 'text-fg-muted hover:text-fg hover:bg-surface-hi';
+  const linkActive = 'text-fg font-semibold';
+
+  // Lien de nav avec indicateur d'item actif = puce orange (accent chaud, règle 10%).
+  const navLink = (item: NavItem) => {
+    const active = isActive(item.href);
+    return (
+      <li key={item.href}>
+        <a
+          href={item.href}
+          className={`${linkBase} ${active ? linkActive : linkInactive}`}
+          aria-current={active ? 'page' : undefined}
+        >
+          {item.label}
+          {active && (
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-1 h-0.5 w-4 rounded-full bg-fire"
+            />
+          )}
+        </a>
+      </li>
+    );
+  };
+
+  const brand = logo ?? (
+    <a
+      href={homeUrl}
+      aria-label="Daviani.dev - Retour à l'accueil"
+      className="flex items-center gap-2.5 cursor-pointer rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+    >
+      {/* Cross-fade logo PNG (extended) ↔ signet SVG (compacted), conteneur qui se redimensionne. */}
+      <span
+        className={`relative block shrink-0 transition-all duration-300 ${
+          scrolled ? 'w-[34px] h-[34px]' : 'w-16 h-16 md:w-32 md:h-32'
+        }`}
+      >
+        <FoxLogo
+          className={`absolute inset-0 w-full h-full transition-opacity duration-300 ${
+            scrolled ? 'opacity-0' : 'opacity-100'
+          }`}
+        />
+        <FoxMark
+          className={`absolute inset-0 w-full h-full transition-opacity duration-300 ${
+            scrolled ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+      </span>
+      {/* Wordmark TOUJOURS visible, agrandi en extended et réduit au scroll. Le « . » = étincelle orange feu. */}
+      <span
+        className={`font-mono font-bold whitespace-nowrap transition-all duration-300 ${
+          scrolled ? 'text-base md:text-lg' : 'text-2xl md:text-4xl'
+        }`}
+      >
+        <span className="text-fg-subtle">&lt;</span>
+        <span className="text-accent">Daviani</span>
+        <span className="text-fire font-extrabold">.</span>
+        <span className="text-accent-2">dev</span>
+        <span className="text-fg-subtle">/&gt;</span>
+      </span>
+    </a>
+  );
 
   return (
     <header
       ref={headerRef}
-      className={`fixed top-[var(--spacing-edge)] left-[var(--spacing-edge)] right-[var(--spacing-edge)] z-50 glass-card transition-colors ${className}`}
+      className={`fixed top-[var(--spacing-edge)] left-[var(--spacing-edge)] right-[var(--spacing-edge)] z-50 glass-card ${className}`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo / Branding */}
-          <div className="flex-shrink-0">
-            {logo || (
-              <a href={homeUrl} aria-label="Daviani.dev - Retour à l'accueil" className="flex items-center gap-3 cursor-pointer rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2">
-                <FoxLogo size={48} />
-                <span className="text-xl font-mono font-bold">
-                  <span className="text-fg-subtle">&lt;</span>
-                  <span className="text-accent">Daviani</span>
-                  <span className="text-fg-subtle">.</span>
-                  <span className="text-accent-2">dev</span>
-                  <span className="text-fg-subtle">/&gt;</span>
-                </span>
-              </a>
-            )}
-          </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5">
+        {/* Tout sur UNE ligne : logo + wordmark | nav inline | actions | burger mobile.
+            La hauteur de la barre = celle du logo (élément le plus haut) → ≤140 en extended. */}
+        <div className="flex items-center justify-between gap-4">
+          <div className="shrink-0">{brand}</div>
 
-          {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-4">
-            {actions}
-          </div>
+          {/* Nav inline desktop — toujours visible (extended ET compacted), ne bouge pas */}
+          {navItems.length > 0 && (
+            <nav aria-label="Navigation principale" className="hidden md:flex flex-1 justify-center">
+              <ul className="flex items-center gap-1">{navItems.map(navLink)}</ul>
+            </nav>
+          )}
 
-          {/* Mobile Hamburger Button */}
+          {actions && <div className="hidden md:flex items-center gap-4 shrink-0">{actions}</div>}
+
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -106,20 +183,19 @@ export function Header({
           </div>
         </div>
 
-        {/* Mobile Menu Dropdown */}
+        {/* Menu mobile déroulant */}
         {isOpen && (
-          <div id="mobile-menu" className="md:hidden pb-4">
-            {/* Navigation Links */}
+          <div id="mobile-menu" className="md:hidden pb-4 mt-2">
             {navItems.length > 0 && (
               <ul className="flex flex-col items-center gap-1">
                 {navItems.map((item) => {
-                  const isActive = currentPath === item.href || currentPath.startsWith(`${item.href}/`);
+                  const active = isActive(item.href);
                   return (
                     <li key={item.href} className="w-full">
                       <a
                         href={item.href}
-                        className={`${baseStyles} ${isActive ? activeStyles : inactiveStyles} block text-center`}
-                        aria-current={isActive ? 'page' : undefined}
+                        className={`${linkBase} ${active ? linkActive : linkInactive} block text-center`}
+                        aria-current={active ? 'page' : undefined}
                         onClick={() => setIsOpen(false)}
                       >
                         {item.label}
@@ -130,17 +206,16 @@ export function Header({
               </ul>
             )}
 
-            {/* Secondary Navigation Links (Accessibility, Sitemap, Help) */}
             {secondaryNavItems.length > 0 && (
               <ul className="flex flex-col items-center gap-1 mt-2 pt-2 border-t border-fg-subtle/30">
                 {secondaryNavItems.map((item) => {
-                  const isActive = currentPath === item.href || currentPath.startsWith(`${item.href}/`);
+                  const active = isActive(item.href);
                   return (
                     <li key={item.href} className="w-full">
                       <a
                         href={item.href}
-                        className={`${baseStyles} ${isActive ? activeStyles : inactiveStyles} block text-center text-xs`}
-                        aria-current={isActive ? 'page' : undefined}
+                        className={`${linkBase} ${active ? linkActive : linkInactive} block text-center text-xs`}
+                        aria-current={active ? 'page' : undefined}
                         onClick={() => setIsOpen(false)}
                       >
                         {item.label}
@@ -151,10 +226,11 @@ export function Header({
               </ul>
             )}
 
-            {/* Theme & Language toggles */}
-            <div className="flex items-center justify-center gap-4 mt-2 pt-2 border-t border-fg-subtle/30">
-              {actions}
-            </div>
+            {actions && (
+              <div className="flex items-center justify-center gap-4 mt-2 pt-2 border-t border-fg-subtle/30">
+                {actions}
+              </div>
+            )}
           </div>
         )}
       </div>

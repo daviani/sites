@@ -29,11 +29,11 @@ export function FeaturedArticle({ article }: FeaturedArticleProps) {
             {t('blog.featured')}
           </span>
 
-          <h2 className="text-3xl md:text-4xl font-bold mt-5 mb-4 text-fg group-hover:text-accent transition-colors">
+          <h2 className="text-3xl md:text-4xl font-bold mt-5 mb-4 text-fg group-hover:text-accent transition-colors max-w-[65ch]">
             {title}
           </h2>
 
-          <p className="text-lg text-fg-muted mb-6 max-w-3xl">{excerpt}</p>
+          <p className="text-lg text-fg-muted mb-6 max-w-[65ch]">{excerpt}</p>
 
           <div className="flex flex-wrap items-center gap-4 text-sm text-fg-muted">
             <time dateTime={article.meta.publishedAt}>
@@ -63,7 +63,7 @@ export function FeaturedArticle({ article }: FeaturedArticleProps) {
 
           <div className="mt-6 inline-flex items-center gap-2 text-accent font-medium group-hover:gap-3 transition-all">
             {t('blog.readArticle')}
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 text-fire" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </div>

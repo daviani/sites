@@ -7,6 +7,7 @@ import { useLanguage } from '@/hooks/use-language';
 
 const navKeys = [
   { href: '/about', key: 'nav.about.title' as const },
+  { href: '/projets', key: 'nav.projects.title' as const },
   { href: '/blog', key: 'nav.blog.title' as const },
   { href: '/cv', key: 'nav.cv.title' as const },
   { href: '/contact', key: 'nav.contact.title' as const },

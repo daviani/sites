@@ -11,6 +11,8 @@ const storage: GitHubConfig['storage'] = {
  */
 const postsPath = 'apps/web/content/posts/*';
 const photosPath = 'apps/web/content/photos/*';
+const projectsPath = 'apps/web/content/projects/*';
+const contributionsPath = 'apps/web/content/contributions/*';
 
 export default config({
   storage,
@@ -53,6 +55,13 @@ export default config({
         tags: fields.array(fields.text({ label: 'Tag' }), {
           label: 'Tags',
           itemLabel: (props) => props.value || 'Nouveau tag',
+        }),
+
+        // Projet lié (liaison bidirectionnelle article ↔ projet)
+        project: fields.relationship({
+          label: 'Projet lié',
+          description: 'Optionnel — relie cet article à un projet',
+          collection: 'projects',
         }),
 
         // Contenu principal (FR par défaut)
@@ -106,6 +115,91 @@ export default config({
           label: 'Tags',
           itemLabel: (props) => props.value || 'Nouveau tag',
         }),
+      },
+    }),
+    projects: collection({
+      label: 'Projets',
+      slugField: 'slug',
+      path: projectsPath,
+      format: { contentField: 'bodyFr' },
+      schema: {
+        slug: fields.slug({ name: { label: 'Slug (URL)' } }),
+        name: fields.text({ label: 'Nom du projet', validation: { isRequired: true } }),
+        featured: fields.checkbox({ label: 'Mis en avant', defaultValue: false }),
+        order: fields.integer({ label: "Ordre d'affichage", defaultValue: 0 }),
+        status: fields.select({
+          label: 'Statut',
+          options: [
+            { label: 'Live', value: 'live' },
+            { label: 'Privé', value: 'private' },
+            { label: 'Lab', value: 'lab' },
+            { label: 'Coming soon', value: 'coming-soon' },
+          ],
+          defaultValue: 'live',
+        }),
+        taglineFr: fields.text({ label: 'Accroche (FR)', validation: { isRequired: true } }),
+        taglineEn: fields.text({ label: 'Tagline (EN)' }),
+        summaryFr: fields.text({ label: 'Résumé (FR)', multiline: true }),
+        summaryEn: fields.text({ label: 'Summary (EN)', multiline: true }),
+        role: fields.text({ label: 'Rôle' }),
+        stack: fields.array(fields.text({ label: 'Techno' }), {
+          label: 'Stack',
+          itemLabel: (props) => props.value || 'Nouvelle techno',
+        }),
+        links: fields.array(
+          fields.object({
+            label: fields.text({ label: 'Libellé' }),
+            url: fields.url({ label: 'URL' }),
+          }),
+          {
+            label: 'Liens (repo, démo, npm…)',
+            itemLabel: (props) => props.fields.label.value || 'Lien',
+          }
+        ),
+        cover: fields.image({
+          label: 'Visuel de couverture',
+          directory: 'apps/web/content/projects',
+          publicPath: '/projects/',
+        }),
+        screenshots: fields.array(
+          fields.image({
+            label: 'Capture',
+            directory: 'apps/web/content/projects',
+            publicPath: '/projects/',
+          }),
+          { label: "Captures d'écran", itemLabel: () => 'Capture' }
+        ),
+        bodyFr: fields.markdoc({
+          label: 'Contenu page détail (FR)',
+          description: 'Optionnel — si vide, la carte renvoie vers le lien externe',
+          options: { heading: [2, 3, 4] },
+        }),
+      },
+    }),
+    contributions: collection({
+      label: 'Contributions',
+      slugField: 'slug',
+      path: contributionsPath,
+      format: { data: 'yaml' },
+      schema: {
+        slug: fields.slug({ name: { label: 'Slug' } }),
+        type: fields.select({
+          label: 'Type',
+          options: [
+            { label: 'Talk / Conférence', value: 'talk' },
+            { label: 'Mentorat', value: 'mentorat' },
+            { label: 'Article', value: 'article' },
+            { label: 'Open source', value: 'oss' },
+          ],
+          defaultValue: 'talk',
+        }),
+        titleFr: fields.text({ label: 'Titre (FR)', validation: { isRequired: true } }),
+        titleEn: fields.text({ label: 'Title (EN)' }),
+        descriptionFr: fields.text({ label: 'Description (FR)', multiline: true }),
+        descriptionEn: fields.text({ label: 'Description (EN)', multiline: true }),
+        date: fields.text({ label: 'Date / période', description: 'ex. « ApéroWeb · mars 2025 »' }),
+        link: fields.url({ label: 'Lien (optionnel)' }),
+        order: fields.integer({ label: 'Ordre', defaultValue: 0 }),
       },
     }),
   },

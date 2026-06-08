@@ -3,7 +3,6 @@
 import { Footer, SkipLink, ScrollToTop } from "@tulikettu/ui";
 import { Providers } from "@/components/Providers";
 import { HeaderNav } from "@/components/HeaderNav";
-import { SubHeaderNav } from "@/components/SubHeaderNav";
 import { useTranslation } from "@/hooks/use-translation";
 
 export default function SiteLayout({
@@ -25,7 +24,6 @@ function SiteLayoutContent({ children }: { children: React.ReactNode }) {
     <>
       <SkipLink label={t('common.skipToContent')} />
       <HeaderNav />
-      <SubHeaderNav />
       <div className="min-h-screen flex flex-col">
         <main
           id="main-content"

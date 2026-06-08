@@ -27,7 +27,7 @@ export function ArticleContent({ article }: ArticleContentProps) {
         <h1 className="text-3xl md:text-4xl font-bold mb-4 text-fg">
           {title}
         </h1>
-        <p className="text-lg text-fg-muted mb-6 leading-relaxed">{excerpt}</p>
+        <p className="text-lg text-fg-muted mb-6 leading-relaxed max-w-[65ch]">{excerpt}</p>
         <div className="flex items-center gap-4 text-sm text-fg-muted">
           <time dateTime={meta.publishedAt}>
             {new Date(meta.publishedAt).toLocaleDateString(dateLocale, {
@@ -54,7 +54,7 @@ export function ArticleContent({ article }: ArticleContentProps) {
 
       {/* Content */}
       <div className="mt-8 p-8 glass-card">
-        <div className="prose prose-tuli max-w-none">
+        <div className="prose prose-tuli max-w-[65ch] mx-auto">
           <MarkdocContent content={articleContent} />
         </div>
       </div>

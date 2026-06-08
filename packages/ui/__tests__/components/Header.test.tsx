@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, within } from '@testing-library/react';
 import { Header } from '../../src/components/Header';
 
 // Mock FoxLogo
@@ -105,45 +105,50 @@ describe('Header', () => {
       { href: '/contact', label: 'Contact' },
     ];
 
+    // La nav desktop (intégrée au header) et la nav du dropdown mobile rendent
+    // les mêmes libellés ; on scope les assertions au menu mobile pour lever l'ambiguïté.
+    const openMobileMenu = () => {
+      fireEvent.click(screen.getByLabelText('Ouvrir le menu'));
+      return within(document.getElementById('mobile-menu')!);
+    };
+
     it('renders navigation items in mobile menu', () => {
       render(<Header navItems={navItems} menuLabels={defaultMenuLabels} />);
+      const menu = openMobileMenu();
 
-      // Open mobile menu
-      const button = screen.getByLabelText('Ouvrir le menu');
-      fireEvent.click(button);
+      expect(menu.getByText('Blog')).toBeInTheDocument();
+      expect(menu.getByText('Contact')).toBeInTheDocument();
+    });
 
-      expect(screen.getByText('Blog')).toBeInTheDocument();
-      expect(screen.getByText('Contact')).toBeInTheDocument();
+    it('renders navigation items in desktop nav', () => {
+      render(<Header navItems={navItems} menuLabels={defaultMenuLabels} />);
+      const desktopNav = screen.getByRole('navigation', { name: 'Navigation principale' });
+
+      expect(within(desktopNav).getByText('Blog')).toBeInTheDocument();
+      expect(within(desktopNav).getByText('Contact')).toBeInTheDocument();
     });
 
     it('marks current page with aria-current', () => {
       render(<Header navItems={navItems} currentPath="/blog" menuLabels={defaultMenuLabels} />);
+      const menu = openMobileMenu();
 
-      const button = screen.getByLabelText('Ouvrir le menu');
-      fireEvent.click(button);
-
-      const blogLink = screen.getByText('Blog').closest('a');
+      const blogLink = menu.getByText('Blog').closest('a');
       expect(blogLink).toHaveAttribute('aria-current', 'page');
     });
 
     it('applies active styles to current page', () => {
       render(<Header navItems={navItems} currentPath="/blog" menuLabels={defaultMenuLabels} />);
+      const menu = openMobileMenu();
 
-      const button = screen.getByLabelText('Ouvrir le menu');
-      fireEvent.click(button);
-
-      const blogLink = screen.getByText('Blog').closest('a');
-      expect(blogLink?.className).toContain('bg-surface-hi');
+      const blogLink = menu.getByText('Blog').closest('a');
+      expect(blogLink?.className).toContain('font-semibold');
     });
 
     it('closes menu when nav item is clicked', () => {
       render(<Header navItems={navItems} menuLabels={defaultMenuLabels} />);
+      const menu = openMobileMenu();
 
-      const button = screen.getByLabelText('Ouvrir le menu');
-      fireEvent.click(button);
-
-      const blogLink = screen.getByText('Blog');
-      fireEvent.click(blogLink);
+      fireEvent.click(menu.getByText('Blog'));
 
       // Menu should close
       expect(screen.getByLabelText('Ouvrir le menu')).toBeInTheDocument();
