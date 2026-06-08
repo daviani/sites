@@ -28,8 +28,6 @@ export type { BreadcrumbProps, BreadcrumbItem } from './components/Breadcrumb';
 
 export { ScrollToTop } from './components/ScrollToTop';
 
-export { CalendlyEmbed } from './components/CalendlyEmbed';
-
 
 export { useTheme, ThemeProvider } from './hooks/use-theme';
 export type { Theme } from './hooks/use-theme';

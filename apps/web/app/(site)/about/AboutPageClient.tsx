@@ -100,12 +100,6 @@ export default function AboutPageClient() {
             >
               {t('pages.about.cta.contact')}
             </a>
-            <a
-              href="/rdv"
-              className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg border-2 border-nord-10 text-nord-10 dark:text-nord-8 hover:bg-nord-btn hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-nord-10 focus:ring-offset-2"
-            >
-              {t('pages.about.cta.appointment')}
-            </a>
           </div>
         </article>
       </div>
