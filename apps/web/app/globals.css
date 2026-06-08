@@ -7,6 +7,10 @@
 @theme {
   /* Design tokens — island layout */
   --radius-island: 2.5rem;
+  /* Typo « Sauna » : Geist (titres + corps) · JetBrains Mono (mono).
+     Les variables --font-* viennent de next/font (layout racine). */
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, 'SF Mono', Menlo, monospace;
 }
 
 /* ── Tulikettu — tokens sémantiques ────────────────────────────────────────
@@ -105,6 +109,13 @@
      ~102px mobile logo 64, 140px desktop logo 128, + le gap haut de 10px). */
   --height-header-offset: 116px;
   --height-full-offset: 156px;
+  /* Largeur de contenu unifiée : large sur mobile, 80% plafonné à 1200px en desktop. */
+  --content-width: 92%;
+}
+@media (min-width: 768px) {
+  :root {
+    --content-width: min(80%, 1200px);
+  }
 }
 
 /* Glass card — frosted glass island effect */
@@ -122,7 +133,7 @@ body {
   color: var(--tuli-text-1);
   background-color: var(--tuli-bg);
   min-height: 100dvh;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Fond aurore en backdrop fixe (perf : pseudo fixe plutôt que background-attachment,
