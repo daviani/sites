@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { ArticleContent } from '@/components/blog/ArticleContent';
 
@@ -9,10 +9,6 @@ vi.mock('@/hooks/use-language', () => ({
     setLanguage: vi.fn(),
     toggleLanguage: vi.fn(),
   }),
-}));
-
-vi.mock('@/lib/markdoc', () => ({
-  MarkdocContent: ({ content }: { content: string }) => <div data-testid="markdoc">{content}</div>,
 }));
 
 describe('ArticleContent', () => {
@@ -32,43 +28,44 @@ describe('ArticleContent', () => {
     },
   };
 
-  it('renders article title', () => {
-    render(<ArticleContent article={mockArticle} />);
+  // Le corps est désormais pré-rendu côté serveur et passé en prop.
+  const bodyFr = <div data-testid="body-fr">Corps FR</div>;
+  const bodyEn = <div data-testid="body-en">Corps EN</div>;
 
+  const renderArticle = (article = mockArticle) =>
+    render(<ArticleContent article={article} bodyFr={bodyFr} bodyEn={bodyEn} />);
+
+  it('renders article title', () => {
+    renderArticle();
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Titre en Francais');
   });
 
   it('renders article excerpt', () => {
-    render(<ArticleContent article={mockArticle} />);
-
+    renderArticle();
     expect(screen.getByText('Extrait en francais')).toBeInTheDocument();
   });
 
   it('renders article tags', () => {
-    render(<ArticleContent article={mockArticle} />);
-
+    renderArticle();
     expect(screen.getByText('#typescript')).toBeInTheDocument();
     expect(screen.getByText('#react')).toBeInTheDocument();
   });
 
   it('renders formatted date', () => {
-    render(<ArticleContent article={mockArticle} />);
-
+    renderArticle();
     const time = screen.getByRole('time');
     expect(time).toHaveAttribute('datetime', '2026-01-30');
   });
 
-  it('renders article content via MarkdocContent', () => {
-    render(<ArticleContent article={mockArticle} />);
-
-    expect(screen.getByTestId('markdoc')).toHaveTextContent('## French Content');
+  it('renders the pre-rendered French body', () => {
+    renderArticle();
+    expect(screen.getByTestId('body-fr')).toBeInTheDocument();
   });
 
-  it('renders tags as links', () => {
-    render(<ArticleContent article={mockArticle} />);
-
+  it('renders tags as links to /blog', () => {
+    renderArticle();
     const tagLink = screen.getByText('#typescript').closest('a');
-    expect(tagLink).toHaveAttribute('href', '/?tag=typescript');
+    expect(tagLink).toHaveAttribute('href', '/blog?tag=typescript');
   });
 
   it('renders article without tags', () => {
@@ -76,26 +73,8 @@ describe('ArticleContent', () => {
       ...mockArticle,
       meta: { ...mockArticle.meta, tags: [] },
     };
-    render(<ArticleContent article={articleNoTags} />);
-
+    renderArticle(articleNoTags);
     expect(screen.getByText('Titre en Francais')).toBeInTheDocument();
     expect(screen.queryByText('#')).not.toBeInTheDocument();
-  });
-});
-
-describe('ArticleContent - English', () => {
-  beforeEach(() => {
-    vi.doMock('@/hooks/use-language', () => ({
-      useLanguage: () => ({
-        language: 'en',
-        mounted: true,
-        setLanguage: vi.fn(),
-        toggleLanguage: vi.fn(),
-      }),
-    }));
-  });
-
-  afterEach(() => {
-    vi.doUnmock('@/hooks/use-language');
   });
 });
