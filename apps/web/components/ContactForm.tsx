@@ -29,6 +29,10 @@ interface ContactFormProps {
   onSubmit: (data: ContactFormData) => Promise<ContactFormResult>;
 }
 
+const FIELD_CLASS =
+  'w-full px-[14px] py-3 rounded-xl bg-surface-el border border-surface-hi/55 text-fg placeholder:text-fg-subtle focus:outline-none focus:border-accent focus:ring-[3px] focus:ring-accent/20 transition-all disabled:opacity-50';
+const LABEL_CLASS = 'block text-[13px] font-semibold text-fg-muted mb-2';
+
 export function ContactForm({ onSubmit }: ContactFormProps) {
   const { t } = useTranslation();
   const { execute, load, isLoaded } = useRecaptcha();
@@ -109,7 +113,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
   if (status === 'success') {
     return (
       <div
-        className="p-8 glass-card text-center"
+        className="bg-surface border border-surface-hi/55 rounded-3xl p-8 md:p-9 text-center"
         role="alert"
         aria-live="polite"
       >
@@ -125,9 +129,18 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
     <form
       onSubmit={handleSubmit}
       onFocus={() => !isLoaded && load()}
-      className="p-8 glass-card space-y-6"
+      className="bg-surface border border-surface-hi/55 rounded-3xl p-8 md:p-9"
       noValidate
     >
+      <div className="mb-6">
+        <h2 className="text-[22px] font-bold tracking-[-0.02em] text-fg">
+          {t('contact.form.cardTitle')}
+        </h2>
+        <p className="text-[14.5px] text-fg-muted mt-1.5">
+          {t('contact.form.responseTime')}
+        </p>
+      </div>
+
       {/* Honeypot field - hidden from users */}
       <div className="sr-only" aria-hidden="true">
         <label htmlFor="favorite_color">Favorite Color</label>
@@ -142,126 +155,112 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
         />
       </div>
 
-      {/* Name field */}
-      <div>
-        <label
-          htmlFor="name"
-          className="block text-sm font-medium text-fg mb-2"
-        >
-          {t('contact.form.name')}
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder={t('contact.form.namePlaceholder')}
-          required
-          minLength={2}
-          disabled={status === 'loading'}
-          aria-invalid={!!fieldErrors.name}
-          aria-describedby={fieldErrors.name ? 'name-error' : undefined}
-          className="w-full px-4 py-3 rounded-xl bg-surface border border-surface-hi text-fg placeholder:text-fg-subtle focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all disabled:opacity-50"
-        />
-        {fieldErrors.name && (
-          <p
-            id="name-error"
-            className="mt-1 text-sm text-err"
-            role="alert"
-          >
-            {fieldErrors.name[0]}
-          </p>
-        )}
-      </div>
-
-      {/* Email field */}
-      <div>
-        <label
-          htmlFor="email"
-          className="block text-sm font-medium text-fg mb-2"
-        >
-          {t('contact.form.email')}
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder={t('contact.form.emailPlaceholder')}
-          required
-          disabled={status === 'loading'}
-          aria-invalid={!!fieldErrors.email}
-          aria-describedby={fieldErrors.email ? 'email-error' : undefined}
-          className="w-full px-4 py-3 rounded-xl bg-surface border border-surface-hi text-fg placeholder:text-fg-subtle focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all disabled:opacity-50"
-        />
-        {fieldErrors.email && (
-          <p
-            id="email-error"
-            className="mt-1 text-sm text-err"
-            role="alert"
-          >
-            {fieldErrors.email[0]}
-          </p>
-        )}
-      </div>
-
-      {/* Message field */}
-      <div>
-        <label
-          htmlFor="message"
-          className="block text-sm font-medium text-fg mb-2"
-        >
-          {t('contact.form.message')}
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          placeholder={t('contact.form.messagePlaceholder')}
-          required
-          minLength={10}
-          maxLength={2000}
-          rows={5}
-          disabled={status === 'loading'}
-          aria-invalid={!!fieldErrors.message}
-          aria-describedby={fieldErrors.message ? 'message-error' : undefined}
-          className="w-full px-4 py-3 rounded-xl bg-surface border border-surface-hi text-fg placeholder:text-fg-subtle focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all resize-none disabled:opacity-50"
-        />
-        {fieldErrors.message && (
-          <p
-            id="message-error"
-            className="mt-1 text-sm text-err"
-            role="alert"
-          >
-            {fieldErrors.message[0]}
-          </p>
-        )}
-      </div>
-
-      {/* Error message */}
-      {status === 'error' && errorMessage && (
-        <div
-          className="p-4 rounded-xl bg-err/10 border border-err/20 text-err"
-          role="alert"
-          aria-live="assertive"
-        >
-          {errorMessage}
+      <div className="space-y-[18px]">
+        {/* Name field */}
+        <div>
+          <label htmlFor="name" className={LABEL_CLASS}>
+            {t('contact.form.name')}
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder={t('contact.form.namePlaceholder')}
+            required
+            minLength={2}
+            disabled={status === 'loading'}
+            aria-invalid={!!fieldErrors.name}
+            aria-describedby={fieldErrors.name ? 'name-error' : undefined}
+            className={FIELD_CLASS}
+          />
+          {fieldErrors.name && (
+            <p id="name-error" className="mt-1 text-sm text-err" role="alert">
+              {fieldErrors.name[0]}
+            </p>
+          )}
         </div>
-      )}
 
-      {/* Submit button */}
-      <button
-        type="submit"
-        disabled={status === 'loading'}
-        className="w-full px-6 py-3 rounded-full font-semibold bg-accent text-on-accent hover:opacity-90 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-accent focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-200 cursor-pointer"
-      >
-        {status === 'loading'
-          ? t('contact.form.sending')
-          : t('contact.form.submit')}
-      </button>
+        {/* Email field */}
+        <div>
+          <label htmlFor="email" className={LABEL_CLASS}>
+            {t('contact.form.email')}
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder={t('contact.form.emailPlaceholder')}
+            required
+            disabled={status === 'loading'}
+            aria-invalid={!!fieldErrors.email}
+            aria-describedby={fieldErrors.email ? 'email-error' : undefined}
+            className={FIELD_CLASS}
+          />
+          {fieldErrors.email && (
+            <p id="email-error" className="mt-1 text-sm text-err" role="alert">
+              {fieldErrors.email[0]}
+            </p>
+          )}
+        </div>
+
+        {/* Message field */}
+        <div>
+          <label htmlFor="message" className={LABEL_CLASS}>
+            {t('contact.form.message')}
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            placeholder={t('contact.form.messagePlaceholder')}
+            required
+            minLength={10}
+            maxLength={2000}
+            rows={5}
+            disabled={status === 'loading'}
+            aria-invalid={!!fieldErrors.message}
+            aria-describedby={fieldErrors.message ? 'message-error' : undefined}
+            className={`${FIELD_CLASS} min-h-[130px] resize-y`}
+          />
+          {fieldErrors.message && (
+            <p id="message-error" className="mt-1 text-sm text-err" role="alert">
+              {fieldErrors.message[0]}
+            </p>
+          )}
+        </div>
+
+        {/* Error message */}
+        {status === 'error' && errorMessage && (
+          <div
+            className="p-4 rounded-xl bg-err/10 border border-err/20 text-err"
+            role="alert"
+            aria-live="assertive"
+          >
+            {errorMessage}
+          </div>
+        )}
+
+        {/* Submit button */}
+        <button
+          type="submit"
+          disabled={status === 'loading'}
+          className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold bg-accent text-on-accent hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-accent/40 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 cursor-pointer"
+        >
+          {status === 'loading' ? (
+            t('contact.form.sending')
+          ) : (
+            <>
+              {t('contact.form.submit')}
+              <span aria-hidden="true">→</span>
+            </>
+          )}
+        </button>
+      </div>
     </form>
   );
 }
