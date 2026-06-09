@@ -5,6 +5,8 @@ import { FeaturedProjects } from '@/components/home/FeaturedProjects';
 import { ExpertiseSection } from '@/components/ExpertiseSection';
 import { ParcoursTeaser } from '@/components/home/ParcoursTeaser';
 import { FinalCta } from '@/components/home/FinalCta';
+import { JsonLd } from '@/components/JsonLd';
+import { personJsonLd, websiteJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Accueil',
@@ -45,6 +47,8 @@ export default function HomePage() {
   return (
     <div className="py-8 md:py-12">
       <div className="w-[var(--content-width)] mx-auto px-4 sm:px-6">
+        <JsonLd data={personJsonLd()} />
+        <JsonLd data={websiteJsonLd()} />
         <HeroSection />
         {featured && (
           <FeaturedProjects

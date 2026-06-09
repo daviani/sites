@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { SITE_NAME } from '@/lib/domains/config';
+import { getBaseUrl, SITE_NAME, SITE_DESCRIPTION } from '@/lib/domains/config';
 
 /** Image Open Graph par défaut (logo de marque), partagée par toutes les pages. */
 const OG_IMAGE = {
@@ -45,5 +45,65 @@ export function pageMetadata(opts: {
       description,
       images: [OG_IMAGE.url],
     },
+  };
+}
+
+// ── JSON-LD (données structurées schema.org) ────────────────────────────────
+// Injectées via le composant <JsonLd>. Aident Google (rich results) et les IA
+// à comprendre QUI tu es, QUEL est le site, et de QUOI parle chaque article.
+
+/** Profils publics — alignés sur les liens du Footer. */
+const SAME_AS = ['https://github.com/daviani', 'https://linkedin.com/in/daviani'];
+
+/** Person — l'entité principale du site (toi). Posé sur l'accueil. */
+export function personJsonLd() {
+  const baseUrl = getBaseUrl();
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: SITE_NAME,
+    url: baseUrl,
+    image: `${baseUrl}${OG_IMAGE.url}`,
+    jobTitle: 'Développeur Full-Stack & DevOps',
+    description: SITE_DESCRIPTION,
+    sameAs: SAME_AS,
+    knowsAbout: ['React', 'Next.js', 'Node.js', 'TypeScript', 'DevOps', 'Docker', 'CI/CD', 'IA'],
+  };
+}
+
+/** WebSite — le site lui-même. */
+export function websiteJsonLd() {
+  const baseUrl = getBaseUrl();
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_NAME,
+    url: baseUrl,
+    inLanguage: 'fr-FR',
+    author: { '@type': 'Person', name: SITE_NAME, url: baseUrl },
+  };
+}
+
+/** BlogPosting — un article de blog. Posé sur /blog/[slug]. */
+export function articleJsonLd(opts: {
+  title: string;
+  description: string;
+  slug: string;
+  publishedAt: string;
+  tags: string[];
+}) {
+  const baseUrl = getBaseUrl();
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: opts.title,
+    description: opts.description,
+    datePublished: opts.publishedAt,
+    url: `${baseUrl}/blog/${opts.slug}`,
+    image: `${baseUrl}/api/og/${opts.slug}`,
+    keywords: opts.tags,
+    inLanguage: 'fr-FR',
+    author: { '@type': 'Person', name: SITE_NAME, url: baseUrl },
+    publisher: { '@type': 'Person', name: SITE_NAME, url: baseUrl },
   };
 }
