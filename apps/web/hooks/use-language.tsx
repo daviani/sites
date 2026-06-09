@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useSyncExternalStore, useState, ReactNode, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 
 export type Language = 'fr' | 'en';
 
@@ -47,16 +48,22 @@ const getServerSnapshot = () => false;
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>(getInitialLanguage);
   const mounted = useSyncExternalStore(emptySubscribe, getClientSnapshot, getServerSnapshot);
+  const router = useRouter();
 
   useEffect(() => {
     document.documentElement.lang = language;
   }, [language]);
 
-  const setLanguage = useCallback((newLanguage: Language) => {
-    setLanguageState(newLanguage);
-    setLanguageCookie(newLanguage);
-    document.documentElement.lang = newLanguage;
-  }, []);
+  const setLanguage = useCallback(
+    (newLanguage: Language) => {
+      setLanguageState(newLanguage);
+      setLanguageCookie(newLanguage);
+      document.documentElement.lang = newLanguage;
+      // Re-render des server components (langue lue via cookie côté serveur) dans la nouvelle langue.
+      router.refresh();
+    },
+    [router]
+  );
 
   const toggleLanguage = useCallback(() => {
     const newLanguage = language === 'fr' ? 'en' : 'fr';
