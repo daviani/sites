@@ -1,40 +1,41 @@
 'use client';
 
 import { useTranslation } from '@/hooks/use-translation';
+import { SectionHead } from './home/SectionHead';
 
 const expertiseItems = [
-  { key: 'fullstack', icon: CodeIcon },
-  { key: 'devops', icon: RocketIcon },
+  { key: 'fullstack', icon: MonitorSmartphoneIcon },
+  { key: 'devops', icon: InfinityIcon },
   { key: 'infra', icon: ServerIcon },
-  { key: 'architecture', icon: LayoutIcon },
+  { key: 'architecture', icon: BoxesIcon },
   { key: 'database', icon: DatabaseIcon },
-  { key: 'accessibility', icon: AccessibilityIcon },
+  { key: 'accessibility', icon: PersonStandingIcon },
 ] as const;
 
 export function ExpertiseSection() {
   const { t } = useTranslation();
 
   return (
-    <section className="mt-16">
-      <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 text-fg">
-        {t('home.expertise.title')}
-      </h2>
+    <section className="py-12 md:py-[60px] border-t border-surface-hi/40">
+      <SectionHead
+        eyebrow={t('home.expertise.eyebrow')}
+        title={t('home.expertise.title')}
+        subtitle={t('home.expertise.subtitle')}
+      />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {expertiseItems.map(({ key, icon: Icon }) => (
           <div
             key={key}
-            className="p-6 rounded-lg bg-surface/70 backdrop-blur-sm border border-surface-hi transition-colors hover:border-accent"
+            className="flex flex-col rounded-2xl bg-surface border border-surface-hi/55 px-7 py-[30px] transition duration-[180ms] hover:border-surface-hi hover:-translate-y-0.5"
           >
-            <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 rounded-md bg-accent/10 text-accent">
-                <Icon className="w-5 h-5" />
-              </div>
-              <h3 className="font-semibold text-fg">
-                {t(`home.expertise.${key}.title`)}
-              </h3>
+            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-[color-mix(in_oklab,var(--tuli-accent)_8%,var(--tuli-surface-el))] border border-[color-mix(in_oklab,var(--tuli-accent)_16%,var(--tuli-surface-hi))] text-accent mb-[18px]">
+              <Icon className="w-5 h-5" />
             </div>
-            <p className="text-sm text-fg-muted leading-relaxed">
+            <h3 className="text-[19px] font-bold tracking-[-0.01em] text-fg mb-2.5">
+              {t(`home.expertise.${key}.title`)}
+            </h3>
+            <p className="text-sm text-fg-muted leading-[1.65]">
               {t(`home.expertise.${key}.description`)}
             </p>
           </div>
@@ -44,50 +45,74 @@ export function ExpertiseSection() {
   );
 }
 
-function CodeIcon({ className }: { className?: string }) {
+// Icônes au style Lucide (MIT) — tracés officiels, stroke 1.6 + bouts arrondis
+// pour coller à la maquette (≠ Heroicons stroke 2).
+function MonitorSmartphoneIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M18 8V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h8" />
+      <path d="M10 19v-3.96 3.15" />
+      <path d="M7 19h5" />
+      <rect width="6" height="10" x="16" y="12" rx="2" />
     </svg>
   );
 }
 
-function RocketIcon({ className }: { className?: string }) {
+function InfinityIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8" />
     </svg>
   );
 }
 
 function ServerIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
+      <rect width="20" height="8" x="2" y="2" rx="2" ry="2" />
+      <rect width="20" height="8" x="2" y="14" rx="2" ry="2" />
+      <line x1="6" x2="6.01" y1="6" y2="6" />
+      <line x1="6" x2="6.01" y1="18" y2="18" />
     </svg>
   );
 }
 
-function LayoutIcon({ className }: { className?: string }) {
+function BoxesIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z" />
+      <path d="m7 16.5-4.74-2.85" />
+      <path d="m7 16.5 5-3" />
+      <path d="M7 16.5v5.17" />
+      <path d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z" />
+      <path d="m17 16.5-5-3" />
+      <path d="m17 16.5 4.74-2.85" />
+      <path d="M17 16.5v5.17" />
+      <path d="M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z" />
+      <path d="M12 8 7.26 5.15" />
+      <path d="m12 8 4.74-2.85" />
+      <path d="M12 13.5V8" />
     </svg>
   );
 }
 
 function DatabaseIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
+      <ellipse cx="12" cy="5" rx="9" ry="3" />
+      <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+      <path d="M3 12A9 3 0 0 0 21 12" />
     </svg>
   );
 }
 
-function AccessibilityIcon({ className }: { className?: string }) {
+function PersonStandingIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5c-1.657 0-3 .672-3 1.5s1.343 1.5 3 1.5 3-.672 3-1.5-1.343-1.5-3-1.5zM12 7.5v3m0 0l-3 6m3-6l3 6m-6 0h6" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="5" r="1" />
+      <path d="m9 20 3-6 3 6" />
+      <path d="m6 8 6 2 6-2" />
+      <path d="M12 10v4" />
     </svg>
   );
 }

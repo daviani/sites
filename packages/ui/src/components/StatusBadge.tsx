@@ -10,11 +10,13 @@ import type { ReactNode } from 'react';
  */
 export type StatusBadgeVariant = 'neutral' | 'success' | 'accent' | 'warn';
 
+// Fonds opaques (color-mix avec la surface) plutôt que des teintes transparentes :
+// contraste déterministe et conforme AA quel que soit l'arrière-plan.
 const VARIANT_CLASS: Record<StatusBadgeVariant, string> = {
   neutral: 'bg-surface-hi text-fg-muted',
-  success: 'bg-ok/15 text-ok',
-  accent: 'bg-accent/15 text-accent',
-  warn: 'bg-warn/15 text-warn',
+  success: 'bg-[color-mix(in_oklab,var(--tuli-ok)_10%,var(--tuli-surface))] text-ok',
+  accent: 'bg-[color-mix(in_oklab,var(--tuli-accent)_10%,var(--tuli-surface))] text-accent',
+  warn: 'bg-[color-mix(in_oklab,var(--tuli-warn)_10%,var(--tuli-surface))] text-warn',
 };
 
 export interface StatusBadgeProps {
