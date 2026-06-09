@@ -6,6 +6,7 @@ import { MarkdocContent } from '@/lib/markdoc';
 import { getServerTranslations } from '@/lib/i18n/server';
 import { getProjectBySlug, getProjectSlugs, STATUS_VARIANT } from '@/lib/content/projects';
 import { getAllArticles } from '@/lib/content/blog';
+import { pageMetadata } from '@/lib/seo';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -18,7 +19,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
-  return { title: project ? project.name : 'Projet' };
+  if (!project) return { title: 'Projet' };
+  return pageMetadata({
+    title: project.name,
+    description: project.taglineFr,
+    path: `/projets/${slug}`,
+    type: 'article',
+  });
 }
 
 export default async function ProjectDetailPage({ params }: PageProps) {

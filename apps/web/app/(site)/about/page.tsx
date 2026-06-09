@@ -1,11 +1,16 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import { pageMetadata } from '@/lib/seo';
 import { Breadcrumb } from '@tulikettu/ui';
 import { getServerTranslations } from '@/lib/i18n/server';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'À propos',
-};
+  description:
+    'De soudeur à développeur full-stack en 2017 : mon parcours, ma façon de construire des produits web et ce qui me motive.',
+  path: '/about',
+  type: 'profile',
+});
 
 const FACTS = ['location', 'since', 'field'] as const;
 
