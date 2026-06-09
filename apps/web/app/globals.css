@@ -24,9 +24,10 @@
   --tuli-surface: #FFFFFF;
   --tuli-surface-el: #F8FAFC;
   --tuli-surface-hi: #E2E8F0;
+  --tuli-input-border: #6B7889; /* RGAA 1.4.11 — bordure de champ ≥ 3:1 (affordance, ≠ bordures décoratives) */
   --tuli-text-1: #1E293B;
   --tuli-text-2: #475569;
-  --tuli-text-3: #64748B;
+  --tuli-text-3: #5B6678; /* RGAA 3.2 — 4.5:1 même sur bg/bg-page (l'ancien #64748B chutait à 4.16) */
   --tuli-accent: #0E7490;
   --tuli-accent-2: #047857;
   --tuli-accent-3: #6D28D9;
@@ -57,9 +58,10 @@
   --tuli-surface: #111B2E;
   --tuli-surface-el: #1A2740;
   --tuli-surface-hi: #243352;
+  --tuli-input-border: #7488A8;
   --tuli-text-1: #E2E8F0;
   --tuli-text-2: #94A3B8;
-  --tuli-text-3: #7A8BA0;
+  --tuli-text-3: #8896AB; /* RGAA 3.2 — 4.5:1 même sur surface-el (l'ancien #7A8BA0 chutait à 4.28) */
   --tuli-accent: #5BB8D4;
   --tuli-accent-2: #67D4A8;
   --tuli-accent-3: #C084FC;
@@ -89,6 +91,7 @@
   --color-surface: var(--tuli-surface);
   --color-surface-el: var(--tuli-surface-el);
   --color-surface-hi: var(--tuli-surface-hi);
+  --color-input: var(--tuli-input-border);
   --color-fg: var(--tuli-text-1);
   --color-fg-muted: var(--tuli-text-2);
   --color-fg-subtle: var(--tuli-text-3);
