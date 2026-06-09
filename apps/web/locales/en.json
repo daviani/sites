@@ -144,10 +144,23 @@
       "rateLimited": "Too many attempts. Please try again in a minute.",
       "botDetected": "Invalid submission.",
       "recaptchaFailed": "Security verification failed. Please try again.",
-      "validationError": "Please check the form fields."
+      "validationError": "Please check the form fields.",
+      "cardTitle": "Send a message",
+      "responseTime": "I usually reply within 48 hours."
     },
     "intro": "Have a project, a question, or just want to chat? Feel free to write to me.",
-    "fallback": "You can also contact me directly by email."
+    "fallback": "You can also contact me directly by email.",
+    "eyebrow": "Let's talk",
+    "aside": {
+      "availableTitle": "Available",
+      "availableSub": "Open to projects & collaborations",
+      "directTitle": "Direct",
+      "email": "Email",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "location": "Location",
+      "locationValue": "Lyon, France"
+    }
   },
   "rdv": {
     "showCalendar": "Show calendar",

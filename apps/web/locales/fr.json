@@ -144,10 +144,23 @@
       "rateLimited": "Trop de tentatives. Réessayez dans une minute.",
       "botDetected": "Soumission non valide.",
       "recaptchaFailed": "Vérification de sécurité échouée. Veuillez réessayer.",
-      "validationError": "Veuillez vérifier les champs du formulaire."
+      "validationError": "Veuillez vérifier les champs du formulaire.",
+      "cardTitle": "Envoyer un message",
+      "responseTime": "Je réponds généralement sous 48 h."
     },
     "intro": "Vous avez un projet, une question ou simplement envie d'échanger ? N'hésitez pas à m'écrire.",
-    "fallback": "Vous pouvez aussi me contacter directement par email."
+    "fallback": "Vous pouvez aussi me contacter directement par email.",
+    "eyebrow": "Échangeons",
+    "aside": {
+      "availableTitle": "Disponible",
+      "availableSub": "Ouvert aux missions & collaborations",
+      "directTitle": "En direct",
+      "email": "Email",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "location": "Localisation",
+      "locationValue": "Lyon, France"
+    }
   },
   "rdv": {
     "showCalendar": "Afficher le calendrier",
