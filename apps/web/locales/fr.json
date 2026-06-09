@@ -284,6 +284,7 @@
       "subtitle": "Planifiez une rencontre"
     },
     "legal": {
+      "eyebrow": "Légal",
       "title": "Mentions légales",
       "subtitle": "Informations légales et politique de confidentialité",
       "publisher": {
@@ -419,6 +420,7 @@
       "lastUpdate": "Dernière mise à jour"
     },
     "accessibility": {
+      "eyebrow": "Inclusif",
       "title": "Accessibilité",
       "subtitle": "Déclaration d'accessibilité",
       "status": "Partiellement conforme",
@@ -446,12 +448,21 @@
       "declarationDate": "Date de la déclaration"
     },
     "sitemap": {
+      "eyebrow": "Navigation",
       "title": "Plan du site",
       "subtitle": "Structure du site",
       "mainPages": "Pages principales",
       "utilities": "Utilitaires"
     },
     "help": {
+      "eyebrow": "Support",
+      "shortcuts": {
+        "title": "Raccourcis clavier",
+        "next": "Élément suivant",
+        "previous": "Élément précédent",
+        "activate": "Activer",
+        "close": "Fermer le menu"
+      },
       "title": "Aide à la navigation",
       "subtitle": "Comment naviguer sur ce site",
       "keyboard": "Navigation au clavier",
