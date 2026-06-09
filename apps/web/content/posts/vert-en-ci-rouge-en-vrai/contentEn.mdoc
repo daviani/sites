@@ -1,0 +1,94 @@
+My site daviani.dev runs a battery of accessibility tests on every commit. One day, everything turned green. A few weeks later, an audit done with a screen reader showed that several pages were still unusable. Here is the gap between "the tests pass" and "it is actually accessible".
+
+## Why a guardrail in CI
+
+After making several applications accessible in a professional setting, I wanted to apply the same rigor to my personal site. The goal was not to hit a score, but to protect myself against my own regressions: to stop a deployment from breaking accessibility without me noticing.
+
+Accessibility therefore became a **blocking** step in my pipeline: lint and types → build → unit tests → end-to-end tests → accessibility tests → deployment. If the accessibility step fails, nothing ships.
+
+```yaml
+# quality.yml — GitHub Actions
+jobs:
+  accessibility-tests:
+    name: Accessibility Tests (RGAA/WCAG)
+    needs: quality
+    steps:
+      - run: pnpm test:a11y
+      - uses: actions/upload-artifact@v4
+        if: always() # Report kept even on failure
+        with:
+          name: accessibility-report
+```
+
+## What CI actually checks
+
+The first net is **axe-core**, which scans each page against WCAG 2.1 level AA criteria. I filter the results down to `critical` and `serious` impacts to avoid drowning the signal in noise.
+
+```ts
+test('axe-core WCAG 2.1 AA scan', async ({ page }) => {
+  const results = await new AxeBuilder({ page })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+    .analyze();
+
+  const violations = results.violations.filter(
+    (v) => v.impact === 'critical' || v.impact === 'serious'
+  );
+
+  expect(violations).toHaveLength(0);
+});
+```
+
+On top of that come hand-written tests derived from RGAA (the French accessibility standard): presence and relevance of text alternatives, mandatory attributes (`lang`, `title`, `viewport`), document structure (a single `h1`, heading hierarchy, landmarks). Then checks most scanners do not include: no keyboard trap, respect for `prefers-reduced-motion`, minimum touch target size.
+
+The day the whole thing went green, I thought the job was done.
+
+## Green everywhere, and yet
+
+Gabriel, an accessibility specialist, tested the site with VoiceOver — a real screen reader, used the way an actual user would. The result was eye-opening:
+
+- "CV" was read aloud as "cheval-vapeur" (French for horsepower) instead of the intended initials;
+- in dark theme, one piece of text had a contrast ratio of 2.21:1 instead of the required 4.5:1;
+- some form fields used the placeholder as their label, creating noise when read aloud;
+- keyboard navigation became inconsistent in certain sections.
+
+None of these flaws had been caught by my CI. Yet every one of them degraded the experience — or made it impossible.
+
+## The gap between presence and meaning
+
+The reason is simple: automated tools check for presence and syntactic conformance, not meaning. An `alt="image"` attribute satisfies the rule "every image has a text alternative", but tells the person listening nothing. The machine validates a rule; it judges neither context, nor relevance, nor the real journey.
+
+That is the whole distinction:
+
+- automated tests cover **presence, syntax, rules**;
+- human auditing covers **meaning, context, real use**.
+
+Neither replaces the other. They complement each other.
+
+## Closing the loop
+
+Rather than pitting the two approaches against each other, I chained them. Every issue surfaced by the audit became a new automated test:
+
+```ts
+// "CV" → explicit aria-label for screen readers
+test('acronyms have accessible labels', async ({ page }) => {
+  const results = await testAcronymsAccessibility(page);
+  expect(results.acronymsWithoutLabel).toHaveLength(0);
+});
+
+// Dark-mode contrast, computed via getComputedStyle
+test('dark mode contrast', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'dark' });
+  const results = await testExplicitContrast(page);
+  expect(results.insufficient).toHaveLength(0);
+});
+```
+
+I also extended the suite: checking inline language changes (RGAA criterion 8.7), forbidding fields that rely on a placeholder alone, verifying the language-switcher label. The guiding idea: a human spots a problem once; automation guarantees it never comes back.
+
+## What I take away from it
+
+"Green in CI" is not proof of accessibility. It is insurance against regression — valuable, but limited. The barrier automation cannot cross is judgment: deciding whether content makes sense to the person perceiving it.
+
+So the right setup is not "machine or human", but "machine **and** human": human auditing to discover what matters, automation to make sure it is never lost again. This reasoning goes well beyond accessibility — it holds for any system where you put your trust in a green light.
+
+I presented this experience report at ApéroWeb Lyon, in March 2026.

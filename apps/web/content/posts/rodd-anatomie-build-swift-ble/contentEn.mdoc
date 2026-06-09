@@ -1,0 +1,67 @@
+RØDD — Swedish for simply "row", or the act of rowing — is a personal R&D project born from one precise goal: to make a consumer Bluetooth rowing machine talk to iOS cleanly and without friction.
+
+The project came out of a gap in the market: unable to find any fitness app I was happy with, I set out to build a clean, rigorous and technically sharp interface. As a developer, this project is my lab for putting a complete design cycle through its paces, solo — from the reverse-engineering phase all the way to a robust software architecture.
+
+## The technical pivot
+
+My first instinct was React Native, to iterate fast. But from the very first proof of concept, the technical constraints brought me back to earth. To cleanly handle continuous hardware communication with `CoreBluetooth` and data export to `Apple HealthKit`, cross-platform was showing its limits. Swift imposed itself — not as an ideal preference, but as the logical choice for this specific use case.
+
+## Build methodology & R&D timeline
+
+Once native was settled, development followed a very linear path, immediately confronting the theory of the code with the constraints of the hardware:
+
+1. **Initial reverse-engineering.** Before writing a single line of Swift, I analysed the rower's payloads. By sniffing the raw Bluetooth frames with the nRF Connect app, I confirmed the signal existed and mapped the machine's characteristics.
+2. **System bring-up.** Once the protocol was understood, I implemented the `CoreBluetooth` layer to instantiate the peripheral manager and cleanly handle iOS's first access-permission prompts.
+3. **Physical crash-test.** I then built a raw scanner and a bare-bones interface to pair the iPhone with the rower and observe the data stream under real effort.
+
+It was during those first sessions that the reality of the hardware caught up with the theory. Behind the FTMS standard (Fitness Machine Service), the machine's firmware sometimes returns inconsistent raw values that have to be intercepted and corrected. Concretely, you read the frame byte by byte: two *flag* bytes announce which fields are present, then comes the Stroke Rate — encoded in half-units, hence the division by 2 — and the rest depending on the bits. Here is an excerpt from my FTMS parser:
+
+```swift
+/// FTMS Rower Data parser (characteristic 2AD1).
+enum FtmsParser {
+    static func parseRowerData(_ data: Data) -> LiveMetrics? {
+        guard data.count >= 2 else { return nil }
+
+        // 2 flag bytes (little-endian): they tell which fields follow.
+        let flags = UInt16(data[0]) | (UInt16(data[1]) << 8)
+        var offset = 2
+
+        // Stroke Rate (UInt8 / 2) + Stroke Count (UInt16) — always present.
+        guard let strokeRateRaw = readUInt8(data, at: &offset),
+              let strokeCountRaw = readUInt16(data, at: &offset) else { return nil }
+        let strokeRate = clampStrokeRate(Double(strokeRateRaw) / 2.0)
+
+        // … then distance, pace, power… depending on the flag bits.
+    }
+}
+```
+
+The `clampStrokeRate` is not incidental: it is the first guardrail against a firmware that, sometimes, talks nonsense. I will come back to it in detail in a future article.
+
+### The prototyping steps
+
+{% gallery %}
+{% figure src="/images/blog/rodd-anatomie-build-swift-ble/01-sniff-nrf-connect.png" alt="Screenshot of the nRF Connect app on iOS showing a BLE signal analysis graph between -25 dBm and -100 dBm, revealing the rower detected under the identifier SF-3531 with the Fitness Machine service." caption="Fig. 1 — First successful frame sniff in nRF Connect: identifying the rower's FTMS broadcast (SF-3531)." /%}
+{% figure src="/images/blog/rodd-anatomie-build-swift-ble/02-permissions-bluetooth.png" alt="iOS system Bluetooth permission alert for the Elvar app: « Allow Elvar to find Bluetooth devices? Elvar connects to your rower to measure your cadence in real time. »" caption="Fig. 2 — First CoreBluetooth implementation and system permission handling (initial codename: Elvar)." /%}
+{% figure src="/images/blog/rodd-anatomie-build-swift-ble/03-premier-poc-session.png" alt="Very raw, unstyled first version of the RØDD app in workout mode: a uniform blue-grey background, the word WARM-UP, the number 20 in the centre, dashes for distance and power, a rudimentary gauge with two Pause and Stop buttons." caption="Fig. 3 — The very first working connected-session prototype: rough UI, but data parsing validated on the machine." /%}
+{% /gallery %}
+
+## The UI/UX overhaul and the design system
+
+Only after securing this technical base and validating the reliability of the raw data did I tackle the visual product. I built my own design system from scratch — typography, a starry dark theme, components — to replace the initial prototype with an interface meant to stay readable mid-effort. The ergonomics were tested and validated in real conditions by people close to me, directly on the machine.
+
+## Where it stands and the end goal
+
+RØDD today ships full training programmes as well as classic sessions. The biggest technical job was aligning and calibrating my local data to get unified, reliable metrics, modelled on Concept2's precision standards. Right now I am finishing the immersive challenges (such as GPS tracking on Lake Annecy).
+
+RØDD's end goal is clear: to carry this project, solo, all the way through its life cycle — which means a full, official App Store release.
+
+This technical series will run three or four articles. In the next one, we will get straight to the heart of it: in-depth analysis of the Bluetooth logs, precise reverse-engineering of the firmware's FTMS characteristics, and the implementation of the abstraction layer on top of `CoreBluetooth`.
+
+### The current product experience
+
+{% gallery %}
+{% figure src="/images/blog/rodd-anatomie-build-swift-ble/04-splash-screen.png" alt="Dark RØDD launch screen: a stylised blue Viking longship logo inside a glowing circle, with the tagline « Find your north. Hold it. » over a starry sky." caption="Fig. 4 — RØDD launch screen: « Find your north. Hold it. »" /%}
+{% figure src="/images/blog/rodd-anatomie-build-swift-ble/05-session-classique.png" alt="Classic session interface in RØDD: a large central orange progress ring for the warm-up, cadence at 22 SPM, resistance at 7 of 32, and distance, pace, power and calories metrics at the bottom." caption="Fig. 5 — The « Classic » session after integrating the final design system." /%}
+{% figure src="/images/blog/rodd-anatomie-build-swift-ble/06-defi-lac-annecy.png" alt="Challenge mode in RØDD: a circular satellite map of Lake Annecy in Haute-Savoie with a white progress trace. Cadence shows 0 SPM in red." caption="Fig. 6 — The « Challenge » mode (Lake Annecy), in development. The red « 0 » is the live cadence, frozen at the moment of the screenshot." /%}
+{% /gallery %}

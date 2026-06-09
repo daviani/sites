@@ -1,0 +1,80 @@
+---
+slug: rodd-anatomie-build-swift-ble
+publishedAt: '2026-06-05'
+featured: true
+titleFr: "RØDD : anatomie d'un build Swift & BLE en solo"
+excerptFr: "Connecter un rameur Bluetooth grand public à iOS : reverse-engineering, CoreBluetooth et le pivot vers Swift natif. Le récit d'un build solo."
+titleEn: "RØDD: Anatomy of a Solo Swift & BLE Build"
+excerptEn: "Connecting a consumer Bluetooth rower to iOS: reverse-engineering, CoreBluetooth and the move to native Swift. The story of a solo build."
+tags:
+  - swift
+  - bluetooth
+---
+
+RØDD — du suédois signifiant tout simplement « rame », ou l'action de ramer — est un projet de recherche et développement personnel né d'un objectif précis : faire communiquer proprement et sans friction un rameur Bluetooth grand public avec iOS.
+
+L'origine du projet vient d'un manque sur le marché : ne trouvant aucune application de fitness satisfaisante, j'ai voulu concevoir une interface épurée, rigoureuse et techniquement avancée. En tant que développeur, ce projet me sert de laboratoire pour éprouver un cycle de conception complet en solo, de la phase de reverse-engineering jusqu'à la mise en place d'une architecture logicielle robuste.
+
+## Le pivot technologique
+
+Initialement, ma première intuition était de partir sur du React Native pour itérer rapidement. Mais dès le premier POC (preuve de concept), les contraintes techniques m'ont ramené à la réalité. Pour gérer proprement la communication matérielle en continu avec `CoreBluetooth` et l'export des données vers `Apple HealthKit`, le cross-platform montrait ses limites. Swift s'est imposé non pas par préférence idéale, mais comme une évidence logique pour ce cas d'usage précis.
+
+## La méthodologie du build & la chronologie R&D
+
+Une fois le choix du natif validé, le développement s'est structuré de manière très linéaire, en confrontant immédiatement la théorie du code aux contraintes du matériel :
+
+1. **Le reverse-engineering initial.** Avant d'écrire la moindre ligne de Swift, j'ai analysé les payloads du rameur. C'est en sniffant les trames Bluetooth brutes via l'application nRF Connect que j'ai pu valider l'existence du signal et mapper les caractéristiques de la machine.
+2. **L'initialisation système.** Une fois le protocole compris, j'ai implémenté la couche `CoreBluetooth` pour instancier le gestionnaire de périphériques et gérer proprement les premières demandes d'autorisation d'accès iOS.
+3. **Le crash-test physique.** J'ai ensuite développé un scanner brut et une interface rudimentaire pour lier l'iPhone au rameur et analyser le comportement du flux de données en conditions réelles d'effort.
+
+C'est lors de ces premières sessions que la réalité du hardware a rattrapé la théorie. Derrière le standard FTMS (Fitness Machine Service), le firmware de la machine renvoie parfois des valeurs brutes incohérentes qu'il faut intercepter et corriger. Concrètement, on lit la trame octet par octet : deux octets de *flags* annoncent les champs présents, puis vient le Stroke Rate — encodé en demi-unités, d'où la division par 2 — et le reste selon les bits. Voici un extrait de mon parser FTMS :
+
+```swift
+/// Parser FTMS Rower Data (characteristic 2AD1).
+enum FtmsParser {
+    static func parseRowerData(_ data: Data) -> LiveMetrics? {
+        guard data.count >= 2 else { return nil }
+
+        // 2 octets de flags (little-endian) : ils indiquent quels champs suivent.
+        let flags = UInt16(data[0]) | (UInt16(data[1]) << 8)
+        var offset = 2
+
+        // Stroke Rate (UInt8 / 2) + Stroke Count (UInt16) — toujours présents.
+        guard let strokeRateRaw = readUInt8(data, at: &offset),
+              let strokeCountRaw = readUInt16(data, at: &offset) else { return nil }
+        let strokeRate = clampStrokeRate(Double(strokeRateRaw) / 2.0)
+
+        // … puis distance, allure, puissance… selon les bits du flags.
+    }
+}
+```
+
+Le `clampStrokeRate` n'est pas anodin : c'est le premier garde-fou contre un firmware qui, parfois, raconte n'importe quoi. J'y reviendrai en détail dans un prochain article.
+
+### Les étapes du prototypage
+
+{% gallery %}
+{% figure src="/images/blog/rodd-anatomie-build-swift-ble/01-sniff-nrf-connect.png" alt="Capture d'écran de l'application nRF Connect sur iOS affichant un graphique d'analyse de signal BLE entre -25 dBm et -100 dBm, révélant la détection du rameur sous l'identifiant SF-3531 avec le service Fitness Machine." caption="Fig. 1 — Premier sniff de trame réussi dans nRF Connect : identification du broadcast FTMS du rameur (SF-3531)." /%}
+{% figure src="/images/blog/rodd-anatomie-build-swift-ble/02-permissions-bluetooth.png" alt="Alerte système iOS d'autorisation Bluetooth pour l'application Elvar : « Autoriser Elvar à rechercher les appareils Bluetooth ? Elvar se connecte à ton rameur pour mesurer ta cadence en temps réel. »" caption="Fig. 2 — Première implémentation de CoreBluetooth et gestion des permissions système (nom de code initial : Elvar)." /%}
+{% figure src="/images/blog/rodd-anatomie-build-swift-ble/03-premier-poc-session.png" alt="Première version brute et non stylisée de l'app RØDD en mode entraînement : fond gris-bleu uniforme, le mot ÉCHAUFFEMENT, le chiffre 20 au centre, des tirets pour la distance et la puissance, une jauge rudimentaire avec deux boutons Pause et Arrêter." caption="Fig. 3 — Le tout premier prototype fonctionnel de session connectée : UI rudimentaire, mais parsing validé sur la machine." /%}
+{% /gallery %}
+
+## La refonte UI/UX et le design system
+
+Ce n'est qu'après avoir sécurisé cette base technique et validé la fiabilité des données brutes que j'ai attaqué le produit visuel. J'ai composé mon propre design system de zéro — typographies, thème sombre stellaire, composants — pour remplacer le prototype initial par une interface pensée pour rester lisible en plein effort. L'ergonomie a été testée et validée en conditions réelles par mes proches, directement sur la machine.
+
+## État actuel et objectif final
+
+RØDD intègre aujourd'hui des programmes d'entraînement complets ainsi que des sessions classiques. Le plus gros chantier technique a été d'aligner et de calibrer mes données locales pour obtenir des métriques unifiées et fiables, calquées sur les standards de précision de Concept2. Actuellement, je finalise les défis immersifs (comme le tracking géolocalisé sur le lac d'Annecy).
+
+L'objectif final de RØDD est clair : mener ce projet en solo jusqu'au bout de son cycle de vie, ce qui implique le déploiement complet et officiel sur l'App Store.
+
+Cette série technique comportera trois ou quatre articles. Dans le prochain, on entrera dans le vif du sujet : l'analyse approfondie des logs Bluetooth, le reverse-engineering précis des caractéristiques FTMS du firmware, et l'implémentation de la couche d'abstraction au-dessus de `CoreBluetooth`.
+
+### L'expérience produit actuelle
+
+{% gallery %}
+{% figure src="/images/blog/rodd-anatomie-build-swift-ble/04-splash-screen.png" alt="Écran de démarrage sombre de RØDD : un logo de drakkar viking bleu stylisé dans un cercle lumineux, avec la baseline « Trouve ton nord. Tiens-le. » sur fond de ciel étoilé." caption="Fig. 4 — Écran de lancement de RØDD : « Trouve ton nord. Tiens-le. »" /%}
+{% figure src="/images/blog/rodd-anatomie-build-swift-ble/05-session-classique.png" alt="Interface de session classique de RØDD : un grand cercle central de progression orange pour l'échauffement, la cadence à 22 SPM, la résistance à 7 sur 32, et les métriques distance, allure, puissance et calories en bas." caption="Fig. 5 — La session « Classique » après intégration du design system final." /%}
+{% figure src="/images/blog/rodd-anatomie-build-swift-ble/06-defi-lac-annecy.png" alt="Mode défi de RØDD : une carte satellite circulaire du lac d'Annecy en Haute-Savoie avec un tracé blanc d'avancement. La cadence affiche 0 SPM en rouge." caption="Fig. 6 — Le mode « Défi » (lac d'Annecy), en cours de développement. Le « 0 » rouge est la cadence en direct, figée à l'instant de la capture." /%}
+{% /gallery %}
