@@ -10,8 +10,10 @@ const nextConfig = {
   // Masque l'indicateur de dev Next.js (le bouton « N » en bas-gauche).
   devIndicators: false,
 
-  // Configuration des images externes
+  // Configuration des images
   images: {
+    // AVIF n'est pas servi par défaut en Next 16 → on l'active (fallback WebP).
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
         protocol: 'https',

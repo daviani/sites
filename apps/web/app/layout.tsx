@@ -11,6 +11,7 @@ const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
+  display: "swap",
 });
 // Typo « Sauna » : JetBrains Mono pour le mono (wordmark, eyebrows, stacks…).
 const jetbrainsMono = JetBrains_Mono({

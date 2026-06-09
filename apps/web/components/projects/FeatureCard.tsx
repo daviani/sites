@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { StatusBadge } from '@tulikettu/ui';
 import { STATUS_VARIANT, type Project } from '@/lib/content/projects';
 
@@ -54,12 +55,12 @@ export function FeatureCard({
             <StatusBadge variant={STATUS_VARIANT[project.status]}>{statusLabel}</StatusBadge>
           </span>
         )}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={splashSrc}
           alt={splashAlt}
-          loading="lazy"
-          className="block h-full w-full object-cover object-[center_44%]"
+          fill
+          sizes="(max-width: 768px) 100vw, 600px"
+          className="object-cover object-[center_44%]"
         />
       </div>
       <div className="p-8 md:p-10 flex flex-col">
