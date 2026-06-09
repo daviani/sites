@@ -184,6 +184,16 @@
   "pages": {
     "about": {
       "title": "About",
+      "lead": {
+        "start": "I started in ",
+        "fire": "metal",
+        "end": ", not in code. Today I build applications — the craft changed, not the standard."
+      },
+      "facts": {
+        "location": { "k": "Based in", "v": "Lyon", "sub": "France · remote-friendly" },
+        "since": { "k": "Since", "v": "2017", "sub": "career switch → dev" },
+        "field": { "k": "Field", "v": "Full-Stack & DevOps", "sub": "from front-end to infra" }
+      },
       "crossroad": {
         "title": "A different path",
         "p1": "I was a welder for several years. The heat of the workshop, the mask, the smell of metal. A physical, hands-on trade where a lack of precision doesn't forgive.",
