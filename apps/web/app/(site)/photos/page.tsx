@@ -24,7 +24,7 @@ export default function PhotosPage() {
   const tags = getUniqueTags(photos);
 
   return (
-    <div className="min-h-screen">
+    <div>
       <div className="w-[var(--content-width)] mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-24">
         {/* Breadcrumb */}
         <div className="mb-8">

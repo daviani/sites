@@ -67,7 +67,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
   const bodyEn = article.contentEn ? <MarkdocContent content={article.contentEn} /> : null;
 
   return (
-    <div className="min-h-screen">
+    <div>
       <article className="w-[var(--content-width)] mx-auto px-4 pt-5 pb-16">
         {/* Breadcrumb */}
         <div className="mb-8">

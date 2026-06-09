@@ -34,7 +34,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   const linkedArticles = getAllArticles().filter((a) => a.meta.project === slug);
 
   return (
-    <div className="min-h-screen">
+    <div>
       <div className="w-[var(--content-width)] mx-auto px-4 pt-5 pb-16">
         <div className="mb-8">
           <Breadcrumb

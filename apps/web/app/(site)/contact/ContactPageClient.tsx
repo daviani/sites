@@ -48,7 +48,7 @@ export default function ContactPageClient() {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen">
+    <div>
       <div className="w-[var(--content-width)] mx-auto px-4 sm:px-6 py-8 md:py-12">
         <Breadcrumb
           items={[{ href: '/contact', label: t('nav.contact.title') }]}
