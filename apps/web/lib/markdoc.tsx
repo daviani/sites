@@ -10,6 +10,9 @@ const THEME = 'nord';
 const COLOR_REPLACEMENTS: Record<string, string> = {
   '#616e88': '#9aa4bc',
   '#616E88': '#9aa4bc',
+  // nord15 (violet) : 4.41:1 sur #2e3440, sous AA → éclairci à 5.06:1
+  '#b48ead': '#be9ab8',
+  '#B48EAD': '#be9ab8',
 };
 const LANGS = [
   'yaml',

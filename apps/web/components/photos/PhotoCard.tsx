@@ -37,9 +37,9 @@ export const PhotoCard = memo(function PhotoCard({
       <div className="absolute inset-0 bg-gradient-to-t from-bg/50 via-transparent to-bg/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       {/* Title on hover */}
       <div className="absolute top-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <h3 className="text-sm font-semibold text-fg drop-shadow-lg truncate">
+        <span className="block text-sm font-semibold text-fg drop-shadow-lg truncate">
           {photo.title}
-        </h3>
+        </span>
       </div>
       {/* Tags on hover */}
       <div className="absolute bottom-3 left-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">

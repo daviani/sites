@@ -28,7 +28,7 @@ export default async function LegalPage() {
 
   const formattedDate = new Date(LAST_UPDATE_DATE).toLocaleDateString(
     lang === 'fr' ? 'fr-FR' : 'en-US',
-    { year: 'numeric', month: 'long', day: 'numeric' }
+    { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }
   );
 
   return (

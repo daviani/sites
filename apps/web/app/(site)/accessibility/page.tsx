@@ -30,7 +30,7 @@ export default async function AccessibilityPage() {
   const { t, lang } = await getServerTranslations();
   const formattedDate = new Date(DECLARATION_DATE).toLocaleDateString(
     lang === 'fr' ? 'fr-FR' : 'en-US',
-    { year: 'numeric', month: 'long', day: 'numeric' }
+    { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }
   );
 
   return (

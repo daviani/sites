@@ -44,6 +44,7 @@ export default async function ProjetsPage() {
       </div>
 
       {/* Projet en vedette (sans halo : réservé à l'accueil) */}
+      <h2 className="sr-only">{t('projects.featuredHeading')}</h2>
       {featured && (
         <FeatureCard
           project={featured}

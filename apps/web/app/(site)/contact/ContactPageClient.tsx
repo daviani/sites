@@ -85,9 +85,9 @@ export default function ContactPageClient() {
 
             {/* En direct */}
             <div className="bg-surface border border-surface-hi/55 rounded-2xl px-6 py-[22px]">
-              <h3 className="text-[13px] font-semibold uppercase tracking-[0.04em] text-fg-subtle mb-3">
+              <h2 className="text-[13px] font-semibold uppercase tracking-[0.04em] text-fg-subtle mb-3">
                 {t('contact.aside.directTitle')}
-              </h3>
+              </h2>
               {METHODS.map((m, i) => {
                 const value = m.key === 'location' ? t('contact.aside.locationValue') : m.value;
                 const isExternal = !!m.href && m.href.startsWith('http');

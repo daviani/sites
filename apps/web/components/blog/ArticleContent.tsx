@@ -37,6 +37,7 @@ export function ArticleContent({ article, bodyFr, bodyEn }: ArticleContentProps)
               year: 'numeric',
               month: 'long',
               day: 'numeric',
+              timeZone: 'UTC',
             })}
           </time>
         </div>

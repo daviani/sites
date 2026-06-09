@@ -4,10 +4,14 @@ import { getAllArticles, getAllTags, getFeaturedArticles } from '@/lib/content/b
 import { Breadcrumb } from '@tulikettu/ui';
 import { RssButton } from '@/components/blog/RssButton';
 import { FeaturedArticle } from '@/components/blog/FeaturedArticles';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Blog',
-};
+  description:
+    "Articles sur le développement web, le DevOps, Swift/iOS et l'ingénierie logicielle.",
+  path: '/blog',
+});
 
 const PAGE_SIZE = 20;
 
@@ -117,6 +121,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   {new Date(article.meta.publishedAt).toLocaleDateString('fr-FR', {
                     day: '2-digit',
                     month: 'short',
+                    timeZone: 'UTC',
                   })}
                   <br />
                   {new Date(article.meta.publishedAt).getFullYear()}

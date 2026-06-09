@@ -30,7 +30,7 @@ interface ContactFormProps {
 }
 
 const FIELD_CLASS =
-  'w-full px-[14px] py-3 rounded-xl bg-surface-el border border-surface-hi/55 text-fg placeholder:text-fg-subtle focus:outline-none focus:border-accent focus:ring-[3px] focus:ring-accent/20 transition-all disabled:opacity-50';
+  'w-full px-[14px] py-3 rounded-xl bg-surface-el border border-input text-fg placeholder:text-fg-subtle focus:outline-none focus:border-accent focus:ring-[3px] focus:ring-accent/20 transition-all disabled:opacity-50';
 const LABEL_CLASS = 'block text-[13px] font-semibold text-fg-muted mb-2';
 
 export function ContactForm({ onSubmit }: ContactFormProps) {
