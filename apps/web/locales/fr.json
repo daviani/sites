@@ -184,6 +184,16 @@
   "pages": {
     "about": {
       "title": "À propos",
+      "lead": {
+        "start": "J'ai commencé dans le ",
+        "fire": "métal",
+        "end": ", pas dans le code. Aujourd'hui je conçois des applications — le geste a changé, pas l'exigence."
+      },
+      "facts": {
+        "location": { "k": "Basé à", "v": "Lyon", "sub": "France · remote-friendly" },
+        "since": { "k": "Depuis", "v": "2017", "sub": "reconversion → dev" },
+        "field": { "k": "Terrain", "v": "Full-Stack & DevOps", "sub": "du front à l'infra" }
+      },
       "crossroad": {
         "title": "Un chemin de traverse",
         "p1": "J'ai été soudeur pendant plusieurs années. La chaleur de l'atelier, le masque, l'odeur du métal. Un métier physique, concret, où le manque de précision ne pardonne pas.",
