@@ -15,7 +15,7 @@ const navKeys = [
 
 const secondaryNavKeys = [
   { href: '/accessibility', key: 'nav.accessibility.title' as const },
-  { href: '/sitemap', key: 'nav.sitemap.title' as const },
+  { href: '/plan-du-site', key: 'nav.sitemap.title' as const },
   { href: '/help', key: 'nav.help.title' as const },
 ];
 

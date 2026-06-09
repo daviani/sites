@@ -31,7 +31,7 @@ const utilityPages: PageLink[] = [
   { href: '/legal', titleKey: 'nav.legal.title', descKey: 'nav.legal.description' },
   { href: '/accessibility', titleKey: 'nav.accessibility.title', descKey: 'nav.accessibility.description' },
   { href: '/help', titleKey: 'nav.help.title', descKey: 'nav.help.description' },
-  { href: '/sitemap', titleKey: 'nav.sitemap.title', descKey: 'nav.sitemap.description' },
+  { href: '/plan-du-site', titleKey: 'nav.sitemap.title', descKey: 'nav.sitemap.description' },
 ];
 
 export default async function SitemapPage() {
@@ -41,7 +41,7 @@ export default async function SitemapPage() {
     <div>
       <div className="w-[var(--content-width)] mx-auto px-4 sm:px-6 py-8 md:py-12">
         <Breadcrumb
-          items={[{ href: '/sitemap', label: t('nav.sitemap.title') }]}
+          items={[{ href: '/plan-du-site', label: t('nav.sitemap.title') }]}
           homeLabel={t('common.home')}
           ariaLabel={t('common.breadcrumb')}
         />
