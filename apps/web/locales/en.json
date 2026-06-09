@@ -284,6 +284,7 @@
       "subtitle": "Schedule a meeting"
     },
     "legal": {
+      "eyebrow": "Legal",
       "title": "Legal notice",
       "subtitle": "Legal information and privacy policy",
       "publisher": {
@@ -419,6 +420,7 @@
       "lastUpdate": "Last updated"
     },
     "accessibility": {
+      "eyebrow": "Inclusive",
       "title": "Accessibility",
       "subtitle": "Accessibility statement",
       "status": "Partially compliant",
@@ -446,12 +448,21 @@
       "declarationDate": "Declaration date"
     },
     "sitemap": {
+      "eyebrow": "Navigation",
       "title": "Sitemap",
       "subtitle": "Website structure",
       "mainPages": "Main pages",
       "utilities": "Utilities"
     },
     "help": {
+      "eyebrow": "Support",
+      "shortcuts": {
+        "title": "Keyboard shortcuts",
+        "next": "Next element",
+        "previous": "Previous element",
+        "activate": "Activate",
+        "close": "Close menu"
+      },
       "title": "Navigation Help",
       "subtitle": "How to navigate this site",
       "keyboard": "Keyboard navigation",

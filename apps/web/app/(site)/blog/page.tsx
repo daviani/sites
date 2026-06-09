@@ -43,7 +43,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const allTags = getAllTags();
 
   return (
-    <div className="min-h-screen">
+    <div>
       <div className="w-[var(--content-width)] mx-auto px-4 sm:px-6 py-8 md:py-12">
         <Breadcrumb items={[{ href: '/blog', label: 'Blog' }]} homeLabel="Accueil" ariaLabel="Fil d'Ariane" />
 

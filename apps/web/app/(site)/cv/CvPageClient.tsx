@@ -26,7 +26,7 @@ export default function CvPageClient() {
   const otherPdf = isDark ? ASSETS.light.pdf : ASSETS.dark.pdf;
 
   return (
-    <div className="min-h-screen">
+    <div>
       <div className="w-[var(--content-width)] mx-auto px-4 pt-5 pb-16">
         <div className="mb-8">
           <Breadcrumb

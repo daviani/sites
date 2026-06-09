@@ -1,115 +1,105 @@
-'use client';
-
+import type { Metadata } from 'next';
 import { Breadcrumb } from '@tulikettu/ui';
-import { useTranslation } from '@/hooks/use-translation';
-import { useLanguage } from '@/hooks/use-language';
+import { getServerTranslations } from '@/lib/i18n/server';
 
-export default function AccessibilityPage() {
-  const { t } = useTranslation();
-  const { language } = useLanguage();
-  const currentDate = new Date().toLocaleDateString(language === 'fr' ? 'fr-FR' : 'en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+export const metadata: Metadata = {
+  title: 'Accessibilité',
+};
 
-  const conformityItems = [
-    'semantics',
-    'contrast',
-    'forms',
-    'keyboard',
-    'focus',
-    'motion',
-    'lang',
-    'touch',
-    'skiplink',
-  ] as const;
+// Date de la déclaration d'accessibilité (figée — pas la date du jour).
+const DECLARATION_DATE = '2026-06-09';
+const CARD = 'bg-surface border border-surface-hi/55 rounded-2xl p-6 md:p-8';
+
+const conformityItems = [
+  'semantics',
+  'contrast',
+  'forms',
+  'keyboard',
+  'focus',
+  'motion',
+  'lang',
+  'touch',
+  'skiplink',
+] as const;
+
+export default async function AccessibilityPage() {
+  const { t, lang } = await getServerTranslations();
+  const formattedDate = new Date(DECLARATION_DATE).toLocaleDateString(
+    lang === 'fr' ? 'fr-FR' : 'en-US',
+    { year: 'numeric', month: 'long', day: 'numeric' }
+  );
 
   return (
-    <div className="min-h-screen">
-      <div className="w-[var(--content-width)] mx-auto px-4 pt-5 pb-16">
-        <div className="mb-8">
-          <Breadcrumb items={[{ href: '/accessibility', label: t('nav.accessibility.title') }]} homeLabel={t('common.home')} ariaLabel={t('common.breadcrumb')} />
-        </div>
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-fg">
+    <div>
+      <div className="w-[var(--content-width)] mx-auto px-4 sm:px-6 py-8 md:py-12">
+        <Breadcrumb
+          items={[{ href: '/accessibility', label: t('nav.accessibility.title') }]}
+          homeLabel={t('common.home')}
+          ariaLabel={t('common.breadcrumb')}
+        />
+
+        <div className="text-center pt-[54px] pb-9">
+          <span className="inline-block font-mono text-xs uppercase tracking-[0.14em] text-accent mb-3.5">
+            {t('pages.accessibility.eyebrow')}
+          </span>
+          <h1 className="text-[clamp(40px,5.2vw,62px)] font-extrabold tracking-[-0.03em] leading-[1.02] text-fg">
             {t('pages.accessibility.title')}
           </h1>
-          <p className="text-xl text-fg dark:text-fg-muted">
+          <p className="text-[17px] text-fg-muted mt-3.5 max-w-[54ch] mx-auto">
             {t('pages.accessibility.subtitle')}
           </p>
         </div>
 
-        <div className="bg-surface-hi dark:bg-surface rounded-lg p-6 mb-8 border-l-4 border-ok">
-          <p className="text-lg font-semibold text-fg dark:text-ok">
-            {t('pages.accessibility.status')}
-          </p>
-          <p className="text-fg dark:text-fg-muted mt-2">
-            {t('pages.accessibility.statusDetail')}
-          </p>
-        </div>
+        <div className="max-w-4xl mx-auto">
+          {/* Statut de conformité */}
+          <div className="bg-surface border border-surface-hi/55 border-l-[3px] border-l-ok rounded-2xl p-6 mb-6">
+            <p className="text-lg font-semibold text-ok">{t('pages.accessibility.status')}</p>
+            <p className="text-fg-muted mt-2">{t('pages.accessibility.statusDetail')}</p>
+          </div>
 
-        <div className="space-y-8">
-          <section className="glass-card p-6">
-            <h2 className="text-2xl font-bold mb-4 text-accent">
-              {t('pages.accessibility.commitment')}
-            </h2>
-            <p className="text-fg dark:text-fg-muted">
-              {t('pages.accessibility.commitmentText')}
-            </p>
-          </section>
+          <div className="space-y-5">
+            <section className={CARD}>
+              <h2 className="text-xl font-bold mb-3 text-accent">{t('pages.accessibility.commitment')}</h2>
+              <p className="text-fg-muted">{t('pages.accessibility.commitmentText')}</p>
+            </section>
 
-          <section className="glass-card p-6">
-            <h2 className="text-2xl font-bold mb-4 text-accent">
-              {t('pages.accessibility.standards')}
-            </h2>
-            <p className="text-fg dark:text-fg-muted">
-              {t('pages.accessibility.standardsText')}
-            </p>
-          </section>
+            <section className={CARD}>
+              <h2 className="text-xl font-bold mb-3 text-accent">{t('pages.accessibility.standards')}</h2>
+              <p className="text-fg-muted">{t('pages.accessibility.standardsText')}</p>
+            </section>
 
-          <section className="glass-card p-6">
-            <h2 className="text-2xl font-bold mb-4 text-accent">
-              {t('pages.accessibility.conformity')}
-            </h2>
-            <ul className="space-y-2">
-              {conformityItems.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-fg dark:text-fg-muted">
-                  <span className="text-ok mt-1">✓</span>
-                  <span>{t(`pages.accessibility.conformityItems.${item}`)}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
+            <section className={CARD}>
+              <h2 className="text-xl font-bold mb-4 text-accent">{t('pages.accessibility.conformity')}</h2>
+              <ul className="space-y-2">
+                {conformityItems.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-fg-muted">
+                    <span className="text-ok mt-1" aria-hidden="true">✓</span>
+                    <span>{t(`pages.accessibility.conformityItems.${item}`)}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
 
-          <section className="glass-card p-6">
-            <h2 className="text-2xl font-bold mb-4 text-accent">
-              {t('pages.accessibility.testing')}
-            </h2>
-            <p className="text-fg dark:text-fg-muted">
-              {t('pages.accessibility.testingText')}
-            </p>
-          </section>
+            <section className={CARD}>
+              <h2 className="text-xl font-bold mb-3 text-accent">{t('pages.accessibility.testing')}</h2>
+              <p className="text-fg-muted">{t('pages.accessibility.testingText')}</p>
+            </section>
 
-          <section className="glass-card p-6">
-            <h2 className="text-2xl font-bold mb-4 text-accent">
-              {t('pages.accessibility.contact')}
-            </h2>
-            <p className="text-fg dark:text-fg-muted mb-4">
-              {t('pages.accessibility.contactText')}
-            </p>
-            <a
-              href="/contact"
-              className="inline-block px-6 py-3 bg-accent text-on-accent rounded-lg hover:bg-accent transition-colors"
-            >
-              {t('nav.contact.title')}
-            </a>
-          </section>
+            <section className={CARD}>
+              <h2 className="text-xl font-bold mb-3 text-accent">{t('pages.accessibility.contact')}</h2>
+              <p className="text-fg-muted mb-4">{t('pages.accessibility.contactText')}</p>
+              <a
+                href="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-on-accent font-semibold hover:opacity-90 transition-opacity"
+              >
+                {t('nav.contact.title')}
+                <span aria-hidden="true">→</span>
+              </a>
+            </section>
 
-          <div className="text-sm text-fg dark:text-fg-muted text-center mt-8">
-            <p>
-              {t('pages.accessibility.declarationDate')}: {currentDate}
-            </p>
+            <div className="text-sm text-fg-muted text-center mt-8">
+              <p>{t('pages.accessibility.declarationDate')}: {formattedDate}</p>
+            </div>
           </div>
         </div>
       </div>
