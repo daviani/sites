@@ -78,7 +78,9 @@ export function Header({
     currentPath === href || currentPath.startsWith(`${href}/`);
 
   const linkBase =
-    'relative px-3 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2';
+    'relative px-3 py-2 font-medium rounded-lg transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2';
+  // Taille des liens nav desktop : agrandis en extended (sommet), réduits en compacted (défilé).
+  const linkSize = scrolled ? 'text-sm' : 'text-base md:text-lg';
   const linkInactive = 'text-fg-muted hover:text-fg hover:bg-surface-hi';
   const linkActive = 'text-fg font-semibold';
 
@@ -89,7 +91,7 @@ export function Header({
       <li key={item.href}>
         <a
           href={item.href}
-          className={`${linkBase} ${active ? linkActive : linkInactive}`}
+          className={`${linkBase} ${linkSize} ${active ? linkActive : linkInactive}`}
           aria-current={active ? 'page' : undefined}
         >
           {item.label}
@@ -133,11 +135,11 @@ export function Header({
           scrolled ? 'text-base md:text-lg' : 'text-2xl md:text-4xl'
         }`}
       >
-        <span className="text-fg-subtle">&lt;</span>
-        <span className="text-accent">Daviani</span>
+        <span className="text-accent">&lt;</span>
+        <span className="text-fg">Daviani</span>
         <span className="text-fire font-extrabold">.</span>
-        <span className="text-accent-2">dev</span>
-        <span className="text-fg-subtle">/&gt;</span>
+        <span className="text-accent">dev</span>
+        <span className="text-accent">/&gt;</span>
       </span>
     </a>
   );
@@ -194,7 +196,7 @@ export function Header({
                     <li key={item.href} className="w-full">
                       <a
                         href={item.href}
-                        className={`${linkBase} ${active ? linkActive : linkInactive} block text-center`}
+                        className={`${linkBase} ${active ? linkActive : linkInactive} block text-center text-sm`}
                         aria-current={active ? 'page' : undefined}
                         onClick={() => setIsOpen(false)}
                       >
