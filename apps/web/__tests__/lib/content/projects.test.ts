@@ -26,9 +26,12 @@ describe('projects loader', () => {
     expect(featured.length + nonFeatured.length).toBe(projects.length);
   });
 
-  it('exposes hasDetail = true only when a body exists', () => {
-    expect(getProjectBySlug('daviani-dev')?.hasDetail).toBe(true); // a un corps
-    expect(getProjectBySlug('flairjob')?.hasDetail).toBe(false); // pas de corps
+  it('exposes hasDetail consistent with body presence', () => {
+    // Invariant : hasDetail === (corps non vide), indépendant du contenu courant.
+    for (const p of getAllProjects()) {
+      expect(p.hasDetail).toBe(p.bodyFr.trim().length > 0);
+    }
+    expect(getProjectBySlug('daviani-dev')?.hasDetail).toBe(true);
   });
 
   it('parses structured fields (links, stack) of a project', () => {
