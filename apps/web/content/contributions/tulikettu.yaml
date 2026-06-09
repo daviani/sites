@@ -5,4 +5,44 @@ titleEn: "Tulikettu — design system"
 descriptionFr: "Mon design system boréal : palette froide, renard de feu, modes clair (Päivä) et sombre (Kaamos). Open-source et publication npm à venir."
 descriptionEn: "My boreal design system: cold palette, fire fox, light (Päivä) and dark (Kaamos) modes. Open-source and npm release coming soon."
 date: "Bientôt sur npm"
-order: 4
+dateEn: "Coming soon on npm"
+order: 1
+cover: /contributions/tulikettu-couleur.webp
+bodyFr: |
+  ## Le design system
+
+  **Tulikettu** (« renard de feu » en finnois) est mon design system maison :
+  une direction boréale, une palette froide d'aurore réveillée par un accent
+  chaud — le renard de feu hérité du logo.
+
+  ## Ce qu'il couvre
+
+  - Deux modes : **Päivä** (clair) et **Kaamos** (sombre), bascule sans flash
+  - Tokens sémantiques : couleurs, espacements base-4, rayons, typographie
+  - Accents commutables (cyan par défaut, emerald, violet) + un voile « aurore »
+  - Conformité **WCAG AA** sur les deux modes (contraste 4.5:1 minimum)
+  - Pensé d'abord pour des écrans lus en mouvement (Rodd), puis généralisé au web
+
+  ## La suite
+
+  Open-source et publication **npm** à venir. C'est ce design system qui habille
+  ce portfolio.
+bodyEn: |
+  ## The design system
+
+  **Tulikettu** ("fire fox" in Finnish) is my in-house design system: a boreal
+  direction, a cold aurora palette woken up by a warm accent — the fire fox from
+  the logo.
+
+  ## What it covers
+
+  - Two modes: **Päivä** (light) and **Kaamos** (dark), flash-free toggle
+  - Semantic tokens: colors, base-4 spacing, radii, typography
+  - Switchable accents (cyan by default, emerald, violet) + an "aurora" veil
+  - **WCAG AA** compliance on both modes (4.5:1 minimum contrast)
+  - Built first for screens read in motion (Rodd), then generalized to the web
+
+  ## What's next
+
+  Open-source and **npm** release coming soon. This design system is what dresses
+  this very portfolio.

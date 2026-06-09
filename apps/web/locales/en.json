@@ -480,7 +480,9 @@
   "projects": {
     "title": "Projects",
     "subtitle": "What I build — products, labs and contributions.",
+    "eyebrow": "Selection",
     "contributionsTitle": "Contributions",
+    "contributionsSubtitle": "Beyond shipped code.",
     "viewProject": "View project",
     "linkedArticles": "Related articles",
     "relatedProject": "Related project",

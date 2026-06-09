@@ -9,7 +9,11 @@ const CONTRIBUTIONS_DIR = path.join(process.cwd(), 'content/contributions');
 
 // ───────────────────────── Projets ─────────────────────────
 
-const linkSchema = z.object({ label: z.string(), url: z.string() });
+const linkSchema = z.object({
+  label: z.string(),
+  labelEn: z.string().default(''),
+  url: z.string(),
+});
 
 export const PROJECT_STATUSES = ['live', 'private', 'lab', 'coming-soon'] as const;
 export type ProjectStatus = (typeof PROJECT_STATUSES)[number];
@@ -33,10 +37,13 @@ const projectSchema = z.object({
   summaryFr: z.string().default(''),
   summaryEn: z.string().default(''),
   role: z.string().default(''),
+  roleEn: z.string().default(''),
   stack: z.array(z.string()).default([]),
   links: z.array(linkSchema).default([]),
   cover: z.string().nullable().optional(),
   screenshots: z.array(z.string()).default([]),
+  /** Corps détail EN (le corps après frontmatter sert de FR). */
+  bodyEn: z.string().default(''),
 });
 
 export type ProjectMeta = z.infer<typeof projectSchema>;
@@ -97,11 +104,23 @@ const contributionSchema = z.object({
   descriptionFr: z.string().default(''),
   descriptionEn: z.string().default(''),
   date: z.string().default(''),
+  dateEn: z.string().default(''),
+  /** Lien rapide (ex. /blog) affiché sur la row, sans page détail. */
   link: z.string().nullable().optional(),
   order: z.number().default(0),
+  /** Corps détail (markdoc) FR/EN — si présent, la contribution a une page /contributions/[slug]. */
+  bodyFr: z.string().default(''),
+  bodyEn: z.string().default(''),
+  /** Liens de la page détail (ex. dépôt des slides, npm). */
+  links: z.array(linkSchema).default([]),
+  /** Image de couverture de la page détail (ex. aperçu du design system). */
+  cover: z.string().nullable().optional(),
 });
 
-export type Contribution = z.infer<typeof contributionSchema>;
+export type Contribution = z.infer<typeof contributionSchema> & {
+  /** True si la contribution a une page détail (corps non vide). */
+  hasDetail: boolean;
+};
 
 export function getAllContributions(): Contribution[] {
   if (!fs.existsSync(CONTRIBUTIONS_DIR)) return [];
@@ -111,7 +130,18 @@ export function getAllContributions(): Contribution[] {
     .filter((file) => file.endsWith('.yaml'))
     .map((file) => {
       const raw = fs.readFileSync(path.join(CONTRIBUTIONS_DIR, file), 'utf-8');
-      return contributionSchema.parse(parseYaml(raw) ?? {});
+      const meta = contributionSchema.parse(parseYaml(raw) ?? {});
+      return { ...meta, hasDetail: meta.bodyFr.trim().length > 0 };
     })
     .sort((a, b) => a.order - b.order || a.titleFr.localeCompare(b.titleFr));
+}
+
+export function getContributionBySlug(slug: string): Contribution | null {
+  return getAllContributions().find((c) => c.slug === slug) ?? null;
+}
+
+export function getContributionSlugs(): string[] {
+  return getAllContributions()
+    .filter((c) => c.hasDetail)
+    .map((c) => c.slug);
 }

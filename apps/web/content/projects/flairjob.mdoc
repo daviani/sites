@@ -9,9 +9,46 @@ taglineEn: "Job-offer aggregator with hybrid scoring"
 summaryFr: "Outil personnel qui agrège des milliers d'offres en base PostgreSQL et les score selon mes critères (matching hybride). Stack full TypeScript."
 summaryEn: "Personal tool that aggregates thousands of job offers in PostgreSQL and scores them against my criteria (hybrid matching). Full-TypeScript stack."
 role: "Conception et développement full-stack — outil perso"
+roleEn: "Full-stack design & development — personal tool"
 stack:
   - Next.js
   - TypeScript
   - Node.js
   - PostgreSQL
+bodyEn: |
+  **flairJob** aggregates thousands of multi-source job offers into a PostgreSQL database, enriches them and scores them against my own criteria. A personal tool, born from a realization: job hunting is mostly sorting noise.
+
+  ## The pipeline
+
+  Multi-source connectors (Adzuna, APEC, France Travail, Arbeitnow, Jobicy…) feed a single normalized offer, then an **idempotent** enrichment pipeline: inference, semantic tags, and scoring against my criteria.
+
+  ## Employer enrichment
+
+  SIREN/NAF validation via public **INSEE / Sirene** data, with a confidence score — to know who's really hiring, beyond the displayed name.
+
+  ## Application tracking
+
+  Merging email parsing and manual entries: status (applied, in progress, rejected, accepted), to drive the search like a real pipeline.
+
+  ## Tech
+
+  Full-TypeScript stack: Next.js (App Router), Drizzle ORM + PostgreSQL, systematic Zod validation, Vitest tests, Docker containerization. DB caution throughout: no blind mass-updates, audit before any migration.
 ---
+
+**flairJob** agrège des milliers d'offres d'emploi multi-sources dans une base PostgreSQL, les enrichit et les score selon mes propres critères. Un outil perso, né d'un constat : chercher un poste, c'est surtout trier du bruit.
+
+## Le pipeline
+
+Des connecteurs multi-sources (Adzuna, APEC, France Travail, Arbeitnow, Jobicy…) alimentent une offre normalisée unique, puis un pipeline d'enrichissement **idempotent** : inférence, tags sémantiques, et scoring selon mes critères.
+
+## Enrichissement employeur
+
+Validation SIREN/NAF via les données publiques **INSEE / Sirene**, avec un score de confiance — pour savoir qui recrute vraiment, au-delà du nom affiché.
+
+## Suivi de candidatures
+
+Fusion du parsing d'e-mails et de saisies manuelles : statut (candidaté, en cours, refus, accepté), pour piloter sa recherche comme un vrai pipeline.
+
+## Technique
+
+Stack full TypeScript : Next.js (App Router), Drizzle ORM + PostgreSQL, validation Zod systématique, tests Vitest, conteneurisation Docker. Prudence DB de rigueur : pas de mass-update à l'aveugle, audit avant toute migration.
