@@ -45,7 +45,7 @@ export function Footer({
         {' · '}
         <a
           href={projectsUrl}
-          className="text-accent hover:opacity-80 transition-opacity rounded focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+          className="text-accent underline underline-offset-2 hover:opacity-80 transition-opacity rounded focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
         >
           {t.designCredit}
         </a>
