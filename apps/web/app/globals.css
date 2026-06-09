@@ -39,6 +39,8 @@
   --tuli-err: #DC2626;
   --tuli-info: #0E7490;
   --tuli-mark-fg: #131A2C;
+  /* Détails du signet renard (inverse de mark-fg) : clairs sur la face sombre en Päivä. */
+  --fox-detail: #F5F0E6;
   --tuli-glass-bg: rgba(255, 255, 255, 0.55);
   --tuli-glass-border: rgba(15, 23, 42, 0.10);
   /* Fond aurore — PA « voile diagonal clair » */
@@ -69,6 +71,7 @@
   --tuli-err: #F87171;
   --tuli-info: #7CC4E0;
   --tuli-mark-fg: #F5F0E6;
+  --fox-detail: #131A2C;
   --tuli-glass-bg: rgba(255, 255, 255, 0.05);
   --tuli-glass-border: rgba(255, 255, 255, 0.12);
   /* Fond aurore — K1 « voile diagonal » */
