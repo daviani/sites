@@ -37,7 +37,7 @@ function SiteLayoutContent({ children }: { children: React.ReactNode }) {
           accessibilityUrl="/accessibility"
           githubUrl="https://github.com/daviani"
           linkedinUrl="https://linkedin.com/in/daviani"
-          sitemapUrl="/sitemap"
+          sitemapUrl="/plan-du-site"
           helpUrl="/help"
           projectsUrl="/projets"
           translations={{
