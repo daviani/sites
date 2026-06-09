@@ -41,6 +41,7 @@ export function FeaturedArticle({ article }: FeaturedArticleProps) {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
+                timeZone: 'UTC',
               })}
             </time>
 

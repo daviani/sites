@@ -32,6 +32,7 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
   return {
     title: article.meta.titleFr,
     description: article.meta.excerptFr,
+    alternates: { canonical: `/blog/${slug}` },
     openGraph: {
       title: article.meta.titleFr,
       description: article.meta.excerptFr,
