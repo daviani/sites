@@ -10,7 +10,7 @@ export function RssButton() {
       href="/api/rss"
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-2 px-4 py-2 bg-warn/10 dark:bg-warn/20 text-warn rounded-full text-sm font-medium hover:bg-warn/20 dark:hover:bg-warn/30 transition-colors"
+      className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-surface-hi/55 font-mono text-[13px] font-medium text-fg-muted hover:text-accent hover:border-accent/40 hover:bg-[color-mix(in_oklab,var(--tuli-accent)_12%,transparent)] transition-colors"
       title={t('rss.title')}
     >
       <svg

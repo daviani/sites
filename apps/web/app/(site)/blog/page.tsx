@@ -44,16 +44,22 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
   return (
     <div className="min-h-screen">
-      <div className="w-[var(--content-width)] mx-auto px-4 pt-5 pb-16">
-        <div className="mb-8">
-          <Breadcrumb items={[{ href: '/blog', label: 'Blog' }]} homeLabel="Accueil" ariaLabel="Fil d'Ariane" />
-        </div>
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-fg">Blog</h1>
-          <p className="text-xl text-fg-muted mb-6">
+      <div className="w-[var(--content-width)] mx-auto px-4 sm:px-6 py-8 md:py-12">
+        <Breadcrumb items={[{ href: '/blog', label: 'Blog' }]} homeLabel="Accueil" ariaLabel="Fil d'Ariane" />
+
+        <div className="text-center pt-[54px] pb-9">
+          <span className="inline-block font-mono text-xs uppercase tracking-[0.14em] text-accent mb-3.5">
+            Journal
+          </span>
+          <h1 className="text-[clamp(40px,5.2vw,62px)] font-extrabold tracking-[-0.03em] leading-[1.02] text-fg">
+            Blog
+          </h1>
+          <p className="text-[17px] text-fg-muted mt-3.5 max-w-[54ch] mx-auto">
             Articles sur le développement web, DevOps et plus encore.
           </p>
-          <RssButton />
+          <div className="mt-[22px] flex justify-center">
+            <RssButton />
+          </div>
         </div>
 
         {/* Featured article hero section */}
@@ -63,11 +69,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         {allTags.length > 0 && (
           <div className="mb-8 flex flex-wrap gap-2">
             <Link
-              href="/"
-              className={`px-3 py-1 rounded-full text-sm transition-colors cursor-pointer ${
+              href="/blog"
+              className={`px-[13px] py-[5px] rounded-full font-mono text-xs border transition-colors cursor-pointer ${
                 !tag
-                  ? 'bg-accent text-on-accent'
-                  : 'bg-surface-hi text-fg dark:text-fg-muted hover:bg-surface-hi'
+                  ? 'bg-accent text-on-accent border-transparent'
+                  : 'bg-surface-el text-fg-muted border-surface-hi/55 hover:border-surface-hi hover:text-fg'
               }`}
             >
               Tous
@@ -75,11 +81,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             {allTags.map((t) => (
               <Link
                 key={t}
-                href={`/?tag=${t}`}
-                className={`px-3 py-1 rounded-full text-sm transition-colors cursor-pointer ${
+                href={`/blog?tag=${t}`}
+                className={`px-[13px] py-[5px] rounded-full font-mono text-xs border transition-colors cursor-pointer ${
                   tag === t
-                    ? 'bg-accent text-on-accent'
-                    : 'bg-surface-hi text-fg dark:text-fg-muted hover:bg-surface-hi'
+                    ? 'bg-accent text-on-accent border-transparent'
+                    : 'bg-surface-el text-fg-muted border-surface-hi/55 hover:border-surface-hi hover:text-fg'
                 }`}
               >
                 {t}
@@ -90,71 +96,80 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
         {/* Articles list */}
         {showFeatured && articles.length > 0 && (
-          <h2 className="text-sm font-semibold text-fg-muted uppercase tracking-wider mb-6">
+          <h2 className="text-sm font-semibold text-fg-muted uppercase tracking-wider mb-6 mt-[30px]">
             Tous les articles
           </h2>
         )}
         {articles.length === 0 ? (
-          <p className="text-fg dark:text-fg-muted">Aucun article trouvé.</p>
+          <p className="text-fg-muted">Aucun article trouvé.</p>
         ) : (
-          <div className="space-y-8">
+          <div className="flex flex-col gap-4">
             {articles.map((article) => (
-              <article
+              <Link
                 key={article.slug}
-                className="p-6 glass-card hover:shadow-xl transition-shadow"
+                href={`/blog/${article.slug}`}
+                className="group grid grid-cols-1 sm:grid-cols-[110px_1fr_auto] gap-x-6 gap-y-2 items-center bg-surface border border-surface-hi/55 rounded-2xl px-[26px] py-[22px] hover:border-surface-hi hover:-translate-y-0.5 transition-all cursor-pointer"
               >
-                <Link href={`/${article.slug}`} className="block cursor-pointer">
-                  <h2 className="text-2xl font-bold mb-2 text-fg hover:text-accent transition-colors">
+                <time
+                  dateTime={article.meta.publishedAt}
+                  className="font-mono text-xs text-fg-subtle leading-[1.5]"
+                >
+                  {new Date(article.meta.publishedAt).toLocaleDateString('fr-FR', {
+                    day: '2-digit',
+                    month: 'short',
+                  })}
+                  <br />
+                  {new Date(article.meta.publishedAt).getFullYear()}
+                </time>
+                <div>
+                  <h3 className="text-[19px] font-bold tracking-[-0.01em] text-fg group-hover:text-accent transition-colors">
                     {article.meta.titleFr}
-                  </h2>
-                  <p className="text-fg dark:text-fg-muted mb-4">
+                  </h3>
+                  <p className="text-sm text-fg-muted mt-[5px] leading-[1.55]">
                     {article.meta.excerptFr}
                   </p>
-                  <div className="flex items-center gap-4 text-sm text-fg dark:text-fg-muted">
-                    <time dateTime={article.meta.publishedAt}>
-                      {new Date(article.meta.publishedAt).toLocaleDateString('fr-FR', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </time>
-                  </div>
                   {article.meta.tags.length > 0 && (
-                    <div className="mt-4 flex flex-wrap gap-2">
+                    <div className="mt-2.5 flex flex-wrap gap-2">
                       {article.meta.tags.map((t) => (
                         <span
                           key={t}
-                          className="px-2 py-1 bg-surface-hi text-fg dark:text-fg-muted rounded text-xs"
+                          className="font-mono text-xs text-fg-muted bg-surface-el border border-surface-hi/55 px-[11px] py-[5px] rounded-lg"
                         >
                           {t}
                         </span>
                       ))}
                     </div>
                   )}
-                </Link>
-              </article>
+                </div>
+                <span
+                  className="hidden sm:block text-fire text-xl group-hover:translate-x-1 transition-transform"
+                  aria-hidden="true"
+                >
+                  →
+                </span>
+              </Link>
             ))}
           </div>
         )}
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <nav className="mt-12 flex justify-center gap-2">
+          <nav className="mt-12 flex justify-center items-center gap-2">
             {page > 1 && (
               <Link
-                href={`/?page=${page - 1}${tag ? `&tag=${tag}` : ''}`}
-                className="px-4 py-2 bg-surface-hi rounded hover:bg-surface-hi transition-colors cursor-pointer"
+                href={`/blog?page=${page - 1}${tag ? `&tag=${tag}` : ''}`}
+                className="px-4 py-2 rounded-lg bg-surface border border-surface-hi/55 text-fg-muted hover:border-surface-hi hover:text-fg transition-colors cursor-pointer"
               >
                 ← Précédent
               </Link>
             )}
-            <span className="px-4 py-2 text-fg dark:text-fg-muted">
+            <span className="px-4 py-2 font-mono text-sm text-fg-subtle">
               Page {page} / {totalPages}
             </span>
             {page < totalPages && (
               <Link
-                href={`/?page=${page + 1}${tag ? `&tag=${tag}` : ''}`}
-                className="px-4 py-2 bg-surface-hi rounded hover:bg-surface-hi transition-colors cursor-pointer"
+                href={`/blog?page=${page + 1}${tag ? `&tag=${tag}` : ''}`}
+                className="px-4 py-2 rounded-lg bg-surface border border-surface-hi/55 text-fg-muted hover:border-surface-hi hover:text-fg transition-colors cursor-pointer"
               >
                 Suivant →
               </Link>
