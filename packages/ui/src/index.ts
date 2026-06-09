@@ -21,8 +21,6 @@ export { FlagFR, FlagEN } from './components/icons/FlagIcons';
 
 export { Footer } from './components/Footer';
 
-export { SubHeader } from './components/SubHeader';
-
 export { SkipLink } from './components/SkipLink';
 
 export { Breadcrumb } from './components/Breadcrumb';
@@ -32,6 +30,9 @@ export { ScrollToTop } from './components/ScrollToTop';
 
 export { StatusBadge } from './components/StatusBadge';
 export type { StatusBadgeProps, StatusBadgeVariant } from './components/StatusBadge';
+
+export { Tag } from './components/Tag';
+export type { TagProps } from './components/Tag';
 
 
 export { useTheme, ThemeProvider } from './hooks/use-theme';

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { Tag } from '@tulikettu/ui';
 import { useTranslation } from '@/hooks/use-translation';
 import { useLanguage } from '@/hooks/use-language';
 import type { Article } from '@/lib/content/blog';
@@ -49,12 +50,7 @@ export function FeaturedArticle({ article }: FeaturedArticleProps) {
               <>
                 <span aria-hidden="true">·</span>
                 {article.meta.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="font-mono text-xs text-fg-muted bg-surface-el border border-surface-hi/55 px-[11px] py-[5px] rounded-lg"
-                  >
-                    {tag}
-                  </span>
+                  <Tag key={tag}>{tag}</Tag>
                 ))}
               </>
             )}

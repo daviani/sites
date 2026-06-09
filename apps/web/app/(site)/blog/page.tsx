@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllArticles, getAllTags, getFeaturedArticles } from '@/lib/content/blog';
-import { Breadcrumb } from '@tulikettu/ui';
+import { Breadcrumb, Tag } from '@tulikettu/ui';
 import { RssButton } from '@/components/blog/RssButton';
 import { FeaturedArticle } from '@/components/blog/FeaturedArticles';
 import { pageMetadata } from '@/lib/seo';
@@ -136,12 +136,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   {article.meta.tags.length > 0 && (
                     <div className="mt-2.5 flex flex-wrap gap-2">
                       {article.meta.tags.map((t) => (
-                        <span
-                          key={t}
-                          className="font-mono text-xs text-fg-muted bg-surface-el border border-surface-hi/55 px-[11px] py-[5px] rounded-lg"
-                        >
-                          {t}
-                        </span>
+                        <Tag key={t}>{t}</Tag>
                       ))}
                     </div>
                   )}

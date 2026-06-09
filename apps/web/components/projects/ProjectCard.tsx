@@ -1,9 +1,6 @@
 import Link from 'next/link';
-import { StatusBadge } from '@tulikettu/ui';
+import { StatusBadge, Tag } from '@tulikettu/ui';
 import { STATUS_VARIANT, type Project } from '@/lib/content/projects';
-
-const chip =
-  'font-mono text-xs text-fg-muted bg-surface-el border border-surface-hi/55 px-[11px] py-[5px] rounded-lg';
 
 export interface ProjectCardProps {
   project: Project;
@@ -36,9 +33,7 @@ export function ProjectCard({
       {project.stack.length > 0 && (
         <div className="flex flex-wrap gap-2 mt-4">
           {project.stack.slice(0, 4).map((s) => (
-            <span key={s} className={chip}>
-              {s}
-            </span>
+            <Tag key={s}>{s}</Tag>
           ))}
         </div>
       )}
