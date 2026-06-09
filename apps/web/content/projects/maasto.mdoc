@@ -9,20 +9,39 @@ taglineEn: "Snow & hiking conditions for a GPS point, as an HTML report"
 summaryFr: "Outil CLI (Python) qui croise météo, image satellite, sorties communautaires (Camptocamp) et bulletin avalanche pour un point GPS. Le signal terrain sert de garde-fou quand le modèle météo se plante — d'où le nom."
 summaryEn: "Python CLI that cross-references weather, satellite imagery, community outings (Camptocamp) and avalanche bulletins for a GPS point. The field signal is a guardrail when the weather model gets it wrong — hence the name."
 role: "Lab personnel"
+roleEn: "Personal lab"
 stack:
   - Python
   - Rasterio
   - Météo & géospatial
 screenshots:
   - /projects/maasto-report.webp
+bodyEn: |
+  *Maasto* is Finnish for **the field**. The tool checks snow and hiking conditions for a GPS point in one command and generates a standalone HTML report.
+
+  ## The idea
+
+  Weather models are often wrong in the mountains. *maasto* cross-references several sources — multi-altitude weather profile (Open-Meteo), **Sentinel-2 satellite imagery** (before/after snow), **recent Camptocamp outings**, avalanche bulletin (BERA in France, SLF in Switzerland) — and uses the field signal (what people actually do) as a guardrail when the model goes off.
+
+  ## Under the hood
+
+  A modular Python CLI: coordinate parsing (decimal or DMS), reverse-geocoding and exact altitude, satellite image generation (rasterio, pillow), HTML rendering (jinja2). Fragile sources (scraping) are flagged "best effort" and never block the report.
+
+  ## Output
+
+  A dark, readable HTML report: multi-altitude snow profile, time windows, satellite comparison — for a given point and date, built to decide fast before heading out.
 ---
 
-*Maasto*, en finnois, c'est **le terrain**. L'outil vérifie en une commande les conditions neige/rando d'un point GPS et génère un rapport HTML autonome.
+*Maasto*, en finnois, c'est **le terrain**. L'outil vérifie en une commande les conditions neige et rando d'un point GPS et génère un rapport HTML autonome.
 
 ## L'idée
 
-Les modèles météo se trompent en montagne. *maasto* croise plusieurs sources — météo, image satellite, **sorties Camptocamp récentes**, bulletin avalanche — et utilise le signal terrain (ce que les gens font vraiment) comme garde-fou.
+Les modèles météo se trompent souvent en montagne. *maasto* croise plusieurs sources — profil météo multi-altitudes (Open-Meteo), **image satellite Sentinel-2** (comparaison avant/après neige), **sorties Camptocamp récentes**, bulletin avalanche (BERA en France, SLF en Suisse) — et utilise le signal terrain (ce que les gens font vraiment) comme garde-fou quand le modèle déraille.
+
+## Sous le capot
+
+CLI Python modulaire : parsing de coordonnées (décimal ou DMS), reverse-geocoding et altitude exacte, génération d'images satellite (rasterio, pillow), rendu HTML (jinja2). Les sources fragiles (scraping) sont marquées « best effort » et ne bloquent jamais le rapport.
 
 ## Sortie
 
-Un rapport HTML sombre et lisible : profil neige multi-altitudes, isotherme 0 °C, fenêtres horaires, le tout pour un point et une date donnés.
+Un rapport HTML sombre et lisible : profil neige multi-altitudes, fenêtres horaires, comparaison satellite, le tout pour un point et une date donnés — pensé pour décider vite avant de partir.

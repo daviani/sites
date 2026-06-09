@@ -9,6 +9,7 @@ taglineEn: "iOS app for indoor rowing training"
 summaryFr: "Application iOS native en SwiftUI pour l'entraînement sur rameur : connexion Bluetooth aux machines, sessions guidées, design system maison « Aurora »."
 summaryEn: "Native SwiftUI iOS app for rowing-machine training: Bluetooth connection to ergs, guided sessions, in-house “Aurora” design system."
 role: "Conception et développement iOS — side project"
+roleEn: "iOS design & development — side project"
 stack:
   - SwiftUI
   - Swift
@@ -17,15 +18,32 @@ stack:
 screenshots:
   - /projects/rodd-session.webp
   - /projects/rodd-defi.webp
+bodyEn: |
+  **RØDD** is a native iOS app (SwiftUI) for indoor rowing training. It connects to the machine over Bluetooth, guides sessions in real time, and offers themed "quests" — row the length of a lake, climb a river, cross an ocean.
+
+  ## The intent
+
+  A training companion that's more than numbers. A display readable mid-effort (session gauge, audio metronome, haptic feedback), guided sessions, and quests that give you a reason to pull one more stroke — with progression and personal records.
+
+  ## On the erg, or without
+
+  **Bluetooth FTMS** (Fitness Machine Service) connection to compatible rowers, parsing frames in real time; plus a sensor-free mode based on perceived effort for silent machines. A unified power metric lets you compare sessions across machines.
+
+  ## Under the hood
+
+  Swift 6 (strict concurrency), SwiftUI, local **GRDB** persistence (SQLite), export to **Apple Health** (HealthKit) and iOS widgets (next session, weekly summary). *Clean* architecture (Domain / App / Infrastructure / Presentation). The whole app runs on an in-house design system — **Aurora** — colors, motion and components.
 ---
 
-**RØDD** est une application iOS native (SwiftUI) pour l'entraînement sur rameur. Elle se connecte en Bluetooth à la machine, guide les séances en temps réel et propose des « défis » géolocalisés — ramer la longueur d'un lac, remonter une rivière.
+**RØDD** est une application iOS native (SwiftUI) pour l'entraînement sur rameur indoor. Elle se connecte en Bluetooth à la machine, guide les séances en temps réel et propose des « quêtes » thématiques — ramer la longueur d'un lac, remonter une rivière, traverser un océan.
 
 ## L'intention
 
-Un compagnon d'entraînement qui ne se résume pas à des chiffres : une interface vivante (jauge de séance, aurores boréales), des sessions guidées, et des défis qui donnent une raison de tirer encore.
+Un compagnon d'entraînement qui ne se résume pas à des chiffres. Une interface lisible en plein effort (jauge de séance, métronome audio, retour haptique), des sessions guidées, et des quêtes qui donnent une raison de tirer encore — avec progression et records personnels.
+
+## Sur le rameur, ou sans
+
+Connexion **Bluetooth FTMS** (Fitness Machine Service) aux rameurs compatibles, avec parsing des trames en temps réel ; et un mode hors-capteur basé sur le ressenti pour les machines muettes. Une métrique de puissance unifiée permet de comparer ses séances d'une machine à l'autre.
 
 ## Technique
 
-Connexion BLE aux rameurs (Core Bluetooth) et parsing des trames machine en temps réel. Toute l'app est irriguée par un design system maison — **Aurora** — couleurs, mouvement et composants.
-
+Swift 6 (concurrence stricte), SwiftUI, persistance locale **GRDB** (SQLite), export vers **Apple Santé** (HealthKit) et widgets iOS (prochaine séance, résumé hebdo). Architecture *Clean* (Domain / App / Infrastructure / Presentation). Toute l'app est irriguée par un design system maison — **Aurora** — couleurs, mouvement et composants.

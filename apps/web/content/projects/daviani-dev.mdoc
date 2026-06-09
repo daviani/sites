@@ -9,6 +9,7 @@ taglineEn: "This portfolio — and Tulikettu's showcase"
 summaryFr: "Le site que vous parcourez : monorepo Turborepo, Next.js 16, React 19, Tailwind v4. Il tourne sur mon design system Tulikettu."
 summaryEn: "The site you're browsing: Turborepo monorepo, Next.js 16, React 19, Tailwind v4. Running on my Tulikettu design system."
 role: "Conception et développement"
+roleEn: "Design & development"
 stack:
   - Next.js
   - React
@@ -17,17 +18,29 @@ stack:
   - Turborepo
 links:
   - label: Voir le site
+    labelEn: Visit site
     url: https://daviani.dev
   - label: Code source
+    labelEn: Source code
     url: https://github.com/daviani/sites
+bodyEn: |
+  This site is both my portfolio and the playground for **Tulikettu**, my design system. Monorepo architecture (Turborepo): one multi-domain Next.js app (marketing, blog, contact, CV, projects) and shared packages (UI, config, content, emails).
+
+  ## Stack
+
+  Next.js 16 (App Router, server components), React 19, strict TypeScript, Tailwind CSS 4 with *theme-aware* semantic tokens (light Päivä / dark Kaamos, flash-free). Content — blog, photos, projects, contributions — is managed *headless* (Keystatic + Markdoc), bilingual FR/EN.
+
+  ## Quality
+
+  Built with an accessibility requirement: WCAG AA contrast, visible focus, full keyboard navigation, `prefers-reduced-motion` respected. Test suite (Vitest + Testing Library) and strict end-to-end typing.
 ---
 
-Ce site est à la fois mon portfolio et le terrain de jeu de **Tulikettu**, mon design system. Architecture monorepo (Turborepo) : une app Next.js multi-domaines et des packages partagés (UI, config, contenu).
+Ce site est à la fois mon portfolio et le terrain de jeu de **Tulikettu**, mon design system. Architecture monorepo (Turborepo) : une app Next.js multi-domaines (marketing, blog, contact, CV, projets) et des packages partagés (UI, config, contenu, e-mails).
 
 ## Stack
 
-Next.js 16 (App Router), React 19, TypeScript strict, Tailwind CSS 4 avec des tokens sémantiques *theme-aware*. Le contenu — blog, photos, projets — est géré en headless via Keystatic.
+Next.js 16 (App Router, server components), React 19, TypeScript strict, Tailwind CSS 4 avec des tokens sémantiques *theme-aware* (clair Päivä / sombre Kaamos, sans flash). Le contenu — blog, photos, projets, contributions — est géré en *headless* (Keystatic + Markdoc), bilingue FR/EN.
 
-## Accessibilité
+## Qualité
 
-Construit avec une exigence d'accessibilité : contrastes AA, focus visibles, navigation clavier complète, `prefers-reduced-motion` respecté.
+Construit avec une exigence d'accessibilité : contrastes WCAG AA, focus visibles, navigation clavier complète, `prefers-reduced-motion` respecté. Suite de tests (Vitest + Testing Library) et typage strict de bout en bout.

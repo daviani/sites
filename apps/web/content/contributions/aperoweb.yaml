@@ -2,7 +2,47 @@ slug: aperoweb
 type: talk
 titleFr: "Talk à l'ApéroWeb"
 titleEn: "ApéroWeb talk"
-descriptionFr: "Partage d'expérience à l'ApéroWeb, le meetup des développeurs lyonnais."
-descriptionEn: "Sharing experience at ApéroWeb, the Lyon developer meetup."
-date: "ApéroWeb · Lyon"
-order: 1
+descriptionFr: "« Vert en CI, rouge en vrai » — un talk sur les tests d'accessibilité automatisés et leurs limites."
+descriptionEn: "\"Green in CI, red in real life\" — a talk on automated accessibility testing and its limits."
+date: "ApéroWeb · Lyon · mars 2026"
+dateEn: "ApéroWeb · Lyon · March 2026"
+order: 2
+links:
+  - label: "Slides (GitHub)"
+    url: "https://github.com/daviani/access-cicd-talk"
+bodyFr: |
+  ## Le talk
+
+  « **Vert en CI, rouge en vrai** » : un retour d'expérience sur les **tests
+  d'accessibilité automatisés** et leurs limites. Les outils (axe, Lighthouse,
+  pa11y) attrapent une partie des problèmes — mais un pipeline tout vert peut
+  cacher un site inutilisable au lecteur d'écran ou au clavier.
+
+  J'y montre où s'arrête l'automatique, ce qu'il faut tester à la main, et
+  comment intégrer ces garde-fous dans une chaîne CI/CD sans se mentir sur le
+  niveau réel de conformité.
+
+  ## Le contexte
+
+  Présenté à l'**ApéroWeb de Lyon** (mars 2026), chez fulll à Vaise, lors d'une
+  soirée dédiée à l'accessibilité web — en présentiel et sur Twitch.
+
+  Les slides sont open-source sur GitHub.
+bodyEn: |
+  ## The talk
+
+  "**Green in CI, red in real life**": a field report on **automated
+  accessibility testing** and its limits. Tools (axe, Lighthouse, pa11y) catch
+  part of the issues — but an all-green pipeline can hide a site that's unusable
+  with a screen reader or a keyboard.
+
+  I show where automation stops, what still needs manual testing, and how to
+  wire these guardrails into a CI/CD pipeline without lying to yourself about
+  real conformance.
+
+  ## Context
+
+  Presented at **ApéroWeb Lyon** (March 2026), at fulll in Vaise, during an
+  evening dedicated to web accessibility — on site and on Twitch.
+
+  Slides are open-source on GitHub.
