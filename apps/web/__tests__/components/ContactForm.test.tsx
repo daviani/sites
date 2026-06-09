@@ -251,7 +251,6 @@ describe('ContactForm', () => {
         }),
       }));
 
-      const user = userEvent.setup();
       render(<ContactForm onSubmit={mockOnSubmit} />);
 
       // The load function is called via onFocus on the form

@@ -1,10 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { StatusBadge } from '@tulikettu/ui';
+import { StatusBadge, Tag } from '@tulikettu/ui';
 import { STATUS_VARIANT, type Project } from '@/lib/content/projects';
-
-const chip =
-  'font-mono text-xs text-fg-muted bg-surface-el border border-surface-hi/55 px-[11px] py-[5px] rounded-lg';
 
 // Halo chaud de mise en avant (réservé à la vedette de l'accueil).
 const HALO = 'shadow-[0_0_0_1px_rgb(255_110_7_/_0.16),0_0_70px_-28px_rgb(255_110_7_/_0.30)]';
@@ -77,9 +74,7 @@ export function FeatureCard({
         {project.stack.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-[18px]">
             {project.stack.map((s) => (
-              <span key={s} className={chip}>
-                {s}
-              </span>
+              <Tag key={s}>{s}</Tag>
             ))}
           </div>
         )}
