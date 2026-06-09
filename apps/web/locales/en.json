@@ -28,36 +28,53 @@
     "title": "Daviani Fillatre",
     "subtitle": "Full-Stack & DevOps Developer",
     "description": "From code to deployment. Accessible applications, polished interfaces, mastered infrastructure.",
+    "eyebrow": "Portfolio & lab",
+    "featured": {
+      "eyebrow": "01 — Selection",
+      "title": "Featured projects",
+      "subtitle": "Proof before pitch. What I build, for real.",
+      "view": "View project",
+      "splashAlt": "splash screen"
+    },
+    "parcours": {
+      "kicker": "The path",
+      "titleBefore": "From ",
+      "titleFire": "metal",
+      "titleAfter": " to code.",
+      "text": "Before writing my first line of code, I was a welder. A physical trade where lack of precision is unforgiving. Today I build applications — the gesture changed, not the standard.",
+      "link": "Read my story"
+    },
+    "finalCta": {
+      "title": "Let's work together",
+      "text": "The best collaborations often start with a first conversation.",
+      "button": "Get in touch"
+    },
     "cta": {
       "contact": "Contact me",
       "cv": "View my resume"
     },
     "expertise": {
       "title": "What I do",
+      "eyebrow": "02 — Skills",
+      "subtitle": "Three fields, one standard: real things that hold up in production.",
       "fullstack": {
-        "title": "Full-Stack Development",
-        "description": "Modern web applications with React, Next.js, .NET Core and Node.js"
-      },
+        "title": "Full-Stack & Mobile Development",
+        "description": "End-to-end design and deployment of products, from web app to native or cross-platform mobile. Specialized in clean architectures, I ship performant applications built for the field and production-ready."      },
       "devops": {
         "title": "DevOps & CI/CD",
-        "description": "Automated pipelines, continuous deployment, Docker and orchestration"
-      },
+        "description": "Full automation of delivery cycles. Designing continuous deployment pipelines and managing ephemeral environments to secure releases with zero downtime."      },
       "infra": {
-        "title": "Infrastructure",
-        "description": "Linux/Windows server administration, OVH and GCP cloud"
-      },
+        "title": "Infrastructure & Run",
+        "description": "Autonomous management and maintenance of production server fleets. Operating hybrid, cloud or on-premise infrastructures with strict requirements on security, monitoring and backup strategies."      },
       "architecture": {
-        "title": "Architecture",
-        "description": "Scalable and maintainable application design"
-      },
+        "title": "Multi-Tenant Architecture",
+        "description": "Design of robust, isolated and highly scalable systems. Able to lead critical database overhauls and consolidate complex architectures without introducing regressions."      },
       "database": {
-        "title": "Databases",
-        "description": "PostgreSQL, MySQL, optimization and migrations"
-      },
+        "title": "Databases & Data",
+        "description": "Modeling, optimizing and securing production data. Writing critical scripts and automating maintenance and large-volume migration processes."      },
       "accessibility": {
-        "title": "Accessibility",
-        "description": "RGAA and WCAG compliant applications"
-      }
+        "title": "Accessibility (RGAA / WCAG)",
+        "description": "Building in digital inclusion from the design phase. Auditing, bringing complex user journeys into compliance, and automating accessibility tests within deployment pipelines."      }
     }
   },
   "nav": {

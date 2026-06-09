@@ -49,11 +49,11 @@ describe('HeroSection', () => {
     expect(screen.getByTestId('hero-logo')).toBeInTheDocument();
   });
 
-  it('logo has correct size', () => {
+  it('logo is sized responsively via className', () => {
     render(<HeroSection />);
 
     const logo = screen.getByTestId('hero-logo');
-    expect(logo).toHaveAttribute('data-size', '512');
+    expect(logo.className).toContain('aspect-square');
   });
 
   it('renders contact CTA button with correct route', () => {

@@ -28,36 +28,53 @@
     "title": "Daviani Fillatre",
     "subtitle": "Développeur Full-Stack & DevOps",
     "description": "Du code au déploiement. Applications accessibles, interfaces soignées, infrastructure maîtrisée.",
+    "eyebrow": "Portfolio & lab",
+    "featured": {
+      "eyebrow": "01 — Sélection",
+      "title": "Projets en vedette",
+      "subtitle": "La preuve avant le discours. Ce que je construis, pour de vrai.",
+      "view": "Voir le projet",
+      "splashAlt": "écran de lancement"
+    },
+    "parcours": {
+      "kicker": "Le parcours",
+      "titleBefore": "Du ",
+      "titleFire": "métal",
+      "titleAfter": " au code.",
+      "text": "Avant d'écrire ma première ligne de code, j'étais soudeur en métallurgie. Un métier physique où le manque de précision ne pardonne pas. Aujourd'hui je conçois des applications — le geste a changé, pas l'exigence.",
+      "link": "Lire mon parcours"
+    },
+    "finalCta": {
+      "title": "Travaillons ensemble",
+      "text": "Les meilleures collaborations commencent souvent par un premier échange.",
+      "button": "Me contacter"
+    },
     "cta": {
       "contact": "Me contacter",
       "cv": "Voir mon CV"
     },
     "expertise": {
       "title": "Ce que je fais",
+      "eyebrow": "02 — Savoir-faire",
+      "subtitle": "Trois terrains, une même exigence : du concret qui tient en production.",
       "fullstack": {
-        "title": "Développement Full-Stack",
-        "description": "Applications web modernes avec React, Next.js, .NET Core et Node.js"
-      },
+        "title": "Développement Full-Stack & Mobile",
+        "description": "Conception et déploiement de produits de bout en bout, de l'application web au mobile natif ou cross-platform. Spécialisé dans les architectures propres, je livre des applications performantes conçues pour le terrain et prêtes pour la production."      },
       "devops": {
         "title": "DevOps & CI/CD",
-        "description": "Pipelines automatisés, déploiement continu, Docker et orchestration"
-      },
+        "description": "Automatisation complète des cycles de livraison. Conception de pipelines de déploiement continu et gestion d'environnements éphémères pour sécuriser les mises en production sans interruption de service."      },
       "infra": {
-        "title": "Infrastructure",
-        "description": "Administration serveurs Linux/Windows, cloud OVH et GCP"
-      },
+        "title": "Infrastructure & Run",
+        "description": "Gestion et maintenance autonome de parcs de serveurs en production. Pilotage d'infrastructures hybrides, cloud ou sur site, avec une exigence stricte sur la sécurité, le monitoring et les stratégies de sauvegarde."      },
       "architecture": {
-        "title": "Architecture",
-        "description": "Conception d'applications scalables et maintenables"
-      },
+        "title": "Architecture Multi-Tenant",
+        "description": "Conception de systèmes robustes, isolés et hautement évolutifs. Capacité à piloter des refontes de bases de données critiques et à consolider des architectures complexes sans génération de régression."      },
       "database": {
-        "title": "Bases de données",
-        "description": "PostgreSQL, MySQL, optimisation et migrations"
-      },
+        "title": "Bases de données & Data",
+        "description": "Modélisation, optimisation et sécurisation des données de production. Écriture de scripts critiques et automatisation des processus de maintenance et de migration de volumes importants."      },
       "accessibility": {
-        "title": "Accessibilité",
-        "description": "Applications conformes RGAA et WCAG"
-      }
+        "title": "Accessibilité (RGAA / WCAG)",
+        "description": "Intégration de l'inclusion numérique dès la phase de conception. Audit, mise en conformité de parcours utilisateurs complexes et automatisation des tests d'accessibilité dans les chaînes de déploiement."      }
     }
   },
   "nav": {
