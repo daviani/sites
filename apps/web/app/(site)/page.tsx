@@ -30,11 +30,13 @@ export default function HomePage() {
         summaryFr: tuli.descriptionFr,
         summaryEn: tuli.descriptionEn,
         role: '',
+        roleEn: '',
         stack: ['React', 'TypeScript', 'CSS', 'Design tokens'],
-        links: [],
+        links: [{ label: 'Voir', labelEn: 'View', url: '/contributions/tulikettu' }],
         cover: null,
         screenshots: [],
         bodyFr: '',
+        bodyEn: '',
         hasDetail: false,
       }
     : null;
