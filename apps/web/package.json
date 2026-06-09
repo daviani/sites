@@ -27,11 +27,13 @@
     "@vercel/kv": "^3.0.0",
     "@vercel/speed-insights": "^1.2.0",
     "framer-motion": "^12.23.26",
+    "hast-util-to-jsx-runtime": "^2.3.6",
     "next": "^16.0.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "resend": "^6.5.2",
     "sharp": "^0.34.5",
+    "shiki": "^4.2.0",
     "yaml": "^2.8.2",
     "zod": "^4.1.13"
   },

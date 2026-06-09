@@ -1,24 +1,27 @@
 'use client';
 
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import { useLanguage } from '@/hooks/use-language';
-import { MarkdocContent } from '@/lib/markdoc';
 import type { Article } from '@/lib/content/blog';
 
 interface ArticleContentProps {
   article: Article;
+  /** Corps pré-rendus côté serveur (Markdoc + coloration Shiki). */
+  bodyFr: ReactNode;
+  bodyEn: ReactNode | null;
 }
 
-export function ArticleContent({ article }: ArticleContentProps) {
+export function ArticleContent({ article, bodyFr, bodyEn }: ArticleContentProps) {
   const { language, mounted } = useLanguage();
-  const { meta, content, contentEn } = article;
+  const { meta } = article;
 
   // Use French as fallback during SSR and when English content is not available
   const isEnglish = mounted && language === 'en';
   const title = isEnglish ? meta.titleEn : meta.titleFr;
   const excerpt = isEnglish ? meta.excerptEn : meta.excerptFr;
-  const articleContent = isEnglish && contentEn ? contentEn : content;
   const dateLocale = isEnglish ? 'en-US' : 'fr-FR';
+  const body = isEnglish && bodyEn ? bodyEn : bodyFr;
 
   return (
     <>
@@ -42,7 +45,7 @@ export function ArticleContent({ article }: ArticleContentProps) {
             {meta.tags.map((tag) => (
               <Link
                 key={tag}
-                href={`/?tag=${tag}`}
+                href={`/blog?tag=${tag}`}
                 className="px-4 py-1.5 bg-accent/10 text-accent rounded-full text-sm font-medium hover:bg-accent/20 transition-colors cursor-pointer"
               >
                 #{tag}
@@ -52,11 +55,9 @@ export function ArticleContent({ article }: ArticleContentProps) {
         )}
       </header>
 
-      {/* Content : conteneur large (80%), mais corps de lecture borné ~75ch (confort). */}
+      {/* Content (pré-rendu serveur avec Shiki) : conteneur large, corps borné ~75ch. */}
       <div className="mt-8 p-8 glass-card">
-        <div className="prose prose-tuli max-w-prose mx-auto">
-          <MarkdocContent content={articleContent} />
-        </div>
+        <div className="prose prose-tuli max-w-prose mx-auto">{body}</div>
       </div>
     </>
   );

@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { getAllArticles, getArticleBySlug } from '@/lib/content/blog';
 import { Comments } from '@/components/blog/Comments';
 import { ArticleContent } from '@/components/blog/ArticleContent';
+import { MarkdocContent } from '@/lib/markdoc';
 import { Breadcrumb } from '@tulikettu/ui';
 import type { Metadata } from 'next';
 
@@ -61,6 +62,10 @@ export default async function BlogPost({ params }: BlogPostProps) {
     notFound();
   }
 
+  // Corps rendus côté serveur (coloration Shiki async) puis passés au composant client.
+  const bodyFr = <MarkdocContent content={article.content} />;
+  const bodyEn = article.contentEn ? <MarkdocContent content={article.contentEn} /> : null;
+
   return (
     <div className="min-h-screen">
       <article className="w-[var(--content-width)] mx-auto px-4 pt-5 pb-16">
@@ -75,7 +80,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
         </div>
 
         {/* Article content with i18n support */}
-        <ArticleContent article={article} />
+        <ArticleContent article={article} bodyFr={bodyFr} bodyEn={bodyEn} />
 
         {/* Comments */}
         <Comments />
