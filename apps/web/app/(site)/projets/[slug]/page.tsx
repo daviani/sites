@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Breadcrumb, StatusBadge } from '@tulikettu/ui';
+import Image from 'next/image';
 import { MarkdocContent } from '@/lib/markdoc';
+import { imageDimensions } from '@/lib/images';
 import { getServerTranslations } from '@/lib/i18n/server';
 import { getProjectBySlug, getProjectSlugs, STATUS_VARIANT } from '@/lib/content/projects';
 import { getAllArticles } from '@/lib/content/blog';
@@ -39,6 +41,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   const body = pick(project.bodyFr, project.bodyEn);
 
   const linkedArticles = getAllArticles().filter((a) => a.meta.project === slug);
+
+  const shots = await Promise.all(
+    project.screenshots.map(async (src) => ({ src, dims: await imageDimensions(src) }))
+  );
 
   return (
     <div>
@@ -91,18 +97,30 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </div>
         )}
 
-        {project.screenshots.length > 0 && (
+        {shots.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-            {project.screenshots.map((src, i) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={src}
-                src={src}
-                alt={`${project.name} — ${i + 1}`}
-                loading="lazy"
-                className="w-full rounded-[var(--radius-island)] border border-surface-hi"
-              />
-            ))}
+            {shots.map(({ src, dims }, i) =>
+              dims ? (
+                <Image
+                  key={src}
+                  src={src}
+                  alt={`${project.name} — ${i + 1}`}
+                  width={dims.width}
+                  height={dims.height}
+                  sizes="(max-width: 640px) 100vw, 400px"
+                  className="h-auto w-full rounded-[var(--radius-island)] border border-surface-hi"
+                />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={src}
+                  src={src}
+                  alt={`${project.name} — ${i + 1}`}
+                  loading="lazy"
+                  className="w-full rounded-[var(--radius-island)] border border-surface-hi"
+                />
+              )
+            )}
           </div>
         )}
 

@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Breadcrumb } from '@tulikettu/ui';
+import Image from 'next/image';
 import { MarkdocContent } from '@/lib/markdoc';
+import { imageDimensions } from '@/lib/images';
 import { getServerTranslations } from '@/lib/i18n/server';
 import { getContributionBySlug, getContributionSlugs } from '@/lib/content/projects';
 import { pageMetadata } from '@/lib/seo';
@@ -36,6 +38,7 @@ export default async function ContributionDetailPage({ params }: PageProps) {
   const body = pick(c.bodyFr, c.bodyEn);
   const description = pick(c.descriptionFr, c.descriptionEn);
   const date = pick(c.date, c.dateEn);
+  const coverDims = c.cover ? await imageDimensions(c.cover) : null;
 
   return (
     <div className="w-[var(--content-width)] mx-auto px-4 sm:px-6 py-8 md:py-12">
@@ -62,13 +65,24 @@ export default async function ContributionDetailPage({ params }: PageProps) {
 
       {c.cover && (
         <div className="mb-10 rounded-2xl overflow-hidden border border-surface-hi/55">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={c.cover}
-            alt={pick(c.titleFr, c.titleEn)}
-            loading="lazy"
-            className="block w-full"
-          />
+          {coverDims ? (
+            <Image
+              src={c.cover}
+              alt={pick(c.titleFr, c.titleEn)}
+              width={coverDims.width}
+              height={coverDims.height}
+              sizes="(max-width: 768px) 100vw, 720px"
+              className="block h-auto w-full"
+            />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={c.cover}
+              alt={pick(c.titleFr, c.titleEn)}
+              loading="lazy"
+              className="block w-full"
+            />
+          )}
         </div>
       )}
 

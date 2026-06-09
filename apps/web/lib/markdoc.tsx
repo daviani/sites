@@ -3,6 +3,8 @@ import React from 'react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime';
 import { createHighlighter, type Highlighter } from 'shiki';
+import Image from 'next/image';
+import { imageDimensions } from '@/lib/images';
 
 const THEME = 'nord';
 // Nord's comment color (#616e88) only reaches 2.43:1 on the code background
@@ -61,12 +63,39 @@ const config: Config = {
   },
 };
 
-/** A single image with an optional caption, rendered as a semantic <figure>. */
-function Figure({ src, alt, caption }: { src?: string; alt?: string; caption?: string }) {
+/**
+ * A single image with an optional caption, rendered as a semantic <figure>.
+ * width/height are injected at build time (see addImageDimensions) so next/image
+ * reserves layout space (no CLS) and emits a responsive AVIF/WebP srcset.
+ */
+function Figure({
+  src,
+  alt,
+  caption,
+  width,
+  height,
+}: {
+  src?: string;
+  alt?: string;
+  caption?: string;
+  width?: number;
+  height?: number;
+}) {
   return (
     <figure className="article-figure">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={alt ?? ''} loading="lazy" />
+      {src && width && height ? (
+        <Image
+          src={src}
+          alt={alt ?? ''}
+          width={width}
+          height={height}
+          sizes="(max-width: 640px) 100vw, 240px"
+          className="h-auto w-full"
+        />
+      ) : (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={src} alt={alt ?? ''} loading="lazy" />
+      )}
       {caption ? <figcaption>{caption}</figcaption> : null}
     </figure>
   );
@@ -75,6 +104,29 @@ function Figure({ src, alt, caption }: { src?: string; alt?: string; caption?: s
 /** Lays its child figures out in a responsive grid (2 columns, 1 on mobile). */
 function Gallery({ children }: { children?: React.ReactNode }) {
   return <div className="img-grid">{children}</div>;
+}
+
+/**
+ * Walk the transformed Markdoc tree and annotate each Figure with its source
+ * width/height, so next/image can reserve layout space (no CLS) and emit a
+ * responsive srcset. Markdoc's React renderer is synchronous, so dimensions
+ * must be resolved here (async) before rendering.
+ */
+async function addImageDimensions(node: unknown): Promise<void> {
+  if (Array.isArray(node)) {
+    await Promise.all(node.map(addImageDimensions));
+    return;
+  }
+  if (!node || typeof node !== 'object') return;
+  const tag = node as { name?: string; attributes?: Record<string, unknown>; children?: unknown };
+  if (tag.name === 'Figure' && typeof tag.attributes?.src === 'string') {
+    const dims = await imageDimensions(tag.attributes.src);
+    if (dims) {
+      tag.attributes.width = dims.width;
+      tag.attributes.height = dims.height;
+    }
+  }
+  if (tag.children) await addImageDimensions(tag.children);
 }
 
 /**
@@ -108,6 +160,7 @@ export async function renderMarkdoc(content: string): Promise<React.ReactNode> {
 
   const ast = Markdoc.parse(content);
   const transformed = Markdoc.transform(ast, config);
+  await addImageDimensions(transformed);
   return Markdoc.renderers.react(transformed, React, { components: { CodeBlock, Figure, Gallery } });
 }
 
