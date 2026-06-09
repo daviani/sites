@@ -1,13 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Breadcrumb, StatusBadge } from '@tulikettu/ui';
+import { Breadcrumb } from '@tulikettu/ui';
 import { getServerTranslations } from '@/lib/i18n/server';
-import {
-  getAllProjects,
-  getAllContributions,
-  STATUS_VARIANT,
-  type Project,
-} from '@/lib/content/projects';
+import { getAllProjects, getAllContributions, type Project, type Contribution } from '@/lib/content/projects';
+import { FeatureCard } from '@/components/projects/FeatureCard';
+import { ProjectCard } from '@/components/projects/ProjectCard';
 
 export const metadata: Metadata = {
   title: 'Projets',
@@ -15,147 +12,127 @@ export const metadata: Metadata = {
 
 export default async function ProjetsPage() {
   const { lang, t } = await getServerTranslations();
-  const projects = getAllProjects();
-  const contributions = getAllContributions();
   const pick = (fr: string, en: string) => (lang === 'en' && en ? en : fr);
+  const projects = getAllProjects();
+  const featured =
+    projects.find((p) => p.slug === 'rodd') ?? projects.find((p) => p.featured) ?? projects[0];
+  const grid = projects.filter((p) => p.slug !== featured?.slug);
+  const contributions = getAllContributions();
+  const href = (p: Project) => (p.hasDetail ? `/projets/${p.slug}` : p.links[0]?.url ?? '/projets');
 
   return (
-    <div className="min-h-screen">
-      <div className="w-[var(--content-width)] mx-auto px-4 pt-5 pb-16">
-        <div className="mb-8">
-          <Breadcrumb
-            items={[{ href: '/projets', label: t('nav.projects.title') }]}
-            homeLabel={t('common.home')}
-            ariaLabel={t('common.breadcrumb')}
-          />
-        </div>
+    <div className="w-[var(--content-width)] mx-auto px-4 sm:px-6 py-8 md:py-12">
+      <Breadcrumb
+        items={[{ href: '/projets', label: t('nav.projects.title') }]}
+        homeLabel={t('common.home')}
+        ariaLabel={t('common.breadcrumb')}
+      />
 
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-fg">{t('projects.title')}</h1>
-          <p className="text-xl text-fg-muted">{t('projects.subtitle')}</p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {projects.map((project) => (
-            <ProjectCard
-              key={project.slug}
-              project={project}
-              tagline={pick(project.taglineFr, project.taglineEn)}
-              summary={pick(project.summaryFr, project.summaryEn)}
-              statusLabel={t(`projects.status.${project.status}`)}
-              viewLabel={t('projects.viewProject')}
-            />
-          ))}
-        </div>
-
-        {contributions.length > 0 && (
-          <section className="mt-16">
-            <h2 className="text-2xl md:text-3xl font-bold text-fg mb-6">
-              {t('projects.contributionsTitle')}
-            </h2>
-            <ul className="space-y-4">
-              {contributions.map((c) => {
-                const desc = pick(c.descriptionFr, c.descriptionEn);
-                const isExternal = !!c.link && /^https?:\/\//.test(c.link);
-                return (
-                  <li
-                    key={c.slug}
-                    className="p-4 rounded-2xl bg-surface/70 backdrop-blur-sm border border-surface-hi"
-                  >
-                    <h3 className="font-semibold text-fg leading-tight">{pick(c.titleFr, c.titleEn)}</h3>
-                    {c.date && <p className="text-xs text-fg-subtle mt-0.5">{c.date}</p>}
-                    {desc && <p className="text-fg-muted text-sm mt-1.5 leading-relaxed">{desc}</p>}
-                    {c.link &&
-                      (isExternal ? (
-                        <a
-                          href={c.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-accent text-sm underline underline-offset-4 hover:opacity-80 mt-2 inline-block"
-                        >
-                          {c.link.replace(/^https?:\/\//, '')} ↗
-                        </a>
-                      ) : (
-                        <Link
-                          href={c.link}
-                          className="text-accent text-sm underline underline-offset-4 hover:opacity-80 mt-2 inline-block"
-                        >
-                          {c.link} →
-                        </Link>
-                      ))}
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
-        )}
+      {/* En-tête de page */}
+      <div className="text-center pt-[54px] pb-9">
+        <span className="inline-block font-mono text-xs uppercase tracking-[0.14em] text-accent mb-3.5">
+          {t('projects.eyebrow')}
+        </span>
+        <h1 className="text-[clamp(40px,5.2vw,62px)] font-extrabold tracking-[-0.03em] leading-[1.02] text-fg">
+          {t('projects.title')}
+        </h1>
+        <p className="text-[17px] text-fg-muted mt-3.5 max-w-[54ch] mx-auto">{t('projects.subtitle')}</p>
       </div>
+
+      {/* Projet en vedette (sans halo : réservé à l'accueil) */}
+      {featured && (
+        <FeatureCard
+          project={featured}
+          tagline={pick(featured.taglineFr, featured.taglineEn)}
+          summary={pick(featured.summaryFr, featured.summaryEn)}
+          statusLabel={t(`projects.status.${featured.status}`)}
+          viewLabel={t('projects.viewProject')}
+          href={href(featured)}
+          splashSrc="/projects/rodd-splash.webp"
+          splashAlt={`${featured.name} — ${t('home.featured.splashAlt')}`}
+          badgeInVisual
+        />
+      )}
+
+      {/* Grille des autres projets */}
+      <div className="grid sm:grid-cols-2 gap-5 mt-5">
+        {grid.map((p) => (
+          <ProjectCard
+            key={p.slug}
+            project={p}
+            tagline={pick(p.taglineFr, p.taglineEn)}
+            summary={pick(p.summaryFr, p.summaryEn)}
+            statusLabel={t(`projects.status.${p.status}`)}
+            viewLabel={t('projects.viewProject')}
+            href={href(p)}
+          />
+        ))}
+      </div>
+
+      {/* Contributions */}
+      {contributions.length > 0 && (
+        <section className="mt-[30px] pt-12 border-t border-surface-hi/40">
+          <h2 className="text-[30px] font-bold tracking-[-0.025em] text-fg">
+            {t('projects.contributionsTitle')}
+          </h2>
+          <p className="text-fg-muted mt-2">{t('projects.contributionsSubtitle')}</p>
+          <div className="flex flex-col gap-3.5 mt-[26px]">
+            {contributions.map((c) => (
+              <ContribRow key={c.slug} c={c} pick={pick} />
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }
 
-function ProjectCard({
-  project,
-  tagline,
-  summary,
-  statusLabel,
-  viewLabel,
+function ContribRow({
+  c,
+  pick,
 }: {
-  project: Project;
-  tagline: string;
-  summary: string;
-  statusLabel: string;
-  viewLabel: string;
+  c: Contribution;
+  pick: (fr: string, en: string) => string;
 }) {
-  return (
-    <article
-      className={`p-6 glass-card flex flex-col gap-3 ${
-        project.featured ? 'ring-1 ring-fire/40 shadow-[0_0_28px_-8px_var(--tuli-fire)]' : ''
-      }`}
-    >
-      <div className="flex items-start justify-between gap-3">
-        <h2 className="text-2xl font-bold text-fg leading-tight">{project.name}</h2>
-        <span className="shrink-0">
-          <StatusBadge variant={STATUS_VARIANT[project.status]}>{statusLabel}</StatusBadge>
-        </span>
+  const title = pick(c.titleFr, c.titleEn);
+  const desc = pick(c.descriptionFr, c.descriptionEn);
+  const date = pick(c.date, c.dateEn);
+  // Cible : page détail si corps présent, sinon lien rapide (ex. /blog), sinon inerte.
+  const href = c.hasDetail ? `/contributions/${c.slug}` : c.link ?? null;
+  const base = 'rounded-2xl bg-surface border border-surface-hi/55 px-[26px] py-[22px]';
+
+  // Inerte (ex. Mentorat) : aucune cible.
+  if (!href) {
+    return (
+      <div className={base}>
+        <h3 className="text-lg font-bold tracking-[-0.01em] text-fg">{title}</h3>
+        {date && <div className="font-mono text-xs text-fg-subtle mt-[3px] mb-[9px]">{date}</div>}
+        {desc && <p className="text-[14.5px] text-fg-muted leading-[1.6]">{desc}</p>}
       </div>
+    );
+  }
 
-      <p className="text-sm font-medium text-fg-muted">{tagline}</p>
-      {summary && <p className="text-sm text-fg-subtle leading-relaxed">{summary}</p>}
-
-      {project.stack.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-1">
-          {project.stack.map((s) => (
-            <span key={s} className="px-2 py-1 bg-surface-hi text-fg-muted rounded text-xs">
-              {s}
-            </span>
-          ))}
-        </div>
-      )}
-
-      {(project.hasDetail || project.links.length > 0) && (
-        <div className="flex flex-wrap items-center gap-4 mt-auto pt-2">
-          {project.hasDetail && (
-            <Link
-              href={`/projets/${project.slug}`}
-              className="text-accent font-medium hover:opacity-80 transition-opacity"
-            >
-              {viewLabel} <span className="text-fire" aria-hidden="true">→</span>
-            </Link>
-          )}
-          {project.links.map((l) => (
-            <a
-              key={l.url}
-              href={l.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-fg-muted underline underline-offset-4 hover:text-accent transition-colors"
-            >
-              {l.label} ↗
-            </a>
-          ))}
-        </div>
-      )}
-    </article>
+  // Cliquable : toute la row via stretched-link sur le titre.
+  return (
+    <div className={`relative ${base} transition-colors hover:border-surface-hi`}>
+      <h3 className="text-lg font-bold tracking-[-0.01em] text-fg">
+        <Link
+          href={href}
+          aria-label={title}
+          className="transition-colors hover:text-accent after:absolute after:inset-0 after:content-[''] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+        >
+          {title}
+        </Link>
+      </h3>
+      {date && <div className="font-mono text-xs text-fg-subtle mt-[3px] mb-[9px]">{date}</div>}
+      {desc && <p className="text-[14.5px] text-fg-muted leading-[1.6]">{desc}</p>}
+      <span
+        className="inline-flex items-center gap-1.5 text-accent text-sm font-semibold mt-2.5"
+        aria-hidden="true"
+      >
+        {!c.hasDetail && c.link}
+        <span className="text-fire">→</span>
+      </span>
+    </div>
   );
 }

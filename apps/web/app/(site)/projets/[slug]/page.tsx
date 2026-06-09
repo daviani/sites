@@ -28,6 +28,8 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
   const { lang, t } = await getServerTranslations();
   const pick = (fr: string, en: string) => (lang === 'en' && en ? en : fr);
+  const role = pick(project.role, project.roleEn);
+  const body = pick(project.bodyFr, project.bodyEn);
 
   const linkedArticles = getAllArticles().filter((a) => a.meta.project === slug);
 
@@ -50,7 +52,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             <StatusBadge variant={STATUS_VARIANT[project.status]}>
               {t(`projects.status.${project.status}`)}
             </StatusBadge>
-            {project.role && <span className="text-sm text-fg-subtle">{project.role}</span>}
+            {role && <span className="text-sm text-fg-subtle">{role}</span>}
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-fg mb-3">{project.name}</h1>
           <p className="text-xl text-accent font-medium">{pick(project.taglineFr, project.taglineEn)}</p>
@@ -76,7 +78,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium bg-accent text-on-accent hover:opacity-90 transition-opacity"
               >
-                {l.label} ↗
+                {pick(l.label, l.labelEn)} ↗
               </a>
             ))}
           </div>
@@ -97,9 +99,9 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </div>
         )}
 
-        {project.bodyFr.length > 0 && (
+        {body.length > 0 && (
           <div className="prose prose-tuli mx-auto glass-card p-8">
-            <MarkdocContent content={project.bodyFr} />
+            <MarkdocContent content={body} />
           </div>
         )}
 
