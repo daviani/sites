@@ -4,6 +4,7 @@ import { JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { getBaseUrl, SITE_NAME, SITE_DESCRIPTION } from "@/lib/domains/config";
+import { getLanguage } from "@/lib/i18n/server";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -46,13 +47,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const lang = await getLanguage();
+
   return (
-    <html lang="fr" className={`${geistSans.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html lang={lang} className={`${geistSans.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{

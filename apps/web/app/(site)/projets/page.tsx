@@ -5,10 +5,14 @@ import { getServerTranslations } from '@/lib/i18n/server';
 import { getAllProjects, getAllContributions, type Project, type Contribution } from '@/lib/content/projects';
 import { FeatureCard } from '@/components/projects/FeatureCard';
 import { ProjectCard } from '@/components/projects/ProjectCard';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Projets',
-};
+  description:
+    'Mes projets et contributions open-source : produits web, labs et expérimentations en React, Next.js, Node.js et DevOps.',
+  path: '/projets',
+});
 
 export default async function ProjetsPage() {
   const { lang, t } = await getServerTranslations();

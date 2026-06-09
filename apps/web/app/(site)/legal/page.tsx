@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 import { Breadcrumb } from '@tulikettu/ui';
 import { getServerTranslations } from '@/lib/i18n/server';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Mentions légales',
-};
+  description:
+    "Mentions légales de daviani.dev : éditeur du site, hébergement et propriété intellectuelle.",
+  path: '/legal',
+});
 
 const GITHUB_REPO_URL = 'https://github.com/daviani/sites';
 const LAST_UPDATE_DATE = '2026-06-09';

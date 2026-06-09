@@ -2,10 +2,14 @@ import type { Metadata } from 'next';
 import { Breadcrumb } from '@tulikettu/ui';
 import { getServerTranslations } from '@/lib/i18n/server';
 import type { TranslationKey } from '@/hooks/use-translation';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Aide à la navigation',
-};
+  description:
+    "Aide à la navigation : raccourcis clavier et repères pour parcourir daviani.dev facilement.",
+  path: '/help',
+});
 
 const CARD = 'bg-surface border border-surface-hi/55 rounded-2xl p-6 md:p-8';
 

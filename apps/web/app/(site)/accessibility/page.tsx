@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 import { Breadcrumb } from '@tulikettu/ui';
 import { getServerTranslations } from '@/lib/i18n/server';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Accessibilité',
-};
+  description:
+    "Déclaration d'accessibilité de daviani.dev : engagement RGAA, état de conformité et contact.",
+  path: '/accessibility',
+});
 
 // Date de la déclaration d'accessibilité (figée — pas la date du jour).
 const DECLARATION_DATE = '2026-06-09';

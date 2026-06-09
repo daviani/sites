@@ -3,10 +3,14 @@ import { Breadcrumb } from '@tulikettu/ui';
 import { PhotosPageContent } from '@/components/photos';
 import { getAllPhotos } from '@/lib/content/photos';
 import type { Tag } from '@/components/photos';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Photos',
-};
+  description:
+    'Quelques photos hors du code : paysages, montagne et instants capturés au fil de mes sorties.',
+  path: '/photos',
+});
 
 // Extract unique tags from photos
 function getUniqueTags(photos: { tags: string[] }[]): Tag[] {

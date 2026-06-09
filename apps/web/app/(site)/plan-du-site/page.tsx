@@ -3,10 +3,14 @@ import Link from 'next/link';
 import { Breadcrumb } from '@tulikettu/ui';
 import { getServerTranslations } from '@/lib/i18n/server';
 import type { TranslationKey } from '@/hooks/use-translation';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Plan du site',
-};
+  description:
+    "Plan du site daviani.dev : toutes les pages réunies pour s'y retrouver en un coup d'œil.",
+  path: '/plan-du-site',
+});
 
 type PageLink = {
   href: string;

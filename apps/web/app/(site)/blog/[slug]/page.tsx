@@ -5,6 +5,8 @@ import { ArticleContent } from '@/components/blog/ArticleContent';
 import { MarkdocContent } from '@/lib/markdoc';
 import { Breadcrumb } from '@tulikettu/ui';
 import type { Metadata } from 'next';
+import { JsonLd } from '@/components/JsonLd';
+import { articleJsonLd } from '@/lib/seo';
 
 interface BlogPostProps {
   params: Promise<{ slug: string }>;
@@ -69,6 +71,15 @@ export default async function BlogPost({ params }: BlogPostProps) {
   return (
     <div>
       <article className="w-[var(--content-width)] mx-auto px-4 pt-5 pb-16">
+        <JsonLd
+          data={articleJsonLd({
+            title: article.meta.titleFr,
+            description: article.meta.excerptFr,
+            slug,
+            publishedAt: article.meta.publishedAt,
+            tags: article.meta.tags,
+          })}
+        />
         {/* Breadcrumb */}
         <div className="mb-8">
           <Breadcrumb

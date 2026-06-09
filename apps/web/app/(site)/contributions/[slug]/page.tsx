@@ -4,6 +4,7 @@ import { Breadcrumb } from '@tulikettu/ui';
 import { MarkdocContent } from '@/lib/markdoc';
 import { getServerTranslations } from '@/lib/i18n/server';
 import { getContributionBySlug, getContributionSlugs } from '@/lib/content/projects';
+import { pageMetadata } from '@/lib/seo';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -16,7 +17,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const c = getContributionBySlug(slug);
-  return { title: c ? c.titleFr : 'Contribution' };
+  if (!c) return { title: 'Contribution' };
+  return pageMetadata({
+    title: c.titleFr,
+    description: c.descriptionFr || `${c.titleFr} — contribution open-source de Daviani Fillatre.`,
+    path: `/contributions/${slug}`,
+    type: 'article',
+  });
 }
 
 export default async function ContributionDetailPage({ params }: PageProps) {
