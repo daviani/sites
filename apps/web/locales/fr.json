@@ -196,6 +196,7 @@
   },
   "pages": {
     "about": {
+      "eyebrow": "Profil",
       "title": "À propos",
       "lead": {
         "start": "J'ai commencé dans le ",
@@ -495,6 +496,7 @@
     }
   },
   "cv": {
+    "eyebrow": "Carrière",
     "title": "Curriculum Vitae",
     "subtitle": "Mon parcours, mes compétences et mes expériences.",
     "download": "Télécharger le CV",

@@ -20,19 +20,25 @@ export default async function AboutPage() {
         ariaLabel={t('common.breadcrumb')}
       />
 
-      <section className="pt-2 pb-16">
-        {/* Tête : h1 aligné à gauche + accroche (lead) */}
-        <h1 className="max-w-[65ch] text-[clamp(42px,5.4vw,64px)] font-extrabold tracking-[-0.03em] leading-[1.02] text-fg mt-6">
+      {/* En-tête centré (cohérent avec les autres pages) */}
+      <div className="text-center pt-[54px] pb-9">
+        <span className="inline-block font-mono text-xs uppercase tracking-[0.14em] text-accent mb-3.5">
+          {t('pages.about.eyebrow')}
+        </span>
+        <h1 className="text-[clamp(42px,5.4vw,64px)] font-extrabold tracking-[-0.03em] leading-[1.02] text-fg">
           {t('pages.about.title')}
         </h1>
-        <p className="max-w-[65ch] text-[19px] leading-[1.7] text-fg mt-[22px]">
+        <p className="max-w-[60ch] mx-auto text-[19px] leading-[1.7] text-fg mt-[22px]">
           {t('pages.about.lead.start')}
           <span className="text-fire font-semibold">{t('pages.about.lead.fire')}</span>
           {t('pages.about.lead.end')}
         </p>
+      </div>
 
+      {/* Corps narratif : bloc centré, texte aligné à gauche pour la lecture */}
+      <div className="max-w-[65ch] mx-auto pb-16">
         {/* Prose narrative */}
-        <article className="max-w-[65ch]">
+        <article>
           <AboutSection title={t('pages.about.crossroad.title')}>
             <P>{t('pages.about.crossroad.p1')}</P>
             <P>{t('pages.about.crossroad.p2')}</P>
@@ -67,7 +73,7 @@ export default async function AboutPage() {
         </article>
 
         {/* Facts */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10 max-w-[65ch]">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10">
           {FACTS.map((f) => (
             <div key={f} className="rounded-2xl bg-surface border border-surface-hi/55 px-6 py-[22px]">
               <div className="font-mono text-[11px] uppercase tracking-[0.08em] text-fg-subtle mb-2">
@@ -84,7 +90,7 @@ export default async function AboutPage() {
         </div>
 
         {/* CTA — La suite */}
-        <div className="max-w-[65ch] mt-[52px] pt-[34px] border-t border-surface-hi/40">
+        <div className="mt-[52px] pt-[34px] border-t border-surface-hi/40">
           <h3 className="text-2xl font-bold tracking-[-0.02em] text-fg">{t('pages.about.next.title')}</h3>
           <p className="text-fg-muted mt-2.5 mb-5">{t('pages.about.next.p1')}</p>
           <a
@@ -95,7 +101,7 @@ export default async function AboutPage() {
             <span aria-hidden="true">→</span>
           </a>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

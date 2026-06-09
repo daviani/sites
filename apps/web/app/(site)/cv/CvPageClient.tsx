@@ -36,9 +36,14 @@ export default function CvPageClient() {
           />
         </div>
 
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-fg">{t('cv.title')}</h1>
-          <p className="text-xl text-fg-muted">{t('cv.subtitle')}</p>
+        <div className="text-center pt-[54px] pb-9">
+          <span className="inline-block font-mono text-xs uppercase tracking-[0.14em] text-accent mb-3.5">
+            {t('cv.eyebrow')}
+          </span>
+          <h1 className="text-[clamp(40px,5.2vw,62px)] font-extrabold tracking-[-0.03em] leading-[1.02] text-fg">
+            {t('cv.title')}
+          </h1>
+          <p className="text-[17px] text-fg-muted mt-3.5 max-w-[54ch] mx-auto">{t('cv.subtitle')}</p>
         </div>
 
         <div className="flex flex-col items-center gap-3 mb-8">
