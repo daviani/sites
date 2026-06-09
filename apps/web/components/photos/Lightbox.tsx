@@ -117,7 +117,7 @@ export function Lightbox({
           focus:outline-none focus:ring-2 focus:ring-surface rounded-full hover:bg-surface-hi/20"
         aria-label={t('pages.photos.lightbox.close')}
       >
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
         </svg>
       </motion.button>
@@ -134,7 +134,7 @@ export function Lightbox({
           hidden md:block"
         aria-label={t('pages.photos.lightbox.previousPhoto')}
       >
-        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
         </svg>
       </motion.button>
@@ -150,7 +150,7 @@ export function Lightbox({
           hidden md:block"
         aria-label={t('pages.photos.lightbox.nextPhoto')}
       >
-        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
       </motion.button>

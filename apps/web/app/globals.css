@@ -61,7 +61,7 @@
   --tuli-input-border: #7488A8;
   --tuli-text-1: #E2E8F0;
   --tuli-text-2: #94A3B8;
-  --tuli-text-3: #8896AB; /* RGAA 3.2 — 4.5:1 même sur surface-el (l'ancien #7A8BA0 chutait à 4.28) */
+  --tuli-text-3: #9AA8BC; /* RGAA 3.2 — 4.5:1 jusque sur le voile aurore (#2C3445) ; ≈ text-2, distinction estompée assumée */
   --tuli-accent: #5BB8D4;
   --tuli-accent-2: #67D4A8;
   --tuli-accent-3: #C084FC;
