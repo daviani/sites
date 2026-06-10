@@ -31,7 +31,6 @@ export function ScrollToTop({ ariaLabel }: ScrollToTopProps) {
       onClick={scrollToTop}
       aria-label={ariaLabel}
       tabIndex={isVisible ? 0 : -1}
-      aria-hidden={!isVisible}
       className={`
         fixed bottom-[175px] md:bottom-[165px] right-[20px] z-50
         p-4 rounded-full cursor-pointer
