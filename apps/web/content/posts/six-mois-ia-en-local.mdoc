@@ -1,0 +1,93 @@
+---
+slug: six-mois-ia-en-local
+publishedAt: '2026-06-10'
+featured: false
+titleFr: "Six mois d'IA en local : le modèle compte moins que ce qu'on monte autour"
+excerptFr: "En six mois, mon usage de l'IA a radicalement changé — mais pas grâce aux modèles. Ce qui a tout changé, c'est l'outillage construit autour : contexte, doc indexée, skills, agents, garde-fous."
+titleEn: "Six Months of Local AI: The Model Matters Less Than What You Build Around It"
+excerptEn: "In six months my use of AI changed radically — but not because of the models. What changed everything is the tooling I built around them: context, indexed docs, skills, agents, guardrails."
+tags:
+  - ia
+  - outillage
+---
+
+## Le déclic
+
+Chez mon précédent employeur, j'avais des licences IA et je m'en servais à peine, faute de temps pour m'y mettre sérieusement. Depuis six mois, ça a changé.
+
+Soyons honnêtes une seconde : les modèles, eux, ont énormément progressé sur la période — c'en est même spectaculaire. Mais ce n'est pas ça qui a transformé mon usage. Ce qui a vraiment changé, ce n'est pas leur puissance : c'est ce que j'ai construit **autour**.
+
+Le point de départ, c'est un achat : un MacBook Pro assez costaud pour faire tourner un modèle de langage en local, sans rien envoyer dans le cloud. Quand le modèle tourne sur ta propre machine, tu peux voir comment il marche pour de vrai — pas de quota, pas de données qui sortent, la liberté d'expérimenter. C'est à ce moment-là que j'ai arrêté de me contenter de poser des questions à un assistant, et que je me suis mis à lui construire des outils autour.
+
+## Rien de nouveau, au fond
+
+En réalité, je n'ai rien inventé sur moi-même. Chez mon employeur précédent, bien avant l'IA, j'avais bricolé un script bash qui récupérait un dump de la base de prod, l'injectait dans mon pgAdmin local et nettoyait derrière. Rien de glorieux. Mais ça me faisait gagner un temps fou, et c'était fiable.
+
+Je le raconte parce qu'il dit l'essentiel : **j'ai toujours été quelqu'un qui outille pour gagner du temps.** L'IA n'a pas changé ma philosophie — elle a changé mes moyens. Hier, du bash. Aujourd'hui, des agents, de la doc indexée, des garde-fous dans le code. Le même réflexe, un medium différent.
+
+Aujourd'hui, un petit modèle local — Gemma 3, dans sa variante à 4 milliards de paramètres — tourne sur mon Mac pour les tâches simples et répétitives : résumer, reformuler. Pour le raisonnement plus difficile, je passe par un modèle cloud, plus puissant. Mais encore une fois : le modèle compte moins que ce que j'ai monté autour. C'est là que ça devient intéressant.
+
+## 1. Le contexte : les CLAUDE.md
+
+La première chose que j'ai mise en place, c'est un moyen pour que l'assistant me connaisse, histoire de ne pas tout réexpliquer à chaque session.
+
+J'utilise des fichiers appelés `CLAUDE.md` : de simples fichiers texte que l'assistant lit au démarrage — c'est la convention de Claude Code, l'outil que j'utilise en ce moment, même si l'idée se transpose à n'importe quel assistant. J'y note mon contexte (qui je suis, ma stack, mes préférences) et mes règles de travail. Je les range par niveaux : un fichier global, un par grand domaine, un par projet. Le plus précis complète le plus général.
+
+Trois lignes suffisent à donner le ton :
+
+```text
+# CLAUDE.md
+- Répondre en français, ton direct, pas de formules creuses
+- Jamais de commit ni de push sur la branche principale
+- Conventional commits, aucune signature d'IA dans les messages
+```
+
+L'assistant sait donc comment je bosse et propose dans le bon style sans que j'aie à reposer le décor. Mais ça reste des instructions. Sur une longue session, il peut les perdre de vue. On y revient plus bas.
+
+## 2. La doc d'abord, les consignes ensuite
+
+Un modèle répond avec ses connaissances — et ses connaissances sont souvent **périmées**. L'exemple que je rencontre le plus : Tailwind CSS. En version 3, on configurait le thème dans un fichier `tailwind.config.js`. En version 4, ça passe par une directive `@theme` directement dans le CSS. Comme la v3 est bien plus représentée dans les données d'entraînement, le modèle te ressort spontanément l'ancien pattern. Et tu perds dix minutes à débugger une config qui n'a plus lieu d'être.
+
+Ma parade : j'indexe la documentation des versions **que j'utilise réellement** dans une base vectorielle locale (Qdrant), que j'expose à l'assistant via un serveur **MCP** — le Model Context Protocol, qui standardise le branchement entre un modèle et mes propres sources. Avant de répondre sur une techno, il a pour consigne de consulter cette base. Concrètement, quand je lui demande quelque chose sur Tailwind, il lit *ma* doc v4 — pas sa mémoire floue de la v3.
+
+La logique est préventive, pas réactive : je n'attends pas que le modèle se trompe pour le corriger, je l'empêche de se tromper en lui donnant d'office la bonne source. C'est sans doute le morceau le plus rentable de tout mon outillage.
+
+## 3. Les workflows : les skills
+
+Un cran au-dessus du simple contexte, j'ai codifié des **procédures** : pas seulement « qui fait quoi », mais « comment on fait, ici ».
+
+L'exemple le plus parlant, c'est ma commande `/pre-pr` sur Rodd, mon appli d'aviron. Quand je suis prêt à ouvrir une pull request, elle déroule toute seule une checklist que j'oublierais à coup sûr à la main : elle range le travail en commits propres, auto-corrige le formatage, vérifie que les critères du ticket sont remplis, lance des audits spécialisés **en parallèle** selon les fichiers que j'ai touchés, fait tourner le build et les tests — et ne crée la PR **que si tout passe**.
+
+Une discipline faillible quand elle repose sur ma vigilance, devenue systématique parce qu'elle est encodée.
+
+## 4. Les exécutants : les agents
+
+Ensuite, j'ai arrêté de traiter l'IA comme un assistant à tout faire pour en tirer des agents spécialisés sur un sujet précis.
+
+Dans Rodd, un agent me sert de coach. Au départ, je ramais sur un programme générique glané sur les forums, plusieurs semaines durant. Puis j'ai donné à l'agent l'accès à mes données d'entraînement réelles — une base SQLite — et je lui ai demandé de les analyser. Il en a tiré des programmes sur mesure : calés sur ce que j'avais réellement fait, et qui s'ajustent en plus à l'IMC de l'utilisateur. On passe du programme « moyen » trouvé sur un forum au programme « le mien ».
+
+J'ai aussi un POC que j'ai appelé **maasto**, « le terrain » en finnois. Tu lui donnes un point GPS en montagne et il génère un rapport sur les conditions neige et rando. Sous le capot, rien de magique : un module par source de données — météo, imagerie satellite, bulletin d'avalanche (BERA), sorties récentes de Camptocamp — chacun interrogeant directement son API, et un dernier module qui croise le tout dans un rapport. Quand la prévision météo se trompe, ce sont ces sorties réelles du terrain qui remettent les choses d'aplomb. C'est de là que vient le nom. Le code est ouvert : [github.com/daviani/maasto](https://github.com/daviani/maasto).
+
+Les deux partagent la même logique : ils s'appuient sur des données réelles et rendent un service précis.
+
+## 5. Les garde-fous : les hooks
+
+Laisser un agent travailler seul, c'est pratique — à condition de l'empêcher de faire des dégâts. Et une consigne polie dans un prompt ne suffit pas.
+
+Les règles que je ne veux **jamais** voir sauter, je les ai mises directement dans le code. Avant chaque action sensible, un script se déclenche et peut tout bloquer : pas de commit signé par une IA, pas d'écriture sur la branche principale, pas de pull request tant que les audits n'ont pas tourné. Sur Rodd, un de ces scripts protège même l'architecture du projet : si une modification casse une règle de conception, il refuse l'édition.
+
+La nuance avec les `CLAUDE.md` compte. Un `CLAUDE.md`, c'est une instruction que l'assistant est censé respecter mais peut oublier. Un script, c'est un mur qui ne bouge pas, même quand le modèle insiste. C'est du *secure by design* appliqué à mon outillage : les règles que je ne peux pas me permettre de voir sauter ne reposent pas sur la bonne volonté du modèle — elles sont câblées. Les deux niveaux se complètent : le `CLAUDE.md` donne le contexte, le hook ferme la porte aux bêtises.
+
+## À l'échelle : un système, pas des gadgets
+
+Pris séparément, tout ça peut ressembler à du bricolage de passionné. C'est en regardant Rodd dans son ensemble que je vois autre chose : un ticket que je prends, du code que j'écris, des audits qui tournent, une PR qui part — chaque étape outillée, et les étapes qui s'enchaînent. Une chaîne, pas une collection d'astuces.
+
+C'est ce passage à l'échelle qui m'a convaincu que je ne perdais pas mon temps en gadgets : j'avais construit une façon de travailler.
+
+## Ce que j'en retiens
+
+Au fond, voilà ce qui a changé pour moi : avant, j'attendais que l'outil s'améliore tout seul ; maintenant, je l'adapte à ma façon de travailler. Je ne me sers plus de l'IA comme d'une béquille pour combler ce que je ne sais pas faire, mais pour avancer plus vite sur ce que je sais déjà.
+
+Ça a un prix : tout ça prend du temps à monter et à entretenir. Mais une fois en place, je ne reviendrais pas en arrière.
+
+Une dernière chose, par honnêteté : **c'est mon angle d'aujourd'hui.** Il a déjà changé une fois — du script bash aux agents — et il changera encore. Ma prochaine étape, j'aimerais qu'elle soit de sortir le modèle local de ma machine pour le mettre en production sur un serveur. Le fil, lui, n'a jamais bougé : outiller pour avancer plus vite. Seuls les outils changent.

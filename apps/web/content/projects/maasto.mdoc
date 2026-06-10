@@ -16,6 +16,10 @@ stack:
   - Météo & géospatial
 screenshots:
   - /projects/maasto-report.webp
+links:
+  - label: Code source
+    labelEn: Source code
+    url: https://github.com/daviani/maasto
 bodyEn: |
   *Maasto* is Finnish for **the field**. The tool checks snow and hiking conditions for a GPS point in one command and generates a standalone HTML report.
 
@@ -25,7 +29,7 @@ bodyEn: |
 
   ## Under the hood
 
-  A modular Python CLI: coordinate parsing (decimal or DMS), reverse-geocoding and exact altitude, satellite image generation (rasterio, pillow), HTML rendering (jinja2). Fragile sources (scraping) are flagged "best effort" and never block the report.
+  A modular Python CLI: coordinate parsing (decimal or DMS), reverse-geocoding and exact altitude, satellite image generation (rasterio, pillow), HTML rendering (jinja2). One module per data source, and a missing source never blocks the report.
 
   ## Output
 
@@ -40,7 +44,7 @@ Les modèles météo se trompent souvent en montagne. *maasto* croise plusieurs 
 
 ## Sous le capot
 
-CLI Python modulaire : parsing de coordonnées (décimal ou DMS), reverse-geocoding et altitude exacte, génération d'images satellite (rasterio, pillow), rendu HTML (jinja2). Les sources fragiles (scraping) sont marquées « best effort » et ne bloquent jamais le rapport.
+CLI Python modulaire : parsing de coordonnées (décimal ou DMS), reverse-geocoding et altitude exacte, génération d'images satellite (rasterio, pillow), rendu HTML (jinja2). Un module par source de données, et une source indisponible ne bloque jamais le rapport.
 
 ## Sortie
 

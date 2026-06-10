@@ -1,0 +1,80 @@
+## The trigger
+
+At my previous employer, I had AI licenses and barely used them, for lack of time to get into it seriously. Over the past six months, that has changed.
+
+Let's be honest for a second: the models themselves have improved enormously over the period — spectacularly, even. But that's not what transformed how I use them. What really changed isn't their power: it's what I built **around** them.
+
+It started with a purchase: a MacBook Pro powerful enough to run a language model locally, without sending anything to the cloud. When the model runs on your own machine, you can see how it actually works — no quotas, no data leaving, the freedom to experiment. That's when I stopped settling for asking an assistant questions, and started building tools around it.
+
+## Nothing new, really
+
+In truth, I didn't invent anything about myself. At my previous job, well before AI, I'd hacked together a bash script that pulled a dump of the production database, loaded it into my local pgAdmin and cleaned up afterwards. Nothing glorious. But it saved me a ton of time, and it was reliable.
+
+I bring it up because it says the essential thing: **I've always been someone who builds tooling to save time.** AI didn't change my philosophy — it changed my means. Yesterday, bash. Today, agents, indexed docs, guardrails in code. The same reflex, a different medium.
+
+Today, a small local model — Gemma 3, in its 4-billion-parameter variant — runs on my Mac for simple, repetitive tasks: summarizing, rephrasing. For harder reasoning, I go through a more powerful cloud model. But again: the model matters less than what I built around it. That's where it gets interesting.
+
+## 1. Context: the CLAUDE.md files
+
+The first thing I set up was a way for the assistant to know me, so I don't have to re-explain everything every session.
+
+I use files called `CLAUDE.md`: plain text files the assistant reads on startup — it's Claude Code's convention, the tool I currently use, even if the idea carries over to any assistant. I note my context (who I am, my stack, my preferences) and my working rules. I organize them by levels: one global file, one per broad domain, one per project. The most specific complements the most general.
+
+Three lines are enough to set the tone:
+
+```text
+# CLAUDE.md
+- Reply in French, direct tone, no empty filler
+- Never commit or push to the main branch
+- Conventional commits, no AI signature in messages
+```
+
+So the assistant knows how I work and suggests things in the right style without me resetting the scene. But these are still instructions. Over a long session, it can lose sight of them. More on that below.
+
+## 2. The docs first, the instructions second
+
+A model answers with its knowledge — and its knowledge is often **outdated**. The example I hit most often: Tailwind CSS. In version 3, you configured the theme in a `tailwind.config.js` file. In version 4, it goes through a `@theme` directive directly in the CSS. Since v3 is far more represented in the training data, the model spontaneously hands you the old pattern. And you lose ten minutes debugging a config that no longer applies.
+
+My countermeasure: I index the documentation of the versions **I actually use** in a local vector database (Qdrant), which I expose to the assistant through an **MCP** server — the Model Context Protocol, which standardizes the link between a model and my own sources. Before answering about a technology, it's instructed to consult that database. Concretely, when I ask it something about Tailwind, it reads *my* v4 docs — not its fuzzy memory of v3.
+
+The logic is preventive, not reactive: I don't wait for the model to be wrong to correct it, I keep it from being wrong by handing it the right source upfront. It's probably the most cost-effective piece of my whole setup.
+
+## 3. Workflows: the skills
+
+A step above plain context, I've codified **procedures**: not just "who does what", but "how we do it, here".
+
+The clearest example is my `/pre-pr` command on Rodd, my rowing app. When I'm ready to open a pull request, it runs through a checklist on its own that I'd surely forget by hand: it arranges the work into clean commits, auto-fixes formatting, checks that the ticket's acceptance criteria are met, runs specialized audits **in parallel** depending on which files I touched, runs the build and tests — and creates the PR **only if everything passes**.
+
+A discipline that's fallible when it rests on my vigilance, made systematic because it's encoded.
+
+## 4. The executors: the agents
+
+Then I stopped treating AI as a do-everything assistant and started getting specialized agents, each focused on a precise topic.
+
+In Rodd, an agent acts as my coach. At first I was rowing on a generic program found on forums, for several weeks. Then I gave the agent access to my real training data — a SQLite database — and asked it to analyze them. It produced tailored programs: based on what I'd actually done, and which also adjust to the user's BMI. We go from the "average" program found on a forum to "my" program.
+
+I also have a POC I called **maasto**, "the field" in Finnish. You give it a GPS point in the mountains and it generates a report on snow and hiking conditions. Under the hood, nothing magical: one module per data source — weather, satellite imagery, avalanche bulletin (BERA), recent Camptocamp outings — each hitting its API directly, and a final module that cross-references everything into a report. When the weather forecast is wrong, it's these real field outings that set things straight. That's where the name comes from. The code is open: [github.com/daviani/maasto](https://github.com/daviani/maasto).
+
+The two share the same logic: they rely on real data and deliver a precise service.
+
+## 5. The guardrails: the hooks
+
+Letting an agent work on its own is convenient — provided you stop it from doing damage. And a polite instruction in a prompt isn't enough.
+
+The rules I never want to see slip, I put directly in code. Before each sensitive action, a script triggers and can block everything: no commit signed by an AI, no writing to the main branch, no pull request until the audits have run. On Rodd, one of these scripts even protects the project's architecture: if a change breaks a design rule, it refuses the edit.
+
+The distinction from `CLAUDE.md` matters. A `CLAUDE.md` is an instruction the assistant is supposed to follow but can forget. A script is a wall that doesn't move, even when the model insists. It's *secure by design* applied to my tooling: the rules I can't afford to see slip don't rest on the model's goodwill — they're wired in. The two levels complement each other: the `CLAUDE.md` gives context, the hook closes the door on mistakes.
+
+## At scale: a system, not gadgets
+
+Taken separately, all this can look like a hobbyist's tinkering. It's when I look at Rodd as a whole that I see something else: a ticket I pick up, code I write, audits that run, a PR that goes out — every step tooled, and the steps chained together. A chain, not a collection of tricks.
+
+It's that move to scale that convinced me I wasn't wasting my time on gadgets: I'd built a way of working.
+
+## What I take from it
+
+Deep down, here's what changed for me: before, I waited for the tool to improve on its own; now, I adapt it to how I work. I no longer use AI as a crutch to fill what I can't do, but to move faster on what I already know.
+
+It has a price: all this takes time to set up and maintain. But once in place, I wouldn't go back.
+
+One last thing, in honesty: **this is my angle today.** It has already changed once — from the bash script to agents — and it will change again. My next step, I'd like it to be taking the local model off my machine and into production on a server. The thread itself has never moved: build tooling to move faster. Only the tools change.
