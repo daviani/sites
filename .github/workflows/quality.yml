@@ -2,7 +2,7 @@ name: Quality & Deploy
 
 on:
   push:
-    branches: [main, feat/testing-stack-vitest-playwright]
+    branches: [main, epic/**, feat/testing-stack-vitest-playwright]
   pull_request:
     branches: [main]
 
