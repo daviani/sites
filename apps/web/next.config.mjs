@@ -88,6 +88,18 @@ const nextConfig = {
     ];
   },
 
+  // Redirection 301 : l'article a été renommé après une première mise en ligne
+  // (six-mois-ia-en-local → workflow-ia-2026) — on préserve l'ancienne URL.
+  async redirects() {
+    return [
+      {
+        source: '/blog/six-mois-ia-en-local',
+        destination: '/blog/workflow-ia-2026',
+        permanent: true,
+      },
+    ];
+  },
+
   // Variables d'environnement publiques
   env: {
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL || 'https://daviani.dev',

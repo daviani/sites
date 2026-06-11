@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="96 118 388 268" width="388" height="268" font-family="var(--ill-font-mono, &#39;JetBrains Mono&#39;, ui-monospace, &#39;SF Mono&#39;, Menlo, monospace)">
+  <rect width="560" height="420" fill="var(--ill-bg, #060C17)"></rect>
+  <g stroke="var(--ill-line, #243352)" stroke-width="2">
+    <line x1="290" y1="270" x2="140" y2="180"></line>
+    <line x1="290" y1="270" x2="290" y2="162"></line>
+    <line x1="290" y1="270" x2="440" y2="180"></line>
+    <line x1="290" y1="270" x2="420" y2="340"></line>
+    <line x1="290" y1="270" x2="160" y2="340"></line>
+  </g>
+  <g font-size="11" text-anchor="middle">
+    <g transform="translate(140,180)"><circle r="30" fill="var(--ill-surface, #111B2E)" stroke="var(--ill-accent-2, #5BB8D4)" stroke-width="2"></circle><text y="4" fill="var(--ill-ink, #E2E8F0)" data-i18n="agents.weather">météo</text></g>
+    <g transform="translate(290,162)"><circle r="30" fill="var(--ill-surface, #111B2E)" stroke="var(--ill-accent-2, #5BB8D4)" stroke-width="2"></circle><text y="-2" fill="var(--ill-ink, #E2E8F0)" data-i18n="agents.satellite.l1">satel-</text><text y="11" fill="var(--ill-ink, #E2E8F0)" data-i18n="agents.satellite.l2">lite</text></g>
+    <g transform="translate(440,180)"><circle r="30" fill="var(--ill-surface, #111B2E)" stroke="var(--ill-accent-2, #5BB8D4)" stroke-width="2"></circle><text y="4" fill="var(--ill-ink, #E2E8F0)" data-i18n="agents.bera">BERA</text></g>
+    <g transform="translate(420,340)"><circle r="30" fill="var(--ill-surface, #111B2E)" stroke="var(--ill-accent-2, #5BB8D4)" stroke-width="2"></circle><text y="4" fill="var(--ill-ink, #E2E8F0)" data-i18n="agents.outings">sorties</text></g>
+    <g transform="translate(160,340)"><circle r="30" fill="var(--ill-surface, #111B2E)" stroke="var(--ill-accent-2, #5BB8D4)" stroke-width="2"></circle><text y="0" fill="var(--ill-ink, #E2E8F0)" data-i18n="agents.data.l1">données</text><text y="14" fill="var(--ill-ink, #E2E8F0)" data-i18n="agents.data.l2">réelles</text></g>
+  </g>
+  <g transform="translate(290,270)">
+    <path d="M0 -48 L42 -24 L42 24 L0 48 L-42 24 L-42 -24 Z" fill="var(--ill-surface-2, #16263F)" stroke="var(--ill-accent, #7BE0B5)" stroke-width="2.5"></path>
+    <text y="-2" fill="var(--ill-accent, #7BE0B5)" font-size="13" text-anchor="middle" data-i18n="agents.report">rapport</text>
+    <text y="15" fill="var(--ill-muted, #7A8BA0)" font-size="11" text-anchor="middle">maasto</text>
+  </g>
+</svg>

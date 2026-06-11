@@ -66,8 +66,8 @@ export default async function BlogPost({ params }: BlogPostProps) {
   }
 
   // Corps rendus côté serveur (coloration Shiki async) puis passés au composant client.
-  const bodyFr = <MarkdocContent content={article.content} />;
-  const bodyEn = article.contentEn ? <MarkdocContent content={article.contentEn} /> : null;
+  const bodyFr = <MarkdocContent content={article.content} locale="fr" />;
+  const bodyEn = article.contentEn ? <MarkdocContent content={article.contentEn} locale="en" /> : null;
 
   return (
     <div>
