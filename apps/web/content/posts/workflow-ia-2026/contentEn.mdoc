@@ -1,3 +1,5 @@
+{% illustration name="hero" alt="Row of the five tooling layers around a local AI model: context, indexed docs, skills, agents, guardrails" /%}
+
 ## The trigger
 
 At my previous employer, I had AI licenses and barely used them, for lack of time to get into it seriously. Over the past six months, that has changed.
@@ -16,6 +18,8 @@ Today, a small local model — Gemma 3, in its 4-billion-parameter variant — r
 
 ## 1. Context: the CLAUDE.md files
 
+{% illustration name="1-contexte" alt="Icon of the CLAUDE.md context files the assistant reads" caption="One file per level: global, per domain, per project — the most specific complements the most general." /%}
+
 The first thing I set up was a way for the assistant to know me, so I don't have to re-explain everything every session.
 
 I use files called `CLAUDE.md`: plain text files the assistant reads on startup — it's Claude Code's convention, the tool I currently use, even if the idea carries over to any assistant. I note my context (who I am, my stack, my preferences) and my working rules. I organize them by levels: one global file, one per broad domain, one per project. The most specific complements the most general.
@@ -33,6 +37,8 @@ So the assistant knows how I work and suggests things in the right style without
 
 ## 2. The docs first, the instructions second
 
+{% illustration name="2-doc" alt="Icon of locally indexed documentation (RAG)" caption="Preventive, not reactive: query the right version's docs upfront." /%}
+
 A model answers with its knowledge — and its knowledge is often **outdated**. The example I hit most often: Tailwind CSS. In version 3, you configured the theme in a `tailwind.config.js` file. In version 4, it goes through a `@theme` directive directly in the CSS. Since v3 is far more represented in the training data, the model spontaneously hands you the old pattern. And you lose ten minutes debugging a config that no longer applies.
 
 My countermeasure: I index the documentation of the versions **I actually use** in a local vector database (Qdrant), which I expose to the assistant through an **MCP** server — the Model Context Protocol, which standardizes the link between a model and my own sources. Before answering about a technology, it's instructed to consult that database. Concretely, when I ask it something about Tailwind, it reads *my* v4 docs — not its fuzzy memory of v3.
@@ -41,6 +47,8 @@ The logic is preventive, not reactive: I don't wait for the model to be wrong to
 
 ## 3. Workflows: the skills
 
+{% illustration name="3-skills" alt="Checklist icon: workflows codified as skills" caption="A codified procedure: /pre-pr chains formatting, audits, build and PR." /%}
+
 A step above plain context, I've codified **procedures**: not just "who does what", but "how we do it, here".
 
 The clearest example is my `/pre-pr` command on Rodd, my rowing app. When I'm ready to open a pull request, it runs through a checklist on its own that I'd surely forget by hand: it arranges the work into clean commits, auto-fixes formatting, checks that the ticket's acceptance criteria are met, runs specialized audits **in parallel** depending on which files I touched, runs the build and tests — and creates the PR **only if everything passes**.
@@ -48,6 +56,8 @@ The clearest example is my `/pre-pr` command on Rodd, my rowing app. When I'm re
 A discipline that's fallible when it rests on my vigilance, made systematic because it's encoded.
 
 ## 4. The executors: the agents
+
+{% illustration name="4-agents" alt="Node-network icon: the specialized agents" caption="Real data, a precise service." /%}
 
 Then I stopped treating AI as a do-everything assistant and started getting specialized agents, each focused on a precise topic.
 
@@ -58,6 +68,8 @@ I also have a POC I called **maasto**, "the field" in Finnish. You give it a GPS
 The two share the same logic: they rely on real data and deliver a precise service.
 
 ## 5. The guardrails: the hooks
+
+{% illustration name="5-hooks" alt="Padlock icon: the guardrails wired into the code" caption="A wall that doesn't move, even when the model insists." /%}
 
 Letting an agent work on its own is convenient — provided you stop it from doing damage. And a polite instruction in a prompt isn't enough.
 

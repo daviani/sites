@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="104 104 400 284" width="400" height="284" font-family="var(--ill-font-mono, &#39;JetBrains Mono&#39;, ui-monospace, &#39;SF Mono&#39;, Menlo, monospace)">
+  <rect width="560" height="420" fill="var(--ill-bg, #060C17)"></rect>
+  <rect x="118" y="116" width="300" height="150" rx="10" fill="var(--ill-surface, #111B2E)" stroke="var(--ill-line, #243352)" stroke-width="1.5"></rect>
+  <text x="136" y="140" font-size="12"><tspan fill="var(--ill-muted, #7A8BA0)" data-i18n="ctx.level.global">global</tspan><tspan fill="var(--ill-muted, #7A8BA0)"> · ~/CLAUDE.md</tspan></text>
+  <rect x="142" y="152" width="300" height="150" rx="10" fill="var(--ill-surface, #111B2E)" stroke="var(--ill-muted, #7A8BA0)" stroke-width="1.5"></rect>
+  <text x="160" y="176" font-size="12"><tspan fill="var(--ill-ink, #E2E8F0)" data-i18n="ctx.level.dev">dev</tspan><tspan fill="var(--ill-muted, #7A8BA0)"> · ~/Dev/CLAUDE.md</tspan></text>
+  <rect x="166" y="188" width="300" height="150" rx="10" fill="var(--ill-surface, #111B2E)" stroke="var(--ill-accent-2, #5BB8D4)" stroke-width="1.5"></rect>
+  <text x="184" y="212" font-size="12"><tspan fill="var(--ill-accent-2, #5BB8D4)" data-i18n="ctx.level.ios">iOS</tspan><tspan fill="var(--ill-muted, #7A8BA0)"> · ~/Dev/iOS/CLAUDE.md</tspan></text>
+  <rect x="190" y="224" width="300" height="150" rx="10" fill="var(--ill-accent, #7BE0B5)" stroke="var(--ill-accent, #7BE0B5)" stroke-width="2"></rect>
+  <text x="208" y="248" font-size="12"><tspan fill="var(--ill-on-accent, #04140C)" font-weight="700" data-i18n="ctx.level.project">projet</tspan><tspan fill="var(--ill-on-accent, #04140C)" opacity="0.7"> · ~/Dev/iOS/Rodd/CLAUDE.md</tspan></text>
+  <g font-size="11.5" fill="var(--ill-on-accent, #04140C)">
+    <text x="208" y="270" data-i18n="ctx.rule.i18n">› strings via catalogue, jamais en dur</text>
+    <text x="208" y="292" data-i18n="ctx.rule.tests">› @Test décrit en FR, nommé en EN</text>
+    <text x="208" y="314" data-i18n="ctx.rule.ddd">› domaine pur, zéro dépendance infra</text>
+    <text x="208" y="336" data-i18n="ctx.rule.migrations">› ALTER TABLE oui, DROP TABLE non</text>
+  </g>
+</svg>

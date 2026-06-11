@@ -327,3 +327,19 @@ body::before {
     scroll-behavior: auto !important;
   }
 }
+
+/* Illustrations themables du blog : les SVG inline lisent var(--ill-*),
+   mappés ici sur les tokens Tulikettu (qui basculent déjà clair/sombre,
+   donc un seul SVG suffit pour les deux thèmes). */
+.article-illustration {
+  --ill-bg: var(--tuli-bg-page);
+  --ill-surface: var(--tuli-surface);
+  --ill-surface-2: var(--tuli-surface-el);
+  --ill-line: var(--tuli-surface-hi);
+  --ill-ink: var(--tuli-text-1);
+  --ill-muted: var(--tuli-text-2);
+  --ill-accent: var(--tuli-accent-2);
+  --ill-accent-2: var(--tuli-accent);
+  --ill-ok: var(--tuli-ok);
+  --ill-on-accent: var(--tuli-on-accent);
+}

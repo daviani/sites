@@ -1,15 +1,17 @@
 ---
-slug: six-mois-ia-en-local
+slug: workflow-ia-2026
 publishedAt: '2026-06-10'
 featured: false
-titleFr: "Six mois d'IA en local : le modèle compte moins que ce qu'on monte autour"
+titleFr: "Garde-fous, agents et local-first : mon workflow IA en 2026"
 excerptFr: "En six mois, mon usage de l'IA a radicalement changé — mais pas grâce aux modèles. Ce qui a tout changé, c'est l'outillage construit autour : contexte, doc indexée, skills, agents, garde-fous."
-titleEn: "Six Months of Local AI: The Model Matters Less Than What You Build Around It"
+titleEn: "Guardrails, agents and local-first: my 2026 AI workflow"
 excerptEn: "In six months my use of AI changed radically — but not because of the models. What changed everything is the tooling I built around them: context, indexed docs, skills, agents, guardrails."
 tags:
   - ia
   - outillage
 ---
+
+{% illustration name="hero" alt="Frise des cinq niveaux d'outillage autour d'un modèle d'IA local : contexte, doc indexée, skills, agents, garde-fous" /%}
 
 ## Le déclic
 
@@ -29,6 +31,8 @@ Aujourd'hui, un petit modèle local — Gemma 3, dans sa variante à 4 milliards
 
 ## 1. Le contexte : les CLAUDE.md
 
+{% illustration name="1-contexte" alt="Icône des fichiers de contexte CLAUDE.md lus par l'assistant" caption="Un fichier par niveau : global, par domaine, par projet — le plus précis complète le plus général." /%}
+
 La première chose que j'ai mise en place, c'est un moyen pour que l'assistant me connaisse, histoire de ne pas tout réexpliquer à chaque session.
 
 J'utilise des fichiers appelés `CLAUDE.md` : de simples fichiers texte que l'assistant lit au démarrage — c'est la convention de Claude Code, l'outil que j'utilise en ce moment, même si l'idée se transpose à n'importe quel assistant. J'y note mon contexte (qui je suis, ma stack, mes préférences) et mes règles de travail. Je les range par niveaux : un fichier global, un par grand domaine, un par projet. Le plus précis complète le plus général.
@@ -46,6 +50,8 @@ L'assistant sait donc comment je bosse et propose dans le bon style sans que j'a
 
 ## 2. La doc d'abord, les consignes ensuite
 
+{% illustration name="2-doc" alt="Icône d'une documentation indexée localement (RAG)" caption="Préventif, pas réactif : interroger la doc de la bonne version, d'office." /%}
+
 Un modèle répond avec ses connaissances — et ses connaissances sont souvent **périmées**. L'exemple que je rencontre le plus : Tailwind CSS. En version 3, on configurait le thème dans un fichier `tailwind.config.js`. En version 4, ça passe par une directive `@theme` directement dans le CSS. Comme la v3 est bien plus représentée dans les données d'entraînement, le modèle te ressort spontanément l'ancien pattern. Et tu perds dix minutes à débugger une config qui n'a plus lieu d'être.
 
 Ma parade : j'indexe la documentation des versions **que j'utilise réellement** dans une base vectorielle locale (Qdrant), que j'expose à l'assistant via un serveur **MCP** — le Model Context Protocol, qui standardise le branchement entre un modèle et mes propres sources. Avant de répondre sur une techno, il a pour consigne de consulter cette base. Concrètement, quand je lui demande quelque chose sur Tailwind, il lit *ma* doc v4 — pas sa mémoire floue de la v3.
@@ -54,6 +60,8 @@ La logique est préventive, pas réactive : je n'attends pas que le modèle se t
 
 ## 3. Les workflows : les skills
 
+{% illustration name="3-skills" alt="Icône d'une checklist : les workflows codifiés en skills" caption="Une procédure codifiée : /pre-pr enchaîne format, audits, build et PR." /%}
+
 Un cran au-dessus du simple contexte, j'ai codifié des **procédures** : pas seulement « qui fait quoi », mais « comment on fait, ici ».
 
 L'exemple le plus parlant, c'est ma commande `/pre-pr` sur Rodd, mon appli d'aviron. Quand je suis prêt à ouvrir une pull request, elle déroule toute seule une checklist que j'oublierais à coup sûr à la main : elle range le travail en commits propres, auto-corrige le formatage, vérifie que les critères du ticket sont remplis, lance des audits spécialisés **en parallèle** selon les fichiers que j'ai touchés, fait tourner le build et les tests — et ne crée la PR **que si tout passe**.
@@ -61,6 +69,8 @@ L'exemple le plus parlant, c'est ma commande `/pre-pr` sur Rodd, mon appli d'avi
 Une discipline faillible quand elle repose sur ma vigilance, devenue systématique parce qu'elle est encodée.
 
 ## 4. Les exécutants : les agents
+
+{% illustration name="4-agents" alt="Icône d'un réseau de nœuds : les agents spécialisés" caption="Des données réelles, un service précis." /%}
 
 Ensuite, j'ai arrêté de traiter l'IA comme un assistant à tout faire pour en tirer des agents spécialisés sur un sujet précis.
 
@@ -71,6 +81,8 @@ J'ai aussi un POC que j'ai appelé **maasto**, « le terrain » en finnois. Tu l
 Les deux partagent la même logique : ils s'appuient sur des données réelles et rendent un service précis.
 
 ## 5. Les garde-fous : les hooks
+
+{% illustration name="5-hooks" alt="Icône d'un cadenas : les garde-fous câblés dans le code" caption="Un mur qui ne bouge pas, même quand le modèle insiste." /%}
 
 Laisser un agent travailler seul, c'est pratique — à condition de l'empêcher de faire des dégâts. Et une consigne polie dans un prompt ne suffit pas.
 
