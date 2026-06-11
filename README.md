@@ -1,17 +1,17 @@
 # daviani.dev
 
-> Portfolio professionnel avec Next.js 16, Turborepo et le design system @nordic-island/ui
+> Portfolio professionnel avec Next.js 16, Turborepo et le design system @tulikettu/ui
 
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
-[![Turborepo](https://img.shields.io/badge/Turborepo-2.6-EF4444?logo=turborepo)](https://turbo.build/)
+[![Turborepo](https://img.shields.io/badge/Turborepo-2.1-EF4444?logo=turborepo)](https://turbo.build/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 
 ---
 
 ## Vue d'ensemble
 
-Portfolio professionnel démontrant une expertise Full-Stack et DevOps. Architecture monorepo avec Next.js 16, design system découplé (`@nordic-island/ui`), i18n FR/EN, dark mode sans FOUC, sécurité renforcée et performance optimale.
+Portfolio professionnel démontrant une expertise Full-Stack et DevOps. Architecture monorepo avec Next.js 16, design system découplé (`@tulikettu/ui`), i18n FR/EN, dark mode sans FOUC, sécurité renforcée et performance optimale.
 
 ### Routes
 
@@ -19,14 +19,15 @@ Portfolio professionnel démontrant une expertise Full-Stack et DevOps. Architec
 |-------|-------------|
 | `/` | Homepage |
 | `/about` | À propos |
-| `/blog` | Articles techniques (Markdoc) |
+| `/blog` | Articles techniques (Markdoc, illustrations SVG bi-thème) |
+| `/projets` | Projets et réalisations |
+| `/contributions` | Contributions open-source |
 | `/contact` | Formulaire de contact sécurisé |
-| `/rdv` | Prise de rendez-vous (Calendly) |
 | `/cv` | CV interactif + export PDF |
 | `/photos` | Galerie photo |
 | `/legal` | Mentions légales RGPD |
 | `/accessibility` | Déclaration d'accessibilité RGAA |
-| `/sitemap` | Plan du site |
+| `/plan-du-site` | Plan du site |
 | `/help` | Aide à la navigation |
 
 ---
@@ -39,9 +40,9 @@ Portfolio professionnel démontrant une expertise Full-Stack et DevOps. Architec
 - Tailwind CSS 4 (design tokens, glass-card utility)
 - Framer Motion
 
-**Design System — `@nordic-island/ui`**
+**Design System — `@tulikettu/ui`**
 - Composants génériques : Header, Footer, SubHeader, Card, Button, IconButton, Breadcrumb, ScrollToTop, etc.
-- Palette Nord (nord-0 à nord-15) centralisée dans `constants/nord-colors.ts`
+- Palette Tulikettu (froide boréale) : modes **Päivä** (clair) / **Kaamos** (sombre), tokens `--tuli-*` (`constants/tuli-colors.ts`)
 - Dark mode (class-based, script bloquant anti-FOUC)
 - i18n découplé : le design system expose un `TranslationProvider` injectable, les traductions app restent dans `apps/web/locales/`
 - Easter eggs : Konami Code, Matrix Rain, Confetti
@@ -56,7 +57,7 @@ Portfolio professionnel démontrant une expertise Full-Stack et DevOps. Architec
 **Tooling**
 - Turborepo + pnpm workspaces
 - ESLint 9, Prettier
-- Vitest + Testing Library (579 tests)
+- Vitest + Testing Library
 - Playwright + axe-core (E2E + accessibility)
 - GitHub Actions CI (Unit Tests, Lint/Type/Build, E2E, Accessibility, Smoke, Deploy)
 
@@ -69,29 +70,22 @@ sites/
 ├── apps/
 │   └── web/                    # Next.js App Router
 │       ├── app/
-│       │   ├── about/
-│       │   ├── blog/
-│       │   ├── contact/
-│       │   ├── rdv/
-│       │   ├── cv/
-│       │   ├── photos/
-│       │   ├── legal/
-│       │   ├── accessibility/
-│       │   ├── sitemap/
-│       │   └── help/
+│       │   └── (site)/         # about, blog, projets, contributions, contact,
+│       │                       # cv, photos, legal, accessibility,
+│       │                       # plan-du-site, help
 │       ├── components/         # Composants métier (OwlLogo, ContactForm, ConsentGate...)
+│       ├── content/            # Articles blog (Markdoc), projets, contributions
 │       ├── hooks/              # Hooks app (useLanguage, useConsoleMessage...)
 │       ├── locales/            # Traductions FR/EN (app-specific)
-│       └── lib/
+│       └── lib/                # markdoc.tsx, images, i18n server...
 ├── packages/
-│   ├── ui/                     # @nordic-island/ui — Design system découplé
+│   ├── ui/                     # @tulikettu/ui — Design system découplé
 │   │   ├── src/
 │   │   │   ├── components/     # Composants génériques
 │   │   │   ├── hooks/          # useTheme, useTranslation, useMatrixRain...
-│   │   │   ├── constants/      # Nord color constants (NORD_0-15, NORD_AURORA)
-│   │   │   └── locales/        # Traductions par défaut (UI-only)
+│   │   │   └── constants/      # Tokens Tulikettu (tuli-colors.ts) + Nord (base)
 │   │   └── __tests__/
-│   └── config/                 # @nordic-island/config — ESLint, TypeScript
+│   └── config/                 # @tulikettu/config — ESLint, TypeScript
 ├── turbo.json
 └── pnpm-workspace.yaml
 ```
@@ -159,10 +153,10 @@ pnpm start
 - Skip-link pour navigation clavier
 - Conformité RGAA 4.1 / WCAG 2.1 AA
 - Support i18n (FR/EN) avec cookies
-- Mode sombre (Nord Theme, sans flash)
+- Mode sombre (Kaamos, sans flash)
 - Déclaration d'accessibilité
 - Page d'aide à la navigation
-- 88 tests axe-core automatisés en CI
+- Tests axe-core automatisés en CI
 
 ---
 
