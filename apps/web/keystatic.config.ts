@@ -26,6 +26,10 @@ export default config({
         // Identification
         slug: fields.slug({ name: { label: 'Slug (URL)' } }),
         publishedAt: fields.date({ label: 'Date de publication' }),
+        updatedAt: fields.date({
+          label: 'Dernière modification',
+          description: 'Optionnel — alimente le lastmod du sitemap (SEO). Vide = date de publication.',
+        }),
         featured: fields.checkbox({
           label: 'Article mis en avant',
           defaultValue: false,
@@ -127,6 +131,10 @@ export default config({
         name: fields.text({ label: 'Nom du projet', validation: { isRequired: true } }),
         featured: fields.checkbox({ label: 'Mis en avant', defaultValue: false }),
         order: fields.integer({ label: "Ordre d'affichage", defaultValue: 0 }),
+        updatedAt: fields.date({
+          label: 'Dernière modification',
+          description: 'Optionnel — alimente le lastmod du sitemap (SEO).',
+        }),
         status: fields.select({
           label: 'Statut',
           options: [
@@ -200,6 +208,10 @@ export default config({
         date: fields.text({ label: 'Date / période', description: 'ex. « ApéroWeb · mars 2025 »' }),
         link: fields.url({ label: 'Lien (optionnel)' }),
         order: fields.integer({ label: 'Ordre', defaultValue: 0 }),
+        updatedAt: fields.date({
+          label: 'Dernière modification',
+          description: 'Optionnel — alimente le lastmod du sitemap (SEO).',
+        }),
       },
     }),
   },

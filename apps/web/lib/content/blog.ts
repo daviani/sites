@@ -8,6 +8,7 @@ import { z } from 'zod';
 const metaSchema = z.object({
   slug: z.string(),
   publishedAt: z.string(),
+  updatedAt: z.string().default(''),
   featured: z.boolean().default(false),
   titleFr: z.string(),
   titleEn: z.string(),

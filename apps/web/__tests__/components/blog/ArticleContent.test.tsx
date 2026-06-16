@@ -19,6 +19,7 @@ describe('ArticleContent', () => {
     meta: {
       slug: 'test-article',
       publishedAt: '2026-01-30',
+      updatedAt: '',
       titleFr: 'Titre en Francais',
       titleEn: 'Title in English',
       excerptFr: 'Extrait en francais',

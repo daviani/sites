@@ -32,6 +32,7 @@ const projectSchema = z.object({
   featured: z.boolean().default(false),
   order: z.number().default(0),
   status: z.enum(PROJECT_STATUSES).default('live'),
+  updatedAt: z.string().default(''),
   taglineFr: z.string(),
   taglineEn: z.string().default(''),
   summaryFr: z.string().default(''),
@@ -105,6 +106,7 @@ const contributionSchema = z.object({
   descriptionEn: z.string().default(''),
   date: z.string().default(''),
   dateEn: z.string().default(''),
+  updatedAt: z.string().default(''),
   /** Lien rapide (ex. /blog) affiché sur la row, sans page détail. */
   link: z.string().nullable().optional(),
   order: z.number().default(0),

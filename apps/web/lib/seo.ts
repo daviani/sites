@@ -36,6 +36,7 @@ export function pageMetadata(opts: {
       url: path,
       siteName: SITE_NAME,
       locale: 'fr_FR',
+      alternateLocale: ['en_US'],
       type,
       images: [OG_IMAGE],
     },

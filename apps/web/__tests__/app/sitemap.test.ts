@@ -49,4 +49,19 @@ describe('sitemap', () => {
     );
     expect(new Set(dynamicInSitemap)).toEqual(new Set(expectedDynamic));
   });
+
+  it('date les pages statiques avec la constante de refonte (2026-06-10)', () => {
+    const home = entries.find((e) => e.url === base);
+    expect(home?.lastModified).toBeInstanceOf(Date);
+    expect((home!.lastModified as Date).toISOString().slice(0, 10)).toBe('2026-06-10');
+  });
+
+  it("n'utilise jamais la date de build (aujourd'hui) comme lastmod", () => {
+    // Régression : avant le fix, statiques/projets/contributions étaient datés à new Date() (build).
+    const today = new Date().toISOString().slice(0, 10);
+    for (const entry of entries) {
+      expect(entry.lastModified).toBeInstanceOf(Date);
+      expect((entry.lastModified as Date).toISOString().slice(0, 10)).not.toBe(today);
+    }
+  });
 });
