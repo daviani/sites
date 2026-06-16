@@ -36,7 +36,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     a: ({ href, children }) => (
       <a
         href={href}
-        className="text-fg-muted dark:text-accent hover:underline cursor-pointer"
+        className="text-fg-muted dark:text-accent hover:underline cursor-pointer rounded-sm focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 dark:focus:ring-offset-bg"
         target={href?.startsWith('http') ? '_blank' : undefined}
         rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
       >
