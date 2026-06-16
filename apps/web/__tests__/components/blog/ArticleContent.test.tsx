@@ -41,6 +41,18 @@ describe('ArticleContent', () => {
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Titre en Francais');
   });
 
+  it('donne un id au titre pour l’aria-labelledby de l’article', () => {
+    renderArticle();
+    expect(screen.getByRole('heading', { level: 1 })).toHaveAttribute('id', 'article-title');
+  });
+
+  it('affiche l’attribution auteur (rel=author vers /about)', () => {
+    renderArticle();
+    const author = screen.getByRole('link', { name: 'Daviani Fillatre' });
+    expect(author).toHaveAttribute('rel', 'author');
+    expect(author).toHaveAttribute('href', '/about');
+  });
+
   it('renders article excerpt', () => {
     renderArticle();
     expect(screen.getByText('Extrait en francais')).toBeInTheDocument();

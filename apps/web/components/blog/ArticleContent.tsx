@@ -27,11 +27,21 @@ export function ArticleContent({ article, bodyFr, bodyEn }: ArticleContentProps)
     <>
       {/* Header */}
       <header className="mb-10 p-8 glass-card">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4 text-fg">
+        <h1 id="article-title" className="text-3xl md:text-4xl font-bold mb-4 text-fg">
           {title}
         </h1>
         <p className="text-lg text-fg-muted mb-6 leading-relaxed">{excerpt}</p>
         <div className="flex items-center gap-4 text-sm text-fg-muted">
+          <address className="not-italic">
+            {isEnglish ? 'By ' : 'Par '}
+            <a
+              rel="author"
+              href="/about"
+              className="font-medium hover:text-accent hover:underline underline-offset-4 transition-colors"
+            >
+              Daviani Fillatre
+            </a>
+          </address>
           <time dateTime={meta.publishedAt}>
             {new Date(meta.publishedAt).toLocaleDateString(dateLocale, {
               year: 'numeric',

@@ -51,6 +51,8 @@ export function Header({
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   // extended au sommet, compacted dès qu'on défile (seuil bas, déclenchement franc).
   useEffect(() => {
@@ -72,6 +74,23 @@ export function Header({
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen]);
+
+  // Gestion du focus clavier du menu mobile : focus dans le menu à l'ouverture,
+  // Escape pour fermer et rendre le focus au bouton déclencheur (disclosure, pas de trap).
+  useEffect(() => {
+    if (!isOpen) return;
+    menuRef.current?.querySelector<HTMLElement>('a')?.focus();
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+        triggerRef.current?.focus();
+      }
+    }
+
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
   }, [isOpen]);
 
   const isActive = (href: string) =>
@@ -166,6 +185,7 @@ export function Header({
 
           <div className="md:hidden">
             <button
+              ref={triggerRef}
               onClick={() => setIsOpen(!isOpen)}
               className="p-3 rounded-lg text-fg-muted hover:bg-surface-hi focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 transition-colors"
               aria-expanded={isOpen}
@@ -187,7 +207,7 @@ export function Header({
 
         {/* Menu mobile déroulant */}
         {isOpen && (
-          <div id="mobile-menu" className="md:hidden pb-4 mt-2">
+          <div id="mobile-menu" ref={menuRef} className="md:hidden pb-4 mt-2">
             {navItems.length > 0 && (
               <ul className="flex flex-col items-center gap-1">
                 {navItems.map((item) => {

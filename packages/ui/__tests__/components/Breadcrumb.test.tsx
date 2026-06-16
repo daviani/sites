@@ -10,6 +10,11 @@ describe('Breadcrumb', () => {
       expect(nav).toHaveAttribute('aria-label', "Fil d'Ariane");
     });
 
+    it('expose role="list" pour préserver la sémantique malgré list-style:none', () => {
+      render(<Breadcrumb items={[{ href: '/blog', label: 'Blog' }]} homeLabel="Accueil" />);
+      expect(screen.getByRole('list')).toBeInTheDocument();
+    });
+
     it('always includes home as first item', () => {
       render(<Breadcrumb items={[]} homeLabel="Accueil" />);
       const homeText = screen.getByText('Accueil');

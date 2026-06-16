@@ -169,6 +169,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
             onChange={handleChange}
             placeholder={t('contact.form.namePlaceholder')}
             required
+            aria-required="true"
             minLength={2}
             disabled={status === 'loading'}
             aria-invalid={!!fieldErrors.name}
@@ -195,6 +196,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
             onChange={handleChange}
             placeholder={t('contact.form.emailPlaceholder')}
             required
+            aria-required="true"
             disabled={status === 'loading'}
             aria-invalid={!!fieldErrors.email}
             aria-describedby={fieldErrors.email ? 'email-error' : undefined}
@@ -219,6 +221,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
             onChange={handleChange}
             placeholder={t('contact.form.messagePlaceholder')}
             required
+            aria-required="true"
             minLength={10}
             maxLength={2000}
             rows={5}

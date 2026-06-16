@@ -71,7 +71,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
 
   return (
     <div>
-      <article className="w-[var(--content-width)] mx-auto px-4 pt-5 pb-16">
+      <article aria-labelledby="article-title" className="w-[var(--content-width)] mx-auto px-4 pt-5 pb-16">
         <JsonLd
           data={articleJsonLd({
             title: article.meta.titleFr,

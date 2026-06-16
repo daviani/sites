@@ -17,7 +17,7 @@ export function Breadcrumb({ items, homeLabel = 'Home', currentLabel, ariaLabel 
 
   return (
     <nav aria-label={ariaLabel} className="text-base">
-      <ol className="flex items-center gap-2 flex-wrap">
+      <ol role="list" className="flex items-center gap-2 flex-wrap">
         {allItems.map((item, index) => {
           const isLast = index === allItems.length - 1 && !currentLabel;
 

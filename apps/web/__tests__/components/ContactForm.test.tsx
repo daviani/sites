@@ -58,6 +58,13 @@ describe('ContactForm', () => {
       expect(screen.getByRole('button', { name: 'Envoyer' })).toBeInTheDocument();
     });
 
+    it('marque les champs requis avec aria-required', () => {
+      render(<ContactForm onSubmit={mockOnSubmit} />);
+      expect(screen.getByLabelText('Nom')).toHaveAttribute('aria-required', 'true');
+      expect(screen.getByLabelText('Email')).toHaveAttribute('aria-required', 'true');
+      expect(screen.getByLabelText('Message')).toHaveAttribute('aria-required', 'true');
+    });
+
     it('has placeholders on inputs', () => {
       render(<ContactForm onSubmit={mockOnSubmit} />);
 
