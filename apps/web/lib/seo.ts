@@ -1,11 +1,19 @@
 import type { Metadata } from 'next';
 import { getBaseUrl, SITE_NAME, SITE_DESCRIPTION } from '@/lib/domains/config';
 
-/** Image Open Graph par défaut (logo de marque), partagée par toutes les pages. */
+/** Logo de marque (carré) — utilisé comme image d'entité dans le JSON-LD Person. */
 const OG_IMAGE = {
   url: '/brand/tulikettu-full-ondark-512.png',
   width: 512,
   height: 512,
+  alt: SITE_NAME,
+};
+
+/** Bannière de partage social (1200×630) générée à la volée — voir app/api/og. */
+const OG_SOCIAL = {
+  url: '/api/og',
+  width: 1200,
+  height: 630,
   alt: SITE_NAME,
 };
 
@@ -38,13 +46,13 @@ export function pageMetadata(opts: {
       locale: 'fr_FR',
       alternateLocale: ['en_US'],
       type,
-      images: [OG_IMAGE],
+      images: [OG_SOCIAL],
     },
     twitter: {
       card: 'summary_large_image',
       title: ogTitle,
       description,
-      images: [OG_IMAGE.url],
+      images: [OG_SOCIAL.url],
     },
   };
 }

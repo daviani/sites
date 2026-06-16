@@ -39,13 +39,13 @@ export const metadata: Metadata = {
     locale: 'fr_FR',
     alternateLocale: ['en_US'],
     type: 'website',
-    images: [{ url: '/brand/tulikettu-full-ondark-512.png', width: 512, height: 512, alt: SITE_NAME }],
+    images: [{ url: '/api/og', width: 1200, height: 630, alt: SITE_NAME }],
   },
   twitter: {
     card: 'summary_large_image',
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
-    images: ['/brand/tulikettu-full-ondark-512.png'],
+    images: ['/api/og'],
   },
 };
 
