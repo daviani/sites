@@ -30,6 +30,7 @@ describe('FeaturedArticle', () => {
     meta: {
       slug: 'featured-article',
       publishedAt: '2026-01-30',
+      updatedAt: '',
       titleFr: 'Article en vedette',
       titleEn: 'Featured Article',
       excerptFr: 'Ceci est un article vedette',

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
-import { pageMetadata } from '@/lib/seo';
+import { pageMetadata, personJsonLd } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
 import { Breadcrumb } from '@tulikettu/ui';
 import { getServerTranslations } from '@/lib/i18n/server';
 
@@ -19,6 +20,7 @@ export default async function AboutPage() {
 
   return (
     <div className="w-[var(--content-width)] mx-auto px-4 sm:px-6 py-8 md:py-12">
+      <JsonLd data={personJsonLd()} />
       <Breadcrumb
         items={[{ href: '/about', label: t('nav.about.title') }]}
         homeLabel={t('common.home')}

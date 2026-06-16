@@ -8,7 +8,8 @@ import { imageDimensions } from '@/lib/images';
 import { getServerTranslations } from '@/lib/i18n/server';
 import { getProjectBySlug, getProjectSlugs, STATUS_VARIANT } from '@/lib/content/projects';
 import { getAllArticles } from '@/lib/content/blog';
-import { pageMetadata } from '@/lib/seo';
+import { pageMetadata, projectJsonLd } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!project) return { title: 'Projet' };
   return pageMetadata({
     title: project.name,
-    description: project.taglineFr,
+    description: project.summaryFr || project.taglineFr,
     path: `/projets/${slug}`,
     type: 'article',
   });
@@ -48,6 +49,14 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
   return (
     <div>
+      <JsonLd
+        data={projectJsonLd({
+          name: project.name,
+          description: project.summaryFr || project.taglineFr,
+          slug,
+          stack: project.stack,
+        })}
+      />
       <div className="w-[var(--content-width)] mx-auto px-4 pt-5 pb-16">
         <div className="mb-8">
           <Breadcrumb

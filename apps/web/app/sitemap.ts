@@ -1,16 +1,22 @@
 import type { MetadataRoute } from 'next';
 import { getBaseUrl } from '@/lib/domains/config';
 import { getAllArticles } from '@/lib/content/blog';
-import { getProjectSlugs, getContributionSlugs } from '@/lib/content/projects';
+import { getAllProjects, getAllContributions } from '@/lib/content/projects';
 
 /**
  * /sitemap.xml — généré par Next (file convention).
  * Pages statiques (priorité décroissante selon l'importance SEO) + routes
  * dynamiques (articles de blog, projets, contributions avec page détail).
  */
+/**
+ * Date de dernière refonte des pages statiques (go-live v2). À bumper
+ * manuellement lors d'un changement de contenu statique significatif —
+ * un lastmod figé à la date de build est un faux signal pour les crawlers.
+ */
+const SITE_UPDATED = new Date('2026-06-10');
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = getBaseUrl();
-  const now = new Date();
 
   const staticPages: Array<{
     path: string;
@@ -33,7 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticEntries: MetadataRoute.Sitemap = staticPages.map(
     ({ path, priority, changeFrequency }) => ({
       url: `${baseUrl}${path}`,
-      lastModified: now,
+      lastModified: SITE_UPDATED,
       changeFrequency,
       priority,
     }),
@@ -41,24 +47,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const articleEntries: MetadataRoute.Sitemap = getAllArticles().map((article) => ({
     url: `${baseUrl}/blog/${article.slug}`,
-    lastModified: new Date(article.meta.publishedAt),
+    lastModified: new Date(article.meta.updatedAt || article.meta.publishedAt),
     changeFrequency: 'monthly',
     priority: 0.7,
   }));
 
-  const projectEntries: MetadataRoute.Sitemap = getProjectSlugs().map((slug) => ({
-    url: `${baseUrl}/projets/${slug}`,
-    lastModified: now,
+  const projectEntries: MetadataRoute.Sitemap = getAllProjects().map((project) => ({
+    url: `${baseUrl}/projets/${project.slug}`,
+    lastModified: project.updatedAt ? new Date(project.updatedAt) : SITE_UPDATED,
     changeFrequency: 'monthly',
     priority: 0.6,
   }));
 
-  const contributionEntries: MetadataRoute.Sitemap = getContributionSlugs().map((slug) => ({
-    url: `${baseUrl}/contributions/${slug}`,
-    lastModified: now,
-    changeFrequency: 'monthly',
-    priority: 0.5,
-  }));
+  const contributionEntries: MetadataRoute.Sitemap = getAllContributions()
+    .filter((c) => c.hasDetail)
+    .map((c) => ({
+      url: `${baseUrl}/contributions/${c.slug}`,
+      lastModified: c.updatedAt ? new Date(c.updatedAt) : SITE_UPDATED,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    }));
 
   return [...staticEntries, ...articleEntries, ...projectEntries, ...contributionEntries];
 }

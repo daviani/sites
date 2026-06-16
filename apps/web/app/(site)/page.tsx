@@ -27,6 +27,7 @@ export default function HomePage() {
         featured: false,
         order: tuli.order,
         status: 'coming-soon',
+        updatedAt: '',
         taglineFr: 'Design system boréal open-source',
         taglineEn: 'Boreal open-source design system',
         summaryFr: tuli.descriptionFr,

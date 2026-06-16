@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import CvPageClient from './CvPageClient';
-import { pageMetadata } from '@/lib/seo';
+import { pageMetadata, cvPersonJsonLd } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
 
 export const metadata: Metadata = pageMetadata({
   title: 'CV',
@@ -10,5 +11,10 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function CvPage() {
-  return <CvPageClient />;
+  return (
+    <>
+      <JsonLd data={cvPersonJsonLd()} />
+      <CvPageClient />
+    </>
+  );
 }

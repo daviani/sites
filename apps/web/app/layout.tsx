@@ -26,7 +26,7 @@ const baseUrl = getBaseUrl();
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    template: '%s | Daviani Fillatre',
+    template: '%s · Daviani Fillatre',
     default: 'Daviani Fillatre — Développeur Full-Stack',
   },
   description: SITE_DESCRIPTION,
@@ -37,14 +37,15 @@ export const metadata: Metadata = {
     url: baseUrl,
     siteName: SITE_NAME,
     locale: 'fr_FR',
+    alternateLocale: ['en_US'],
     type: 'website',
-    images: [{ url: '/brand/tulikettu-full-ondark-512.png', width: 512, height: 512, alt: SITE_NAME }],
+    images: [{ url: '/api/og', width: 1200, height: 630, alt: SITE_NAME }],
   },
   twitter: {
     card: 'summary_large_image',
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
-    images: ['/brand/tulikettu-full-ondark-512.png'],
+    images: ['/api/og'],
   },
 };
 

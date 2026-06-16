@@ -225,4 +225,31 @@ describe('Header', () => {
       expect(button.className).toContain('focus:ring-2');
     });
   });
+
+  describe('focus management (clavier)', () => {
+    const navItems = [
+      { href: '/blog', label: 'Blog' },
+      { href: '/contact', label: 'Contact' },
+    ];
+
+    it('déplace le focus dans le menu à l’ouverture', () => {
+      render(<Header navItems={navItems} menuLabels={defaultMenuLabels} />);
+      fireEvent.click(screen.getByLabelText('Ouvrir le menu'));
+
+      const firstLink = within(document.getElementById('mobile-menu')!).getByText('Blog').closest('a');
+      expect(document.activeElement).toBe(firstLink);
+    });
+
+    it('ferme au clavier (Échap) et rend le focus au bouton déclencheur', () => {
+      render(<Header navItems={navItems} menuLabels={defaultMenuLabels} />);
+      fireEvent.click(screen.getByLabelText('Ouvrir le menu'));
+      expect(screen.getByLabelText('Fermer le menu')).toBeInTheDocument();
+
+      fireEvent.keyDown(document, { key: 'Escape' });
+
+      const reopenButton = screen.getByLabelText('Ouvrir le menu');
+      expect(reopenButton).toBeInTheDocument();
+      expect(document.activeElement).toBe(reopenButton);
+    });
+  });
 });
