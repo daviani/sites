@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { ArticleContent } from '@/components/blog/ArticleContent';
+import type { Article } from '@/lib/content/blog';
 
 vi.mock('@/hooks/use-language', () => ({
   useLanguage: () => ({
@@ -20,6 +21,8 @@ describe('ArticleContent', () => {
       slug: 'test-article',
       publishedAt: '2026-01-30',
       updatedAt: '',
+      keyTakeawaysFr: [],
+      keyTakeawaysEn: [],
       titleFr: 'Titre en Francais',
       titleEn: 'Title in English',
       excerptFr: 'Extrait en francais',
@@ -33,7 +36,7 @@ describe('ArticleContent', () => {
   const bodyFr = <div data-testid="body-fr">Corps FR</div>;
   const bodyEn = <div data-testid="body-en">Corps EN</div>;
 
-  const renderArticle = (article = mockArticle) =>
+  const renderArticle = (article: Article = mockArticle) =>
     render(<ArticleContent article={article} bodyFr={bodyFr} bodyEn={bodyEn} />);
 
   it('renders article title', () => {
@@ -51,6 +54,27 @@ describe('ArticleContent', () => {
     const author = screen.getByRole('link', { name: 'Daviani Fillatre' });
     expect(author).toHaveAttribute('rel', 'author');
     expect(author).toHaveAttribute('href', '/about');
+  });
+
+  it('affiche le temps de lecture', () => {
+    renderArticle();
+    expect(screen.getByText(/min de lecture/)).toBeInTheDocument();
+  });
+
+  it('n’affiche pas l’encadré résumé sans key takeaways', () => {
+    renderArticle(); // mockArticle a keyTakeawaysFr: []
+    expect(screen.queryByText(/Ce qu.+il faut retenir/)).not.toBeInTheDocument();
+  });
+
+  it('affiche l’encadré « Ce qu’il faut retenir » avec les puces et la mention IA', () => {
+    const article = {
+      ...mockArticle,
+      meta: { ...mockArticle.meta, keyTakeawaysFr: ['Premier point clé', 'Second point clé'] },
+    };
+    renderArticle(article);
+    expect(screen.getByText(/Ce qu.+il faut retenir/)).toBeInTheDocument();
+    expect(screen.getByText('Premier point clé')).toBeInTheDocument();
+    expect(screen.getByText('Résumé généré par IA')).toBeInTheDocument();
   });
 
   it('renders article excerpt', () => {
