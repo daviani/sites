@@ -6,6 +6,16 @@ titleFr: "RØDD : anatomie d'un build Swift & BLE en solo"
 excerptFr: "Connecter un rameur Bluetooth grand public à iOS : reverse-engineering, CoreBluetooth et le pivot vers Swift natif. Le récit d'un build solo."
 titleEn: "RØDD: Anatomy of a Solo Swift & BLE Build"
 excerptEn: "Connecting a consumer Bluetooth rower to iOS: reverse-engineering, CoreBluetooth and the move to native Swift. The story of a solo build."
+keyTakeawaysFr:
+  - RØDD est une app iOS de rameur conçue en solo, née d'un manque d'application de fitness satisfaisante et utilisée comme laboratoire d'un cycle de conception complet.
+  - Le pivot de React Native vers Swift natif s'est imposé pour gérer la communication CoreBluetooth en continu et l'export vers Apple HealthKit, là où le cross-platform montrait ses limites.
+  - Le build a suivi une chronologie stricte, du reverse-engineering des trames Bluetooth (via nRF Connect) à la couche CoreBluetooth, puis au crash-test physique en conditions réelles d'effort.
+  - Le parser FTMS lit la trame octet par octet et corrige un firmware parfois incohérent (d'où un garde-fou clampStrokeRate), avant une refonte UI complète sur un design system maison.
+keyTakeawaysEn:
+  - RØDD is a solo-built iOS rowing app, born from the lack of a satisfying fitness app and used as a lab for a full design cycle.
+  - The pivot from React Native to native Swift became obvious to handle continuous CoreBluetooth communication and Apple HealthKit export, where cross-platform fell short.
+  - The build followed a strict timeline, from reverse-engineering the Bluetooth frames (via nRF Connect) to the CoreBluetooth layer, then a real-effort physical crash-test.
+  - The FTMS parser reads the frame byte by byte and corrects an occasionally inconsistent firmware (hence a clampStrokeRate guard), before a full UI overhaul on an in-house design system.
 tags:
   - swift
   - bluetooth

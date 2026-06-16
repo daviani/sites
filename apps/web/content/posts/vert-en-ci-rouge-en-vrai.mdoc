@@ -6,6 +6,16 @@ titleFr: "Vert en CI, rouge en vrai : les limites des tests d'accessibilité aut
 excerptFr: "Ma CI testait l'accessibilité de daviani.dev et tout restait au vert. Un audit humain au lecteur d'écran a révélé ce que l'automatisation ignore."
 titleEn: "Green in CI, Red in Reality: The Limits of Automated Accessibility Testing"
 excerptEn: "My CI tested daviani.dev for accessibility and everything stayed green. A human screen-reader audit revealed what automation never sees."
+keyTakeawaysFr:
+  - La CI de daviani.dev rend l'accessibilité bloquante (axe-core WCAG 2.1 AA plus des tests RGAA maison), et tout était au vert.
+  - Un audit humain au lecteur d'écran (VoiceOver) a pourtant révélé des défauts invisibles pour la machine, comme « CV » lu « Cheval Vapeur », un contraste de 2,21 pour 1 en thème sombre ou des placeholders servant de libellés.
+  - Le fond du problème, les outils automatiques vérifient la présence et la syntaxe, pas le sens ni le contexte d'usage.
+  - La solution n'est pas machine ou humain mais machine et humain, chaque anomalie d'audit devenant un nouveau test automatisé pour ne jamais réapparaître.
+keyTakeawaysEn:
+  - daviani.dev's CI makes accessibility a blocking step (axe-core WCAG 2.1 AA plus hand-written RGAA tests), and everything passed green.
+  - Yet a human screen-reader audit (VoiceOver) surfaced flaws invisible to the machine, like « CV » read as « horsepower », a 2.21-to-1 contrast in dark mode, or placeholders used as labels.
+  - The root cause, automated tools check presence and syntax, not meaning or real usage context.
+  - The answer is not machine or human but machine and human, each audit finding becoming a new automated test so it never returns.
 tags:
   - accessibilite
   - ci-cd

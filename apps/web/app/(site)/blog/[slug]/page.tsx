@@ -7,6 +7,7 @@ import { Breadcrumb } from '@tulikettu/ui';
 import type { Metadata } from 'next';
 import { JsonLd } from '@/components/JsonLd';
 import { articleJsonLd } from '@/lib/seo';
+import { readingMinutes } from '@/lib/reading-time';
 
 interface BlogPostProps {
   params: Promise<{ slug: string }>;
@@ -79,6 +80,8 @@ export default async function BlogPost({ params }: BlogPostProps) {
             slug,
             publishedAt: article.meta.publishedAt,
             tags: article.meta.tags,
+            timeRequired: `PT${readingMinutes(article.content, 'fr')}M`,
+            abstract: article.meta.keyTakeawaysFr.join(' ') || undefined,
           })}
         />
         {/* Breadcrumb */}

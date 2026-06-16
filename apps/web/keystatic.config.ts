@@ -44,6 +44,11 @@ export default config({
           label: 'Extrait (FR)',
           multiline: true,
         }),
+        keyTakeawaysFr: fields.array(fields.text({ label: 'Point clé (FR)', multiline: true }), {
+          label: 'Ce qu’il faut retenir (FR)',
+          description: '3 à 5 puces résumant l’article (généré par IA puis relu).',
+          itemLabel: (p) => p.value || 'Point clé',
+        }),
 
         // Titre et extrait EN
         titleEn: fields.text({
@@ -53,6 +58,10 @@ export default config({
         excerptEn: fields.text({
           label: 'Excerpt (EN)',
           multiline: true,
+        }),
+        keyTakeawaysEn: fields.array(fields.text({ label: 'Key point (EN)', multiline: true }), {
+          label: 'Key takeaways (EN)',
+          itemLabel: (p) => p.value || 'Key point',
         }),
 
         // Tags

@@ -14,6 +14,8 @@ const metaSchema = z.object({
   titleEn: z.string(),
   excerptFr: z.string().default(''),
   excerptEn: z.string().default(''),
+  keyTakeawaysFr: z.array(z.string()).default([]),
+  keyTakeawaysEn: z.array(z.string()).default([]),
   tags: z.array(z.string()).default([]),
   project: z.string().nullable().optional(),
 });

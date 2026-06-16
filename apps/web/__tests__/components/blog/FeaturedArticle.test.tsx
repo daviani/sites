@@ -31,6 +31,8 @@ describe('FeaturedArticle', () => {
       slug: 'featured-article',
       publishedAt: '2026-01-30',
       updatedAt: '',
+      keyTakeawaysFr: [],
+      keyTakeawaysEn: [],
       titleFr: 'Article en vedette',
       titleEn: 'Featured Article',
       excerptFr: 'Ceci est un article vedette',

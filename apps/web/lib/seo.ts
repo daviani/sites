@@ -102,6 +102,10 @@ export function articleJsonLd(opts: {
   slug: string;
   publishedAt: string;
   tags: string[];
+  /** Durée de lecture ISO 8601 (ex. « PT4M »). */
+  timeRequired?: string;
+  /** Résumé (key takeaways joints) — doit être visible sur la page. */
+  abstract?: string;
 }) {
   const baseUrl = getBaseUrl();
   return {
@@ -116,6 +120,8 @@ export function articleJsonLd(opts: {
     inLanguage: 'fr-FR',
     author: { '@type': 'Person', name: SITE_NAME, url: baseUrl },
     publisher: { '@type': 'Person', name: SITE_NAME, url: baseUrl },
+    ...(opts.timeRequired ? { timeRequired: opts.timeRequired } : {}),
+    ...(opts.abstract ? { abstract: opts.abstract } : {}),
   };
 }
 

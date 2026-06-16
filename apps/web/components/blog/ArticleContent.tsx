@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { useLanguage } from '@/hooks/use-language';
+import { readingMinutes } from '@/lib/reading-time';
 import type { Article } from '@/lib/content/blog';
 
 interface ArticleContentProps {
@@ -22,6 +23,11 @@ export function ArticleContent({ article, bodyFr, bodyEn }: ArticleContentProps)
   const excerpt = isEnglish ? meta.excerptEn : meta.excerptFr;
   const dateLocale = isEnglish ? 'en-US' : 'fr-FR';
   const body = isEnglish && bodyEn ? bodyEn : bodyFr;
+  const takeaways = isEnglish ? meta.keyTakeawaysEn : meta.keyTakeawaysFr;
+  const minutes = readingMinutes(
+    isEnglish && article.contentEn ? article.contentEn : article.content,
+    isEnglish ? 'en' : 'fr'
+  );
 
   return (
     <>
@@ -50,6 +56,20 @@ export function ArticleContent({ article, bodyFr, bodyEn }: ArticleContentProps)
               timeZone: 'UTC',
             })}
           </time>
+          <span className="inline-flex items-center gap-1.5">
+            <svg
+              className="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3 2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            {minutes} {isEnglish ? 'min read' : 'min de lecture'}
+          </span>
         </div>
         {meta.tags.length > 0 && (
           <div className="mt-5 flex flex-wrap gap-2">
@@ -65,6 +85,22 @@ export function ArticleContent({ article, bodyFr, bodyEn }: ArticleContentProps)
           </div>
         )}
       </header>
+
+      {takeaways.length > 0 && (
+        <details open className="mb-8 p-6 glass-card border-l-4 border-fire">
+          <summary className="cursor-pointer text-sm font-mono uppercase tracking-wide text-fire">
+            {isEnglish ? 'Key takeaways' : 'Ce qu’il faut retenir'}
+          </summary>
+          <ol className="mt-4 list-decimal space-y-2 pl-5 text-fg-muted leading-relaxed">
+            {takeaways.map((point, i) => (
+              <li key={i}>{point}</li>
+            ))}
+          </ol>
+          <p className="mt-4 text-xs italic text-fg-subtle">
+            {isEnglish ? 'AI-generated summary' : 'Résumé généré par IA'}
+          </p>
+        </details>
+      )}
 
       {/* Content (pré-rendu serveur avec Shiki) : conteneur large, corps borné ~75ch. */}
       <div className="mt-8 p-8 glass-card">
