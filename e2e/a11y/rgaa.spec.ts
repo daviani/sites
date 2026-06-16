@@ -353,14 +353,55 @@ test.describe('Keyboard Navigation', () => {
   test('no keyboard trap', async ({ page }) => {
     await page.goto('/');
 
-    // Tab through many elements
-    for (let i = 0; i < 50; i++) {
+    // Intention RGAA : vérifier l'ABSENCE de piège clavier, c.-à-d. que le focus
+    // continue d'avancer et ne reste pas bloqué sur un seul élément. On ne dépend
+    // PAS d'un nombre d'éléments focusables hardcodé : on tabule N fois et on
+    // collecte une signature de document.activeElement à chaque étape.
+    const STEPS = 15;
+    const signatures: string[] = [];
+
+    for (let i = 0; i < STEPS; i++) {
       await page.keyboard.press('Tab');
+      const signature = await page.evaluate(() => {
+        const el = document.activeElement;
+        if (!el || el === document.body) return 'body';
+        const tag = el.tagName.toLowerCase();
+        const id = el.id ? `#${el.id}` : '';
+        const text = (el.textContent ?? '').trim().slice(0, 20);
+        return `${tag}${id}:${text}`;
+      });
+      signatures.push(signature);
     }
 
-    // Should not be stuck - we can still interact
-    const focused = page.locator(':focus');
-    await expect(focused).toBeVisible();
+    // 1. Le focus a bougé : il a visité plus d'un élément distinct.
+    //    Si tout est identique, le focus est piégé sur un seul élément.
+    const distinct = new Set(signatures);
+    expect(
+      distinct.size,
+      `Le focus est resté bloqué (piège clavier) : ${[...distinct].join(' | ')}`,
+    ).toBeGreaterThan(1);
+
+    // 2. Aucun élément ne capture le focus trop longtemps d'affilée.
+    //    On ignore `body` : repasser une fois par le body en fin de cycle Tab
+    //    est légitime (bouclage du focus), ce n'est pas un piège.
+    const MAX_REPEAT = 3;
+    let maxRun = 0;
+    let currentRun = 0;
+    let previous = '';
+    for (const signature of signatures) {
+      if (signature === 'body') {
+        currentRun = 0;
+        previous = '';
+        continue;
+      }
+      currentRun = signature === previous ? currentRun + 1 : 1;
+      previous = signature;
+      maxRun = Math.max(maxRun, currentRun);
+    }
+    expect(
+      maxRun,
+      `Un élément a capturé le focus ${maxRun} fois d'affilée (piège clavier) : ${signatures.join(' → ')}`,
+    ).toBeLessThanOrEqual(MAX_REPEAT);
   });
 });
 
