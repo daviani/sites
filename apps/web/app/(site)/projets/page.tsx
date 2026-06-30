@@ -5,7 +5,8 @@ import { getServerTranslations } from '@/lib/i18n/server';
 import { getAllProjects, getAllContributions, type Project, type Contribution } from '@/lib/content/projects';
 import { FeatureCard } from '@/components/projects/FeatureCard';
 import { ProjectCard } from '@/components/projects/ProjectCard';
-import { pageMetadata } from '@/lib/seo';
+import { pageMetadata, projectsCollectionJsonLd } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Projets',
@@ -26,6 +27,11 @@ export default async function ProjetsPage() {
 
   return (
     <div className="w-[var(--content-width)] mx-auto px-4 sm:px-6 py-8 md:py-12">
+      <JsonLd
+        data={projectsCollectionJsonLd(
+          projects.filter((p) => p.hasDetail).map((p) => ({ name: p.name, slug: p.slug })),
+        )}
+      />
       <Breadcrumb
         items={[{ href: '/projets', label: t('nav.projects.title') }]}
         homeLabel={t('common.home')}

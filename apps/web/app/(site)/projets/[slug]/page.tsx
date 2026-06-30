@@ -8,7 +8,7 @@ import { imageDimensions } from '@/lib/images';
 import { getServerTranslations } from '@/lib/i18n/server';
 import { getProjectBySlug, getProjectSlugs, STATUS_VARIANT } from '@/lib/content/projects';
 import { getAllArticles } from '@/lib/content/blog';
-import { pageMetadata, projectJsonLd } from '@/lib/seo';
+import { pageMetadata, projectJsonLd, ogImageUrl } from '@/lib/seo';
 import { JsonLd } from '@/components/JsonLd';
 
 interface PageProps {
@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: project.summaryFr || project.taglineFr,
     path: `/projets/${slug}`,
     type: 'article',
+    ogImage: ogImageUrl(project.name, project.taglineFr),
   });
 }
 
