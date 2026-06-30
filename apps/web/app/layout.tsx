@@ -30,14 +30,14 @@ export const metadata: Metadata = {
     default: 'Daviani Fillatre — Développeur Full-Stack',
   },
   description: SITE_DESCRIPTION,
-  alternates: { canonical: '/' },
+  // Pas de canonical global ici : il serait hérité par la 404 (faux signal).
+  // Chaque page déclare son propre canonical (pageMetadata, ou explicitement).
   openGraph: {
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
     url: baseUrl,
     siteName: SITE_NAME,
     locale: 'fr_FR',
-    alternateLocale: ['en_US'],
     type: 'website',
     images: [{ url: '/api/og', width: 1200, height: 630, alt: SITE_NAME }],
   },

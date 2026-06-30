@@ -27,13 +27,19 @@ interface ContactFormData {
 
 interface ContactFormProps {
   onSubmit: (data: ContactFormData) => Promise<ContactFormResult>;
+  /**
+   * Notifie le parent du message de statut à annoncer. Le succès démonte ce
+   * formulaire (early-return) : l'annonce doit donc passer par une région live
+   * PERMANENTE côté parent, jamais démontée — voir ContactPageClient.
+   */
+  onStatusChange?: (message: string) => void;
 }
 
 const FIELD_CLASS =
   'w-full px-[14px] py-3 rounded-xl bg-surface-el border border-input text-fg placeholder:text-fg-subtle focus:outline-none focus:border-accent focus:ring-[3px] focus:ring-accent/20 transition-all disabled:opacity-50';
 const LABEL_CLASS = 'block text-[13px] font-semibold text-fg-muted mb-2';
 
-export function ContactForm({ onSubmit }: ContactFormProps) {
+export function ContactForm({ onSubmit, onStatusChange }: ContactFormProps) {
   const { t } = useTranslation();
   const { execute, load, isLoaded } = useRecaptcha();
 
@@ -81,6 +87,9 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
       if (result.success) {
         setStatus('success');
         setFormData({ name: '', email: '', message: '', favorite_color: '' });
+        // Le success card remplace ce form (démontage) : on annonce via la
+        // région live permanente du parent, fiable même au montage frais.
+        onStatusChange?.(t('contact.form.success'));
       } else {
         setStatus('error');
         if (result.fieldErrors) {
@@ -111,12 +120,10 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
   };
 
   if (status === 'success') {
+    // Pas de role/aria-live ici : l'annonce passe par la région live permanente
+    // du parent (ContactPageClient). Évite une double annonce au lecteur d'écran.
     return (
-      <div
-        className="bg-surface border border-surface-hi/55 rounded-3xl p-8 md:p-9 text-center"
-        role="alert"
-        aria-live="polite"
-      >
+      <div className="bg-surface border border-surface-hi/55 rounded-3xl p-8 md:p-9 text-center">
         <div className="text-4xl mb-4">✓</div>
         <p className="text-lg font-semibold text-ok">
           {t('contact.form.success')}

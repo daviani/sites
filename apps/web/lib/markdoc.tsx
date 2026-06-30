@@ -43,38 +43,89 @@ function getHighlighter(): Promise<Highlighter> {
   return highlighterPromise;
 }
 
-const config: Config = {
-  nodes: {
-    fence: {
-      render: 'CodeBlock',
-      attributes: {
-        content: { type: String },
-        language: { type: String },
+/**
+ * Transforme le texte d'un titre en identifiant d'ancre URL-safe, utilisé comme
+ * `id` sur chaque heading d'article (ancres profondes + cibles de lien direct).
+ * Exemple attendu : « 2. La doc d'abord » → « 2-la-doc-d-abord ».
+ */
+function slugify(text: string): string {
+  return text
+    .normalize('NFD') // décompose « é » en « e » + diacritique combinant
+    .replace(/[\u0300-\u036f]/g, '') // retire les diacritiques (é→e, ç→c, ô→o…)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-') // tout le reste (espaces, ponctuation, apostrophes) → tiret
+    .replace(/^-+|-+$/g, ''); // pas de tiret en tête ni en queue
+}
+
+/**
+ * Construit la config Markdoc. Recréée à CHAQUE rendu d'article pour que le
+ * dédoublonnage d'`id` (closure `usedIds`) soit isolé par page : deux titres
+ * identiques dans un même article donnent `titre` puis `titre-2`, sans fuite
+ * d'état entre articles.
+ */
+function buildConfig(): Config {
+  const usedIds = new Map<string, number>();
+
+  return {
+    nodes: {
+      fence: {
+        render: 'CodeBlock',
+        attributes: {
+          content: { type: String },
+          language: { type: String },
+        },
+      },
+      heading: {
+        children: ['inline'],
+        attributes: {
+          level: { type: Number, required: true },
+        },
+        transform(node, cfg) {
+          const attributes = node.transformAttributes(cfg) as Record<string, unknown>;
+          delete attributes.level; // `level` sert à choisir la balise (h2…), pas d'attribut DOM
+          const children = node.transformChildren(cfg);
+
+          // Concatène le texte des nœuds enfants pour dériver l'ancre.
+          let text = '';
+          for (const child of node.walk()) {
+            if (child.type === 'text' && typeof child.attributes.content === 'string') {
+              text += child.attributes.content;
+            }
+          }
+
+          let id = slugify(text) || 'section';
+          const seen = usedIds.get(id) ?? 0;
+          usedIds.set(id, seen + 1);
+          if (seen > 0) id = `${id}-${seen + 1}`;
+
+          const level = node.attributes.level as number;
+          return new Markdoc.Tag(`h${level}`, { ...attributes, id }, children);
+        },
       },
     },
-  },
-  tags: {
-    figure: {
-      render: 'Figure',
-      attributes: {
-        src: { type: String, required: true },
-        alt: { type: String },
-        caption: { type: String },
+    tags: {
+      figure: {
+        render: 'Figure',
+        attributes: {
+          src: { type: String, required: true },
+          alt: { type: String },
+          caption: { type: String },
+        },
+      },
+      gallery: {
+        render: 'Gallery',
+      },
+      illustration: {
+        render: 'Illustration',
+        attributes: {
+          name: { type: String, required: true },
+          alt: { type: String },
+          caption: { type: String },
+        },
       },
     },
-    gallery: {
-      render: 'Gallery',
-    },
-    illustration: {
-      render: 'Illustration',
-      attributes: {
-        name: { type: String, required: true },
-        alt: { type: String },
-        caption: { type: String },
-      },
-    },
-  },
-};
+  };
+}
 
 /**
  * A single image with an optional caption, rendered as a semantic <figure>.
@@ -239,7 +290,7 @@ export async function renderMarkdoc(content: string, locale: Locale = 'fr'): Pro
   };
 
   const ast = Markdoc.parse(content);
-  const transformed = Markdoc.transform(ast, config);
+  const transformed = Markdoc.transform(ast, buildConfig());
   await addImageDimensions(transformed);
   await inlineIllustrations(transformed, locale);
   return Markdoc.renderers.react(transformed, React, { components: { CodeBlock, Figure, Gallery, Illustration } });

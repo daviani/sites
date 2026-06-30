@@ -30,8 +30,10 @@ export function pageMetadata(opts: {
   description: string;
   path: string;
   type?: 'website' | 'article' | 'profile';
+  /** Bannière OG contextuelle (URL absolue ou relative). Défaut : bannière de marque. */
+  ogImage?: string;
 }): Metadata {
-  const { title, description, path, type = 'website' } = opts;
+  const { title, description, path, type = 'website', ogImage } = opts;
   const ogTitle = `${title} · ${SITE_NAME}`;
 
   return {
@@ -44,15 +46,14 @@ export function pageMetadata(opts: {
       url: path,
       siteName: SITE_NAME,
       locale: 'fr_FR',
-      alternateLocale: ['en_US'],
       type,
-      images: [OG_SOCIAL],
+      images: [ogImage ? { url: ogImage, width: 1200, height: 630, alt: title } : OG_SOCIAL],
     },
     twitter: {
       card: 'summary_large_image',
       title: ogTitle,
       description,
-      images: [OG_SOCIAL.url],
+      images: [ogImage ?? OG_SOCIAL.url],
     },
   };
 }
@@ -88,10 +89,60 @@ export function websiteJsonLd() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    // @id stable : permet aux pages listing de référencer le site via isPartOf.
+    '@id': `${baseUrl}/#website`,
     name: SITE_NAME,
     url: baseUrl,
     inLanguage: 'fr-FR',
     author: { '@type': 'Person', name: SITE_NAME, url: baseUrl },
+  };
+}
+
+/**
+ * CollectionPage + ItemList — la page /projets. Liste ordonnée de liens internes
+ * vers les projets (aide Google à découvrir et hiérarchiser les pages détail).
+ */
+export function projectsCollectionJsonLd(items: Array<{ name: string; slug: string }>) {
+  const baseUrl = getBaseUrl();
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: `Projets · ${SITE_NAME}`,
+    url: `${baseUrl}/projets`,
+    inLanguage: 'fr-FR',
+    isPartOf: { '@id': `${baseUrl}/#website` },
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: items.map((p, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        url: `${baseUrl}/projets/${p.slug}`,
+        name: p.name,
+      })),
+    },
+  };
+}
+
+/** Blog + blogPost — la page /blog. Liste les articles de la page courante. */
+export function blogCollectionJsonLd(
+  items: Array<{ title: string; slug: string; publishedAt: string; description: string }>,
+) {
+  const baseUrl = getBaseUrl();
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: `Blog · ${SITE_NAME}`,
+    url: `${baseUrl}/blog`,
+    inLanguage: 'fr-FR',
+    isPartOf: { '@id': `${baseUrl}/#website` },
+    author: { '@type': 'Person', '@id': `${baseUrl}/#person`, name: SITE_NAME },
+    blogPost: items.map((a) => ({
+      '@type': 'BlogPosting',
+      headline: a.title,
+      description: a.description,
+      datePublished: a.publishedAt,
+      url: `${baseUrl}/blog/${a.slug}`,
+    })),
   };
 }
 
@@ -150,8 +201,16 @@ export function projectJsonLd(opts: { name: string; description: string; slug: s
     name: opts.name,
     description: opts.description,
     url: `${baseUrl}/projets/${opts.slug}`,
+    image: `${baseUrl}${ogImageUrl(opts.name)}`,
     keywords: opts.stack,
     inLanguage: 'fr-FR',
     author: { '@type': 'Person', '@id': `${baseUrl}/#person`, name: SITE_NAME },
   };
+}
+
+/** URL (relative) d'une bannière OG contextuelle pour un titre donné. */
+export function ogImageUrl(title: string, subtitle?: string): string {
+  const params = new URLSearchParams({ title });
+  if (subtitle) params.set('subtitle', subtitle);
+  return `/api/og?${params.toString()}`;
 }

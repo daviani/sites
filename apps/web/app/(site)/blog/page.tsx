@@ -4,7 +4,8 @@ import { getAllArticles, getAllTags, getFeaturedArticles } from '@/lib/content/b
 import { Breadcrumb, Tag } from '@tulikettu/ui';
 import { RssButton } from '@/components/blog/RssButton';
 import { FeaturedArticle } from '@/components/blog/FeaturedArticles';
-import { pageMetadata } from '@/lib/seo';
+import { pageMetadata, blogCollectionJsonLd } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Blog',
@@ -48,6 +49,16 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
   return (
     <div>
+      <JsonLd
+        data={blogCollectionJsonLd(
+          allArticles.map((a) => ({
+            title: a.meta.titleFr,
+            slug: a.slug,
+            publishedAt: a.meta.publishedAt,
+            description: a.meta.excerptFr,
+          })),
+        )}
+      />
       <div className="w-[var(--content-width)] mx-auto px-4 sm:px-6 py-8 md:py-12">
         <Breadcrumb items={[{ href: '/blog', label: 'Blog' }]} homeLabel="Accueil" ariaLabel="Fil d'Ariane" />
 

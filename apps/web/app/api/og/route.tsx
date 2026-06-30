@@ -14,7 +14,20 @@ const FOX_ORANGE = '#FF6E07';
 const FOX_FACE = '#F5F0E6'; // --tuli-mark-fg (sombre)
 const FOX_DETAIL = '#131A2C'; // --fox-detail (sombre)
 
-export function GET() {
+// Bornes de longueur : un titre/sous-titre vient de l'URL (input non fiable).
+// On tronque côté serveur — Satori ne rend que du texte (pas de HTML/JS), donc
+// pas de vecteur XSS, mais on évite des chaînes absurdes qui débordent la carte.
+const MAX_TITLE = 70;
+const MAX_SUBTITLE = 90;
+const clamp = (s: string, max: number) => (s.length > max ? `${s.slice(0, max - 1)}…` : s);
+
+export function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const rawTitle = searchParams.get('title')?.trim();
+  const rawSubtitle = searchParams.get('subtitle')?.trim();
+  const title = rawTitle ? clamp(rawTitle, MAX_TITLE) : SITE_NAME;
+  const subtitle = rawSubtitle ? clamp(rawSubtitle, MAX_SUBTITLE) : 'Développeur Full-Stack & DevOps';
+
   return new ImageResponse(
     (
       <div
@@ -64,7 +77,7 @@ export function GET() {
             lineHeight: 1.1,
           }}
         >
-          {SITE_NAME}
+          {title}
         </div>
 
         <div
@@ -75,7 +88,7 @@ export function GET() {
             marginTop: '18px',
           }}
         >
-          Développeur Full-Stack &amp; DevOps
+          {subtitle}
         </div>
 
         <div

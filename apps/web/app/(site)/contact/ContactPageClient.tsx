@@ -1,6 +1,6 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Breadcrumb } from '@tulikettu/ui';
 import { useTranslation } from '@/hooks/use-translation';
 import { ContactForm } from '@/components/ContactForm';
@@ -46,9 +46,15 @@ const METHODS: Method[] = [
 
 export default function ContactPageClient() {
   const { t } = useTranslation();
+  // Région live permanente : montée en continu (jamais démontée), elle annonce
+  // de façon fiable le succès même quand le formulaire se démonte au submit.
+  const [statusMessage, setStatusMessage] = useState('');
 
   return (
     <div>
+      <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+        {statusMessage}
+      </div>
       <div className="w-[var(--content-width)] mx-auto px-4 sm:px-6 py-8 md:py-12">
         <Breadcrumb
           items={[{ href: '/contact', label: t('nav.contact.title') }]}
@@ -69,7 +75,7 @@ export default function ContactPageClient() {
         </div>
 
         <div className="grid md:grid-cols-[1.2fr_0.8fr] gap-7 items-start">
-          <ContactForm onSubmit={submitContactForm} />
+          <ContactForm onSubmit={submitContactForm} onStatusChange={setStatusMessage} />
 
           <aside className="flex flex-col gap-4">
             {/* Disponibilité */}
