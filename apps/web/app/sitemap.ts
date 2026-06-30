@@ -9,11 +9,12 @@ import { getAllProjects, getAllContributions } from '@/lib/content/projects';
  * dynamiques (articles de blog, projets, contributions avec page détail).
  */
 /**
- * Date de dernière refonte des pages statiques (go-live v2). À bumper
- * manuellement lors d'un changement de contenu statique significatif —
- * un lastmod figé à la date de build est un faux signal pour les crawlers.
+ * Date de dernière refonte des pages statiques. À bumper manuellement lors d'un
+ * changement de contenu statique significatif (≠ date de build, qui serait un
+ * faux signal pour les crawlers). ⚠️ Checklist release : rebumper si le contenu
+ * statique a changé depuis la dernière mise en prod.
  */
-const SITE_UPDATED = new Date('2026-06-10');
+const SITE_UPDATED = new Date('2026-06-17');
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = getBaseUrl();

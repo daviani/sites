@@ -50,10 +50,10 @@ describe('sitemap', () => {
     expect(new Set(dynamicInSitemap)).toEqual(new Set(expectedDynamic));
   });
 
-  it('date les pages statiques avec la constante de refonte (2026-06-10)', () => {
+  it('date les pages statiques avec la constante de refonte (2026-06-17)', () => {
     const home = entries.find((e) => e.url === base);
     expect(home?.lastModified).toBeInstanceOf(Date);
-    expect((home!.lastModified as Date).toISOString().slice(0, 10)).toBe('2026-06-10');
+    expect((home!.lastModified as Date).toISOString().slice(0, 10)).toBe('2026-06-17');
   });
 
   it("n'utilise jamais la date de build (aujourd'hui) comme lastmod", () => {
