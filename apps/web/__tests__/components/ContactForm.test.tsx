@@ -230,9 +230,10 @@ describe('ContactForm', () => {
       });
     });
 
-    it('success message has role alert', async () => {
+    it('annonce le succès via onStatusChange (région live permanente du parent)', async () => {
+      const onStatusChange = vi.fn();
       const user = userEvent.setup();
-      render(<ContactForm onSubmit={mockOnSubmit} />);
+      render(<ContactForm onSubmit={mockOnSubmit} onStatusChange={onStatusChange} />);
 
       await user.type(screen.getByLabelText('Nom'), 'John');
       await user.type(screen.getByLabelText('Email'), 'john@example.com');
@@ -241,7 +242,7 @@ describe('ContactForm', () => {
       await user.click(screen.getByRole('button', { name: 'Envoyer' }));
 
       await waitFor(() => {
-        expect(screen.getByRole('alert')).toBeInTheDocument();
+        expect(onStatusChange).toHaveBeenCalledWith('Message envoyé avec succès !');
       });
     });
   });
