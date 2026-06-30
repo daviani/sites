@@ -10,6 +10,9 @@ import { personJsonLd, websiteJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Accueil',
+  // Canonical explicite : le layout racine n'impose plus de canonical global
+  // (sinon il fuirait sur la 404). Chaque page porte donc le sien.
+  alternates: { canonical: '/' },
 };
 
 export default function HomePage() {
